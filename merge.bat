@@ -1,29 +1,18 @@
 @echo off
+SET branch=%~1
+if NOT DEFINED branch (SET branch=dev)
 echo.
 echo WARNING!
 echo.
-echo This will overwrite any changes that you have made.
+echo This will merge '%branch%' with the master branch.
 echo.
 echo Press CTRL+C to cancel.
 echo.
 pause
-SET branch=%~1
-if NOT DEFINED branch (SET branch=development)
+cd ..
+git checkout master
 echo.
-echo Deleting old '%branch%' branch.
+echo Merging '%branch%' with master branch.
 echo.
-git branch -D %branch%
-echo.
-echo Deleting remote copy of '%branch%'.
-echo.
-git push origin -d %branch%
-echo.
-echo Creating '%branch%' branch.
-echo.
-git branch %branch%
-echo.
-echo Creating remote copy of '%branch%'.
-echo.
-git push --set-upstream origin %branch%
-echo.
+git merge %branch% --no-ff
 pause
