@@ -1,4 +1,5 @@
 @echo off
+cd ..
 SET msg=%~1
 if NOT DEFINED msg (SET msg=Generic commit)
 echo.

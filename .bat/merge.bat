@@ -1,4 +1,5 @@
 @echo off
+cd ..
 SET branch=%~1
 if NOT DEFINED branch (SET branch=dev)
 echo.
@@ -9,7 +10,6 @@ echo.
 echo Press CTRL+C to cancel.
 echo.
 pause
-cd ..
 git checkout master
 echo.
 echo Merging '%branch%' with master branch.

@@ -1,4 +1,5 @@
 @echo off
+cd ..
 echo.
 echo WARNING!
 echo.
