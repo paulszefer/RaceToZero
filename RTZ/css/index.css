@@ -1,7 +1,34 @@
-gamediv {
+#gamedivwrapper {
     background-color: #CCCCCC;
+    margin: auto;
+    width: 100vp;
+    position: relative;
 }
 
-gamediv h1 {
-    margin: auto;
+@media only screen and (min-width: 981px) {
+    #gamedivwrapper {
+        background-color: #CCCCCC;
+        margin: auto;
+        position: relative;
+        width: 360px;
+    }
 }
+
+#gamediv {
+    background-color: #666666;
+    padding-top: 177.7777%;
+}
+
+
+#gamediv h1 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#header {
+    display: none;
+}
+
