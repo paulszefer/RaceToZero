@@ -19,11 +19,11 @@
 	background-image: url('../img/navgradient.png');
 }
 .navlinks li:hover{
-	background-color: rgba(92, 255, 51, 0.4);
+	text-decoration: underline;	
 }
 .navlinks a{
 	text-decoration: none;
-	color: #ff7f0f;
+	color: #95d5f5; /*navlink color*/
 }
 .navbuttonright{
 	float:right;
@@ -35,25 +35,35 @@ body{
 	margin:0;
 	font-family: helvetica;
 }
+
 body p{
 	margin:0.5em;
 }
 .contentactual{
 	width:80%;
-	min-height:800px;
-	min-width: ;
+	min-height:600px;
+	max-width: 800px;
 	margin:auto;
-	padding:1em;
+	margin-bottom: 0px;
 	background-color: rgba(255, 255, 255, 0.8);
+}
+@media only screen and (max-width: 450px) {
+    .contentactual {
+        width:100%;
+    }
 }
 .footercontent{
 	background-color: black;
-	height:50px;
+	height:100px;
+	/*display:table;*/
+	width:100%;
+	border: 1px solid blue;
 }
 .footercontent p{
-	padding-top:1em;
 	margin:0;
 	color: white;
 	text-align: center;
-	text
+	font-size: 0.75em;
+	display:table-cell;
+	vertical-align: middle;
 }
