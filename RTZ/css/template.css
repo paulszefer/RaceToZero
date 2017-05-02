@@ -9,7 +9,7 @@
 	padding: 0.5em;
 }
 .navlogo{
-	background-color: #3d2e1f;
+	background-color: #95d5f5;/*#3d2e1f;*/
 }
 .navlinks ul{
 	margin:0;
@@ -18,46 +18,52 @@
 .navlinks{
 	background-image: url('../img/navgradient.png');
 }
-.navlinks li:hover{
-	text-decoration: underline;	
-}
 .navlinks a{
 	text-decoration: none;
 	color: #95d5f5; /*navlink color*/
 }
+.navlinks a:hover{
+	border-bottom: 4px solid #95d5f5;
+}
 .navbuttonright{
 	float:right;
 }
+
 /*body shenanigans*/
 body{
-	background-color: grey;
-	background-image: url('../img/backgroundmesh.png');
-	margin:0;
+	background-image: url('../img/bgmesh4.png');
 	font-family: helvetica;
 }
 
-body p{
-	margin:0.5em;
-}
 .contentactual{
 	width:80%;
 	min-height:600px;
 	max-width: 800px;
 	margin:auto;
-	margin-bottom: 0px;
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.7);
 }
-@media only screen and (max-width: 450px) {
+.contentactual h1{
+	padding:0.5em;
+	padding-top: 1em;
+	padding-bottom: 0;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.contentactual p{
+	margin:auto;
+	text-align: justify;
+	width:80%;
+}
+@media only screen and (max-width: 420px) {
     .contentactual {
         width:100%;
     }
 }
 .footercontent{
 	background-color: black;
-	height:100px;
-	/*display:table;*/
+	height:50px;
+	display:table;
 	width:100%;
-	border: 1px solid blue;
 }
 .footercontent p{
 	margin:0;
