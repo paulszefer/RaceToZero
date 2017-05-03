@@ -166,7 +166,7 @@ class Level {
                     return 4;
                 } else {
                 	var move = 0;
-                	while (true) {
+                	while (move < this._playItem.getSize()) {
                 		if (this._board[origX -  move][origY].getType() == SOLID) {
                 			return 4;
                 		} else if (this._board[origX][origY - move].getType() == SOLID) {
@@ -184,7 +184,7 @@ class Level {
                     return 3;
                 } else {
                 	var move = 0;
-                	while (true) {
+                	while (move < this._playItem.getSize()) {
                 		if (this._board[origX + move][origY].getType() == SOLID) {
                 			return 2;
                 		} else if (this._board[origX][origY + move].getType() == SOLID) {
@@ -197,7 +197,7 @@ class Level {
                 }
             } else if (this._board[x1][y2].getType() == SOLID) {
             	var move = 0;
-                while (true) {
+                while (move < this._playItem.getSize()) {
             		if (this._board[origX - move][origY].getType() == SOLID) {
             			return 2;
             		} else if (this._board[origX][origY + move].getType() == SOLID) {
@@ -206,9 +206,10 @@ class Level {
                			move++;
                		}
                	}
+               	return 0;
             } else if (this._board[x2][y1].getType() == SOLID) {
             	var move = 0;
-                while (true) {
+                while (move < this._playItem.getSize()) {
                 	if (this._board[origX + move][origY].getType() == SOLID) {
             			return 2;
             		} else if (this._board[origX][origY - move].getType() == SOLID) {
@@ -217,6 +218,7 @@ class Level {
                			move++;
                		}
                	}
+               	return 0;
             }
         }
         
