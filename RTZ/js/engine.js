@@ -69,13 +69,23 @@ $(document).ready(function() {
     
     var intervalId = setInterval(move, 20);
     
+    var clicked = false;
+    
+    function setClicked(newClicked) {
+    	clicked = newClicked;
+    }
+    
     $("body").click(function(e) {
-		var divPosX = $(this).position().left;
-		var divPosY = $(this).position().top;
-		var mousePosX = e.pageX - divPosX;
-		var mousePosY = e.pageY - divPosY;
+    	if (!clicked) {
+			var divPosX = $(this).position().left;
+			var divPosY = $(this).position().top;
+			var mousePosX = e.pageX - divPosX;
+			var mousePosY = e.pageY - divPosY;
 		
-		playItem.clicked(mousePosX, mousePosY);
+			playItem.clicked(mousePosX, mousePosY);
+			clicked = true;
+			setTimeout(setClicked, 500, false);	
+		}
 	});
 });
 
