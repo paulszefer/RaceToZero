@@ -125,7 +125,7 @@ class Level {
                     this._playItem.setIsGrounded(false);
                 }
                 var move = 0;
-                while (this.checkCollisions(tempX, this._playItem.getY() + this._playItem.getSize() + move) != 1) {
+                while (this.checkCollisions(tempX, this._playItem.getY() + move) != 3) {
                     move++;
                 }
                 this._playItem.setX(tempX); // later there will be death by trig
@@ -133,7 +133,7 @@ class Level {
             } else if (collision == 4) {
                 this._playItem.setDX(-1 * this._playItem.getDX());
                 var move = 0;
-                while (this.checkCollisions(this._playItem.getX() - move, tempY) != 2) {
+                while (this.checkCollisions(this._playItem.getX() - move, tempY) != 4) {
                     move++;
                 }
                 this._playItem.setX(this._playItem.getX() - move); // later there will be death by trig

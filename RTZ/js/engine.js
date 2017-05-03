@@ -65,5 +65,5 @@ $(document).ready(function() {
         draw();
     }
     
-    var intervalId = setInterval(move, 500);
+    var intervalId = setInterval(move, 20);
 });
