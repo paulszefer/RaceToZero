@@ -302,8 +302,8 @@ class PlayItem {
     }
     
     clicked(mousePosX, mousePosY) {
-    	var xDiff = this._x - mousePosX;
-    	var yDiff = this._y - mousePosY;
+    	var xDiff = this._x + (this._size / 2) - mousePosX;
+    	var yDiff = this._y + (this._size / 2) - mousePosY;
     	
     	var divisor = 10;
     	
