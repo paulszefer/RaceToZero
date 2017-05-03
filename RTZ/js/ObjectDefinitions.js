@@ -118,7 +118,7 @@ class Level {
                     this._playItem.setDY(roundedDY);
                 }
                 var move = 0;
-                while (this.checkCollisions(tempX, this._playItem.getY() + move) != 1) {
+                while (this.checkCollisions(tempX, this._playItem.getY() + this._playItem.getSize() + move) != 1) {
                     move++;
                 }
                 this._playItem.setX(tempX); // later there will be death by trig
