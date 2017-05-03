@@ -186,9 +186,7 @@ class Level {
                 this._playItem.setDX(roundedDX);
             }
  //       }
-        if (!this._playItem.getIsGrounded()) {
-            this._playItem.applyGravity();
-        }
+        this._playItem.applyGravity();
         this._playItem.adjustSpeed();
     }
     
