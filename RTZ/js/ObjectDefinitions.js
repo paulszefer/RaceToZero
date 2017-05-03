@@ -87,7 +87,6 @@ class Level {
             var tempX = this._playItem.getX() + this._playItem.getDX();
             var tempY = this._playItem.getY() + this._playItem.getDY();
             var collision = this.checkCollisions(tempX, tempY);
-            console.log(collision);
             if (collision == 0) {
                 this._playItem.move();
                 this._playItem.setIsGrounded(false);
@@ -147,13 +146,16 @@ class Level {
     }
     
     checkCollisions(x, y) {
+    
         var size = this._playItem.getSize();
         var x1 = x;
         var y1 = y;
         var x2 = x + size;
         var y2 = y + size;
-        var origX = x - this._playItem.getDX();
-        var origY = y - this._playItem.getDY();
+        var origX1 = x - this._playItem.getDX();
+        var origY1 = y - this._playItem.getDY();
+        var origX2 = origX1 + size;
+        var origY2 = origY1 + size;
         
         // console.log(this._playItem.getDY());
         // console.log("x1 = " + x1 + "; y1 = " + y1);
@@ -168,10 +170,10 @@ class Level {
                 	var move = 0;
                 	while (move < this._playItem.getSize()) {
                 		//console.log(move + ": " + this._board[origX - move][origY].getType());
-                		if (this._board[origX - move][origY].getType() == SOLID) {
+                		if (this._board[origX1 - move][origY1].getType() == SOLID) {
                 			//console.log((origX - move) + "; " + origY);
                 			return 4;
-                		} else if (this._board[origX][origY - move].getType() == SOLID) {
+                		} else if (this._board[origX1][origY1 - move].getType() == SOLID) {
                 			return 1;
                 		} else {
                 			move++;
@@ -185,11 +187,14 @@ class Level {
                 } else if (this._board[x1][y2].getType() == SOLID) {
                     return 3;
                 } else {
+    				if (this._playItem.getIsGrounded()) {
+    					return 3;
+    				}
                 	var move = 0;
                 	while (move < this._playItem.getSize()) {
-                		if (this._board[origX + move][origY].getType() == SOLID) {
+                		if (this._board[origX2 + move][origY2].getType() == SOLID) {
                 			return 2;
-                		} else if (this._board[origX][origY + move].getType() == SOLID) {
+                		} else if (this._board[origX2][origY2 + move].getType() == SOLID) {
                 			return 3;
                 		} else {
                 			move++;
@@ -200,9 +205,12 @@ class Level {
             } else if (this._board[x1][y2].getType() == SOLID) {
             	var move = 0;
                 while (move < this._playItem.getSize()) {
-            		if (this._board[origX - move][origY].getType() == SOLID) {
-            			return 2;
-            		} else if (this._board[origX][origY + move].getType() == SOLID) {
+                	if (this._playItem.getIsGrounded()) {
+    					return 3;
+    				}
+            		if (this._board[origX1 - move][origY2].getType() == SOLID) {
+            			return 4;
+            		} else if (this._board[origX1][origY2 + move].getType() == SOLID) {
                			return 3;
                		} else {
                			move++;
@@ -212,10 +220,10 @@ class Level {
             } else if (this._board[x2][y1].getType() == SOLID) {
             	var move = 0;
                 while (move < this._playItem.getSize()) {
-                	if (this._board[origX + move][origY].getType() == SOLID) {
+                	if (this._board[origX2 + move][origY1].getType() == SOLID) {
             			return 2;
-            		} else if (this._board[origX][origY - move].getType() == SOLID) {
-            			return 3;
+            		} else if (this._board[origX2][origY1 - move].getType() == SOLID) {
+            			return 1;
             		} else {
                			move++;
                		}
