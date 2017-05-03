@@ -158,6 +158,7 @@ class Level {
         // console.log(this._board[x1][y1].getType());
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
             if (this._board[x1][y1].getType() == SOLID) {
+            	console.log("hello");
                 if (this._board[x2][y1].getType() == SOLID) {
                     return 1;
                 } else if (this._board[x1][y2].getType() == SOLID) {
