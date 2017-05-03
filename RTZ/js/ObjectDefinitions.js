@@ -90,6 +90,7 @@ class Level {
             var collision = this.checkCollisions(tempX, tempY);
             if (collision == 0) {
                 this._playItem.move();
+                this._playItem.setIsGrounded(false);
             } else if (collision == 1) {
                 this._playItem.setDY(-1 * this._playItem.getDY());
                 var move = 0;
@@ -98,6 +99,7 @@ class Level {
                 }
                 this._playItem.setX(tempX); // later there will be death by trig
                 this._playItem.setY(this._playItem.getY() - move);
+                this._playItem.setIsGrounded(false);
             } else if (collision == 2) {
                 this._playItem.setDX(-1 * this._playItem.getDX());
                 var move = 0;
@@ -106,6 +108,7 @@ class Level {
                 }
                 this._playItem.setX(this._playItem.getX() + move); // later there will be death by trig
                 this._playItem.setY(tempY);
+                this._playItem.setIsGrounded(false);
             } else if (collision == 3) {
                 if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 5
                     this._playItem.setIsGrounded(true);
@@ -113,6 +116,7 @@ class Level {
                 } else {
                     var roundedDY = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDY());
                     this._playItem.setDY(roundedDY);
+                    this._playItem.setIsGrounded(false);
                 }
                 var move = 0;
                 while (this.checkCollisions(tempX, this._playItem.getY() + this._playItem.getSize() + move) != 1) {
@@ -128,6 +132,7 @@ class Level {
                 }
                 this._playItem.setX(this._playItem.getX() - move); // later there will be death by trig
                 this._playItem.setY(tempY);
+                this._playItem.setIsGrounded(false);
             }
         }
         if (!this._playItem.getIsGrounded()) {

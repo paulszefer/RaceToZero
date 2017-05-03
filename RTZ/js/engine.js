@@ -1,12 +1,12 @@
 $(document).ready(function() {
     level = new Level(0, 500, 500);
     foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-    playItem = new PlayItem(225, 10, 0, 10, foodItem);
+    playItem = new PlayItem(180, 50, 1, 10, foodItem);
     
     barrier1 = new Barrier("barrier1", 100, 200, 399, 299);
     barrier2 = new Barrier("barrier2", 0, 400, 199, 499);
     barrier3 = new Barrier("barrier3", 300, 400, 499, 499);
-    barrier4 = new Barrier("goal", 199, 430, 300, 499);
+    barrier4 = new Barrier("goal", 199, 460, 300, 499);
     
     drawBarrier(barrier1);
     drawBarrier(barrier2);
@@ -42,7 +42,7 @@ $(document).ready(function() {
     level.addObject(100, 200, 399, 299, SOLID);
     level.addObject(0, 400, 199, 499, SOLID);
     level.addObject(300, 400, 499, 499, SOLID);
-    level.addObject(200, 430, 300, 499, SOLID);
+    level.addObject(200, 460, 300, 499, SOLID);
     
     level.setPlayItem(playItem);
     
