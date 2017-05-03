@@ -113,6 +113,12 @@ class Level {
                 if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 5
                     this._playItem.setIsGrounded(true);
                     this._playItem.setDY(0);
+                    var currentDX = this._playItem.getDX();
+                    if (currentDX > 0) {
+                    	this._playItem.setDX(currentDX - 1);
+                    } else if (currentDX < 0) {
+                    	this._playItem.setDX(currentDX + 1);
+                    }
                 } else {
                     var roundedDY = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDY());
                     this._playItem.setDY(roundedDY);
