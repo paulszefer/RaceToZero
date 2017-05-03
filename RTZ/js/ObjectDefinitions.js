@@ -81,9 +81,10 @@ class Level {
     }
     
     move() {
-        if (this.checkCollisions(this._playItem.getX(), this._playItem.getY()) != 0 && !this._playItem.getIsGrounded()) {
-            this._playItem.move();
-        } else {
+    	console.log("x=" + this._playItem.getX() + ";y=" + this._playItem.getY() + ";dx=" + this._playItem.getDX() + ";dy=" + this._playItem.getDY());
+//        if (this.checkCollisions(this._playItem.getX(), this._playItem.getY()) != 0 && !this._playItem.getIsGrounded()) {
+  //          this._playItem.move();
+    //    } else {
             var tempX = this._playItem.getX() + this._playItem.getDX();
             var tempY = this._playItem.getY() + this._playItem.getDY();
             var collision = this.checkCollisions(tempX, tempY);
@@ -139,7 +140,7 @@ class Level {
                 this._playItem.setIsGrounded(false);
                 this._playItem.setDX(-1 * this._playItem.getDX());
             }
-        }
+ //       }
         if (!this._playItem.getIsGrounded()) {
             this._playItem.applyGravity();
         }
