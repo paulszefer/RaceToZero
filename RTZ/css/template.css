@@ -91,6 +91,11 @@ body{
 		display:none;
 	}
 }
+
+#mobilenav {
+    display: none;
+}
+
 .footercontent{
 	background-color: black;
 	height:50px;
