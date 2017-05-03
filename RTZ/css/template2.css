@@ -1,3 +1,11 @@
+#overlay{
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.7);
+	width:0;
+	min-height:750px;
+	height:100vh;
+	-webkit-transition: width 0.1s;
+}
 #navCont img{
 	height: 100px;
 	width:auto;
@@ -39,31 +47,38 @@
 	float:right;
 }
 #mobilenav{
-	top:100px;
+	width:0;
 	position:fixed;
+	right:0;
+	top:0;
+	height:100vh;
+	-webkit-transition: width 0.3s;
 }
 #mobilenav a{
 	text-decoration: none;
 	color:white;
 	font-size: 1.5em;
 	font-family: calibri;
+	text-align: right;
 }
 #mobilenav ul li{
-	height:15vh;
-	background-color:black;
-	width:97vw;
-	margin:auto;
-	text-align: center;
+	height:20vh;
 	display: table;
+	padding-right:1em;
+	background-color:black;
 }
 #mobilenav ul li div{
 	vertical-align: middle;
 	display:table-cell;
+	width:60vw;
+	background-color:black;
+	text-align: right;
 }
 /*body shenanigans*/
 body{
 	background-image: url('../img/bgmesh6.png');
 	font-family: helvetica;
+	z-index: 0;
 }
 .contentactual{
 	width:80%;
@@ -105,10 +120,6 @@ body{
 	#navburger{
 		display:none;
 	}
-}
-
-#mobilenav {
-    display: none;
 }
 
 .footercontent{
