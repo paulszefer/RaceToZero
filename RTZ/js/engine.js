@@ -1,19 +1,23 @@
 $(document).ready(function() {
     level = new Level(0, 500, 500);
     foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-    playItem = new PlayItem(242, 30, 0, 1, foodItem);
+    playItem = new PlayItem(242, 40, 0, 1, foodItem);
     
-    barrier1 = new Barrier("barrier1", 100, 200, 399, 299);
-    barrier2 = new Barrier("barrier2", 0, 400, 199, 499);
-    barrier3 = new Barrier("barrier3", 300, 400, 499, 499);
+    barrier1 = new Barrier("platform", 110, 200, 389, 299);
+    barrier2 = new Barrier("floorleft", 0, 400, 199, 499);
+    barrier3 = new Barrier("floorright", 300, 400, 499, 499);
     barrier4 = new Barrier("goal", 199, 460, 300, 499);
-    barrier5 = new Barrier("barrier5", 450, 0, 499, 499);
+    barrier5 = new Barrier("rightwall", 450, 0, 499, 499);
+    barrier6 = new Barrier("leftwall", 0, 0, 49, 499);
+    barrier7 = new Barrier("ceiling", 0, 0, 499, 29);
     
     drawBarrier(barrier1);
     drawBarrier(barrier2);
     drawBarrier(barrier3);
     drawBarrier(barrier4);
     drawBarrier(barrier5);
+    drawBarrier(barrier6);
+    drawBarrier(barrier7);
     
     function drawBarrier(barrier) {
         width = barrier.getX2() - barrier.getX1();
@@ -41,11 +45,13 @@ $(document).ready(function() {
     // );
     // document.getElementById("barrier1").style.left = barrierX1;
     // document.getElementById("barrier1").style.top = barrierY1;
-    level.addObject(100, 200, 399, 299, SOLID);
+    level.addObject(110, 200, 389, 299, SOLID);
     level.addObject(0, 400, 199, 499, SOLID);
     level.addObject(300, 400, 499, 499, SOLID);
     level.addObject(200, 460, 300, 499, SOLID);
     level.addObject(450, 0, 499, 499, SOLID);
+    level.addObject(0, 0, 49, 499, SOLID);
+    level.addObject(0, 0, 499, 29, SOLID);
     
     level.setPlayItem(playItem);
     

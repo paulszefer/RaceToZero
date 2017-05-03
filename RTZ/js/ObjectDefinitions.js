@@ -81,7 +81,6 @@ class Level {
     }
     
     move() {
-    	console.log("x=" + this._playItem.getX() + ";y=" + this._playItem.getY() + ";dx=" + this._playItem.getDX() + ";dy=" + this._playItem.getDY());
 //        if (this.checkCollisions(this._playItem.getX(), this._playItem.getY()) != 0 && !this._playItem.getIsGrounded()) {
   //          this._playItem.move();
     //    } else {
