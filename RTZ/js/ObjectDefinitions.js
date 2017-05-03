@@ -158,7 +158,6 @@ class Level {
         // console.log(this._board[x1][y1].getType());
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
             if (this._board[x1][y1].getType() == SOLID) {
-            	console.log("x1 is " + x1 + "; y1 is " + y1);
                 if (this._board[x2][y1].getType() == SOLID) {
                     return 1;
                 } else if (this._board[x1][y2].getType() == SOLID) {
@@ -300,6 +299,16 @@ class PlayItem {
     
     applyGravity() {
         this._dy += this._foodItem.gravity;
+    }
+    
+    clicked(mousePosX, mousePosY) {
+    	var xDiff = this._x - mousePosX;
+    	var yDiff = this._y - mousePosY;
+    	
+    	var divisor = 10;
+    	
+    	this._dx += Math.round(xDiff / divisor);
+    	this._dy += Math.round(yDiff / divisor);
     }
 }
 

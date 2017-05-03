@@ -1,7 +1,7 @@
 $(document).ready(function() {
     level = new Level(0, 500, 500);
     foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-    playItem = new PlayItem(380, 50, 0, 10, foodItem);
+    playItem = new PlayItem(300, 50, 0, 10, foodItem);
     
     barrier1 = new Barrier("barrier1", 100, 200, 399, 299);
     barrier2 = new Barrier("barrier2", 0, 400, 199, 499);
@@ -66,4 +66,14 @@ $(document).ready(function() {
     }
     
     var intervalId = setInterval(move, 20);
+    
+    $("body").click(function(e) {
+		var divPosX = $(this).position().left;
+		var divPosY = $(this).position().top;
+		var mousePosX = e.pageX - divPosX;
+		var mousePosY = e.pageY - divPosY;
+		
+		playItem.clicked(mousePosX, mousePosY);
+	});
 });
+
