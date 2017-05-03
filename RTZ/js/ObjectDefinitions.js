@@ -3,9 +3,6 @@
  * Also allows a PlayItem to be stored.
  */
 class Level {
-    
-
-    
     constructor(id, width, height) {      
         this.setID(id);
         this.setWidth(width);
@@ -110,7 +107,7 @@ class Level {
                 this._playItem.setX(this._playItem.getX() + move); // later there will be death by trig
                 this._playItem.setY(tempY);
             } else if (collision == 3) {
-                if (this._playItem.getDY() < 5) { // SNAPTOGROUND = 5
+                if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 5
                     this._playItem.setIsGrounded(true);
                     this._playItem.setDY(0);
                 } else {
@@ -145,28 +142,80 @@ class Level {
         var x2 = x + size;
         var y2 = y + size;
         
-        console.log(this._playItem.getDY());
-        console.log("x1 = " + x1 + "; y1 = " + y1);
-        console.log(this._board[x1][y1].getType());
-        if (this._board[x1][y1].getType() == SOLID) {
-            if (this._board[x2][y1].getType() == SOLID) {
-                return 1;
-            } else if (this._board[x1][y2].getType() == SOLID) {
-                return 4;
-            } else {
-                return 0; //for now, until objects can collide on part of a side
-            }
-        } else if (this._board[x2][y2].getType() == SOLID) {
-            if (this._board[x2][y1].getType() == SOLID) {
-                return 2;
-            } else if (this._board[x1][y2].getType() == SOLID) {
-                return 3;
-            } else {
-                return 0; //for now, until objects can collide on part of a side
+        // console.log(this._playItem.getDY());
+        // console.log("x1 = " + x1 + "; y1 = " + y1);
+        // console.log(this._board[x1][y1].getType());
+        if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
+            if (this._board[x1][y1].getType() == SOLID) {
+                if (this._board[x2][y1].getType() == SOLID) {
+                    return 1;
+                } else if (this._board[x1][y2].getType() == SOLID) {
+                    return 4;
+                } else {
+                    return 0; //for now, until objects can collide on part of a side
+                }
+            } else if (this._board[x2][y2].getType() == SOLID) {
+                if (this._board[x2][y1].getType() == SOLID) {
+                    return 2;
+                } else if (this._board[x1][y2].getType() == SOLID) {
+                    return 3;
+                } else {
+                    return 0; //for now, until objects can collide on part of a side
+                }
             }
         }
-  
+        
         return 0;
+    }
+}
+
+class Barrier {
+    constructor(name, x1, y1, x2, y2) {
+        this.setName(name);
+        this.setX1(x1);
+        this.setY1(y1);
+        this.setX2(x2);
+        this.setY2(y2);
+    }
+    
+    setName(name) {
+        this._name = name;
+    }
+    
+    getName() {
+        return this._name;
+    }
+    
+    setX1(x1) {
+        this._x1 = x1;
+    }
+    
+    getX1() {
+        return this._x1;
+    }
+    
+    setY1(y1) {
+        this._y1 = y1;
+    }
+    
+    getY1() {
+        return this._y1;
+    }
+    
+    setX2(x2) {
+        this._x2 = x2;
+    }
+    
+    getX2() {
+        return this._x2;
+    }
+    
+    setY2(y2) {
+        this._y2 = y2;
+    }
+    
+    getY2() {
+        return this._y2;
     }
 }
 
