@@ -152,6 +152,8 @@ class Level {
         var y1 = y;
         var x2 = x + size;
         var y2 = y + size;
+        var origX = x - this._playItem.getDX();
+        var origY = y - this._playItem.getDY();
         
         // console.log(this._playItem.getDY());
         // console.log("x1 = " + x1 + "; y1 = " + y1);
@@ -163,6 +165,16 @@ class Level {
                 } else if (this._board[x1][y2].getType() == SOLID) {
                     return 4;
                 } else {
+                	var move = 0;
+                	while (true) {
+                		if (this._board[origX -  move][origY].getType() == SOLID) {
+                			return 4;
+                		} else if (this._board[origX][origY - move].getType() == SOLID) {
+                			return 1;
+                		} else {
+                			move++;
+                		}
+                	}
                     return 0; //for now, until objects can collide on part of a side
                 }
             } else if (this._board[x2][y2].getType() == SOLID) {
@@ -171,8 +183,40 @@ class Level {
                 } else if (this._board[x1][y2].getType() == SOLID) {
                     return 3;
                 } else {
+                	var move = 0;
+                	while (true) {
+                		if (this._board[origX + move][origY].getType() == SOLID) {
+                			return 2;
+                		} else if (this._board[origX][origY + move].getType() == SOLID) {
+                			return 3;
+                		} else {
+                			move++;
+                		}
+                	}
                     return 0; //for now, until objects can collide on part of a side
                 }
+            } else if (this._board[x1][y2].getType() == SOLID) {
+            	var move = 0;
+                while (true) {
+            		if (this._board[origX - move][origY].getType() == SOLID) {
+            			return 2;
+            		} else if (this._board[origX][origY + move].getType() == SOLID) {
+               			return 3;
+               		} else {
+               			move++;
+               		}
+               	}
+            } else if (this._board[x2][y1].getType() == SOLID) {
+            	var move = 0;
+                while (true) {
+                	if (this._board[origX + move][origY].getType() == SOLID) {
+            			return 2;
+            		} else if (this._board[origX][origY - move].getType() == SOLID) {
+            			return 3;
+            		} else {
+               			move++;
+               		}
+               	}
             }
         }
         
