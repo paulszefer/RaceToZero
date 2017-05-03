@@ -161,14 +161,7 @@ class Level {
                 this._playItem.setX(tempX); // later there will be death by trig
                 this._playItem.setY(this._playItem.getY() + move);
                 if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 5
-                    this._playItem.setIsGrounded(true);
-                    this._playItem.setDY(0);
-                    var currentDX = this._playItem.getDX();
-                    if (currentDX > 0) {
-                    	this._playItem.setDX(currentDX - 1);
-                    } else if (currentDX < 0) {
-                    	this._playItem.setDX(currentDX + 1);
-                    }
+                    this._playItem.snapToGround();
                 } else {
                     var roundedDY = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDY());
                     this._playItem.setDY(roundedDY);
@@ -509,18 +502,11 @@ class PlayItem {
     	this._dx += Math.round(xDiff / divisor);
     	this._dy += Math.round(yDiff / divisor);
     }
-    /*
-            if (this._playItem.getDY() > 20) {
-        	this._playItem.setDY(20);
-        } else if (this._playItem.getDY() < -20) {
-        	this._playItem.setDY(-20);
-        }
-        if (this._playItem.getDX() > 20) {
-        	this._playItem.setDX(20);
-        } else if (this._playItem.getDX() < -20) {
-        	this._playItem.setDX(20);
-        }
-        */
+
+	/*
+	 * Ensures that the speed never exceeds 20 in any direction. This method is called 
+	 * after every move.
+	 */
     adjustSpeed() {
     	if (this._dy > 20) {
     		this._dy = 20;
@@ -531,6 +517,22 @@ class PlayItem {
     		this._dx = 20;
     	} else if (this._dx < -20) {
     		this._dx = -20;
+    	}
+    }
+
+	/*
+	 * If the play item is touching the ground and its vertical speed is less than 2,
+	 * it becomes grounded and friction applies.
+	 */
+    snapToGround() {
+    	if (this._dy < 2) {
+    		this._isGrounded = true;
+    		this._dy = 0;
+    		if (this._dx > 0) {
+    			this._dx--;
+    		} else if (this._dx < 0) {
+    			this._dx++;
+    		}
     	}
     }
 }
