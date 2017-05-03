@@ -67,16 +67,29 @@ body{
 	text-align: justify;
 	width:80%;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 980px) {
     .contentactual {
         width:100%;
     }
     .navlinks{
     	display:none;
     }
-    .navburger{
-    	display:;
+    #navCont #navburger{
+    	position: absolute;
+    	top:30px;
+    	right:1em;
     }
+    #navCont #navburger img{
+    	height: 100%;
+    }
+    #navCont #navburger img:hover{
+    	
+    }
+}
+@media only screen and (min-width: 981px){
+	#navburger{
+		display:none;
+	}
 }
 .footercontent{
 	background-color: black;
