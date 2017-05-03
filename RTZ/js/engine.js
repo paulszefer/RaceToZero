@@ -1,13 +1,13 @@
 $(document).ready(function() {
     level = new Level(0, 500, 500);
     foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-    playItem = new PlayItem(242, 400, -4, 1, foodItem);
+    playItem = new PlayItem(242, 30, 0, 1, foodItem);
     
     barrier1 = new Barrier("barrier1", 100, 200, 399, 299);
     barrier2 = new Barrier("barrier2", 0, 400, 199, 499);
     barrier3 = new Barrier("barrier3", 300, 400, 499, 499);
     barrier4 = new Barrier("goal", 199, 460, 300, 499);
-    barrier5 = new Barrier("barrier5", 400, 0, 499, 499);
+    barrier5 = new Barrier("barrier5", 450, 0, 499, 499);
     
     drawBarrier(barrier1);
     drawBarrier(barrier2);
@@ -45,7 +45,7 @@ $(document).ready(function() {
     level.addObject(0, 400, 199, 499, SOLID);
     level.addObject(300, 400, 499, 499, SOLID);
     level.addObject(200, 460, 300, 499, SOLID);
-    level.addObject(400, 0, 499, 499, SOLID);
+    level.addObject(450, 0, 499, 499, SOLID);
     
     level.setPlayItem(playItem);
     
@@ -67,7 +67,7 @@ $(document).ready(function() {
         draw();
     }
     
-    var intervalId = setInterval(move, 100);
+    var intervalId = setInterval(move, 20);
     
     $("body").click(function(e) {
 		var divPosX = $(this).position().left;

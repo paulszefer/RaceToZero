@@ -144,6 +144,17 @@ class Level {
         if (!this._playItem.getIsGrounded()) {
             this._playItem.applyGravity();
         }
+        // max speed
+        if (this._playItem.getDY() > 20) {
+        	this._playItem.setDY(20);
+        } else if (this._playItem.getDY() < -20) {
+        	this._playItem.setDY(-20);
+        }
+        if (this._playItem.getDX() > 20) {
+        	this._playItem.setDX(20);
+        } else if (this._playItem.getDX() < -20) {
+        	this._playItem.setDX(20);
+        }
     }
     
     checkCollisions(x, y) {
