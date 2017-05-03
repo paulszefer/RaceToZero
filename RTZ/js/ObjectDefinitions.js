@@ -98,7 +98,8 @@ class Level {
                 }
                 this._playItem.setX(tempX); // later there will be death by trig
                 this._playItem.setY(this._playItem.getY() - move);
-                this._playItem.setDY(-1 * this._playItem.getDY());
+                var roundedDY = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDY());
+                this._playItem.setDY(roundedDY);
                 this._playItem.setIsGrounded(false);
             } else if (collision == 2) {
                 var move = 0;
@@ -107,7 +108,8 @@ class Level {
                 }
                 this._playItem.setX(this._playItem.getX() + move); // later there will be death by trig
                 this._playItem.setY(tempY);
-                this._playItem.setDX(-1 * this._playItem.getDX());
+                var roundedDX = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDX());
+                this._playItem.setDX(roundedDX);
                 this._playItem.setIsGrounded(false);
             } else if (collision == 3) {
                 var move = 0;
@@ -138,7 +140,8 @@ class Level {
                 this._playItem.setX(this._playItem.getX() - move); // later there will be death by trig
                 this._playItem.setY(tempY);
                 this._playItem.setIsGrounded(false);
-                this._playItem.setDX(-1 * this._playItem.getDX());
+                var roundedDX = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDX());
+                this._playItem.setDX(roundedDX);
             }
  //       }
         if (!this._playItem.getIsGrounded()) {
