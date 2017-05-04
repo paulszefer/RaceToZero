@@ -199,81 +199,124 @@ class Level {
         var y1 = y;
         var x2 = x + size;
         var y2 = y + size;
-        var origX1 = x - this._playItem.getDX();
-        var origY1 = y - this._playItem.getDY();
-        var origX2 = origX1 + size;
-        var origY2 = origY1 + size;
         
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
             if (this._board[x1][y1].getType() == SOLID) {
-                if (this._board[x2][y1].getType() == SOLID) {
-                    return 1;
-                } else if (this._board[x1][y2].getType() == SOLID) {
-                    return 4;
-                } else {
-                	var move = 0;
-                	while (move < this._playItem.getSize()) {
-                		if (this._board[origX1 - move][origY1].getType() == SOLID) {
-                			return 4;
-                		} else if (this._board[origX1][origY1 - move].getType() == SOLID) {
-                			return 1;
-                		} else {
-                			move++;
-                		}
-                	}
-                    return 0;
-                }
+                return this.topLeftCollision(x1, y1);
             } else if (this._board[x2][y2].getType() == SOLID) {
-                if (this._board[x2][y1].getType() == SOLID) {
-                    return 2;
-                } else if (this._board[x1][y2].getType() == SOLID) {
-                    return 3;
-                } else {
-    				if (this._playItem.getIsGrounded()) {
-    					return 3;
-    				}
-                	var move = 0;
-                	while (move < this._playItem.getSize()) {
-                		if (this._board[origX2 + move][origY2].getType() == SOLID) {
-                			return 2;
-                		} else if (this._board[origX2][origY2 + move].getType() == SOLID) {
-                			return 3;
-                		} else {
-                			move++;
-                		}
-                	}
-                    return 0;
-                }
+                return this.bottomRightCollision(x1, y1);
             } else if (this._board[x1][y2].getType() == SOLID) {
-            	var move = 0;
-                while (move < this._playItem.getSize()) {
-                	if (this._playItem.getIsGrounded()) {
-    					return 3;
-    				}
-            		if (this._board[origX1 - move][origY2].getType() == SOLID) {
-            			return 4;
-            		} else if (this._board[origX1][origY2 + move].getType() == SOLID) {
-               			return 3;
-               		} else {
-               			move++;
-               		}
-               	}
-               	return 0;
+               	return this.bottomLeftCollision(x1, y1);
             } else if (this._board[x2][y1].getType() == SOLID) {
-            	var move = 0;
-                while (move < this._playItem.getSize()) {
-                	if (this._board[origX2 + move][origY1].getType() == SOLID) {
-            			return 2;
-            		} else if (this._board[origX2][origY1 - move].getType() == SOLID) {
-            			return 1;
-            		} else {
-               			move++;
-               		}
-               	}
-               	return 0;
+               	return this.topRightCollision(x1, y1);
             }
         }
-        
+        return 0;
+    }
+    
+    /*
+     * Handles the case where the top-left corner of the object collides with a barrier.
+     */
+    topLeftCollision(x1, y1) {
+    	var size = this._playItem.getSize();
+    	var x2 = x1 + size;
+    	var y2 = y1 + size;
+    	var origX1 = x1 - this._playItem.getDX();
+        var origY1 = y1 - this._playItem.getDY();
+    	
+    	if (this._board[x2][y1].getType() == SOLID) {
+            return 1;
+        } else if (this._board[x1][y2].getType() == SOLID) {
+            return 4;
+        } else {
+            var move = 0;
+            while (move < this._playItem.getSize()) {
+                if (this._board[origX1 - move][origY1].getType() == SOLID) {
+                	return 4;
+                } else if (this._board[origX1][origY1 - move].getType() == SOLID) {
+                	return 1;
+                } else {
+                	move++;
+                }
+            }
+            return 0;
+        }
+    }
+    
+    /*
+     * Handles the case where the bottom-right corner of the object collides with a 
+     * barrier.
+     */
+    bottomRightCollision(x1, y1) {
+    	var size = this._playItem.getSize();
+    	var x2 = x1 + size;
+    	var y2 = y1 + size;
+    	var origX2 = x2 - this._playItem.getDX();
+        var origY2 = y2 - this._playItem.getDY();
+    
+    	if (this._board[x2][y1].getType() == SOLID) {
+            return 2;
+        } else if (this._board[x1][y2].getType() == SOLID) {
+            return 3;
+        } else {
+    		if (this._playItem.getIsGrounded()) {
+    			return 3;
+    		}
+            var move = 0;
+            while (move < this._playItem.getSize()) {
+                if (this._board[origX2 + move][origY2].getType() == SOLID) {
+                	return 2;
+                } else if (this._board[origX2][origY2 + move].getType() == SOLID) {
+                	return 3;
+                } else {
+                	move++;
+                }
+            }
+            return 0;
+        }
+    }
+    
+    /*
+     * Handles the case where the bottom-left corner of the object collides with a 
+     * barrier.
+     */
+    bottomLeftCollision(x1, y1) {
+    	var origX1 = x1 - this._playItem.getDX();
+    	var origY2 = y1 + this._playItem.getSize() - this._playItem.getDY();
+    
+    	var move = 0;
+        while (move < this._playItem.getSize()) {
+            if (this._playItem.getIsGrounded()) {
+    			return 3;
+    		}
+            if (this._board[origX1 - move][origY2].getType() == SOLID) {
+            	return 4;
+            } else if (this._board[origX1][origY2 + move].getType() == SOLID) {
+               	return 3;
+            } else {
+               	move++;
+            }
+        }
+        return 0;
+    }
+    
+    /*
+     * Handles the case where the top-right corner of the object collides with a barrier.
+     */
+    topRightCollision(x1, y1) {
+    	var origX2 = x1 + this._playItem.getSize() - this._playItem.getDX();
+    	var origY1 = y1 - this._playItem.getDY();
+    
+    	var move = 0;
+        while (move < this._playItem.getSize()) {
+            if (this._board[origX2 + move][origY1].getType() == SOLID) {
+            	return 2;
+            } else if (this._board[origX2][origY1 - move].getType() == SOLID) {
+            	return 1;
+            } else {
+               	move++;
+            }
+        }
         return 0;
     }
 }
@@ -509,7 +552,7 @@ class PlayItem {
         
         // ensures a far away click does not allow the playItem to move
         // illegally
-        adjustSpeed();
+        this.adjustSpeed();
     }
 
 	/*
