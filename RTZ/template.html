@@ -2,11 +2,14 @@
 <html lang="en">
 	<head>
 		<link rel="stylesheet" href="css/masterreset.css">
-		<link rel="stylesheet" href="css/template.css">
+		<link rel="stylesheet" href="css/template2.css">
 		<script src='js/template.js'></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="js/overlaynav.js"></script>
 	</head>
 	</html>
 	<body>
+		<div id=overlay></div>
 		<div id="header">
 			<div id='navCont'>
 				<div class='navlogo'>
@@ -27,15 +30,17 @@
 						<a href='leaderboard.html'><li class='navbuttonleft'>Leaderboard</li></a>
 					</ul>
 				</div><!--end ov navlinks-->
-                <div id="mobilenav">
-                    <ul>
-                        <a href='index.html'><li class='mobilelist'>Home</li></a>
-						<a href='resource.html'><li class='mobilelist'>Resources</li></a>
-						<a href='login.html'><li class='mobilelist'>Login/Register</li></a>
-						<a href='profile.html'><li class='mobilelist'>Profile</li></a>
-						<a href='leaderboard.html'><li class='mobilelist'>Leaderboard</li></a>
-                    </ul>
-                </div><!--end of mobilenav-->
+
+	            <div id="mobilenav">
+	                <ul>
+	                <a href='index.html'><li class='mobilelist'><div>Home</div></li></a>
+					<a href='resource.html'><li class='mobilelist'><div>Resources</div></li></a>
+					<a href='login.html'><li class='mobilelist'><div>Login/Register</div></li></a>
+					<a href='profile.html'><li class='mobilelist'><div>Profile</div></li></a>
+					<a href='leaderboard.html'><li class='mobilelist'><div>Leaderboard</div></li></a>
+	                </ul>
+	            </div><!--end of mobilenav-->
+
 			</div>
 		</div>	
 		<div id='content'>
@@ -50,8 +55,7 @@
 				<p>Copyright whatever</p>
 			</div>
 		</div>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="js/mobilenav.js"></script>
+
 	</body>
 
 </html>

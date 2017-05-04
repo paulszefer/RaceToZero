@@ -1,6 +1,7 @@
 $("#navburger").click(function() {
     if ($("#mobilenav").css("display") == "none") {
         $("#mobilenav").css("display", "block");
+
         $("#mobilenav").css("position", "absolute");
         $("#mobilenav").css("left", "400px");//$("window").width());
         var intervalID = setInterval(movenavleft, 4);
