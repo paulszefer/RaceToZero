@@ -51,6 +51,7 @@
 	top:0;
 	height:100vh;
 	-webkit-transition: width 0.3s;
+	background-color: black;
 }
 #mobilenav a{
 	text-decoration: none;

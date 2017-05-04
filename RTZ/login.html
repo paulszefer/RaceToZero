@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="css/template2.css">
 	<link rel="stylesheet" href="css/login.css">
 	<script src='js/template.js'></script>
+	<script src='js/login.js'></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="js/overlaynav.js"></script>
 </head>
@@ -55,19 +56,19 @@
 						<td><input type="text" name="UserOrEmail" id="UserOrEmail" oninput="userOrEmailValid()"></td>
 					</tr>	
 					<tr>
-						<td colspan="4"><p id="UserOrEmailErrorField"></p></td>
+						<td colspan="3"><p id="UserOrEmailErrorField"></p></td>
 					</tr>
 					<tr><td></td><td>&nbsp</td></tr>
 					<tr>
 						<td><label class="required" for="password">Password</label></td>
-						<td colspan="3"><input type="password" name="password" id="password" oninput="passwordValid()"></td>
+						<td colspan="3"><input type="password" name="password" id="password"></td>
 					</tr>
-					<tr><td colspan="4"><p id="passErrorField"></p></td></tr>
+					<tr><td colspan="3"><p id="passErrorField"></p></td></tr>
 						</table>
 					<br>
 					<button name="login" value="login" type="submit">Login</button>
 				</form>
-			</div>
+			</div><!--end of logincontent-->
 			<div id='regtab' class='titletab'>Register</div>
 			<div id='regcontent'>
 				<form name="registration" method ="post" action="registration.php" id="registration" class="registration" onsubmit="return validateForm()">
