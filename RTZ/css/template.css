@@ -4,7 +4,7 @@
 }
 #navCont ul li{
 	list-style-type: none;
-	display: inline-block;
+    display: inline-block;
 	font-family: Calibri;
 	padding: 0.5em;
 }
@@ -94,6 +94,10 @@ body{
 
 #mobilenav {
     display: none;
+    background-color: black;
+    color: white;
+    text-align: center;
+    
 }
 
 .footercontent{

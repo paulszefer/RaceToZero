@@ -3,9 +3,9 @@ $("#navburger").click(function() {
         $("#mobilenav").css("display", "block");
         $("#mobilenav").css("position", "absolute");
         $("#mobilenav").css("left", "400px");//$("window").width());
-        var intervalID = setInterval(movenav, 4);
+        var intervalID = setInterval(movenavleft, 4);
         
-        function movenav() {
+        function movenavleft() {
             var xPos = $("#mobilenav").css("left").slice(0, -2);
             if (xPos > 0) {
                 xPos -= 2;
