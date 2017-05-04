@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <title>Race To Zero</title>
-		<link rel="stylesheet" href="css/template.css">
+    <title>Race To Zero</title>
+		<link rel="stylesheet" href="css/masterreset.css">
+		<link rel="stylesheet" href="css/template2.css">
 		<link rel="stylesheet" href="css/index.css">
-        <meta charset="utf-8">		
+    <meta charset="utf-8">
+		<script src='js/template.js'></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="js/indexoverlay.js"></script>
 	</head>
-	</html>
 	<body>
 		<div id="header">
 			<div id='navCont'>
 				<div class='navlogo'>
 					<a href='index.html'><img src='img/logo.png' alt='logo'></a>
-				</div>
+					<div class='loginstatus'>
+						<p>Welcome, Horse</p>
+					</div>
+					<div id='navburger'>
+						<img src='img/menuicon.png'>
+					</div>
+				</div> <!--end of navlogo-->
 				<div class='navlinks'>
 					<ul>
 						<a href='index.html'><li class='navbuttonleft'>Home</li></a>
 						<a href='resource.html'><li class='navbuttonleft'>Resources</li></a>
 						<a href='login.html'><li class='navbuttonright'>Login/Register</li></a>
-						<a href='.profilehtml'><li class='navbuttonright'>Profile</li></a>
+						<a href='profile.html'><li class='navbuttonright'>Profile</li></a>
 						<a href='leaderboard.html'><li class='navbuttonleft'>Leaderboard</li></a>
 					</ul>
-				</div>
-			</div>
-		</div>	
+				</div><!--end ov navlinks-->
+			</div><!--end of navCont-->
+		</div><!--end of header-->	
 		<div id='gamedivwrapper'>
-            <div id='gamediv'>
-                <h1>Play</h1>
-            </div>
+      		<div id='gamediv'>
+          		<h1>Play</h1>
+      		</div>
 		</div>
+		<div id="mobilenav">
+        	<ul>
+          		<a href='index.html'><li class='mobilelist'><div>Home</div></li></a>
+				<a href='resource.html'><li class='mobilelist'><div>Resources</div></li></a>
+				<a href='login.html'><li class='mobilelist'><div>Login/Register</div></li></a>
+				<a href='profile.html'><li class='mobilelist'><div>Profile</div></li></a>
+				<a href='leaderboard.html'><li class='mobilelist'><div>Leaderboard</div></li></a>
+          	</ul>
+      	</div><!--end of mobilenav-->
 	</body>
-
 </html>
