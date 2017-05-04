@@ -126,36 +126,38 @@ class Level {
      * with anything and adjusts accordingly.
      */
     move() {
-            var tempX = this._playItem.getX() + this._playItem.getDX();
-            var tempY = this._playItem.getY() + this._playItem.getDY();
+        var tempX = this._playItem.getX() + this._playItem.getDX();
+        var tempY = this._playItem.getY() + this._playItem.getDY();
             
-            // check if next movement causes a collision
-            var collision = this.checkCollisions(tempX, tempY);
-            if (collision == 0) {
-                // no collision, move normally
-                this._playItem.move();
-                this._playItem.setIsGrounded(false);
-            } else if (collision == 1) {
-                this.snapToTop(tempX);
+        // check if next movement causes a collision
+        var collision = this.checkCollisions(tempX, tempY);
+        if (collision == 0) {
+            // no collision, move normally
+            this._playItem.move();
+            this._playItem.setIsGrounded(false);
+        } else if (collision == 1) {
+            this.snapToTop(tempX);
+            this._playItem.reverseDY();
+            this._playItem.setIsGrounded(false);
+        } else if (collision == 2) {
+            this.snapToRight(tempY);
+            this._playItem.reverseDX();
+            this._playItem.setIsGrounded(false);
+        } else if (collision == 3) {
+        	if (!this._playItem.getIsGrounded()) {
+            	this.snapToBottom(tempX);
+            }
+            if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 2
+                this._playItem.snapToGround();
+            } else {
                 this._playItem.reverseDY();
                 this._playItem.setIsGrounded(false);
-            } else if (collision == 2) {
-                this.snapToRight(tempY);
-                this._playItem.reverseDX();
-                this._playItem.setIsGrounded(false);
-            } else if (collision == 3) {
-                this.snapToBottom(tempX);
-                if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 2
-                    this._playItem.snapToGround();
-                } else {
-                    this._playItem.reverseDY();
-                    this._playItem.setIsGrounded(false);
-                }
-            } else if (collision == 4) {
-                this.snapToLeft(tempY);
-                this._playItem.reverseDX();
-                this._playItem.setIsGrounded(false);
             }
+        } else if (collision == 4) {
+            this.snapToLeft(tempY);
+            this._playItem.reverseDX();
+            this._playItem.setIsGrounded(false);
+        }
         this._playItem.applyGravity();
         this._playItem.adjustSpeed();
         this._playItem.round();
