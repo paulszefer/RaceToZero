@@ -1,0 +1,75 @@
+/*login shenanigans*/
+#logincontent {
+	padding: 5% 0 5% 0;
+	margin: auto;
+	text-align:center;
+	font-size: 0.90em;
+}
+#logincontent table{
+	width:80%;
+	margin:auto;
+}
+/*page specific anchor colors*/
+.content a, .content a:visited{
+	color:orange;
+}
+
+/*registration shenanigans*/
+.registration input{
+	width:100%;
+}
+.registration td{
+	vertical-align:bottom;
+	text-align:left;
+}
+.registration th{
+	width:25%;
+	text-align: center;
+	vertical-align: middle;
+}
+.registration table{
+	margin: 5% 0 5% 0; /*Paddin for table*/
+	width:100%;
+}
+#regcontent{
+	margin: auto;
+	width: 90%;
+	text-align:left;
+	font-size:0.75em;
+}
+.disclaimtext h2{
+	font-size: 1.25em;
+	font-weight:bold;
+	text-align: center;
+}
+.required::after{
+	content: "*";
+	color: red;
+}
+#usernameErrorField, #emailErrorField, #passwordErrorField{
+	color: red;
+	min-height: 1em;
+}
+.flex1{
+	display: inline-block;
+	width:24%;
+	text-align: center;
+	margin: 0.5em 0 0.5em;
+}
+.flex2{
+	display: inline-block;
+	width:49%;
+	text-align: center;
+	vertical-align: middle;
+}
+.flex2 p{
+	position: relative;
+	bottom:1em;
+}
+.registration>div>div.flex1 input, .registration>div>div.flex2 input {
+	width:initial;
+}
+#registration > div:nth-child(4) {
+	width:80%;
+	margin:auto;
+}
