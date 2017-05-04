@@ -2,6 +2,12 @@
 	height: 100px;
 	width:auto;
 }
+#navCont ul li{
+	list-style-type: none;
+    display: inline-block;
+	font-family: Calibri;
+	padding: 0.5em;
+}
 .navlogo{
 	background-color: #95d5f5;/*#3d2e1f;*/
 	background-image: url('../img/bannerBG.gif');
@@ -109,6 +115,10 @@ body{
 
 #mobilenav {
     display: none;
+    background-color: black;
+    color: white;
+    text-align: center;
+    
 }
 
 .footercontent{
