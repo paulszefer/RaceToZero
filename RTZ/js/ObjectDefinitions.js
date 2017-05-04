@@ -126,6 +126,7 @@ class Level {
      * with anything and adjusts accordingly.
      */
     move() {
+    	console.log(this._playItem.getDX());
         var tempX = this._playItem.getX() + this._playItem.getDX();
         var tempY = this._playItem.getY() + this._playItem.getDY();
             
@@ -149,6 +150,7 @@ class Level {
             }
             if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 2
                 this._playItem.snapToGround();
+                this._playItem.move();
             } else {
                 this._playItem.reverseDY();
                 this._playItem.setIsGrounded(false);

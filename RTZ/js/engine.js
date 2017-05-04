@@ -1,7 +1,7 @@
 $(document).ready(function() {
     level = new Level(0, 500, 500);
     foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-    playItem = new PlayItem(242, 80, 0, 0, foodItem);
+    playItem = new PlayItem(242, 149, -10, 0, foodItem);
     
     platform = new Barrier("platform", 110, 200, 389, 299);
     floorleft = new Barrier("floorleft", 0, 400, 199, 499);
