@@ -136,56 +136,69 @@ class Level {
                 this._playItem.move();
                 this._playItem.setIsGrounded(false);
             } else if (collision == 1) {
-                // top collision, snap to top
-                var move = 0;
-                while (this.checkCollisions(tempX, this._playItem.getY() - move) != 1) {
-                    move++;
-                }
-                this._playItem.setX(tempX); // later there will be death by trig
-                this._playItem.setY(this._playItem.getY() - move);
-                var roundedDY = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDY());
-                this._playItem.setDY(roundedDY);
+                this.snapToTop(tempX);
+                this._playItem.reverseDY();
                 this._playItem.setIsGrounded(false);
             } else if (collision == 2) {
-                // right collision, snap to right
-                var move = 0;
-                while (this.checkCollisions(this._playItem.getX() + move, tempY) != 2) {
-                    move++;
-                }
-                this._playItem.setX(this._playItem.getX() + move); // later there will be death by trig
-                this._playItem.setY(tempY);
-                var roundedDX = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDX());
-                this._playItem.setDX(roundedDX);
+                this.snapToRight(tempY);
+                this._playItem.reverseDX();
                 this._playItem.setIsGrounded(false);
             } else if (collision == 3) {
-                // bottom collision, snap to bottom
-                var move = 0;
-                while (this.checkCollisions(tempX, this._playItem.getY() + move) != 3) {
-                    move++;
-                }
-                this._playItem.setX(tempX); // later there will be death by trig
-                this._playItem.setY(this._playItem.getY() + move);
+                this.snapToBottom(tempX);
                 if (this._playItem.getDY() < 2) { // SNAPTOGROUND = 2
                     this._playItem.snapToGround();
                 } else {
-                    var roundedDY = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDY());
-                    this._playItem.setDY(roundedDY);
+                    this._playItem.reverseDY();
                     this._playItem.setIsGrounded(false);
                 }
             } else if (collision == 4) {
-                // left collosion, snap to left
-                var move = 0;
-                while (this.checkCollisions(this._playItem.getX() - move, tempY) != 4) {
-                    move++;
-                }
-                this._playItem.setX(this._playItem.getX() - move); // later there will be death by trig
-                this._playItem.setY(tempY);
+                this.snapToLeft(tempY);
+                this._playItem.reverseDX();
                 this._playItem.setIsGrounded(false);
-                var roundedDX = Math.round(-1 * this._playItem.getFoodItem().bounceMultiplier * this._playItem.getDX());
-                this._playItem.setDX(roundedDX);
             }
         this._playItem.applyGravity();
         this._playItem.adjustSpeed();
+        this._playItem.round();
+    }
+    
+    snapToTop(tempX) {
+    	var move = 0;
+        while (this.checkCollisions(tempX, this._playItem.getY() - move) != 1) {
+            move++;
+        }
+        var ratio = this._playItem.getDX() / this._playItem.getDY();
+        this._playItem.setX(this._playItem.getX() - (move * ratio));
+        this._playItem.setY(this._playItem.getY() - move);
+    }
+    
+    snapToRight(tempY) {
+    	var move = 0;
+        while (this.checkCollisions(this._playItem.getX() + move, tempY) != 2) {
+            move++;
+        }
+        var ratio = this._playItem.getDY() / this._playItem.getDX();
+        this._playItem.setX(this._playItem.getX() + move);
+        this._playItem.setY(this._playItem.getY() + (move * ratio));
+    }
+    
+    snapToBottom(tempX) {
+    	var move = 0;
+        while (this.checkCollisions(tempX, this._playItem.getY() + move) != 3) {
+            move++;
+        }
+        var ratio = this._playItem.getDX() / this._playItem.getDY();
+        this._playItem.setX(this._playItem.getX() + (move * ratio));
+        this._playItem.setY(this._playItem.getY() + move);
+    }
+    
+    snapToLeft(tempY) {
+    	var move = 0;
+        while (this.checkCollisions(this._playItem.getX() - move, tempY) != 4) {
+            move++;
+        }
+        var ratio = this._playItem.getDY() / this._playItem.getDX();
+        this._playItem.setX(this._playItem.getX() - move);
+        this._playItem.setY(this._playItem.getY() - (move * ratio));
     }
     
     /*
@@ -462,6 +475,15 @@ class PlayItem {
     }
     
     /*
+     * Reverses the horizontal component of the velocity vector and applies the bounce
+     * multiplier to it.
+     */
+    reverseDX() {
+    	var adjustedDX = -1 * this._foodItem.bounceMultiplier * this._dx;
+        this.setDX(adjustedDX);
+    }
+    
+    /*
      * Returns the horizontal component of the velocity vector.
      */
     getDX() {
@@ -473,6 +495,15 @@ class PlayItem {
      */
     setDY(dy) {
         this._dy = dy;
+    }
+    
+    /*
+     * Reverses the vertical component of the velocity vector and applies the bounce
+     * multiplier to it.
+     */
+    reverseDY() {
+    	var adjustedDY = -1 * this._foodItem.bounceMultiplier * this._dy;
+        this.setDY(adjustedDY);
     }
     
     /*
@@ -587,6 +618,16 @@ class PlayItem {
     		}
     	}
     }
+    
+    /*
+     * Rounds x, y, dx, dy to the nearest integer.
+     */
+    round() {
+    	this._x = Math.round(this._x);
+    	this._y = Math.round(this._y);
+    	this._dx = Math.round(this._dx);
+    	this._dy = Math.round(this._dy);
+    }
 }
 
 /*
@@ -639,21 +680,10 @@ class Pixel {
     getType() {
         return this._type;
     }
-
-	/*
-	 * Sets the importance of the pixel.
-	 */
-    setIsImportant(isImportant) {
-        this._isImportant = isImportant;
-    }
-    
-    /*
-     * Returns the importance of the pixel.
-     */
-    getIsImportant() {
-        return this._isImportant;
-    }
 }
 
-       var AIR = 0;
-        var SOLID = 1;
+/*
+ * Types of pixels.
+ */
+var AIR = 0;
+var SOLID = 1;
