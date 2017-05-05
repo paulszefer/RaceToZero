@@ -1,8 +1,9 @@
 #overlay{
-	position: absolute;
+	position: fixed;
 	background-color: rgba(0, 0, 0, 0.7);
 	width:0;
 	-webkit-transition: width 0.1s;
+	z-index: 500;
 }
 #navCont img{
 	height: 100px;
@@ -52,11 +53,12 @@
 	height:100vh;
 	-webkit-transition: width 0.3s;
 	background-color: black;
+	z-index: 501;
 }
 #mobilenav a{
 	text-decoration: none;
 	color:white;
-	font-size: 1.5em;
+	font-size: 1em;
 	font-family: calibri;
 	text-align: right;
 }

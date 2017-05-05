@@ -1,0 +1,26 @@
+/*override default template2.css*/
+/*when screen is smaller than 980px*/
+@media only screen and (max-width: 980px) {
+    .contentactual {
+        width:100%;
+    }
+    .navlinks{
+        display:none;
+    }
+    #navCont #navburger{
+        position: fixed;
+        top:1em;
+        right:1em;
+    }
+    #navCont #navburger img{
+        height: 100%;
+    }
+}
+#navburger{
+    position:fixed;
+    top:30px;
+    right:1em;
+}
+.contentwrapper{
+    padding:1em 1em 1em 1em;
+}

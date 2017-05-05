@@ -5,9 +5,16 @@
 	text-align:center;
 	font-size: 0.90em;
 }
+#loginform button{
+	text-align: center;
+}
 #logincontent table{
 	width:80%;
 	margin:auto;
+}
+#logincontent input {
+	text-align: left;
+	width:100%;
 }
 /*page specific anchor colors*/
 .content a, .content a:visited{
@@ -46,7 +53,7 @@
 	content: "*";
 	color: red;
 }
-#usernameErrorField, #emailErrorField, #passwordErrorField{
+#usernameErrorField, #emailErrorField, #passwordErrorField, #UserOrEmailErrorField, #passErrorField{
 	color: red;
 	min-height: 1em;
 }
@@ -71,5 +78,9 @@
 }
 #registration > div:nth-child(4) {
 	width:80%;
+	margin:auto;
+}
+#registration > input[type="submit"]{
+	width:20%;
 	margin:auto;
 }
