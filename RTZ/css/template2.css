@@ -81,9 +81,12 @@ body{
 	font-family: helvetica;
 	z-index: 0;
 }
+html,body{
+	height:100%;
+}
 .contentactual{
 	width:80%;
-	min-height:600px;
+	min-height:85vh;
 	max-width: 981px;
 	height:auto;
 	margin:auto;
@@ -130,7 +133,6 @@ body{
 		display:none;
 	}
 }
-
 .footercontent{
 	background-color: black;
 	height:50px;

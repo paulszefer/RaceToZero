@@ -24,3 +24,28 @@
 .contentwrapper{
     padding:1em 1em 1em 1em;
 }
+.contentboxwrapper{
+    width:49%;
+    background-color:black;
+    min-height:25vh;
+    display:inline-block;
+    color:white;
+    margin:0.24999999%;
+}
+.contentbox{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:0;
+    height:25vh;
+    width:100%
+}
+.contentbox h1{
+    padding:0;
+}
+@media only screen and (max-width: 490px) {
+    .contentboxwrapper {
+        width:100%;
+        min-height:10vh;
+    }
+}
