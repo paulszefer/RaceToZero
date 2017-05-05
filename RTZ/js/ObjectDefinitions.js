@@ -126,6 +126,8 @@ class Level {
      * with anything and adjusts accordingly.
      */
     move() {
+    	//console.log(this._playItem.getDX() + "; " + this._playItem.getDY());
+    	//console.log(this._playItem.getIsGrounded());
         var tempX = this._playItem.getX() + this._playItem.getDX();
         var tempY = this._playItem.getY() + this._playItem.getDY();
             
