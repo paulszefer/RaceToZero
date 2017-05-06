@@ -11,6 +11,9 @@
     width:53.4375vh;
     height:95vh;
 }
+.contentactual{
+    background-color: none;
+}
 
 @media only screen and (min-width: 981px) {
     #gamedivwrapper {

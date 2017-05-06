@@ -1,29 +1,11 @@
 /*override default template2.css*/
 /*when screen is smaller than 980px*/
-@media only screen and (max-width: 980px) {
-    .contentactual {
-        width:100%;
-    }
-    .navlinks{
-        display:none;
-    }
-    #navCont #navburger{
-        position: fixed;
-        top:1em;
-        right:1em;
-    }
-    #navCont #navburger img{
-        height: 100%;
-    }
-}
-#navburger{
-    position:fixed;
-    top:30px;
-    right:1em;
-}
+
+/*whole wrapper for resource content*/
 .contentwrapper{
     padding:1em 1em 1em 1em;
 }
+/*wrapper for each of topic box*/
 .contentboxwrapper{
     width:49%;
     background-color:black;
@@ -32,6 +14,7 @@
     color:white;
     margin:0.24999999%;
 }
+/*topic box*/
 .contentbox{
     display:flex;
     align-items: center;
@@ -43,9 +26,19 @@
 .contentbox h1{
     padding:0;
 }
+/*media query for the boxes when screen too thin*/
 @media only screen and (max-width: 490px) {
     .contentboxwrapper {
         width:100%;
         min-height:10vh;
     }
+}
+/*this is where we put actual content for each topic*/
+.expandedcontentbox{
+    /*because we want it to be displayed on top of topic buttons*/
+    z-index:10;
+    height: 0;
+    width:0;
+    -webkit-transition: width 0.3s;
+    -webkit-transition: height 0.2s;
 }
