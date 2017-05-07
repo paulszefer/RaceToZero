@@ -1,13 +1,32 @@
+// adds a click handler for each minimized topic
+// Courtesy of paulszefer
+// determines which minimized topic was clicked,
+// hides all topics, and then shows the correct
+// maximized topic
 $(function() {
-    $("#navburger").click(function() {
-        $("#mobilenav").css("width", "40vw");
-        $("#overlay").css("width", "60vw");
-        $("#overlay").css("height", $('body').height());
-        $("#overlay").css("height", $('body').height());
-    });
+$(".contentbox").click(function() {
+    var index = $(".contentbox").index(this);
+    var expanded = $(".expandedcontentbox").get(index);
+    hideTopics();
+    expanded.style.display = "flex";
+    expanded.style.minHeight = "100vh";
+    expanded.style.width = "100%";
+});
 
-    //Closes mobilenav when navoverlay is clicked
-    $('.expandedcontentbox').click(function(){
-        $(".expandedcontentbox").attr('style', '');
-    });
+// adds a click handler for each maximized topic
+//
+// hides all topics, then shows all minimized topics
+$(".expandedcontentbox").click(function() {
+    $(this).attr('style', '');
+    //resets the inline attr caused by .css()
+    $(".contentboxwrapper").attr('style', '');
+    $(".contentbox").attr('style', '');
+});
+
+function hideTopics() {
+    $(".contentboxwrapper").css("display", "none"); // can animate this instead later
+    $(".contentbox").css("display", "none");
+    $(".expandedcontentbox").attr("style", '');
+}
+
 });

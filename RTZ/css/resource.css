@@ -4,6 +4,8 @@
 /*whole wrapper for resource content*/
 .contentwrapper{
     padding:1em 1em 1em 1em;
+    height:100%;
+    width:auto;
 }
 /*wrapper for each of topic box*/
 .contentboxwrapper{
@@ -36,9 +38,14 @@
 /*this is where we put actual content for each topic*/
 .expandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
+    color:white;
+    background-color: black;
     z-index:10;
-    height: 0;
+    height:0;
     width:0;
     -webkit-transition: width 0.3s;
-    -webkit-transition: height 0.2s;
+    overflow:hidden;
+}
+.expandedcontentbox h1{
+    padding:0;
 }
