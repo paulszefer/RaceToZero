@@ -4,19 +4,19 @@
 	<link rel="stylesheet" href="css/masterreset.css">
 	<link rel="stylesheet" href="css/template2.css">
 	<link rel="stylesheet" href="css/login.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src='js/template.js'></script>
 	<script src='js/login.js'></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="js/overlaynav.js"></script>
 </head>
 </html>
 <body>
-	<div id=overlay></div>
+	<div id="overlay"></div>
 	<div id="header">
 		<div id='navCont'>
 			<div class='navlogo'>
 				<a href='index.html'><img src='img/logo.png' alt='logo'></a>
-				<div class='loginstatus'>
+				<div class='loginstatus' id="loginstatus">
 					<p>Welcome, Horse</p>
 				</div>
 				<div id='navburger'>
@@ -58,7 +58,6 @@
 					<tr>
 						<td colspan="3"><p id="UserOrEmailErrorField"></p></td>
 					</tr>
-					<tr><td></td><td>&nbsp</td></tr>
 					<tr>
 						<td><label class="required" for="password">Password</label></td>
 						<td colspan="3"><input type="password" name="password" id="password"></td>
@@ -147,7 +146,7 @@
 						<div class="flex2"><p id="agreeErrorField"></p></div>
 					</div>
 					<br>
-					<input type="submit" name="register-btn" value="Register now">
+					<input type="submit" name="register-btn" value="Register"><br><br>
 				</form>
 			</div>
 		</div><!--end of contentactual-->

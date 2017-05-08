@@ -1,0 +1,51 @@
+/*override default template2.css*/
+/*when screen is smaller than 980px*/
+
+/*whole wrapper for resource content*/
+.contentwrapper{
+    padding:1em 1em 1em 1em;
+    height:100%;
+    width:auto;
+}
+/*wrapper for each of topic box*/
+.contentboxwrapper{
+    width:49%;
+    background-color:black;
+    min-height:25vh;
+    display:inline-block;
+    color:white;
+    margin:0.24999999%;
+}
+/*topic box*/
+.contentbox{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:0;
+    height:25vh;
+    width:100%
+}
+.contentbox h1{
+    padding:0;
+}
+/*media query for the boxes when screen too thin*/
+@media only screen and (max-width: 490px) {
+    .contentboxwrapper {
+        width:100%;
+        min-height:10vh;
+    }
+}
+/*this is where we put actual content for each topic*/
+.expandedcontentbox{
+    /*because we want it to be displayed on top of topic buttons*/
+    color:white;
+    background-color: black;
+    z-index:10;
+    height:0;
+    width:0;
+    -webkit-transition: width 0.3s;
+    overflow:hidden;
+}
+.expandedcontentbox h1{
+    padding:0;
+}

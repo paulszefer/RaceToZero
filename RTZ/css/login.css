@@ -3,11 +3,20 @@
 	padding: 5% 0 5% 0;
 	margin: auto;
 	text-align:center;
-	font-size: 0.90em;
+}
+#loginform button{
+	text-align: center;
+	font-size: 1.5em;
 }
 #logincontent table{
 	width:80%;
 	margin:auto;
+	font-size: 1.25em;
+}
+#logincontent input {
+	text-align: left;
+	width:100%;
+	font-size: 1.25em;
 }
 /*page specific anchor colors*/
 .content a, .content a:visited{
@@ -17,6 +26,7 @@
 /*registration shenanigans*/
 .registration input{
 	width:100%;
+	font-size: 1em;
 }
 .registration td{
 	vertical-align:bottom;
@@ -30,15 +40,19 @@
 .registration table{
 	margin: 5% 0 5% 0; /*Paddin for table*/
 	width:100%;
+	font-size: 1.5em;
 }
 #regcontent{
 	margin: auto;
 	width: 90%;
 	text-align:left;
-	font-size:0.75em;
+	font-size:1em;
+}
+.disclaimtext p{
+	font-size: 1em;
 }
 .disclaimtext h2{
-	font-size: 1.25em;
+	font-size: 1em;
 	font-weight:bold;
 	text-align: center;
 }
@@ -46,7 +60,7 @@
 	content: "*";
 	color: red;
 }
-#usernameErrorField, #emailErrorField, #passwordErrorField{
+#usernameErrorField, #emailErrorField, #passwordErrorField, #UserOrEmailErrorField, #passErrorField{
 	color: red;
 	min-height: 1em;
 }
@@ -55,6 +69,7 @@
 	width:24%;
 	text-align: center;
 	margin: 0.5em 0 0.5em;
+	font-size: 1.5em;
 }
 .flex2{
 	display: inline-block;
@@ -71,5 +86,11 @@
 }
 #registration > div:nth-child(4) {
 	width:80%;
+	margin:auto;
+}
+#registration > input[type="submit"]{
+	width:25%;
+	font-size: 1.75em;
+	display:block;
 	margin:auto;
 }

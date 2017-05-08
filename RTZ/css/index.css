@@ -1,34 +1,59 @@
+.contentactual:before {      /* create a full-height inline block pseudo-element */
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle; /* vertical alignment of the inline element */
+    height: 100%;
+}
 #gamedivwrapper {
+    /*currently set as 16:9*/
     background-color: #CCCCCC;
     margin: auto;
-    width: 100vp;
-    position: relative;
+    width:53.4375vh;
+    height:95vh;
+}
+.contentactual{
+    background-color: none;
 }
 
 @media only screen and (min-width: 981px) {
     #gamedivwrapper {
         background-color: #CCCCCC;
         margin: auto;
-        position: relative;
         width: 360px;
     }
 }
-
 #gamediv {
     background-color: #666666;
-    padding-top: 177.7777%;
+    z-index: 0;
+}
+#gamediv>div {
+    width:100%;
+    height:100%;
 }
 
-
-#gamediv h1 {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+/*override default template2.css*/
+/*when screen is smaller than 980px*/
+@media only screen and (max-width: 980px) {
+    .contentactual {
+        width:100%;
+    }
+    .navlinks{
+        display:none;
+    }
+    .navlogo{
+        display:none;
+    }
+    #navCont #navburger{
+        position: fixed;
+        top:1em;
+        right:1em;
+    }
+    #navCont #navburger img{
+        height: 100%;
+    }
 }
-
-#header {
-/*    display: none;*/
+#navburger{
+    position:fixed;
+    top:30px;
+    right:1em;
 }
-
