@@ -4,8 +4,7 @@
 /*whole wrapper for resource content*/
 .contentwrapper{
     padding:1em 1em 1em 1em;
-    height:100%;
-    width:auto;
+    display: inline-block;
 }
 /*wrapper for each of topic box*/
 .contentboxwrapper{
@@ -44,8 +43,18 @@
     height:0;
     width:0;
     -webkit-transition: width 0.3s;
-    overflow:hidden;
+    overflow: auto;
 }
-.expandedcontentbox h1{
-    padding:0;
+.expandedcontentbox h1, .expandedcontentbox h2{
+    padding-left:30px;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+.expandedcontentbox h2{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.expandedcontentbox p{
+    font-size: 20px;
+
 }

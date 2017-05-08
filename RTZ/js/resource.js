@@ -8,8 +8,9 @@ $(".contentbox").click(function() {
     var index = $(".contentbox").index(this);
     var expanded = $(".expandedcontentbox").get(index);
     hideTopics();
-    expanded.style.display = "flex";
+    expanded.style.display = "block";
     expanded.style.minHeight = "100vh";
+        expanded.style.Height = "1000px";
     expanded.style.width = "100%";
 });
 
