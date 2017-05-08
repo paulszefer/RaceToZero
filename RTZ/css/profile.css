@@ -1,0 +1,14 @@
+.contentactual h1 {
+    text-align: center;
+}
+
+.contentactual img {
+    padding: 100px 50px ;
+    float: left;
+    height: 200px;
+}
+
+.contentactual ul {
+    padding: 150px 50px;
+    float: center;
+}
