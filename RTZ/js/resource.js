@@ -10,8 +10,9 @@ $(".contentbox").click(function() {
     hideTopics();
     expanded.style.display = "block";
     expanded.style.minHeight = "100vh";
-        expanded.style.Height = "1000px";
+    expanded.style.height = "100%";
     expanded.style.width = "100%";
+    expanded.style.overflow = "default";
 });
 
 // adds a click handler for each maximized topic
@@ -21,13 +22,16 @@ $(".expandedcontentbox").click(function() {
     $(this).attr('style', '');
     //resets the inline attr caused by .css()
     $(".contentboxwrapper").attr('style', '');
-    $(".contentbox").attr('style', '');
+    // $(".contentbox").attr('style', ''); //apparently we dont need this kappa
 });
 
 function hideTopics() {
     $(".contentboxwrapper").css("display", "none"); // can animate this instead later
-    $(".contentbox").css("display", "none");
+    // $(".contentbox").css("display", "none"); //apparently we dont need this kappa
+    //reset all in line style first
     $(".expandedcontentbox").attr("style", '');
+    //hide all other expandedcontentbox
+    $(".expandedcontentbox").css("overflow", 'hidden');
 }
 
 });

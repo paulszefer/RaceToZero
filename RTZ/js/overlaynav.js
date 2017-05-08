@@ -34,7 +34,7 @@ $(function() {
         //saves the current scrolled position
         var currentPos = $(this).scrollTop();
         //Check if below navContHeight
-        if (currentPos>navContHeight){
+        if (currentPos>navContHeight && ($(window).width() < 980)){
             //if below navContHeight -> #navburger shall be fixed
             if (currentPos > lastPosition){
                 //they hath scrolled down
@@ -50,9 +50,10 @@ $(function() {
         else 
         {
             //When not below navContHeight
-            $("#navburger").fadeIn();
+            if(($(window).width() < 980)){
+                $("#navburger").fadeIn();
+            }
         }
         lastPosition = currentPos;
     }
-
 });

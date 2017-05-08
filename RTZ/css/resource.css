@@ -43,7 +43,7 @@
     height:0;
     width:0;
     -webkit-transition: width 0.3s;
-    overflow: auto;
+    overflow: hidden;
 }
 .expandedcontentbox h1, .expandedcontentbox h2{
     padding-left:30px;
