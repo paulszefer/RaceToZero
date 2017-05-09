@@ -40,7 +40,6 @@ class USER {
 				);
 			$stmt->execute(array(':uname'=>$uname));
 			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-			//FETCH::ASSOC output (array) is saved into $userRow
 			if($stmt->rowCount() == 1) {
 				if($upass == $userRow['user_pass']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
