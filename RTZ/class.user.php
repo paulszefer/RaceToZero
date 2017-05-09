@@ -17,7 +17,7 @@ class USER {
 	public function register($uname,$upass,$photourl) {
 		try {
 			$stmt = $this->conn->prepare(
-				"INSERT INTO users(user_name,user_pass,user_photo) 
+				"INSERT INTO users(user_name,user_password,user_photo) 
 				VALUES(:uname, :upass, :photourl)");
 			$stmt->bindparam(":uname", $uname);
 			$stmt->bindparam(":upass", $upass);
@@ -34,14 +34,14 @@ class USER {
 	public function doLogin($uname,$upass) {
 		try {
 			$stmt = $this->conn->prepare(
-				"SELECT user_name, user_pass 
+				"SELECT user_name, user_password
 				FROM users 
 				WHERE user_name=:uname"
 				);
 			$stmt->execute(array(':uname'=>$uname));
 			$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 			if($stmt->rowCount() == 1) {
-				if($upass == $userRow['user_pass']) {
+				if($upass == $userRow['user_password']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
 					$this->myId = $userRow['user_id'];
 					//$_SESSION['user_session'] = $userRow['id'];

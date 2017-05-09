@@ -3,17 +3,17 @@
 session_start();
 
 //for localhost testing
-/*
+
 $DB_host = "localhost";
 $DB_user = "root";
 $DB_pass = "";
-$DB_name = "comp1536project";
-*/
+$DB_name = "comp2910test1";
 
-$DB_host = 'bcitdevcom.ipagemysql.com';
-$DB_user = 'project2017b';
-$DB_pass = 'project.g12';
-$DB_name = 'project2017b';
+
+// $DB_host = 'bcitdevcom.ipagemysql.com';
+// $DB_user = 'project2017b';
+// $DB_pass = 'project.g12';
+// $DB_name = 'project2017b';
 
 try {
         //make the connection
