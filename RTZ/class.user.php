@@ -16,15 +16,14 @@ class USER
     }
 	
 	//Sets up registration
-	public function register($uname,$umail,$upass)
+	public function register($uname,$upass)
 	{
 		try
 		{
 			#$new_password = password_hash($upass, PASSWORD_DEFAULT);
 			//INSERT into table columns
-			$stmt = $this->conn->prepare("INSERT INTO users(username,user_email,user_pass) VALUES(:uname, :umail, :upass)");
+			$stmt = $this->conn->prepare("INSERT INTO users(user_name,user_pass) VALUES(:uname, :upass)");
 			$stmt->bindparam(":uname", $uname);
-			$stmt->bindparam(":umail", $umail);
 			$stmt->bindparam(":upass", $upass); //NOTE HASHED PASSWORD IS PUT INTO TABLE
 			$stmt->execute();
 			return $stmt;	
