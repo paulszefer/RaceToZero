@@ -21,7 +21,7 @@
 				$stmt1 = $this->conn->prepare(
 					"SELECT user_id
 					FROM games
-					WHERE user_name='" . $this->uname . "';";
+					WHERE user_name='" . $this->uname . "';");
 				$stmt1->execute();
 				$row = $statement->fetch(PDO::FETCH_ASSOC);
 				
