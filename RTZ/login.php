@@ -67,9 +67,7 @@
 					<td colspan=4 id="cpassErrorField"></td>
 				</tr>
 				</table>
-
 				<br>
-				
 				<input type="submit" name="register-btn" value="Register"><br><br>
 			</form>
 		</div>
