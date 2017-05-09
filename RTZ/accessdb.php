@@ -40,5 +40,15 @@
 	
 		$game->save();
 	}
+	
+	function getNumberOfLevels() {
+		try {
+			$statement = $DB_conn->prepare("SELECT Count(level_id)
+											AS NumberOfLevels
+											FROM levels;");
+		} catch(PDOException $e) {
+			echo $e->getMessage();
+		}
+	}
 
 ?>
