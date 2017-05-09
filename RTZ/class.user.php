@@ -16,11 +16,9 @@ class USER {
 	//Sets up registration
 	public function register($uname,$upass) {
 		try {
-			#$new_password = password_hash($upass, PASSWORD_DEFAULT);
-			//INSERT into table columns
 			$stmt = $this->conn->prepare("INSERT INTO users(user_name,user_pass) VALUES(:uname, :upass)");
 			$stmt->bindparam(":uname", $uname);
-			$stmt->bindparam(":upass", $upass); //NOTE HASHED PASSWORD IS PUT INTO TABLE
+			$stmt->bindparam(":upass", $upass);
 			$stmt->execute();
 			return $stmt;	
 		}
@@ -32,23 +30,15 @@ class USER {
 	//Returns true or false if username/email is in DB, then check password
 	public function doLogin($uname,$upass) {
 		try {
-			//Fetches everything on users table
 			$stmt = $this->conn->prepare(
 				"SELECT user_name, user_pass 
 				FROM users 
 				WHERE user_name=:uname"
 				);
-			//execute with params in this format works as if
-			// $stmt->bindparam(":uname", $uname);
-			// $stmt->bindparam(":umail", $umail);
-			// $stmt->execute();
 			$stmt->execute(array(':uname'=>$uname));
-			//PDO::FETCH_ASSOC returns an associative array, indexed by col names
-			//PDO::FETCH_BOTH returns an associative array, indexed both by col name AND number
 			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 			//FETCH::ASSOC output (array) is saved into $userRow
 			if($stmt->rowCount() == 1) {
-				//If by good DB design, 1 row is returned, check if $upass(user inputted pass) matches returned password
 				if($upass == $userRow['user_pass']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
 					$this->myId = $userRow['user_id'];
