@@ -46,9 +46,37 @@
 			$statement = $DB_conn->prepare("SELECT Count(level_id)
 											AS NumberOfLevels
 											FROM levels;");
+			$statement->execute();
+			$row = $statement->fetch(PDO::FETCH_ASSOC);
+			return $row['NumberOfLevels'];
 		} catch(PDOException $e) {
 			echo $e->getMessage();
 		}
+	}
+	
+	function getShortestTimes() {
+		$level = $_POST['level'];
+		
+		$times = array();
+		
+		try {
+			$statement = $DB_conn->prepare("SELECT game_time,
+												   user_id
+											FROM games
+											WHERE level_id=" . $level . 
+										   "ORDER BY game_time DESC;");
+			$statement->execute();
+			$count = 0;
+			while ($row = $statement->fetch(PDO::FETCH_ASSOC) && $count < 10) {
+				$times[] = $row;
+				$count++;
+			}
+		} catch(PDOException $e) {
+			echo $e->getMessage();
+		}
+		
+		$json = json_encode($times);
+		return $json;
 	}
 
 ?>
