@@ -1,3 +1,6 @@
+<?php
+	require_once('PDO_conn.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
