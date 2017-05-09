@@ -1,9 +1,63 @@
+<?php
+require_once('PDO_conn.php');
+
+//if user is logged in, redirect em to index.php
+if($user->is_loggedin()!=""){
+	$user->redirect('index.php');
+}
+//renamed
+//if regigster-btn is pressed
+if(isset($_POST['register-btn']))
+{
+	$FormLoginUsername = $_POST['username'];
+	$FormLoginPassword = $_POST['password'];
+
+	if ($FormLoginUsername == ""){
+		$error[] = "no username provided";
+	} else if ($FormLoginPassword == "") {
+		$error[] = "no password entered";
+	} else {
+		try 
+		{
+			$statement = $DB_conn->prepare("SELECT username, user_pass 
+				FROM users 
+				WHERE username=:uname");
+			$statement->execute(array(':uname' => $FormUsername));
+			//store found rows in $row
+			$row = $statement->fetch(PDO::FETCH_ASSOC);
+
+			//check if username already exists in DB
+			if ($row['username'] == $FormUsername) {
+				$error[] = "username already taken.";
+			}
+			// else if ($row['user_email'] == $FormEmail) 
+			// {
+			// 	$error[] = "email already taken. ";
+			// }
+			else 
+			{			
+				//If both username available, then register the user, and redirect to login.php
+				if ($user->register($FormUsername, "", $FormPassword)) 
+				{				
+					echo "<script type='text/javascript'>alert('Registration successful');</script>";
+					$user->redirect('login.php');
+				}
+			}
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+}
+?>
+
 <?php include("templateHeader.php");?>
 <!--insert page specific js css here-->
 <title>Race to Zero</title>
 <link rel="stylesheet" href="css/login.css">
 <script src="js/login.js"></script>
-<?php include("templateNav.php"); ?>
+<?php include("templateNav.php");?>
 	
 <div id='content'>
 	<div class='contentactual'>
