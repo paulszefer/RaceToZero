@@ -10,6 +10,7 @@ if(isset($_POST['register-btn']))
 	$FormUsername = $_POST['username'];
 	$FormEmail = $_POST['email'];
 	$FormPassword = $_POST['password'];
+	$PhotoURL = "url"; // We'll handle the URL later
 
 	if ($FormUsername == ""){
 		$error[] = "no username provided";
@@ -27,8 +28,8 @@ if(isset($_POST['register-btn']))
 
 			if ($row['username'] == $FormUsername) {
 				$error[] = "username already taken.";
-			}  else {			
-				if ($user->register($FormUsername, $FormEmail, $FormPassword)) 
+			} else {			
+				if ($user->register($FormUsername, $FormPassword, $PhotoURL)) 
 				{				
 					$user->redirect('login.php');					
 				}

@@ -14,11 +14,14 @@ class USER {
     }
 	
 	//Sets up registration
-	public function register($uname,$upass) {
+	public function register($uname,$upass,$photourl) {
 		try {
-			$stmt = $this->conn->prepare("INSERT INTO users(user_name,user_pass) VALUES(:uname, :upass)");
+			$stmt = $this->conn->prepare(
+				"INSERT INTO users(user_name,user_pass,user_photo) 
+				VALUES(:uname, :upass, :photourl)");
 			$stmt->bindparam(":uname", $uname);
 			$stmt->bindparam(":upass", $upass);
+			$stmt->bindparam(":photourl", $photourl);
 			$stmt->execute();
 			return $stmt;	
 		}
