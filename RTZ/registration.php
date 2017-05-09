@@ -10,29 +10,26 @@ if(isset($_POST['register-btn']))
 	$FormUsername = $_POST['username'];
 	$FormEmail = $_POST['email'];
 	$FormPassword = $_POST['password'];
+	$PhotoURL = "url"; // We'll handle the URL later
 
 	if ($FormUsername == ""){
 		$error[] = "no username provided";
-	} else if ($FormEmail == "") {
-		$error[] = "no email provided";
 	} else if ($FormPassword == "") {
 		$error[] = "no password entered";
 	} else {
 		try 
 		{
-			$statement = $DB_conn->prepare("SELECT username, user_email, user_pass 
+			$statement = $DB_conn->prepare("SELECT user_name, user_pass 
 				FROM users 
-				WHERE username=:uname OR user_email=:umail");
-			$statement->execute(array(':uname' => $FormUsername, ':umail'=>$FormEmail));
+				WHERE username=:uname");
+			$statement->execute(array(':uname' => $FormUsername));
 			//store found rows in $row
 			$row = $statement->fetch(PDO::FETCH_ASSOC);
 
 			if ($row['username'] == $FormUsername) {
 				$error[] = "username already taken.";
-			} else if ($row['user_email'] == $FormEmail) {
-				$error[] = "email already taken. ";
 			} else {			
-				if ($user->register($FormUsername, $FormEmail, $FormPassword)) 
+				if ($user->register($FormUsername, $FormPassword, $PhotoURL)) 
 				{				
 					$user->redirect('login.php');					
 				}
