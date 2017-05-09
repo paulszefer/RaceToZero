@@ -1,25 +1,22 @@
 <?php
 require_once('PDO_conn.php');
 
-if($user->is_loggedin()){
+if($user->is_loggedin()) {
 	$user->redirect('glossary.php');
 }
 
-if(isset($_POST['login']))
-{
+if(isset($_POST['login'])) {
 	//Setting variables
 	$FormUsername = $_POST['UserOrEmail'];
 	$FormEmail = $_POST['UserOrEmail'];
 	$FormPassword = $_POST['password'];
 
 	//if the doLogin function returns true.
-	if($user->doLogin($FormUsername, $FormEmail, $FormPassword))
-	{
+	if($user->doLogin($FormUsername, $FormEmail, $FormPassword)) {
 		//IDK REDIRECT IT SOMEHWER ELSE?! - how 2 redirect to loggedin index plshalp
 		$user->redirect('index.php');
 	} 
-	else 
-	{
+	else {
 		$error = "Login info wrong";
 	}
 }
