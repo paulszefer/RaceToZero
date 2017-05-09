@@ -30,19 +30,19 @@ class USER {
 	}
 
 	//Returns true or false if username/email is in DB, then check password
-	public function doLogin($uname,$umail,$upass) {
+	public function doLogin($uname,$upass) {
 		try {
 			//Fetches everything on users table
 			$stmt = $this->conn->prepare(
-				"SELECT username, user_email, user_pass 
+				"SELECT user_name, user_pass 
 				FROM users 
-				WHERE username=:uname OR user_email=:umail"
+				WHERE user_name=:uname"
 				);
 			//execute with params in this format works as if
 			// $stmt->bindparam(":uname", $uname);
 			// $stmt->bindparam(":umail", $umail);
 			// $stmt->execute();
-			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
+			$stmt->execute(array(':uname'=>$uname));
 			//PDO::FETCH_ASSOC returns an associative array, indexed by col names
 			//PDO::FETCH_BOTH returns an associative array, indexed both by col name AND number
 			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -51,11 +51,11 @@ class USER {
 				//If by good DB design, 1 row is returned, check if $upass(user inputted pass) matches returned password
 				if($upass == $userRow['user_pass']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
-					$this->myId = $userRow['id'];
+					$this->myId = $userRow['user_id'];
 					//$_SESSION['user_session'] = $userRow['id'];
 					$_SESSION['user_session'] = "in";
-					$_SESSION['username'] = $userRow['username'];
-					$_SESSION['userid'] = $userRow['id'];
+					$_SESSION['user_name'] = $userRow['user_name'];
+					$_SESSION['user_id'] = $userRow['user_id'];
 					$this->loggedIn = true;
 					return true;
 					//Assigns the session number as the user_id (when user registered onto DB)
@@ -103,8 +103,8 @@ class USER {
 		//$_SESSION['user_session'] = "";
 		$loggedIn = false;
 		unset($_SESSION['user_session']);
-		unset($_SESSION['username']);
-		unset($_SESSION['userid']);
+		unset($_SESSION['user_name']);
+		unset($_SESSION['user_id']);
 		session_write_close();
 		return true;
 	}
