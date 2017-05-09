@@ -1,11 +1,6 @@
 //Login form js
 function loginvalidation() {
-	if (userOrEmailValid()){
-		return true;
-	} else {
-		alert("Form input invalid");
-		return false;
-	}
+	return loginUserValid();
 }	
 function loginUserValid(){
 	var userOrEmail = document.getElementById("UserOrEmail").value,
@@ -27,21 +22,20 @@ function loginUserValid(){
 		return true;
 	}
 }
-function loginEmailValid() {
-	var domain = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/); //checks email for single occurrence of @ and valid domain containing only valid characters.
-	var email = document.getElementById("UserOrEmail").value;
-	return (domain.test(email));
-}
-function userOrEmailValid(){
-	if (loginUserValid()){
-		document.getElementById("UserOrEmailErrorField").innerHTML = "Login format allowed.";
-		return true;
-	} else {
-		document.getElementById("UserOrEmailErrorField").innerHTML = 
-		"Login must be username or E-mail address in the accepted format.";
-		return false;
-	}
-}
+// function loginEmailValid() {
+// 	var domain = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/); //checks email for single occurrence of @ and valid domain containing only valid characters.
+// 	var email = document.getElementById("UserOrEmail").value;
+// 	return (domain.test(email));
+// }
+// function userOrEmailValid(){
+// 	if (loginUserValid()){
+// 		document.getElementById("UserOrEmailErrorField").innerHTML = "Login format allowed.";
+// 		return true;
+// 	} else {
+// 		document.getElementById("UserOrEmailErrorField").innerHTML = "Username format invalid.";
+// 		return false;
+// 	}
+// }
 
 //Registration form js
 var ERROR_DISPLAY = "Errors in fields: ",
@@ -62,7 +56,7 @@ function validateForm() {
 	if (!agreeValid()){
 		ERROR_FIELD.push("TOS Agreement");
 	}
-	if(userValid() && emailValid() && passwordValid() && agreeValid()){
+	if(userValid() && passwordValid()){
 		return true;
 	} else {
 		alert(ERROR_DISPLAY + ERROR_FIELD);
@@ -112,8 +106,8 @@ function emailValid() {
 }
 //password checkbutton, true if length less than 10 and password===cpass
 function passwordValid() {
-	var pass = document.getElementById("password").value,
-		confirmpass = document.getElementById("cpassword").value;
+	var pass = document.getElementById("regPassword").value,
+		confirmpass = document.getElementById("cRegPassword").value;
 	if (pass.length > 10) {
 		document.getElementById("cpassErrorField").innerHTML = "Password longer than 10";
 		return false;

@@ -32,6 +32,7 @@ if(isset($_POST['register-btn']))
 			} else if ($row['user_email'] == $FormEmail) {
 				$error[] = "email already taken. ";
 			} else {			
+				//If both user/email available, then register the user, and redirect to login.php
 				if ($user->register($FormUsername, $FormEmail, $FormPassword)) 
 				{				
 					$user->redirect('login.php');					
