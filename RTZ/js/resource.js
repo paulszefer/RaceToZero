@@ -11,7 +11,7 @@ $(".contentbox").click(function() {
     expanded.style.display = "block";
     expanded.style.minHeight = "100vh";
     expanded.style.height = "100%";
-    expanded.style.width = "100%";
+    expanded.style.width = "99%";
     expanded.style.overflow = "default";
 });
 
