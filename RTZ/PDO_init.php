@@ -3,18 +3,18 @@
 	session_start();
 
 	//for localhost testing
-	/*
+	
 	$db_host = "localhost";
 	$db_user = "root";
 	$db_pass = "";
 	$db_name = "comp1536project";
-	*/
-
+	
+	/*
 	$db_host = 'bcitdevcom.ipagemysql.com';
 	$db_user = 'project2017b';
 	$db_pass = 'project.g12';
 	$db_name = 'project2017b';
-
+	*/
 	try {
         //make the connection
         $db_conn = new PDO("mysql:host={$db_host};", $db_user, $db_pass);
@@ -24,9 +24,10 @@
         $db_conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         
         $sql_dbcreation = "CREATE DATABASE IF NOT EXISTS " . $db_name . ";";
+        $sql_dbuse = "USE " . $db_name;
         
     	//  Database Table: users
-        $sql_users ="CREATE TABLE IF NOT EXISTS users (
+        $sql_users = "CREATE TABLE IF NOT EXISTS users (
        		user_id INT NOT NULL AUTO_INCREMENT,
        		user_name VARCHAR(80) NOT NULL,
        		user_password VARCHAR(80) NOT NULL,
@@ -73,7 +74,6 @@
     		level_id INT NOT NULL AUTO_INCREMENT,
     		playitem_id INT NOT NULL,
     		PRIMARY KEY (level_id),
-    		FOREIGN KEY (goal_id) REFERENCES goals(goal_id),
     		FOREIGN KEY (playitem_id) REFERENCES playitems(playitem_id)
     	) ENGINE = MYISAM ;";
     	
@@ -124,6 +124,7 @@
     		FOREIGN KEY (level_id) REFERENCES levels(level_id);";
     	
     	$db_conn->exec($sql_dbcreation);
+    	$db_conn->exec($sql_dbuse);
     	$db_conn->exec($sql_users);
     	$db_conn->exec($sql_goals);
     	$db_conn->exec($sql_fooditems);

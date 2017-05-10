@@ -43,12 +43,23 @@
 	
 	function getNumberOfLevels() {
 		try {
-			$statement = $DB_conn->prepare("SELECT Count(level_id)
-											AS NumberOfLevels
-											FROM levels;");
-			$statement->execute();
-			$row = $statement->fetch(PDO::FETCH_ASSOC);
-			return json_encode(array("number"=>$row['NumberOfLevels']));
+			$username = "root";
+    		$password = "";
+   			$host     = "localhost";
+    		$database = "comp1536project";
+
+    		$link = mysqli_connect($host, $username, $password, $database);
+    		$query = "SELECT Count(level_id) AS NumberOfLevels FROM levels;";
+			
+			$result = mysqli_query($link, $query);
+	
+			if($result) {
+				$row = mysqli_fetch_array($result);
+				if($row['NumberOfLevels']) {
+					return json_encode(array("number"=>$row['NumberOfLevels']));
+				}
+			}
+			return json_encode(array("number"=>"1"));
 		} catch(PDOException $e) {
 			echo $e->getMessage();
 		}
@@ -56,20 +67,29 @@
 	
 	function getShortestTimes() {
 		$level = $_POST['level'];
+		$level = 1;
 		
 		$times = array();
 		
 		try {
-			$statement = $DB_conn->prepare("SELECT game_time,
-												   user_id
-											FROM games
-											WHERE level_id=" . $level . 
-										   "ORDER BY game_time DESC;");
-			$statement->execute();
-			$count = 0;
-			while ($row = $statement->fetch(PDO::FETCH_ASSOC) && $count < 10) {
-				$times[] = $row;
-				$count++;
+			$username = "root";
+    		$password = "";
+   			$host     = "localhost";
+    		$database = "comp1536project";
+
+    		$link = mysqli_connect($host, $username, $password, $database);
+    		$query = "SELECT game_time,
+							 user_id
+					  FROM games
+					  WHERE level_id=" . $level . 
+					" ORDER BY game_time DESC;";
+			
+			$result = mysqli_query($link, $query);
+	
+			if($result) {
+				while($row = mysqli_fetch_array($result)) {
+					$times[] = $row;
+				}
 			}
 		} catch(PDOException $e) {
 			echo $e->getMessage();
@@ -80,7 +100,6 @@
 	}
 	
 	$function = $_POST['function'];
-	
 	switch ($function) {
 		case 'getBarriers':
 			echo getBarriers();
