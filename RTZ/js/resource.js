@@ -10,7 +10,7 @@ $(".contentbox").click(function() {
     hideTopics();
     expanded.style.display = "block";
     expanded.style.minHeight = "100vh";
-    expanded.style.height = "100%";
+    // expanded.style.height = "100%";
     expanded.style.width = "100%";
     expanded.style.overflow = "default";
 });
@@ -18,8 +18,8 @@ $(".contentbox").click(function() {
 // adds a click handler for each maximized topic
 //
 // hides all topics, then shows all minimized topics
-$(".expandedcontentbox").click(function() {
-    $(this).attr('style', '');
+$(".xbutton").click(function() {
+    $(".expandedcontentbox").attr('style', '');
     //resets the inline attr caused by .css()
     $(".contentboxwrapper").attr('style', '');
     // $(".contentbox").attr('style', ''); //apparently we dont need this kappa
@@ -35,3 +35,17 @@ function hideTopics() {
 }
 
 });
+
+function answerCheck(buttonName, value) {
+    if (value == "incorrect") {
+    var results = document.getElementsByClassName("incorrecttext");
+    var resets = document.getElementsByClassName("correcttext");
+    } else {
+    var results = document.getElementsByClassName("correcttext");
+    var resets = document.getElementsByClassName("incorrecttext");
+    }
+
+    var question = parseInt(buttonName.substr(3, 1), 10);
+    resets[question - 1].style.display="none";
+    results[question - 1].style.display="inline-block";
+}
