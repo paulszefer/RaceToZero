@@ -45,7 +45,19 @@ function answerCheck(buttonName, value) {
     var resets = document.getElementsByClassName("incorrecttext");
     }
 
+    var topic = parseInt(buttonName.substr(1, 1), 10);
     var question = parseInt(buttonName.substr(3, 1), 10);
-    resets[question - 1].style.display="none";
-    results[question - 1].style.display="inline-block";
+
+    if (topic == 1) {
+        resets[question - 1].style.display="none";
+        results[question - 1].style.display="inline-block";
+    } else if (topic == 2) {
+        resets[question - 1 + 4].style.display="none";
+        results[question - 1 + 4].style.display="inline-block";
+    } else if (topic == 3) {
+        resets[question - 1 + 14].style.display="none";
+        results[question - 1 + 14].style.display="inline-block";
+    } else if (topic == 4) {
+        //put in once topic 3 is in
+    }
 }
