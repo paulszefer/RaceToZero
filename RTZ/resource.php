@@ -117,21 +117,43 @@
 				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>TOPIC4</h1>
 			</div>
-			<div class='expandedcontentbox'>
+<!-- UNCOMMENT THIS WHEN WE CAN FINALLY EXPAND THE AFFILIATED APPS BOX -->
+			<div class='expandedcontentbox bigexpandedcontentbox'>
 				<img class="xbutton" src="img/tempX.png" height="120" width="120">
-				<h1>TOPIC5</h1>
-			</div>
-			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
-				<h1>TOPIC6</h1>
-			</div>
-			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
-				<h1>TOPIC7</h1>
-			</div>
-			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
-				<h1>TOPIC8</h1>
+				<h1>AFFILIATED APPS</h1>
+				<p>
+				Here are some other apps that we have connection with!
+				</p>
+				<br>
+	            <hr>
+				<h2>Food Factory Zero</h2>
+				<br>
+				<img src='img/foodfactorylogo.png' height='150' width='150' alt='food factory logo'>
+	            <br><br>
+	            <p>Food Factory Zero is a time-based drag and drop game. All you need to do is pick and match the ingredients with recipes.</p>
+				<br>
+	            <p>Link: <a href='http://students.bcitdev.com/A01006039/ffz/'>http://students.bcitdev.com/A01006039/ffz/</a></p>
+	            <br>
+	            <hr>
+				<h2>Captin Plan-It</h2>
+				<br>
+				<img src='img/cp3.png' height='150' width='150' alt='captin plan-it logo'>
+				<br><br>
+	            <p>Captain Plan-It is an educational quiz game where you can answer questions related to food groups. Answer correctly to earn keys which can unlock accessories for your own personal hero!</p>
+				<br><br>
+	            <hr>
+	            <h2>Food Fall</h2>
+	            <br>
+				<img src='img/foodfallartwork.jpg' height='150' width='150' alt='food fall logo'>
+				<br><br>
+	            <p>Food Fall is a game that teaches you the effects of food waste - and to have fun too!</p>
+	            <br>
+	            <hr>
+				<h2>FoodTrivia</h2>
+	            <br>
+	            <img src='img/setprofilepic.png' height='150' width='150' alt='foodtrivia logo'>
+	            <p>FoodTrivia teaches you about food waste and strategies on how to reduce avoidable food waste.</p>
+	            <br>
 			</div>
 			<!--start of the topic box-->
 			<div class='contentboxwrapper'>
@@ -154,28 +176,15 @@
 					<h1>TOPIC4</h1>
 				</div>
 			</div>
-			<div class='contentboxwrapper'>
-				<div class='contentbox'>
-					<h1>TOPIC5</h1>
+			<div class='contentboxwrapper bigcontentboxwrapper'>
+				<div class='contentbox bigcontentbox'>
+					<h1>AFFILIATED APPS</h1>
+					<br>
+					<img src='img/affiliatedlogo.png'>
 				</div>
 			</div>
-			<div class='contentboxwrapper'>
-				<div class='contentbox'>
-					<h1>TOPIC6</h1>
-				</div>
-			</div>
-			<div class='contentboxwrapper'>
-				<div class='contentbox'>
-					<h1>TOPIC7</h1>
-				</div>
-			</div>
-			<div class='contentboxwrapper'>
-				<div class='contentbox'>
-					<h1>TOPIC8</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+		</div><!--end of contentwrapper-->
+	</div><!--end of contentactual-->
+</div><!--end of #content-->
 
 <?php include("templateFooter.php");?>
