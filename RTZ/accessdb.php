@@ -48,7 +48,7 @@
 											FROM levels;");
 			$statement->execute();
 			$row = $statement->fetch(PDO::FETCH_ASSOC);
-			return $row['NumberOfLevels'];
+			return json_encode(array("number"=>$row['NumberOfLevels']));
 		} catch(PDOException $e) {
 			echo $e->getMessage();
 		}
@@ -77,6 +77,23 @@
 		
 		$json = json_encode($times);
 		return $json;
+	}
+	
+	$function = $_POST['function'];
+	
+	switch ($function) {
+		case 'getBarriers':
+			echo getBarriers();
+			break;
+		case 'saveGame':
+			echo saveGame();
+			break;
+		case 'getNumberOfLevels':
+			echo getNumberOfLevels();
+			break;
+		case 'getShortestTimes':
+			echo getShortestTimes();
+			break;
 	}
 
 ?>
