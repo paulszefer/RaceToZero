@@ -45,11 +45,16 @@
     width:0;
     -webkit-transition: width 0.3s;
     overflow: hidden;
+    font-size: 3em;
+    position: relative;
 }
 .expandedcontentbox h1, .expandedcontentbox h2{
     padding-left:30px;
     padding-top:30px;
     padding-bottom:30px;
+}
+.expandedcontentbox h1{
+    text-align: center;
 }
 .expandedcontentbox h2{
     font-size: 1.5em;
@@ -58,4 +63,33 @@
 .expandedcontentbox p{
     font-size: 20px;
 
+}
+.expandedcontentbox ol{
+    list-style: decimal inside;
+}
+.expandedcontentbox ul{
+    list-style: none inside;
+}
+.expandedcontentbox ul li{
+    padding-top: 15px;
+}
+/* quiz buttons */
+button{
+    font-size: 1em;
+}
+/* Closing button */
+.xbutton{
+    position:absolute;
+    left: 0;
+    top: 0;
+}
+.correcttext, .incorrecttext{
+    font-weight: bold;
+    display: none;
+}
+.correcttext{
+    color: green;
+}
+.incorrecttext{
+    color: red;
 }

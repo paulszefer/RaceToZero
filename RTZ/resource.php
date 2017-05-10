@@ -11,6 +11,7 @@
 		<div class='contentwrapper'> <!--whole wrapper for the boxes-->
 			<!--throw your tips n stuffs in expandedcontetnbox below-->
 			<div class='expandedcontentbox'>
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>Battleship Haruna</h1>
 				<p>
 				Haruna, named after Mount Haruna, was a warship of the Imperial Japanese Navy during World War I and World War II. Designed by the British naval engineer George Thurston, she was the fourth and last battlecruiser of the Kongō class, amongst the most heavily armed ships in any navy when built. Laid down in 1912 at the Kawasaki Shipyards in Kobe, Haruna was formally commissioned in 1915 on the same day as her sister ship, Kirishima. Haruna patrolled off the Chinese coast during World War I. During gunnery drills in 1920, an explosion destroyed one of her guns, damaged the gun turret, and killed seven men. During her career, Haruna underwent two major reconstructions. Beginning in 1926, the Imperial Japanese Navy rebuilt her as a battleship, strengthening her armor and improving her speed and power capabilities. In 1933, her superstructure was completely rebuilt, her speed was increased, and she was equipped with launch catapults for floatplanes. Now fast enough to accompany Japan's growing carrier fleet, Haruna was reclassified as a fast battleship. During the Second Sino-Japanese War, Haruna transported Imperial Japanese Army troops to mainland China before being redeployed to the Third Battleship Division in 1941. On the eve of the Japanese attack on Pearl Harbor, she sailed as part of the Southern Force in preparation for the Battle of Singapore.
@@ -38,25 +39,94 @@
 				<p>
 				</p>
 			</div>
-			<div class='expandedcontentbox'>
-				<h1>TOPIC2</h1>
+			<div class='expandedcontentbox'>	<!-- How to tell if food has gone bad -->
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+				<h1>Has your food gone bad?</h1><br>
+				<ol>
+					<li>Do the best before dates found on food packaging tell you when it’s unsafe to eat the food?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q1" value="incorrect" onClick="answerCheck(this.name, this.value)">Yes</button></li>
+						<li><button type="button" name="t2q1" value="correct" onClick="answerCheck(this.name, this.value)">No</button></li>
+						<li><button type="button" name="t2q1" value="incorrect" onClick="answerCheck(this.name, this.value)">Depends on the food</button></li>
+					</ul></li><br>
+					<li>Which of these foods have gone bad if you’ve found mold on them?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q2" value="incorrect" onClick="answerCheck(this.name, this.value)">Meat &amp; Dairy</button></li>
+						<li><button type="button" name="t2q2" value="incorrect" onClick="answerCheck(this.name, this.value)">Bread</button></li>
+						<li><button type="button" name="t2q2" value="incorrect" onClick="answerCheck(this.name, this.value)">Fruits &amp; Vegetables</button></li>
+						<li><button type="button" name="t2q2" value="correct" onClick="answerCheck(this.name, this.value)">All of them</button></li>
+					</ul></li><br>
+					<li>How safe is it to eat an apple that’s very soft on the inside?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q3" value="incorrect" onClick="answerCheck(this.name, this.value)">It's safe</button></li>
+						<li><button type="button" name="t2q3" value="incorrect" onClick="answerCheck(this.name, this.value)">It depends</button></li>
+						<li><button type="button" name="t2q3" value="correct" onClick="answerCheck(this.name, this.value)">It's not safe</button></li>
+					</ul></li><br>
+					<li>Is a coating of slime on meat a sign of bad food?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q4" value="correct" onClick="answerCheck(this.name, this.value)">Yes</button></li>
+						<li><button type="button" name="t2q4" value="incorrect" onClick="answerCheck(this.name, this.value)">No</button></li>
+					</ul></li><br>
+					<li>Are fruits and vegetables with slightly odd coloring safe to eat?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q5" value="correct" onClick="answerCheck(this.name, this.value)">Yes</button></li>
+						<li><button type="button" name="t2q5" value="incorrect" onClick="answerCheck(this.name, this.value)">No</button></li>
+						<li><button type="button" name="t2q5" value="incorrect" onClick="answerCheck(this.name, this.value)">Only fruits are</button></li>
+						<li><button type="button" name="t2q5" value="incorrect" onClick="answerCheck(this.name, this.value)">Only vegetables are</button></li>
+					</ul></li><br>
+					<li>When you put an egg in water and it’s unsafe to eat, what happens to the egg?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q6" value="incorrect" onClick="answerCheck(this.name, this.value)">It sinks</button></li>
+						<li><button type="button" name="t2q6" value="correct" onClick="answerCheck(this.name, this.value)">It floats</button></li>
+						<li><button type="button" name="t2q6" value="incorrect" onClick="answerCheck(this.name, this.value)">It stays in the middle</button></li>
+					</ul></li><br>
+					<li>Is a food still safe if it smells weird?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q7" value="incorrect" onClick="answerCheck(this.name, this.value)">Yes</button></li>
+						<li><button type="button" name="t2q7" value="correct" onClick="answerCheck(this.name, this.value)">No</button></li>
+						<li><button type="button" name="t2q7" value="incorrect" onClick="answerCheck(this.name, this.value)">Only if it looks weird too</button></li>
+					</ul></li><br>
+					<li>If green vegetables have turned yellow are they safe to eat?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q8" value="incorrect" onClick="answerCheck(this.name, this.value)">Yes</button></li>
+						<li><button type="button" name="t2q8" value="correct" onClick="answerCheck(this.name, this.value)">No</button></li>
+					</ul></li><br>
+					<li>Are bruised fruits and vegetables safe to eat?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q9" value="incorrect" onClick="answerCheck(this.name, this.value)">Yes</button></li>
+						<li><button type="button" name="t2q9" value="incorrect" onClick="answerCheck(this.name, this.value)">No</button></li>
+						<li><button type="button" name="t2q9" value="correct" onClick="answerCheck(this.name, this.value)">As long as you remove the bruised portion</button></li>
+						<li><button type="button" name="t2q9" value="incorrect" onClick="answerCheck(this.name, this.value)">Only in small amounts</button></li>
+					</ul></li><br>
+					<li>Is lettuce with brown discoloration safe to eat?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t2q10" value="correct" onClick="answerCheck(this.name, this.value)">Yes</button></li>
+						<li><button type="button" name="t2q10" value="incorrect" onClick="answerCheck(this.name, this.value)">No</button></li>
+					</ul></li><br>
+				</ol>
 			</div>
 			<div class='expandedcontentbox'>
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>TOPIC3</h1>
 			</div>
 			<div class='expandedcontentbox'>
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>TOPIC4</h1>
 			</div>
 			<div class='expandedcontentbox'>
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>TOPIC5</h1>
 			</div>
 			<div class='expandedcontentbox'>
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>TOPIC6</h1>
 			</div>
 			<div class='expandedcontentbox'>
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>TOPIC7</h1>
 			</div>
 			<div class='expandedcontentbox'>
+				<img class="xbutton" src="img/tempX.png" height="120" width="120">
 				<h1>TOPIC8</h1>
 			</div>
 			<!--start of the topic box-->
@@ -67,7 +137,7 @@
 			</div>
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
-					<h1>TOPIC2</h1>
+					<h1>Has your food gone bad?</h1>
 				</div>
 			</div>
 			<div class='contentboxwrapper'>
