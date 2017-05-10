@@ -17,7 +17,7 @@ class USER {
 	public function register($uname,$upass,$photourl) {
 		try {
 			$stmt = $this->conn->prepare(
-				"INSERT INTO users(user_name,user_pass,user_photo) 
+				"INSERT INTO users(user_name,user_password,user_photo) 
 				VALUES(:uname, :upass, :photourl)");
 			$stmt->bindparam(":uname", $uname);
 			$stmt->bindparam(":upass", $upass);
@@ -34,14 +34,14 @@ class USER {
 	public function doLogin($uname,$upass) {
 		try {
 			$stmt = $this->conn->prepare(
-				"SELECT user_name, user_pass 
+				"SELECT user_name, user_password
 				FROM users 
 				WHERE user_name=:uname"
 				);
 			$stmt->execute(array(':uname'=>$uname));
-			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+			$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 			if($stmt->rowCount() == 1) {
-				if($upass == $userRow['user_pass']) {
+				if($upass == $userRow['user_password']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
 					$this->myId = $userRow['user_id'];
 					//$_SESSION['user_session'] = $userRow['id'];
@@ -65,11 +65,11 @@ class USER {
 	
 	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
-		/*if(isset($_SESSION['user_session']))
+		if(isset($_SESSION['user_session']))
 		{
 			return true;
-		}*/
-		/*if($this->loggedIn) {
+		}
+		if($this->loggedIn) {
 			if($_SESSION['user_session'] == $this->myId)
 			{
 				return true;
@@ -78,12 +78,12 @@ class USER {
 			}
 		} else {
 			return false;
-		}*/
-		if(empty($_SESSION['user_session'])) {
-			return false;
-		} else {
-			return($_SESSION['user_session'] == "in");
 		}
+		// if(empty($_SESSION['user_session'])) {
+		// 	return false;
+		// } else {
+		// 	return($_SESSION['user_session'] == "in");
+		// }
 	}
 	
 	//I guess we change $url for redirect
@@ -98,6 +98,7 @@ class USER {
 		unset($_SESSION['user_name']);
 		unset($_SESSION['user_id']);
 		session_write_close();
+		session_destroy();
 		return true;
 	}
 	
