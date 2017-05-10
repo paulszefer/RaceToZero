@@ -92,7 +92,7 @@
 							 user_id
 					  FROM games
 					  WHERE level_id=" . $level . 
-					" ORDER BY game_time DESC;";
+					" ORDER BY game_time ASC;";
 			
 			$result = mysqli_query($link, $query);
 	
@@ -109,6 +109,30 @@
 		return $json;
 	}
 	
+	function displayTutorialScore() {
+		$username = "root";
+    	$password = "";
+   		$host     = "localhost";
+    	$database = "comp1536project";
+
+    	$link = mysqli_connect($host, $username, $password, $database);
+    	$query = "SELECT game_time
+				  FROM games
+				  	INNER JOIN users ON games.user_id = users.user_id
+				  WHERE level_id=0
+				  	AND user_name=$_POST['user_name']
+				  ORDER BY game_time ASC;";
+			
+		$result = mysqli_query($link, $query);
+	
+		if($result) {
+			$row = mysqli_fetch_array($result)
+		}
+		
+		$json = json_encode(array('time'=>$row['game_time']));
+		return $json;
+	}
+	
 	$function = $_POST['function'];
 	switch ($function) {
 		case 'getBarriers':
@@ -122,6 +146,9 @@
 			break;
 		case 'getShortestTimes':
 			echo getShortestTimes();
+			break;
+		case 'displayTutorialScore':
+			echo displayTutorialScore();
 			break;
 	}
 
