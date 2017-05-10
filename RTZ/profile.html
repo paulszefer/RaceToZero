@@ -7,6 +7,7 @@
 		<script src='js/template.js'></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="js/overlaynav.js"></script>
+		<script src="js/profile.js"></script>
 	</head>
 	</html>
 	<body>
@@ -48,14 +49,30 @@
 			<div class='contentactual'>
 				<h1>Profile</h1>
 				<br>
-                <img src='img/setprofilepic.png'>
-				<ul>
+    			<br>
+			<div class='inline'>
+				<p>Username: Huehue
+				<br>
+				High score: 123456
+				<br>
+				Something: helloitsme
+				</p>
+				<!--<ul>
                     <li>Username: Huehue</li>
                     <li>&nbsp;</li>
                     <li>High score: 123456</li>
                     <li>&nbsp;</li>
                     <li>Something: helloitsme</li>
-                </ul>
+                </ul>-->
+			</div>
+			<div class'inline'>
+    		<img src="img/setprofilepic.png" name="canvas" width="225" height="150" />
+			</div>
+    		<br><br>
+			<div class='button'>
+			<input onclick="displayImage();" type="button" value="Change Image">
+			</div>
+			<br><br>
                 <br>
 			</div>
 		</div>
@@ -64,7 +81,6 @@
 				<p>Copyright whatever</p>
 			</div>
 		</div>
-
 	</body>
 
 </html>

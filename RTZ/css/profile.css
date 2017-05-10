@@ -3,12 +3,16 @@
 }
 
 .contentactual img {
-    padding: 100px 50px ;
-    float: left;
+    padding: 100px 50px 10px;
     height: 200px;
 }
 
 .contentactual ul {
     padding: 150px 50px;
-    float: center;
+}
+.inline {
+    display: inline;
+}
+.button {
+    padding-left: 113px;
 }
