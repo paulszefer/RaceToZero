@@ -9,16 +9,26 @@
 		$barriers = array();
 	
 		try {
-			$statement = $DB_conn->prepare("SELECT barrier_name, 
-											       barrier_x1,
-											       barrier_y1,
-											       barrier_x2,
-											       barrier_y2
-											FROM barriers
-											WHERE level_id='" . $level_id . "';");
-			$statement->execute();
-			while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-				$barriers[] = $row;
+			$username = "root";
+    		$password = "";
+   			$host     = "localhost";
+    		$database = "comp1536project";
+
+    		$link = mysqli_connect($host, $username, $password, $database);
+    		$query = "SELECT barrier_name, 
+							 barrier_x1,
+							 barrier_y1,
+							 barrier_x2,
+							 barrier_y2
+					  FROM barriers
+					  WHERE level_id='" . $level_id . "';";
+			
+			$result = mysqli_query($link, $query);
+	
+			if($result) {
+				while($row = mysqli_fetch_array($result)) {
+					$barriers[] = $row;
+				}
 			}
 		} catch(PDOException $e) {
 	  		echo $e->getMessage();
