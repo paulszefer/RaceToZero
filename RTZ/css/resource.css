@@ -20,16 +20,6 @@
     color:white;
     margin:0.24999999%;
 }
-/*wrapper for affiliated apps box*/
-.bigcontentboxwrapper{
-    width:99%;
-    background-color:black;
-    min-height:25vh;
-    display:inline-block;
-    color:white;
-    margin:0.24999999%;
-    text-align: center;
-}
 /*topic box*/
 .contentbox{
     display:flex;
@@ -40,12 +30,54 @@
     height:25vh;
     width:100%
 }
+.bigcontentbox{
+    height:100%;
+    display:block;
+    padding-top: 1em;
+}
+.bigcontentboxwrapper{
+    width:98.5%;
+    background-color:black;
+    min-height:100%;
+    display:inline-block;
+    color:white;
+    margin:0.24999999%;
+    text-align: center;
+}
+/*this is the affiliated apps content box*/
+.bigexpandedcontentbox{
+    /*because we want it to be displayed on top of topic buttons*/
+    color:white;
+    background-color: black;
+    z-index:10;
+    height:0;
+    width:0;
+    -webkit-transition: width 0.3s;
+    overflow: hidden;
+}
+.bigexpandedcontentbox h1, .bigexpandedcontentbox h2{
+    padding-left:30px;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+.bigexpandedcontentbox h2{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.bigexpandedcontentbox p{
+    font-size: 20px;
+
+}
+.expandedcontentbox img, .expandedcontentboc p{
+    padding-left: 50px;
+    color: #FFFE88;
+}
 .contentbox h1{
     padding:0;
 }
 /*media query for the boxes when screen too thin*/
 @media only screen and (max-width: 490px) {
-    .contentboxwrapper, .bigcontentboxwrapper {
+    .contentboxwrapper {
         width:100%;
         min-height:10vh;
     }
@@ -59,7 +91,6 @@
     z-index:10;
     height:0;
     width:0;
-    margin:0 0.24999999% 0 0.24999999%;;
     -webkit-transition: width 0.3s;
     overflow: hidden;
     font-size: 3em;
@@ -109,31 +140,4 @@ button{
 .incorrecttext{
     color: red;
 }
-/*this is the affiliated apps content box*/
-.bigexpandedcontentbox{
-    /*because we want it to be displayed on top of topic buttons*/
-    color:white;
-    background-color: black;
-    z-index:10;
-    height:0;
-    width:0;
-    -webkit-transition: width 0.3s;
-    overflow: hidden;
-}
-.bigexpandedcontentbox h1, .bigexpandedcontentbox h2{
-    padding-left:30px;
-    padding-top:30px;
-    padding-bottom:30px;
-}
-.bigexpandedcontentbox h2{
-    font-size: 1.5em;
-    font-weight: bold;
-}
-.bigexpandedcontentbox p{
-    font-size: 20px;
 
-}
-.expandedcontentbox img, p{
-    padding-left: 50px;
-    color: #FFFE88;
-}
