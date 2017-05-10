@@ -1,8 +1,5 @@
-<?php include("templateHeader.php");?>
 <!--insert page specific js css here-->
-<title>Race to Zero</title>
-<link rel="stylesheet" href="css/index.css">
-<?php include("templateNav.php"); ?>
+<?php include("indexNav.php"); ?>
 		
 <div id='content'>
 	<div class='contentactual'>

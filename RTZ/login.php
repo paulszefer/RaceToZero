@@ -5,6 +5,7 @@
 //if user is logged in, redirect em to index.php
 if($user->is_loggedin()!=""){
 	$user->redirect('index.php');
+	echo '';
 }
 //renamed
 //if register-btn is pressed
@@ -50,11 +51,11 @@ if(isset($_POST['register-btn']))
 if(isset($_POST['login']))
 {
 	//Setting variables
-	$FormLoginUsername = $_POST['UserOrEmail'];
+	$FormLoginUsername = $_POST['loginUsername'];
 	$FormLoginPassword = $_POST['loginPassword'];
 
 	//if the doLogin function returns true.
-	if($user->doLogin($FormUsername, $FormPassword))
+	if($user->doLogin($FormLoginUsername, $FormLoginPassword))
 	{
 		$user->redirect('index.php');
 	} 

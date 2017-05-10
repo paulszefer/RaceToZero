@@ -65,11 +65,11 @@ class USER {
 	
 	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
-		/*if(isset($_SESSION['user_session']))
+		if(isset($_SESSION['user_session']))
 		{
 			return true;
-		}*/
-		/*if($this->loggedIn) {
+		}
+		if($this->loggedIn) {
 			if($_SESSION['user_session'] == $this->myId)
 			{
 				return true;
@@ -78,12 +78,12 @@ class USER {
 			}
 		} else {
 			return false;
-		}*/
-		if(empty($_SESSION['user_session'])) {
-			return false;
-		} else {
-			return($_SESSION['user_session'] == "in");
 		}
+		// if(empty($_SESSION['user_session'])) {
+		// 	return false;
+		// } else {
+		// 	return($_SESSION['user_session'] == "in");
+		// }
 	}
 	
 	//I guess we change $url for redirect
@@ -98,6 +98,7 @@ class USER {
 		unset($_SESSION['user_name']);
 		unset($_SESSION['user_id']);
 		session_write_close();
+		session_destroy();
 		return true;
 	}
 	

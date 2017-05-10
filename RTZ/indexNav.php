@@ -1,3 +1,17 @@
+<?php
+	require_once("PDO_conn.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Race to Zero</title>
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/masterreset.css">
+	<link rel="stylesheet" href="css/template2.css">
+	<script src='js/template.js'></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="js/indexNav.js"></script>
 </head>
 <body>
 	<div id="overlay"></div>
