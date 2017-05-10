@@ -3,18 +3,18 @@
 	session_start();
 
 	//for localhost testing
-	/*
+	
 	$db_host = "localhost";
 	$db_user = "root";
 	$db_pass = "";
 	$db_name = "comp1536project";
-	*/
-
+	
+	/*
 	$db_host = 'bcitdevcom.ipagemysql.com';
 	$db_user = 'project2017b';
 	$db_pass = 'project.g12';
 	$db_name = 'project2017b';
-
+	*/
 	try {
         //make the connection
         $db_conn = new PDO("mysql:host={$db_host};", $db_user, $db_pass);
@@ -24,9 +24,10 @@
         $db_conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         
         $sql_dbcreation = "CREATE DATABASE IF NOT EXISTS " . $db_name . ";";
+        $sql_dbuse = "USE " . $db_name;
         
     	//  Database Table: users
-        $sql_users ="CREATE TABLE IF NOT EXISTS users (
+        $sql_users = "CREATE TABLE IF NOT EXISTS users (
        		user_id INT NOT NULL AUTO_INCREMENT,
        		user_name VARCHAR(80) NOT NULL,
        		user_password VARCHAR(80) NOT NULL,
@@ -71,12 +72,20 @@
     	//	 Database Table: levels
     	$sql_levels = "CREATE TABLE IF NOT EXISTS levels (
     		level_id INT NOT NULL AUTO_INCREMENT,
-    		goal_id INT NOT NULL,
     		playitem_id INT NOT NULL,
     		PRIMARY KEY (level_id),
-    		FOREIGN KEY (goal_id) REFERENCES goals(goal_id),
     		FOREIGN KEY (playitem_id) REFERENCES playitems(playitem_id)
     	) ENGINE = MYISAM ;";
+    	
+    	//   Database Table: stages
+    	$sql_stages = "CREATE TABLE IF NOT EXISTS tables (
+    		stage_id INT NOT NULL AUTO_INCREMENT,
+    		goal_id INT,
+    		level_id INT NOT NULL,
+    		PRIMARY KEY (stage_id),
+    		FOREIGN KEY (level_id) REFERENCES levels(level_id),
+    		FOREIGN KEY (goal_id) REFERENCES goals(goal_id)
+    	) ENGINE = MYISAM ;";	
     	
     	//   Database Table: barriers
     	$sql_barriers = "CREATE TABLE IF NOT EXISTS barriers (
@@ -86,9 +95,9 @@
     		barrier_y1 INT NOT NULL,
     		barrier_x2 INT NOT NULL,
     		barrier_y2 INT NOT NULL,
-    		level_id INT NOT NULL,
+    		stage_id INT NOT NULL,
     		PRIMARY KEY (barrier_id),
-    		FOREIGN KEY (level_id) REFERENCES levels(level_id)
+    		FOREIGN KEY (stage_id) REFERENCES stages(stage_id)
     	) ENGINE = MYISAM ;";
     	
     	//   Database Table: games
@@ -104,9 +113,9 @@
     	
     	//   Add level_id to goals
     	$sql_goalsupdate = "ALTER TABLE goals
-    		ADD COLUMN level_id INT NOT NULL,
-    		ADD CONSTRAINT goals_level_id_fk
-    		FOREIGN KEY (level_id) REFERENCES levels(level_id);";
+    		ADD COLUMN stage_id INT NOT NULL,
+    		ADD CONSTRAINT goals_stage_id_fk
+    		FOREIGN KEY (stage_id) REFERENCES levels(stage_id);";
     	
     	//   Add level_id to playitems
     	$sql_playitemsupdate = "ALTER TABLE playitems
@@ -115,6 +124,7 @@
     		FOREIGN KEY (level_id) REFERENCES levels(level_id);";
     	
     	$db_conn->exec($sql_dbcreation);
+    	$db_conn->exec($sql_dbuse);
     	$db_conn->exec($sql_users);
     	$db_conn->exec($sql_goals);
     	$db_conn->exec($sql_fooditems);

@@ -17,7 +17,7 @@
 		}
 		
 		public function save() {
-			try {
+			try {/*
 				$stmt1 = $this->conn->prepare(
 					"SELECT user_id
 					FROM games
@@ -34,7 +34,18 @@
 				$stmt->bindparam(":time", $this->time);
 				$stmt->bindparam(":userid", $userid);
 				$stmt->execute();
-				return $stmt;	
+				return $stmt;	*/
+				
+				$username = "root";
+    			$password = "";
+   				$host     = "localhost";
+    			$database = "comp1536project";
+
+    			$link = mysqli_connect($host, $username, $password, $database);
+    			$query = "INSERT INTO games(game_level,game_time,user_id) 
+						  VALUES($this->level , $this->time , $userid);";
+			
+				$result = mysqli_query($link, $query);
 			}
 			catch(PDOException $e) {
 				echo $e->getMessage();
