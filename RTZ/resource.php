@@ -119,7 +119,7 @@
 			</div>
 <!-- UNCOMMENT THIS WHEN WE CAN FINALLY EXPAND THE AFFILIATED APPS BOX -->
 			<div class='expandedcontentbox bigexpandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+				<img class="xbutton" id="bigone" src="img/tempX.png" height="120" width="120">
 				<h1>AFFILIATED APPS</h1>
 				<p>
 				Here are some other apps that we have connection with!
@@ -132,7 +132,7 @@
 	            <br><br>
 	            <p>Food Factory Zero is a time-based drag and drop game. All you need to do is pick and match the ingredients with recipes.</p>
 				<br>
-	            <p>Link: <a href='http://students.bcitdev.com/A01006039/ffz/'>http://students.bcitdev.com/A01006039/ffz/</a></p>
+	            <p>Link: <a href='http://students.bcitdev.com/A01006039/ffz/'>Check it out here!</a></p>
 	            <br>
 	            <hr>
 				<h2>Captin Plan-It</h2>
@@ -158,7 +158,7 @@
 			<!--start of the topic box-->
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
-					<h1>TOPIC1</h1>
+					<h1>Impact/h1>
 				</div>
 			</div>
 			<div class='contentboxwrapper'>

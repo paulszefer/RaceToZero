@@ -65,10 +65,8 @@
     font-weight: bold;
 }
 .bigexpandedcontentbox p{
-    font-size: 20px;
-
 }
-.expandedcontentbox img, .expandedcontentboc p{
+.bigexpandedcontentbox img, .bigexpandedcontentbox p{
     padding-left: 50px;
     color: #FFFE88;
 }
@@ -109,7 +107,6 @@
     font-weight: bold;
 }
 .expandedcontentbox p{
-    font-size: 20px;
 }
 .expandedcontentbox ol{
     list-style: decimal inside;
@@ -129,6 +126,9 @@ button{
     position:absolute;
     left: 0;
     top: 0;
+}
+#bigone{
+    padding-left: 0;
 }
 .correcttext, .incorrecttext{
     font-weight: bold;
