@@ -5,13 +5,16 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name=viewport content="width=device-width, initial-scale=1">
 	<title>Race to Zero</title>
-	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/masterreset.css">
 	<link rel="stylesheet" href="css/template2.css">
+	<link rel="stylesheet" href="css/index.css">
 	<script src='js/template.js'></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="js/indexNav.js"></script>
+	<script src="js/ObjectDefinitions.js"></script>
+	<script src="js/engine.js"></script>
 </head>
 <body>
 	<div id="overlay"></div>
