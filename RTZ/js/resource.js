@@ -35,7 +35,7 @@ function hideTopics() {
 }
 
 });
-
+// Displays whether the answer pressed was correct or not
 function answerCheck(buttonName, value) {
     if (value == "incorrect") {
     var results = document.getElementsByClassName("incorrecttext");
@@ -58,6 +58,7 @@ function answerCheck(buttonName, value) {
         resets[question - 1 + 14].style.display="none";
         results[question - 1 + 14].style.display="inline-block";
     } else if (topic == 4) {
-        //put in once topic 3 is in
+        resets[question - 1 + 19].style.display="none";
+        results[question - 1 + 19].style.display="inline-block";
     }
 }
