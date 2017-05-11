@@ -7,7 +7,7 @@
 	$db_host = "localhost";
 	$db_user = "root";
 	$db_pass = "";
-	$db_name = "comp2910test1";
+	$db_name = "comp1536project";
 	
 	/*
 	$db_host = 'bcitdevcom.ipagemysql.com';
