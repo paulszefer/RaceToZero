@@ -35,6 +35,9 @@
     display:block;
     padding-top: 1em;
 }
+.bigcontentbox img{
+  width:80%;
+}
 .bigcontentboxwrapper{
     width:98.5%;
     background-color:black;
@@ -80,7 +83,6 @@
         min-height:10vh;
     }
 }
-
 /*this is where we put actual content for each topic*/
 .expandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
@@ -91,7 +93,7 @@
     width:0;
     -webkit-transition: width 0.3s;
     overflow: hidden;
-    font-size: 3em;
+    font-size: 1em;
     position: relative;
 }
 .expandedcontentbox h1, .expandedcontentbox h2{
