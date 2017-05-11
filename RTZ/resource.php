@@ -10,8 +10,8 @@
 	<div class='contentactual'>
 		<div class='contentwrapper'> <!--whole wrapper for the boxes-->
 			<!--throw your tips n stuffs in expandedcontetnbox below-->
-			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+			<div class='expandedcontentbox'>    <!-- Impact -->
+				<img class="xbutton" src="img/tempX.png">
 				<h1>Impact</h1>
 				<ol>
 					<li>Which of these is the biggest contributor to food waste?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
@@ -44,7 +44,7 @@
 				</ol>
 			</div>
 			<div class='expandedcontentbox'>	<!-- How to tell if food has gone bad -->
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+				<img class="xbutton" src="img/tempX.png">
 				<h1>Has your food gone bad?</h1><br>
 				<ol>
 					<li>Do the best before dates found on food packaging tell you when it’s unsafe to eat the food?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
@@ -88,7 +88,7 @@
 					<ul>
 						<li><button type="button" name="t2q7" value="incorrect" onClick="answerCheck(this.name, this.value)">Yes</button></li>
 						<li><button type="button" name="t2q7" value="correct" onClick="answerCheck(this.name, this.value)">No</button></li>
-						<li><button type="button" name="t2q7" value="incorrect" onClick="answerCheck(this.name, this.value)">Only if it looks weird too</button></li>
+						<li><button type="button" name="t2q7" value="incorrect" onClick="answerCheck(this.name, this.value)">Only if it looks fine</button></li>
 					</ul></li><br>
 					<li>If green vegetables have turned yellow are they safe to eat?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
 					<ul>
@@ -109,17 +109,80 @@
 					</ul></li><br>
 				</ol>
 			</div>
-			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
-				<h1>TOPIC3</h1>
+			<div class='expandedcontentbox'>	<!-- Food 911 -->
+				<img class="xbutton" src="img/tempX.png">
+				<h1>Food 911</h1>
+				<ol>
+					<li>What’s a good way to make stale chips taste good again?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t3q1" value="incorrect" onClick="answerCheck(this.name, this.value)">Refrigerating them</button></li>
+						<li><button type="button" name="t3q1" value="correct" onClick="answerCheck(this.name, this.value)">Toasting them</button></li>
+						<li><button type="button" name="t3q1" value="incorrect" onClick="answerCheck(this.name, this.value)">Soaking them in water</button></li>
+						<li><button type="button" name="t3q1" value="incorrect" onClick="answerCheck(this.name, this.value)">Breaking them into smaller pieces</button></li>
+					</ul></li><br>
+					<li>How can you heal wilted or wrinkled vegetables?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t3q2" value="incorrect" onClick="answerCheck(this.name, this.value)">Chopping it up</button></li>
+						<li><button type="button" name="t3q2" value="incorrect" onClick="answerCheck(this.name, this.value)">Freezing it</button></li>
+						<li><button type="button" name="t3q2" value="correct" onClick="answerCheck(this.name, this.value)">Putting it in ice water</button></li>
+						<li><button type="button" name="t3q2" value="correct" onClick="answerCheck(this.name, this.value)">Cooking it</button></li>
+					</ul></li><br>
+					<li>What should you do with apples you don’t want to eat?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t3q3" value="incorrect" onClick="answerCheck(this.name, this.value)">Give them away</button></li>
+						<li><button type="button" name="t3q3" value="incorrect" onClick="answerCheck(this.name, this.value)">Throw them away</button></li>
+						<li><button type="button" name="t3q3" value="correct" onClick="answerCheck(this.name, this.value)">Make apple sauce</button></li>
+					</ul></li><br>
+					<li>Which of these is the best use for stale bread?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t3q4" value="correct" onClick="answerCheck(this.name, this.value)">Making breadcrumbs</button></li>
+						<li><button type="button" name="t3q4" value="incorrect" onClick="answerCheck(this.name, this.value)">Feeding ducks</button></li>
+						<li><button type="button" name="t3q4" value="incorrect" onClick="answerCheck(this.name, this.value)">Making compost</button></li>
+					</ul></li><br>
+					<li>What should you do with browning bananas?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t3q5" value="incorrect" onClick="answerCheck(this.name, this.value)">Compost them</button></li>
+						<li><button type="button" name="t3q5" value="incorrect" onClick="answerCheck(this.name, this.value)">Throw them away</button></li>
+						<li><button type="button" name="t3q5" value="correct" onClick="answerCheck(this.name, this.value)">Make a banana smoothie</button></li>
+					</ul></li><br>
+				</ol>
 			</div>
-			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
-				<h1>TOPIC4</h1>
+			<div class='expandedcontentbox'>	<!-- Facts -->
+				<img class="xbutton" src="img/tempX.png">
+				<h1>Facts</h1>
+				<ol>
+					<li>How many apples are thrown out every day in Metro Vancouver?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t4q1" value="incorrect" onClick="answerCheck(this.name, this.value)">1,000</button></li>
+						<li><button type="button" name="t4q1" value="incorrect" onClick="answerCheck(this.name, this.value)">13,000</button></li>
+						<li><button type="button" name="t4q1" value="incorrect" onClick="answerCheck(this.name, this.value)">29,000</button></li>
+						<li><button type="button" name="t4q1" value="correct" onClick="answerCheck(this.name, this.value)">55,000</button></li>
+					</ul></li><br>
+					<li>How many loaves of bread are wasted every day in Metro Vancouver?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t4q2" value="incorrect" onClick="answerCheck(this.name, this.value)">800</button></li>
+						<li><button type="button" name="t4q2" value="incorrect" onClick="answerCheck(this.name, this.value)">15,000</button></li>
+						<li><button type="button" name="t4q2" value="correct" onClick="answerCheck(this.name, this.value)">32,000</button></li>
+						<li><button type="button" name="t4q2" value="incorrect" onClick="answerCheck(this.name, this.value)">41,000</button></li>
+					</ul></li><br>
+					<li>How much of the food produced around the world is wasted?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t4q3" value="incorrect" onClick="answerCheck(this.name, this.value)">One fifth</button></li>
+						<li><button type="button" name="t4q3" value="incorrect" onClick="answerCheck(this.name, this.value)">One quarter</button></li>
+						<li><button type="button" name="t4q3" value="correct" onClick="answerCheck(this.name, this.value)">One third</button></li>
+						<li><button type="button" name="t4q3" value="incorrect" onClick="answerCheck(this.name, this.value)">One half</button></li>
+					</ul></li><br>
+					<li>How much money could we save if there was zero food waste around the world?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<ul>
+						<li><button type="button" name="t4q4" value="incorrect" onClick="answerCheck(this.name, this.value)">$1,000</button></li>
+						<li><button type="button" name="t4q4" value="incorrect" onClick="answerCheck(this.name, this.value)">$1,000,000</button></li>
+						<li><button type="button" name="t4q4" value="incorrect" onClick="answerCheck(this.name, this.value)">$1,000,000,000</button></li>
+						<li><button type="button" name="t4q4" value="correct" onClick="answerCheck(this.name, this.value)">$1,000,000,000,000</button></li>
+					</ul></li><br>
 			</div>
 <!-- UNCOMMENT THIS WHEN WE CAN FINALLY EXPAND THE AFFILIATED APPS BOX -->
-			<div class='expandedcontentbox bigexpandedcontentbox'>
-				<img class="xbutton" id="bigone" src="img/tempX.png" height="120" width="120">
+			<div class='expandedcontentbox bigexpandedcontentbox'>	<!-- Affiliated Apps -->
+				<img class="xbutton" id="bigone" src="img/tempX.png">
 				<h1>AFFILIATED APPS</h1>
 				<p>
 				Here are some other apps that we have connection with!
@@ -158,7 +221,7 @@
 			<!--start of the topic box-->
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
-					<h1>Impact/h1>
+					<h1>Impact</h1>
 				</div>
 			</div>
 			<div class='contentboxwrapper'>
@@ -168,17 +231,17 @@
 			</div>
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
-					<h1>TOPIC3</h1>
+					<h1>Food 911</h1>
 				</div>
 			</div>
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
-					<h1>TOPIC4</h1>
+					<h1>Facts</h1>
 				</div>
 			</div>
 			<div class='contentboxwrapper bigcontentboxwrapper'>
 				<div class='contentbox bigcontentbox'>
-					<h1>AFFILIATED APPS</h1>
+					<h1>Affiliated Apps</h1>
 					<br>
 					<img src='img/affiliatedlogo.png'>
 				</div>
