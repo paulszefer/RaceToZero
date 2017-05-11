@@ -1,7 +1,7 @@
 var count = 0;
     
     function displayImage() {
-        var imagesArray = ['img/profilepics/sushi.jpg', 'img/profilepics/pbsandwich.jpg', 'img/profilepics/coconut.jpg', 'img/profilepics/apples.png', 'img/profilepics/frenchtoast.png', 'img/profilepics/setprofilepic.png'];
+        var imagesArray = ['img/sushi.jpg', 'img/pbsandwich.jpg', 'img/coconut.jpg', 'img/apples.png', 'img/frenchtoast.png', 'img/setprofilepic.png'];
         
         document.canvas.src = imagesArray [count];
         count++;
