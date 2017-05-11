@@ -1,28 +1,26 @@
 <?php
-	/*require_once('PDO_conn.php');
+	//require_once('PDO_conn.php');
 	
 	function displayTutorialScore() {
 		$username = "root";
     	$password = "";
    		$host     = "localhost";
-    	$database = "comp1536project";
+    	$database = "comp2910test1";
 
     	$link = mysqli_connect($host, $username, $password, $database);
     	$query = "SELECT game_time
 				  FROM games
 				  	INNER JOIN users ON games.user_id = users.user_id
-				  WHERE level_id=0
-				  	AND user_name=$_POST['user_name']
-				  ORDER BY game_time ASC;";
-			
+				  WHERE level_id=1
+				  	AND user_name=\"" . $_SESSION['user_name'] . 
+			  "\" ORDER BY game_time ASC;";
 		$result = mysqli_query($link, $query);
-	
 		if($result) {
-			$row = mysqli_fetch_array($result)
+			$row = mysqli_fetch_array($result);
 		}
 		
-		return $$row['game_time'];
-	}*/
+		return $row['game_time'];
+	}
 ?>
 
 <?php include("templateHeader.php");?>
@@ -35,9 +33,9 @@
 		<br>
         <img src='img/setprofilepic.png'>
 		<ul>
-            <li>Username: Huehue</li>
+            <li>Username: <?php echo $_SESSION['user_name']; ?></li>
             <li>&nbsp;</li>
-            <li>High score: <?php displayTutorialScore() ?></li>
+            <li>High score: <?php echo displayTutorialScore(); ?></li>
             <li>&nbsp;</li>
             <li>Something: helloitsme</li>
         </ul>
