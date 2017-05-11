@@ -5,7 +5,7 @@
 	<div class='contentactual'>
 		<div id='gamedivwrapper'>
 	      <div id='gamediv'>
-	          <div>Play</div>
+	        <div id="playButton">Play</div>
 	      </div>
 		</div>
 	</div>

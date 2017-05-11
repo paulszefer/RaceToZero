@@ -25,6 +25,7 @@
 #gamediv {
     background-color: #666666;
     z-index: 0;
+    position: relative;
 }
 #gamediv>div {
     width:100%;

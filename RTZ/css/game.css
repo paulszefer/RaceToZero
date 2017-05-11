@@ -1,0 +1,15 @@
+#game_div {
+    width: 500px;
+    height: 500px;
+}
+
+svg {
+    z-index: 1000000000;
+    min-height: 200px;
+    min-width: 200px;
+
+}
+
+#gamediv {
+    min-height: 200px;
+}

@@ -15,6 +15,7 @@ $DB_name = "comp2910test1";
 // $DB_pass = 'project.g12';
 // $DB_name = 'project2017b';
 
+
 try {
         //make the connection
         $DB_conn = new PDO("mysql:host={$DB_host};dbname={$DB_name};", $DB_user, $DB_pass);
