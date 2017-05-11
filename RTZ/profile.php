@@ -76,7 +76,9 @@
 				<h1>Profile</h1>
 				<br>
     			<br>
-			<div class='inline'>
+				<img class='img' src="img/setprofilepic.png" name="canvas" width="225" height="150" />
+				<br>
+				<br>
 				<p>Username: Huehue
 				<br>
 				High score: 123456
