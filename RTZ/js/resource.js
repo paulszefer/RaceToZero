@@ -46,7 +46,7 @@ function answerCheck(buttonName, value) {
     }
 
     var topic = parseInt(buttonName.substr(1, 1), 10);
-    var question = parseInt(buttonName.substr(3, 1), 10);
+    var question = parseInt(buttonName.substr(3, 2), 10);
 
     if (topic == 1) {
         resets[question - 1].style.display="none";

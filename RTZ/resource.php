@@ -11,7 +11,7 @@
 		<div class='contentwrapper'> <!--whole wrapper for the boxes-->
 			<!--throw your tips n stuffs in expandedcontetnbox below-->
 			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+				<img class="xbutton" src="img/tempX.png">
 				<h1>Impact</h1>
 				<ol>
 					<li>Which of these is the biggest contributor to food waste?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
@@ -44,7 +44,7 @@
 				</ol>
 			</div>
 			<div class='expandedcontentbox'>	<!-- How to tell if food has gone bad -->
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+				<img class="xbutton" src="img/tempX.png">
 				<h1>Has your food gone bad?</h1><br>
 				<ol>
 					<li>Do the best before dates found on food packaging tell you when it’s unsafe to eat the food?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
@@ -110,16 +110,16 @@
 				</ol>
 			</div>
 			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+				<img class="xbutton" src="img/tempX.png">
 				<h1>TOPIC3</h1>
 			</div>
 			<div class='expandedcontentbox'>
-				<img class="xbutton" src="img/tempX.png" height="120" width="120">
+				<img class="xbutton" src="img/tempX.png">
 				<h1>TOPIC4</h1>
 			</div>
 <!-- UNCOMMENT THIS WHEN WE CAN FINALLY EXPAND THE AFFILIATED APPS BOX -->
 			<div class='expandedcontentbox bigexpandedcontentbox'>
-				<img class="xbutton" id="bigone" src="img/tempX.png" height="120" width="120">
+				<img class="xbutton" id="bigone" src="img/tempX.png">
 				<h1>AFFILIATED APPS</h1>
 				<p>
 				Here are some other apps that we have connection with!
@@ -158,7 +158,7 @@
 			<!--start of the topic box-->
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
-					<h1>Impact/h1>
+					<h1>Impact</h1>
 				</div>
 			</div>
 			<div class='contentboxwrapper'>
