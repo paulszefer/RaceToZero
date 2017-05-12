@@ -120,7 +120,7 @@ $(function () {
 
             // create the level using the retrieved level
             // width, height incremented by 1 to avoid ArrayOutOfBounds exceptions
-            level = new Level(levelID, width + 1, height + 1g);
+            level = new Level(levelID, width + 1, height + 1);
 
             // load common level data
             barriers = [

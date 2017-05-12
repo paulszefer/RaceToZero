@@ -3,11 +3,6 @@
 		
 <div id='content'>
 	<div class='contentactual'>
-		<div id='gamedivwrapper'>
-	      <div id='gamediv'>
-	        <div id="playButton">Play</div>
-	      </div>
-		</div>
 	</div>
 </div>
 
