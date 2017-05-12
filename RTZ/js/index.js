@@ -1,15 +1,4 @@
 $(function() {
-    $("#navburger").click(function() {
-        $("#mobilenav").css("width", "40vw");
-        $("#overlay").css("width", "70vw");
-        $("#overlay").css("height", $('body').height());
-    });
-    //Closes mobilenav when navoverlay is clicked
-    $('#overlay').click(function(){
-        $("#mobilenav").attr('style', '');
-        $("#overlay").attr('style', '');
-    });
-    
     //After scrolling down, save var
     var scrolled;
     //sets scrolled to true if scroll happened
@@ -38,7 +27,7 @@ $(function() {
             //if below navContHeight -> #navburger shall be fixed
             if (currentPos > lastPosition){
                 //they hath scrolled down
-                $("#navburger").fadeOut();
+                // $("#navburger").fadeOut();
             }
             else
             {
