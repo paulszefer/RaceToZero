@@ -1,4 +1,5 @@
 $(function() {
+    //Opens #mobilenav when #navburger is clicked
     $("#navburger").click(function() {
         $("#mobilenav").css("width", "40vw");
         $("#overlay").css("width", "70vw");
@@ -10,7 +11,7 @@ $(function() {
         $("#overlay").attr('style', '');
     });
     
-    //After scrolling down, save var
+    //Everything below is related to show navburger fading in/out when scrolled
     var scrolled;
     //sets scrolled to true if scroll happened
     $(window).scroll(function(event){
