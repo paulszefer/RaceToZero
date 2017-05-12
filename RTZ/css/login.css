@@ -48,18 +48,12 @@
 	text-align:left;
 	font-size:1em;
 }
-.disclaimtext p{
-	font-size: 1em;
-}
-.disclaimtext h2{
-	font-size: 1em;
-	font-weight:bold;
-	text-align: center;
-}
+
 .required::after{
 	content: "*";
 	color: red;
 }
+/*displays red in all errofields*/
 #usernameErrorField, #emailErrorField, #passwordErrorField, #UserOrEmailErrorField, #passErrorField{
 	color: red;
 	min-height: 1em;
