@@ -1,11 +1,10 @@
 <?php include("templateHeader.php");?>
 <?php
-// require_once('PDO_conn.php');
+require_once('PDO_conn.php');
 
 //if user is logged in, redirect em to index.php
-if($user->is_loggedin()!=""){
+if($user->is_loggedin()){
 	$user->redirect('index.php');
-	echo '';
 }
 //renamed
 //if register-btn is pressed
@@ -15,11 +14,13 @@ if(isset($_POST['register-btn']))
 	$FormRegPassword = $_POST['regPassword'];
 	$PhotoURL = "url"; // We'll handle the URL later
 
+	//Error handling
 	if ($FormRegUsername == ""){
 		$error[] = "no username provided";
 	} else if ($FormRegPassword == "") {
 		$error[] = "no password entered";
 	} else {
+		//Now if they actually entered things
 		try 
 		{
 			$statement = $DB_conn->prepare("SELECT user_name, user_password
@@ -28,15 +29,24 @@ if(isset($_POST['register-btn']))
 			$statement->execute(array(':uname' => $FormRegUsername));
 			//store found rows in $row
 			$row = $statement->fetch(PDO::FETCH_ASSOC);
-
+			//Check if username is already taken
 			if ($row['user_name'] == $FormRegUsername) {
 				$error[] = "username already taken.";
 			} else {			
-				//If both username available, then register the user, and redirect to login.php
+				//If username available, then register the user, and automatically login
 				if ($user->register($FormRegUsername, $FormRegPassword, $PhotoURL)) 
 				{				
 					echo "<script type='text/javascript'>alert('Registration successful');</script>";
-					$user->redirect('login.php');
+					// $user->redirect('login.php');
+					if($user->doLogin($FormRegUsername, $FormRegPassword))
+						{
+							//Optional redirect
+							// $user->redirect('index.php');
+						} 
+						else 
+						{
+							echo "<script type='text/javascript'>alert('Unknown reg error');</script>";
+						}
 				}
 			}
 		}
@@ -74,6 +84,7 @@ if(isset($_POST['login']))
 	
 <div id='content'>
 	<div class='contentactual'>
+		<!--Login section of the php-->
 		<div id='logintab' class='titletab'>Login</div>
 		<div id='logincontent'>
 			<form id="loginform" method="post" onsubmit="return loginvalidation()" action="login.php">
@@ -83,19 +94,20 @@ if(isset($_POST['login']))
 					<td><input type="text" name="loginUsername" id="loginUsername" oninput="loginUserValid()"></td>
 				</tr>	
 				<tr>
-					<td colspan="3"><p id="loginUsernameErrorField" style="text-align:center">LoginError</p></td>
+					<td colspan="3"><p id="loginUsernameErrorField" style="text-align:center">&nbsp</p></td>
 				</tr>
 				<tr>
 					<td><label class="required" for="password">Password</label></td>
 					<td colspan="3"><input type="password" name="loginPassword" id="loginPassword"></td>
 				</tr>
-				<tr><td colspan="3"><p id="loginPassErrorField" style="text-align:center">PassError</p></td></tr>
+				<tr><td colspan="3"><p id="loginPassErrorField" style="text-align:center">&nbsp</p></td></tr>
 					</table>
 				<br>
 				<button name="login" value="login" type="submit">Login</button>
 			</form>
 		</div><!--end of logincontent-->
 		
+		<!--registration section of the php-->
 		<div id='regtab' class='titletab'>Register</div>
 		<div id='regcontent'>
 			<form name="registration" method ="post" action="login.php" id="registration" class="registration" onsubmit="return validateForm()">

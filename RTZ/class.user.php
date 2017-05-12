@@ -1,9 +1,8 @@
 <?php
-
+//Grabs connection script
 require_once('PDO_conn.php');
 
-class USER {	
-
+class USER {
 	private $conn;
 	private $myId;
 	private $loggedIn;
@@ -13,7 +12,7 @@ class USER {
 		$this->conn = $DB_conn;
     }
 	
-	//Sets up registration
+	//Sets up registration function
 	public function register($uname,$upass,$photourl) {
 		try {
 			$stmt = $this->conn->prepare(
@@ -40,14 +39,18 @@ class USER {
 				);
 			$stmt->execute(array(':uname'=>$uname));
 			$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+			//If a row is returned
 			if($stmt->rowCount() == 1) {
+				//If password = db returned password
 				if($upass == $userRow['user_password']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
 					$this->myId = $userRow['user_id'];
 					//$_SESSION['user_session'] = $userRow['id'];
+					//temp ghetto fix atm
 					$_SESSION['user_session'] = "in";
 					$_SESSION['user_name'] = $userRow['user_name'];
 					$_SESSION['user_id'] = $userRow['user_id'];
+					//set this user loggedIn status as true
 					$this->loggedIn = true;
 					return true;
 					//Assigns the session number as the user_id (when user registered onto DB)
@@ -63,6 +66,7 @@ class USER {
 		}
 	}
 	
+	//checks if an user object is logged in
 	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
 		if(isset($_SESSION['user_session']))
@@ -79,20 +83,15 @@ class USER {
 		} else {
 			return false;
 		}
-		// if(empty($_SESSION['user_session'])) {
-		// 	return false;
-		// } else {
-		// 	return($_SESSION['user_session'] == "in");
-		// }
 	}
 	
-	//I guess we change $url for redirect
+	//Redirects user to another page
 	public function redirect($url) {
 		header("Location: $url");
 	}
 	
+	//unsets current user's session set by doLogin(), and destroys current session
 	public function doLogout() {
-		//$_SESSION['user_session'] = "";
 		$loggedIn = false;
 		unset($_SESSION['user_session']);
 		unset($_SESSION['user_name']);
@@ -102,6 +101,7 @@ class USER {
 		return true;
 	}
 	
+	//TO be implemented if there is time
 	public function postComment() {
 		
 	}
