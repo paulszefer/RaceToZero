@@ -1,3 +1,4 @@
+<!-- This file will not be used in the actual website. -->
 <?php include("templateHeader.php");?>
 <!--insert page specific js css here-->
 <title> Template page title </title>

@@ -1,3 +1,5 @@
+<!-- This file compiles the other template files. All pages should look something like 
+this. -->
 <?php include("templateHeader.php");?>
 <!--insert page specific js css here-->
 <title> Template page title </title>
