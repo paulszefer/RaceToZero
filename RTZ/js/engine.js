@@ -88,8 +88,8 @@ $(function () {
         }
 
         /** Declare/Initialize variables. */
-        let width = Math.round(gameWrapper.offsetWidth); // query from containing div TODO
-        let height = Math.round(gameWrapper.offsetHeight); // query from containing div TODO
+        let width = gameWrapper.parentNode.offsetWidth; // query from containing div TODO
+        let height = gameWrapper.parentNode.offsetHeight; // query from containing div TODO
         let barrierSize = Math.round(width / 10);
         let playItemSize = Math.round(width / 10); // TODO - based on width, make playItem use this value
         let goalSize = playItemSize * 1.5;
@@ -240,7 +240,7 @@ $(function () {
                     let scoreInSeconds = Math.floor(score / 1000);
                     scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
                     $.post("accessdb.php", { function: "saveGame", level: actualLevel, time: scoreInSeconds }, function(data) {
-                    	alert(data);
+                    	//alert(data);
                     });
                     time.style.fontSize = "2em";
                     scoreDiv.appendChild(time);
