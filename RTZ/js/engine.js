@@ -88,8 +88,8 @@ $(function () {
         }
 
         /** Declare/Initialize variables. */
-        let width = Math.round(gameWrapper.offsetWidth); // query from containing div TODO
-        let height = Math.round(gameWrapper.offsetHeight); // query from containing div TODO
+        let width = gameWrapper.parentNode.offsetWidth; // query from containing div TODO
+        let height = gameWrapper.parentNode.offsetHeight; // query from containing div TODO
         let barrierSize = Math.round(width / 10);
         let playItemSize = Math.round(width / 10); // TODO - based on width, make playItem use this value
         let goalSize = playItemSize * 1.5;
