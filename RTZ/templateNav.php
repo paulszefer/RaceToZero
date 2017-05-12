@@ -1,3 +1,4 @@
+<!-- This file provides the header and nav bar for all the pages in the site. -->
 </head>
 <body>
 	<div id="overlay"></div>
@@ -23,6 +24,8 @@
 					<img src='img/menuicon.png'>
 				</div>
 			</div> <!--end of navlogo-->
+			
+			<!-- This div is used for the nav on desktop. -->
 			<div class='navlinks'>
 				<ul>
 					<a href='index.php'><li class='navbuttonleft'>Home</li></a>
@@ -40,8 +43,9 @@
 						}
 					?>
 				</ul>
-			</div><!--end ov navlinks-->
+			</div><!--end of navlinks-->
 
+			<!-- This div is used for the nav on mobile. -->
             <div id="mobilenav">
                 <ul>
                 <a href='index.php'><li class='mobilelist'><div>Home</div></li></a>
