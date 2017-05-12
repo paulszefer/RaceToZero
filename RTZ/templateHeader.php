@@ -1,11 +1,13 @@
+<!--This file provides stylesheets and .js files that are used by every page.-->
 <?php
+	// Eventually this will be deleted, as we are going to use mysqli instead of PDO.
 	require_once("PDO_conn.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 	<link rel="stylesheet" href="css/masterreset.css">
-<link rel="stylesheet" href="css/template2.css"> 
+	<link rel="stylesheet" href="css/template2.css"> 
 	<!--<link rel="stylesheet" href="css/template3.css"> -->
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
