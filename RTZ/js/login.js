@@ -4,9 +4,11 @@ var passRegEx = new RegExp(/^[a-zA-Z0-9]{6,}$/),
 	validChars = new RegExp(/^[a-z0-9]{6,10}(?!.{1,})$/);
 
 //Login form js
+
 function loginvalidation() {
 	return (loginUserValid() && loginPassValid());
-}	
+}
+
 function loginUserValid(){
 	var loginUser = document.getElementById("loginUsername").value,
 		l = loginUser.length;	

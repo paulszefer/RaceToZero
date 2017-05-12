@@ -1,37 +1,43 @@
-/*
- * This file contains definitions for all of the objects used in the game.
+/**
+ * Contains definitions for all of the objects used in the game.
  */
 
-/*
+/**
  * Constants.
  */
 const BACKGROUND_COLOUR = "rgb(255, 255, 255)";
 const BARRIER_COLOUR = "rgb(50, 255, 100)";
 
-/*
+/**
  * Game states.
+ * @Unused - TODO remove
  */
 const LEVEL = 0;
 const QUESTION = 1;
 
-/*
+/**
  * Types of pixels.
  */
 const AIR = 0;
 const SOLID = 1;
 const GOAL = 2;
-const WRONG = 3;
+const WRONG = 3; // TODO - remove
 
+/**
+ * A game object that keeps track of the current level.
+ */
 class Game {
+
     /**
      * Creates a game object that stores the current game screen and its properties.
      * Used to display the correct screen and to transition between levels.
+     * TODO - elements, state are unused, remove them?
      */
     constructor() {
         this.level = this.retrieveLevel();
         this.state = 0;
         this.elements;
-        this.createHTML();
+        this.createHTML(); // TODO - Unused, remove?
     }
 
 	/**
@@ -61,15 +67,22 @@ class Game {
     get state() {
         return this._state;
     }
-
+    /**
+     * Sets the elements of the game.
+     */
     set elements(elements) {
         this._elements = elements;
     }
-
+    /**
+     * Returns the elements of the game.
+     */
     get elements() {
         return this._elements;
     }
 
+    /**
+     * Adds an element to the set of elements.
+     */
     addElement(element) {
         this.elements.push(element);
     }
@@ -78,24 +91,29 @@ class Game {
 	 * Returns the user's current level. Currently the user always starts from level 0.
 	 */
     retrieveLevel() {
-        // TODO - get last level from database
+        // TODO - get last played level from database, use 0 if not logged in
         return 0;
     }
 
+    // TODO - Unused, moved to engine.js setup instead, remove it?
     createHTML() {
     }
 
+    /**
+     * Displays the game.
+     */
     render() {
-        document.getElementById("game_div").style.display = "block";
+        document.getElementById("game_window").style.display = "block";
     }
 }
 
-/*
+/**
  * Defines a level with an ID and dimensions.
  * Also allows a PlayItem to be stored.
  */
 class Level {
-    /*
+
+    /**
      * Initializes the level ID, width and height. Creates a board based on the level's
      * width and height, and assigns the board to this. Keeps an array of barriers.
      */
@@ -116,7 +134,7 @@ class Level {
         this._board = emptyBoard;
     }
 
-    /*
+    /**
      * Sets the level ID if the new level ID is 0 or greater.
      */
     set levelID(levelID) {
@@ -125,15 +143,16 @@ class Level {
         }
     }
 
-    /*
+    /**
      * Returns the level ID.
      */
     get levelID() {
         return this._levelID;
     }
 
-    /*
+    /**
      * Sets the level width if the new level width is 100 or greater.
+     * TODO - maybe unnecessary
      */
     set width(width) {
         if (width >= 100) {
@@ -141,14 +160,14 @@ class Level {
         }
     }
 
-    /*
+    /**
      * Returns the level width.
      */
     get width() {
         return this._width;
     }
 
-    /*
+    /**
      * Sets the level height if the new level height is 100 or greater.
      */
     set height(height) {
@@ -157,50 +176,58 @@ class Level {
         }
     }
 
-    /*
+    /**
      * Returns the level height.
      */
     get height() {
         return this._height;
     }
 
+    /**
+     * Sets the level state.
+     * @Unused TODO - remove
+     */
     set state(state) {
         this._state = state;
     }
 
+    /**
+     * Gets the level state.
+     * @Unused TODO - remove
+     */
     get state() {
         return this._state;
     }
 
-    /*
+    /**
      * Sets the play item of the level.
      */
     set playItem(playItem) {
         this._playItem = playItem;
     }
 
-    /*
+    /**
      * Returns the play item of the level.
      */
     get playItem() {
         return this._playItem;
     }
 
-    /*
+    /**
      * Sets the board of the level. The board is a 2D array of size width x height.
      */
     set board(board) {
         this._board = board;
     }
 
-    /*
+    /**
      * Returns the board of the level.
      */
     get board() {
         return this._board;
     }
 
-    /*
+    /**
      * Changes the PlayItem if the new x and y position are within bounds.
      */
     changePlayItem(x, y, dx, dy, foodItem) {
@@ -210,7 +237,7 @@ class Level {
         }
     }
 
-    /*
+    /**
      * Adds an object by setting all pixels within a certain range to a certain pixel 
      * type.
      */
@@ -222,38 +249,41 @@ class Level {
         }
     }
 
-    /*
+    /**
      * Adds a barrier by setting all pixels within the given barrier's range to solid.
      */
     addBarrier(barrier) {
         this.addPhysicalObject(barrier.x1, barrier.y1, barrier.x2, barrier.y2, SOLID);
     }
 
-    /*
-     * Adds a section of air.
+    /**
+     * Adds a section of air by setting all pixels within the given barrier's range to air.
      */
     addAir(air) {
         this.addPhysicalObject(air.x1, air.y1, air.x2, air.y2, AIR);
     }
 
-    /*
+    /**
      * Adds a goal by setting all pixels within the given barrier's range to goal.
      */
     addGoal(goal) {
         this.addPhysicalObject(goal.x1, goal.y1, goal.x2, goal.y2, GOAL);
     }
 
-    /*
+    /**
      * Moves the play item. Before the play item moves, checks to see if it will collide
      * with anything and adjusts accordingly.
+     * TODO - check incrementally to fix bugs with moving through thin barriers
      */
     move() {
 
         // don't move if out of bounds
+        // TODO - query width and height from div
+        // TODO - this also doesn't work
         if (this.playItem.x1 < 0 || this.playItem.y1 < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
             return;
         }
-        //console.log(this._playItem.getDX());
+
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
 
@@ -264,17 +294,21 @@ class Level {
             this.playItem.move();
             this.playItem.isGrounded = false;
         } else if (collision === 1) {
+            // top-side collision
             this.snapToTop(tempX);
             this.playItem.reverseDY();
             this.playItem.isGrounded = false;
         } else if (collision === 2) {
+            // right-side collision
             this.snapToRight(tempY);
             this.playItem.reverseDX();
             this.playItem.isGrounded = false;
         } else if (collision === 3) {
+            // bottom-side collision
             if (!this.playItem.isGrounded) {
                 this.snapToBottom(tempX);
             }
+            // TODO - make this refer to a constant defined in the constant section above
             if (this.playItem.dy < 2) { // SNAPTOGROUND = 2
                 this.playItem.snapToGround();
                 this.playItem.move();
@@ -283,18 +317,28 @@ class Level {
                 this.playItem.isGrounded = false;
             }
         } else if (collision === 4) {
+            // left-side collision
             this.snapToLeft(tempY);
             this.playItem.reverseDX();
             this.playItem.isGrounded = false;
         } else if (collision === 5) {
+            // collision with a goal
             this.playItem.move();
             return 5;
         }
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
+
+        // rounds values because display is pixel-based
+        // TODO - move rounding to move function?
         this.playItem.round();
     }
 
+    // TODO - group/normalize these snap functions?
+
+    /**
+     * Snaps the playItem to its top side to simulate the object moving until it collides with its top.
+     */
     snapToTop(tempX) {
         let move = 0;
         while (this.checkCollisions(tempX, this._playItem.y - move) !== 1) {
@@ -305,6 +349,9 @@ class Level {
         this._playItem.y = this._playItem.y - move;
     }
 
+    /**
+     * Snaps the playItem to its right side to simulate the object moving until it collides with its right.
+     */
     snapToRight(tempY) {
         let move = 0;
         while (this.checkCollisions(this._playItem.x + move, tempY) !== 2) {
@@ -315,6 +362,9 @@ class Level {
         this._playItem.y = this._playItem.y + (move * ratio);
     }
 
+    /**
+     * Snaps the playItem to its bottom side to simulate the object moving until it collides with its bottom.
+     */
     snapToBottom(tempX) {
         let move = 0;
         while (this.checkCollisions(tempX, this._playItem.y + move) !== 3) {
@@ -325,6 +375,9 @@ class Level {
         this._playItem.y = this._playItem.y + move;
     }
 
+    /**
+     * Snaps the playItem to its left side to simulate the object moving until it collides with its left.
+     */
     snapToLeft(tempY) {
         let move = 0;
         while (this.checkCollisions(this._playItem.x - move, tempY) !== 4) {
@@ -335,10 +388,10 @@ class Level {
         this._playItem.y = this._playItem.y - (move * ratio);
     }
 
-    /*
-     * Checks to see if the object is colliding with anything.
+    /**
+     * Checks to see if the object is currently colliding with anything.
      * Returns 0 if no collision, 1 if top collision, 2 if right-side collision, 3 if 
-     * bottom collision, 4 if left-side collision.
+     * bottom collision, 4 if left-side collision, 5 if it collides with a goal.
      */
     checkCollisions(x, y) {
         let size = this._playItem.size;
@@ -369,7 +422,7 @@ class Level {
         return 0;
     }
 
-    /*
+    /**
      * Handles the case where the top-left corner of the object collides with a barrier.
      */
     topLeftCollision(x1, y1) {
@@ -398,7 +451,27 @@ class Level {
         }
     }
 
-    /*
+    /**
+     * Handles the case where the top-right corner of the object collides with a barrier.
+     */
+    topRightCollision(x1, y1) {
+        let origX2 = x1 + this._playItem.size - this._playItem.dx;
+        let origY1 = y1 - this._playItem.dy;
+
+        let move = 0;
+        while (move < this._playItem.size) {
+            if (this._board[origX2 + move][origY1].type === SOLID) {
+                return 2;
+            } else if (this._board[origX2][origY1 - move].type === SOLID) {
+                return 1;
+            } else {
+                move++;
+            }
+        }
+        return 0;
+    }
+
+    /**
      * Handles the case where the bottom-right corner of the object collides with a 
      * barrier.
      */
@@ -431,7 +504,7 @@ class Level {
         }
     }
 
-    /*
+    /**
      * Handles the case where the bottom-left corner of the object collides with a 
      * barrier.
      */
@@ -454,30 +527,23 @@ class Level {
         }
         return 0;
     }
-
-    /*
-     * Handles the case where the top-right corner of the object collides with a barrier.
-     */
-    topRightCollision(x1, y1) {
-        let origX2 = x1 + this._playItem.size - this._playItem.dx;
-        let origY1 = y1 - this._playItem.dy;
-
-        let move = 0;
-        while (move < this._playItem.size) {
-            if (this._board[origX2 + move][origY1].type === SOLID) {
-                return 2;
-            } else if (this._board[origX2][origY1 - move].type === SOLID) {
-                return 1;
-            } else {
-                move++;
-            }
-        }
-        return 0;
-    }
 }
 
+/**
+ * Defines a physical object that will display within the game.
+ */
 class PhysicalObject {
 
+    /**
+     * Creates the physical object.
+     *
+     * @param name object name used to name HTML element
+     * @param x1 x coordinate of top-left corner
+     * @param y1 y coordinate of top-left corner
+     * @param x2 x coordinate of bottom-right corner
+     * @param y2 y coordinate of bottom-right corner
+     * @param pixelType the type of pixel
+     */
     constructor(name, x1, y1, x2, y2, pixelType) {
         this._name = name;
         this._x1 = x1;
@@ -487,54 +553,90 @@ class PhysicalObject {
         this._pixelType = pixelType;
     }
 
+    /**
+     * Returns the name.
+     */
     get name() {
         return this._name;
     }
-
+    /**
+     * Sets the name.
+     */
     set name(name) {
         this._name = name;
     }
-
+    /**
+     * Returns the x coordinate of the top-left corner.
+     */
     get x1() {
         return this._x1;
     }
-
+    /**
+     * Sets the x coordinate of the top-left corner.
+     */
     set x1(x) {
         this._x1 = x;
     }
 
+    /**
+     * Returns the y coordinate of the top-left corner.
+     */
     get y1() {
         return this._y1;
     }
 
+    /**
+     * Sets the y coordinate of the top-left corner.
+     */
     set y1(y) {
         this._y1 = y;
     }
 
+    /**
+     * Returns the x coordinate of the bottom-right corner.
+     */
     get x2() {
         return this._x2;
     }
 
+    /**
+     * Sets the x coordinate of the bottom-right corner.
+     */
     set x2(x) {
         this._x2 = x;
     }
 
+    /**
+     * Returns the y coordinate of the bottom-right corner.
+     */
     get y2() {
         return this._y2;
     }
 
+    /**
+     * Sets the y coordinate of the bottom-right corner.
+     */
     set y2(y) {
         this._y2 = y;
     }
 
+    /**
+     * Returns the pixel type.
+     */
     get pixelType() {
         return this._pixelType;
     }
 
+    /**
+     * Sets the pixel type.
+     */
     set pixelType(pixelType) {
         this._pixelType = pixelType;
     }
 
+    /**
+     * Creates an svg element to draw this object on the game window.
+     */
     drawPhysicalObject() {
         let objectWidth = this._x2 - this._x1;
         let objectHeight = this._y2 - this._y1;
@@ -548,7 +650,6 @@ class PhysicalObject {
             objectColour = BACKGROUND_COLOUR;
         }
 
-        // TODO - write to appropriate element
         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svgElement.id = this.name;
         svgElement.style.width = objectWidth;
@@ -556,18 +657,10 @@ class PhysicalObject {
         svgElement.innerHTML = "<rect width=\"" + objectWidth
             + "\" height=\"" + objectHeight
             + "\" style=\"fill:" + objectColour + ";\">";
-        document.getElementById("game_div").appendChild(svgElement);
+        document.getElementById("game_window").appendChild(svgElement);
 
-        // document.write(
-        //     "<svg id=\"" + this._name + "some" +
-        //     "\" width=\"" + objectWidth +
-        //     "\" height=\"" + objectHeight + "\">"
-        //     + "<rect width=\"" + objectWidth
-        //     + "\" height=\"" + objectHeight
-        //     + "\" style=\"fill:" + objectColour + ";\">" +
-        //     "</svg>"
-        // );
-
+        // TODO - move this up to match other css styling
+        // TODO - OR move to external stylesheet - better solution
         let element = $("#" + this._name);
         element.css("position", "absolute");
         element.css("left", this._x1);
@@ -576,7 +669,7 @@ class PhysicalObject {
     }
 }
 
-/*
+/**
  * Defines a rectangular barrier (a wall, or platform).
  */
 class Barrier extends PhysicalObject {
@@ -585,24 +678,30 @@ class Barrier extends PhysicalObject {
     }
 }
 
+/**
+ * Defines a section of air.
+ */
 class Air extends PhysicalObject {
     constructor(name, x1, y1, x2, y2) {
         super(name, x1, y1, x2, y2, AIR);
     }
 }
 
+/**
+ * Defines a goal.
+ */
 class Goal extends PhysicalObject {
     constructor(name, x1, y1, x2, y2) {
         super(name, x1, y1, x2, y2, GOAL);
     }
 }
 
-/*
+/**
  * Defines the play item (i.e. the item that moves around the screen).
  */
 class PlayItem {
 
-    /*
+    /**
      * Sets the starting coordinates and velocity vector, as well as the type of food.
      * Automatically sets the item to be a 50x50 square.
      */
@@ -616,63 +715,107 @@ class PlayItem {
         this._isGrounded = false;
     }
 
+    /**
+     * Returns the x coordinate.
+     */
     get x() {
         return this._x;
     }
 
+    /**
+     * Sets the x coordinate.
+     */
     set x(value) {
         this._x = value;
     }
 
+    /**
+     * Returns the y coordinate.
+     */
     get y() {
         return this._y;
     }
 
+    /**
+     * Sets the y coordinate.
+     */
     set y(value) {
         this._y = value;
     }
 
+    /**
+     * Returns the current horizontal speed.
+     */
     get dx() {
         return this._dx;
     }
 
+    /**
+     * Sets the current horizontal speed.
+     * TODO - set bounds?
+     */
     set dx(value) {
         this._dx = value;
     }
 
+    /**
+     * Returns the current horizontal speed.
+     */
     get dy() {
         return this._dy;
     }
 
+    /**
+     * Sets the current horizontal speed.
+     * TODO - set bounds?
+     */
     set dy(value) {
         this._dy = value;
     }
 
+    /**
+     * Returns the size.
+     */
     get size() {
         return this._size;
     }
 
+    /**
+     * Sets the size.
+     */
     set size(value) {
         this._size = value;
     }
 
+    /**
+     * Returns the food item.
+     */
     get foodItem() {
         return this._foodItem;
     }
 
+    /**
+     * Sets the food item.
+     */
     set foodItem(value) {
         this._foodItem = value;
     }
 
+    /**
+     * Returns whether this is grounded.
+     */
     get isGrounded() {
         return this._isGrounded;
     }
 
+    /**
+     * Sets whether this is grounded.
+     */
     set isGrounded(isGrounded) {
         this._isGrounded = isGrounded;
     }
 
-    /*
+    /**
      * Reverses the horizontal component of the velocity vector and applies the bounce
      * multiplier to it.
      */
@@ -681,7 +824,7 @@ class PlayItem {
         this.dx = adjustedDX;
     }
 
-    /*
+    /**
      * Reverses the vertical component of the velocity vector and applies the bounce
      * multiplier to it.
      */
@@ -690,7 +833,7 @@ class PlayItem {
         this.dy = adjustedDY;
     }
 
-    /*
+    /**
      * Moves the object based on its velocity vector and starting coordinates. Does not 
      * take collisions into account.
      */
@@ -699,7 +842,7 @@ class PlayItem {
         this._y += this._dy;
     }
 
-    /*
+    /**
      * Alters the vertical component of the item's velocity vector to account for gravity.
      * Object cannot be grounded.
      */
@@ -709,7 +852,7 @@ class PlayItem {
         }
     }
 
-    /*
+    /**
      * Responds to a mouse click. The mouse click alters the velocity of the object by
      * pushing it away from the location of the cursor.
      */
@@ -719,19 +862,19 @@ class PlayItem {
         let xDiff = this._x + (this._size / 2) - mousePosX;
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
+        // used to slow movement so clicks do not shoot the object off at high speeds
         let divisor = 10;
 
         this._dx += Math.round(xDiff / divisor);
         this._dy += Math.round(yDiff / divisor);
 
-        // ensures a far away click does not allow the playItem to move
-        // illegally
+        // ensures a far away click does not allow the playItem to move illegally
         this.adjustSpeed();
     }
 
-    /*
+    /**
      * Ensures that the speed never exceeds 20 in any direction. This method is called
-     * after every move.
+     * before and after every move.
      */
     adjustSpeed() {
         if (this._dy > 20) {
@@ -746,7 +889,7 @@ class PlayItem {
         }
     }
 
-    /*
+    /**
      * If the play item is touching the ground and its vertical speed is less than 2,
      * it becomes grounded and friction applies.
      */
@@ -762,7 +905,7 @@ class PlayItem {
         }
     }
 
-    /*
+    /**
      * Rounds x, y, dx, dy to the nearest integer.
      */
     round() {
@@ -773,12 +916,12 @@ class PlayItem {
     }
 }
 
-/*
+/**
  * Represents a type of food which can be represented by a play item.
  */
 class FoodItem {
 
-    /*
+    /**
      * Sets the name and type of food, the URL of its image, and whether it is edible.
      */
     constructor(name, type, imageURL, isEdible) {
@@ -794,7 +937,7 @@ class FoodItem {
         this._imageURL = imageURL;
     }
 
-    /*
+    /**
      * Returns the URL of the image of the food item.
      */
     get imageURL() {
@@ -802,26 +945,26 @@ class FoodItem {
     }
 }
 
-/*
+/**
  * Defines one individual pixel.
  */
 class Pixel {
 
-    /*
+    /**
      * Initializes the type of the pixel (air or solid).
      */
     constructor(type) {
         this._type = type;
     }
 
-    /*
+    /**
      * Sets the type of the pixel (air or solid).
      */
     set type(type) {
         this._type = type;
     }
 
-    /*
+    /**
      * Returns the type of the pixel (air or solid).
      */
     get type() {
