@@ -22,7 +22,7 @@ $(document).ready(function() {
 	
 		function displayTable($level) {
 			$.post("accessdb.php", { function: "getShortestTimes", level: $level }, function(data) {
-				console.log($level);
+				console.log(data[0]);
 				for (let i = 0; i < data.length; i++) {
 					let row = document.createElement("tr");
 					let cell1 = document.createElement("td");
@@ -44,15 +44,12 @@ $(document).ready(function() {
 			}, "json");
 		}
 	
-		displayTable(0);
-	
 		$("#levelselect").change(function() {
 			$("#levelselect option:selected").each(function(){
 				let value = $(this).attr("value");
 				let substr = value.substring(5);
 				levelSelected = parseInt(substr);
 				
-				$("table td").remove();
 				displayTable(levelSelected);
 			});
 		});

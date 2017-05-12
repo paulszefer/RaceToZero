@@ -1,17 +1,27 @@
 #overlay{
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.7);
-	width:0;
-	-webkit-transition: width 0.1s;
+	height:0;
+	-webkit-transition: height 0.1s;
 	z-index: 500;
 }
-#navCont img{
-	height: 20vw;
-	width:auto;
+#navCont{
+	min-height: 20vh;
+	background-color: #95d5f5;/*#3d2e1f;*/
+}
+/*Logo image*/
+#navCont > div.navlogo > a > img{
+	height:20vh;
+	width:40vh;
+	position:absolute;
+	margin:auto;
+	display:block;
+}
+#navCont > div.navlogo > a{
+	margin:auto;
 }
 .navlogo{
-	background-color: #95d5f5;/*#3d2e1f;*/
-	background-image: url('../img/bannerBG.gif');
+/*	background-image: url('../img/bannerBG.gif');*/
 }
 .navlogo img, .navlogo .loginstatus{
 	display: inline-block;
@@ -29,7 +39,7 @@
 .navlinks ul li{
 	list-style-type: none;
 	display: inline-block;
-	font-family: Calibri;
+	font-family: MavenPL200;
 	padding: 0.5em;
 	font-size: 1.5em;
 }
@@ -51,52 +61,61 @@
 }
 #mobilenav{
 	width:0;
-	position:fixed;
-	right:0;
+	position:absolute;
+	left:0;
 	top:0;
-	height:100vh;
-	-webkit-transition: width 0.3s;
-	-moz-transition: width 0.3s;
+/*	height:100vh;*/
+	-webkit-transition: height 0.3s;
+	-moz-transition: height 0.3s;
 	background-color: black;
 	z-index: 501;
+	overflow:hidden;
 }
 #mobilenav a{
 	text-decoration: none;
 	color:white;
 	font-size: 5vw;
-	font-family: calibri;
-	text-align: right;
+	font-family: MavenPL300;
 }
 #mobilenav ul li{
-	height:20vh;
+	height:15vh;
+	width:100%;
 	display: table;
 	padding-right:1em;
-	background-color:black;
 }
 #mobilenav ul li div{
 	vertical-align: middle;
 	display:table-cell;
-	width:60vw;
-	background-color:black;
-	text-align: right;
+	text-align: left;
 }
 
 /*body shenanigans*/
+@font-face{
+	font-family: MavenPL100;
+	src: url('../fonts/MavenProLight-100.otf');
+}
+@font-face{
+	font-family: MavenPL200;
+	src: url('../fonts/MavenProLight-200.otf');
+}
+@font-face{
+	font-family: MavenPL300;
+	src: url('../fonts/MavenProLight-300.otf');
+}
 body{
-	background-image: url('../img/bgmesh6.png');
-	font-family: helvetica;
+	font-family: MavenPL100, Arial, Helvetica, sans-serif;
 	z-index: 0;
 }
 html,body{
-	min-height:100vh;
+	height:100%;
 }
 .contentactual{
 	width:80%;
-	min-height:100vh;
+	min-height:85vh;
 	max-width: 981px;
 	/*height:auto;*/
 	margin:auto;
-	background-color: rgba(255, 255, 255, 0.7);
+	background-color: rgb(255, 255, 255);
 }
 .contentactual h1{
 	padding:0.5em;
@@ -126,15 +145,15 @@ html,body{
     	display:none;
     }
     #navCont #navburger{
-    	position: fixed;
-    	top:5vw;
-    	right:5vw;
+    	position: absolute;
+    	top:5vh;
+    	left:5vh;
     	transition: top 0.2s ease-in-out;
 	    -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
 	    -moz-transition: top 0.2s ease-in-out;
     }
     #navCont #navburger img{
-    	height:10vw;
+    	height:5vh;
     }
 }
 @media only screen and (min-width: 981px){
