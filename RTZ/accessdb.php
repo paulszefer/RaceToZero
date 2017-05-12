@@ -1,5 +1,5 @@
 <?php
-	
+	session_start();
 	//require_once('PDO_conn.php');
 	
 	function getBarriers() {
@@ -40,14 +40,14 @@
 	}
 	
 	function saveGame() {
-		$uname = $_POST['uname'];
+		$uname = $_SESSION['user_name'];
 		$level = $_POST['level'];
 		$time = $_POST['time'];
 	
 		include_once('class.game.php');
 	
-		$game = new GAME($DB_conn, $uname, $level, $time);
-	
+		$game = new GAME($uname, $level, $time);
+		
 		$game->save();
 	}
 	

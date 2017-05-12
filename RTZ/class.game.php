@@ -4,13 +4,11 @@
 	
 	class GAME {
 		
-		private $conn;
 		private $uname;
 		private $level;
 		private $time;
 		
-		public function __construct($DB_conn, $uname, $level, $time) {
-			$this->conn = $DB_conn;
+		public function __construct($uname, $level, $time) {
 			$this->uname = $uname;
 			$this->level = $level;
 			$this->time = $time;
@@ -39,13 +37,19 @@
 				$username = "root";
     			$password = "";
    				$host     = "localhost";
-    			$database = "comp1536project";
+    			$database = "comp2910test1";
 
     			$link = mysqli_connect($host, $username, $password, $database);
-    			$query = "INSERT INTO games(game_level,game_time,user_id) 
-						  VALUES($this->level , $this->time , $userid);";
-			
-				$result = mysqli_query($link, $query);
+    			
+    			$userIDQuery = "SELECT user_id FROM users WHERE user_name=\"" . $this->uname . "\";";
+    			$result = mysqli_query($link, $userIDQuery);
+    			$row = mysqli_fetch_array($result);
+    			$userid = intval($row['user_id']);
+    			
+    			$query = "INSERT INTO games(level_id,game_time,user_id) 
+						  VALUES(" . $this->level . ", " . $this->time . ", " . $userid . ");";
+				var_dump($query);
+				mysqli_query($link, $query);
 			}
 			catch(PDOException $e) {
 				echo $e->getMessage();

@@ -120,7 +120,7 @@ $(function () {
 
             // create the level using the retrieved level
             // width, height incremented by 1 to avoid ArrayOutOfBounds exceptions
-            level = new Level(levelID, width + 1, height + 1g);
+            level = new Level(levelID, width + 1, height + 1);
 
             // load common level data
             barriers = [
@@ -236,6 +236,12 @@ $(function () {
                     time.innerHTML = parseTime(score);
                     time.style.color = "white";
                     // TODO - send score to database
+                    let actualLevel = game.level / 2;
+                    let scoreInSeconds = Math.floor(score / 1000);
+                    scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
+                    $.post("accessdb.php", { function: "saveGame", level: actualLevel, time: scoreInSeconds }, function(data) {
+                    	alert(data);
+                    });
                     time.style.fontSize = "2em";
                     scoreDiv.appendChild(time);
 
