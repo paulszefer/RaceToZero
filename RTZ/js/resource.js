@@ -36,18 +36,30 @@ function hideTopics() {
 
 });
 
+// checks source of button push and changes .correcttext and .incorrecttext spans based on if
+// it was a correct answer
 function answerCheck(buttonName, value) {
+
+    // validates answer and stores the .correcttext and .incorrecttext arrays in variables
     if (value == "incorrect") {
-    var results = document.getElementsByClassName("incorrecttext");
-    var resets = document.getElementsByClassName("correcttext");
+        // if incorrect store .correcttext in resets (display none)
+        // and .incorrecttext in results (display inline-block)
+        var results = document.getElementsByClassName("incorrecttext");
+        var resets = document.getElementsByClassName("correcttext");
     } else {
-    var results = document.getElementsByClassName("correcttext");
-    var resets = document.getElementsByClassName("incorrecttext");
+        // if correct store .incorrecttext in resets (display none)
+        // and .correcttext in results (display inline-block)
+        var results = document.getElementsByClassName("correcttext");
+        var resets = document.getElementsByClassName("incorrecttext");
     }
 
+    // parses topic number into var
     var topic = parseInt(buttonName.substr(1, 1), 10);
+    // parses question number into var
     var question = parseInt(buttonName.substr(3, 2), 10);
 
+    // checks topic number
+    // displays either correct or incorrect (determined above) in specified question
     if (topic == 1) {
         resets[question - 1].style.display="none";
         results[question - 1].style.display="inline-block";

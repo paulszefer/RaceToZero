@@ -1,4 +1,8 @@
 /*
+ * This file contains definitions for all of the objects used in the game.
+ */
+
+/*
  * Constants.
  */
 const BACKGROUND_COLOUR = "rgb(255, 255, 255)";
@@ -30,18 +34,30 @@ class Game {
         this.createHTML();
     }
 
+	/**
+	 * Sets the current level of the game.
+	 */
     set level(id) {
         this._level = id;
     }
 
+	/**
+	 * Returns the current level of the game.
+	 */
     get level() {
         return this._level;
     }
 
+	/**
+	 * Sets the current state of the game.
+	 */
     set state(state) {
         this._state = state;
     }
 
+	/**
+	 * Returns the current state of the game.
+	 */
     get state() {
         return this._state;
     }
@@ -58,6 +74,9 @@ class Game {
         this.elements.push(element);
     }
 
+	/**
+	 * Returns the user's current level. Currently the user always starts from level 0.
+	 */
     retrieveLevel() {
         // TODO - get last level from database
         return 0;

@@ -9,13 +9,13 @@
 <div id='content'>
 	<div class='contentactual'>
 		<div class='contentwrapper'> <!--whole wrapper for the boxes-->
-			<!--throw your tips n stuffs in expandedcontetnbox below-->
-			<div class='expandedcontentbox'>    <!-- Impact -->
+			<div class='expandedcontentbox'>    <!-- Impact box -->
 				<img class="xbutton" src="img/tempX.png">
 				<h1>Impact</h1>
 				<ol>
-					<li>Which of these is the biggest contributor to food waste?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br>
+					<li>Which of these is the biggest contributor to food waste?<span class="correcttext">&nbsp;Correct</span><span class="incorrecttext">&nbsp;Incorrect</span><br><!-- these spans are for displaying whether or not an answer is coorect -->
 					<ul>
+						<!-- buttons have names: t is topic number, q is question number, all buttons on same question have same name. Value is either correct or incorrect. Name and value is sent to answerCheck function in resource.js -->
 						<li><button type="button" name="t1q1" value="incorrect" onClick="answerCheck(this.name, this.value)">Retail waste</button></li>
 						<li><button type="button" name="t1q1" value="incorrect" onClick="answerCheck(this.name, this.value)">Not enough storage or packaging</button></li>
 						<li><button type="button" name="t1q1" value="correct" onClick="answerCheck(this.name, this.value)">Consumer waste</button></li>
@@ -43,7 +43,7 @@
 					</ul></li><br>
 				</ol>
 			</div>
-			<div class='expandedcontentbox'>	<!-- How to tell if food has gone bad -->
+			<div class='expandedcontentbox'>	<!-- How to tell if food has gone bad box -->
 				<img class="xbutton" src="img/tempX.png">
 				<h1>Has your food gone bad?</h1><br>
 				<ol>
@@ -109,7 +109,7 @@
 					</ul></li><br>
 				</ol>
 			</div>
-			<div class='expandedcontentbox'>	<!-- Food 911 -->
+			<div class='expandedcontentbox'>	<!-- Food 911 box -->
 				<img class="xbutton" src="img/tempX.png">
 				<h1>Food 911</h1>
 				<ol>
@@ -147,7 +147,7 @@
 					</ul></li><br>
 				</ol>
 			</div>
-			<div class='expandedcontentbox'>	<!-- Facts -->
+			<div class='expandedcontentbox'>	<!-- Facts box -->
 				<img class="xbutton" src="img/tempX.png">
 				<h1>Facts</h1>
 				<ol>
@@ -180,7 +180,7 @@
 						<li><button type="button" name="t4q4" value="correct" onClick="answerCheck(this.name, this.value)">$1,000,000,000,000</button></li>
 					</ul></li><br>
 			</div>
-<!-- UNCOMMENT THIS WHEN WE CAN FINALLY EXPAND THE AFFILIATED APPS BOX -->
+<!-- AFFILIATED APPS BOX -->
 			<div class='expandedcontentbox bigexpandedcontentbox'>	<!-- Affiliated Apps -->
 				<img class="xbutton" id="bigone" src="img/tempX.png">
 				<h1>AFFILIATED APPS</h1>
@@ -218,7 +218,7 @@
 	            <p>FoodTrivia teaches you about food waste and strategies on how to reduce avoidable food waste.</p>
 	            <br>
 			</div>
-			<!--start of the topic box-->
+			<!--start of the topic boxes-->
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
 					<h1>Impact</h1>

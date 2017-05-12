@@ -1,3 +1,4 @@
+/*#dark transparent overlay for navburger */
 #overlay{
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.7);
@@ -5,6 +6,7 @@
 	-webkit-transition: width 0.1s;
 	z-index: 500;
 }
+/*all img in navCont*/
 #navCont img{
 	height: 20vw;
 	width:auto;
@@ -22,6 +24,7 @@
 	font-size: 1em;
 	padding:0.5em;
 }
+/*navlinks is the horizontal navbar for desktop version*/
 .navlinks ul{
 	margin:0;
 	padding:0;
@@ -49,6 +52,7 @@
 .navbuttonright{
 	float:right;
 }
+/*#mobilenav - burger dropdown navmenu*/
 #mobilenav{
 	width:0;
 	position:fixed;
@@ -90,6 +94,7 @@ body{
 html,body{
 	min-height:100vh;
 }
+/*.contentactual is for collaborators to insert their part of the site*/
 .contentactual{
 	width:80%;
 	min-height:100vh;
@@ -110,6 +115,7 @@ html,body{
 	text-align: justify;
 	width:80%;
 }
+/*for styling title tabs*/
 .titletab{
 	width:100%;
 	text-align: center;
@@ -118,6 +124,7 @@ html,body{
 	padding-bottom:1em;
 	background-color: silver;
 }
+/*when the screen is smaller than 980px*/
 @media only screen and (max-width: 980px) {
     .contentactual {
         width:100%;
@@ -137,7 +144,9 @@ html,body{
     	height:10vw;
     }
 }
+/*when the screen is bigger than 980px*/
 @media only screen and (min-width: 981px){
+	/*hides the burger*/
 	#navburger{
 		display:none;
 	}

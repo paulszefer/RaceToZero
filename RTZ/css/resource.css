@@ -30,6 +30,7 @@
     height:25vh;
     width:100%
 }
+/* affiliated apps topic box */
 .bigcontentbox{
     height:100%;
     display:block;
@@ -67,8 +68,6 @@
     font-size: 1.5em;
     font-weight: bold;
 }
-.bigexpandedcontentbox p{
-}
 .bigexpandedcontentbox img, .bigexpandedcontentbox p{
     padding-left: 50px;
     color: #FFFE88;
@@ -84,6 +83,7 @@
     }
 }
 /*this is where we put actual content for each topic*/
+/* main content boxes */
 .expandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
     color:white;
@@ -129,9 +129,11 @@ button{
     left: 0;
     top: 0;
 }
+/* xbutton for affiliated apps */
 #bigone{
     padding-left: 0;
 }
+/* spans text appended to the end of each question and displays based on answer */
 .correcttext, .incorrecttext{
     font-weight: bold;
     display: none;

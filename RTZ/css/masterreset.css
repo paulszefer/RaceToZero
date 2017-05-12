@@ -3,6 +3,8 @@
    License: none (public domain)
 */
 
+/* This file is to reset all (or most) element tags to the most basic level for easier styling*/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

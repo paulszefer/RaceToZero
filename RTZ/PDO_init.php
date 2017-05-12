@@ -1,14 +1,15 @@
 <?php
+	// Creates the database and its tables.
 
 	session_start();
 
 	//for localhost testing
-	
 	$db_host = "localhost";
 	$db_user = "root";
 	$db_pass = "";
 	$db_name = "comp2910test1";
 	
+	//for bcitdev testing - generally unused
 	/*
 	$db_host = 'bcitdevcom.ipagemysql.com';
 	$db_user = 'project2017b';
@@ -20,9 +21,10 @@
         $db_conn = new PDO("mysql:host={$db_host};", $db_user, $db_pass);
         // set the PDO error mode to exception
         $db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //Just turn emulation off in MySQL driver - only really used in older of MYSQL
+        // turn emulation off in MySQL driver - only really used in older of MYSQL
         $db_conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         
+        // Creates the database and tells mySQl to use it.
         $sql_dbcreation = "CREATE DATABASE IF NOT EXISTS " . $db_name . ";";
         $sql_dbuse = "USE " . $db_name;
         
@@ -114,15 +116,16 @@
     	//   Add level_id to goals
     	$sql_goalsupdate = "ALTER TABLE goals
     		ADD COLUMN stage_id INT NOT NULL,
-    		ADD CONSTRAINT goals_stage_id_fk
+    		ADD CONSTRAINT goals_stage_id_fk,
     		FOREIGN KEY (stage_id) REFERENCES levels(stage_id);";
     	
     	//   Add level_id to playitems
     	$sql_playitemsupdate = "ALTER TABLE playitems
     		ADD COLUMN level_id INT NOT NULL,
-    		ADD CONSTRAINT playitems_level_id_fk
+    		ADD CONSTRAINT playitems_level_id_fk,
     		FOREIGN KEY (level_id) REFERENCES levels(level_id);";
     	
+    	// Executes all of the above queries.
     	$db_conn->exec($sql_dbcreation);
     	$db_conn->exec($sql_dbuse);
     	$db_conn->exec($sql_users);
