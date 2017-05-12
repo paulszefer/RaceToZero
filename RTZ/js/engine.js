@@ -344,6 +344,8 @@ $(function () {
             setTimeout(setClicked, 500, false);
         }
     })
+
+    /** Unused play game button block closure. */
     // });
 });
 
