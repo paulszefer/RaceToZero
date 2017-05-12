@@ -1,37 +1,42 @@
 <?php
+	// Provides functions that will be referenced by JavaScript functions in order
+	// to query the database. The JavaScript functions will send the name of the
+	// function they want to access it as a POST variable; this file then uses a
+	// switch statement to execute that function and echo the results in JSON format.
+
 	session_start();
-	//require_once('PDO_conn.php');
 	
+	// Accepts a level_id as a parameter and returns the coordinates of all the barriers
+	// in that level in JSON format. Each barrier has a name and coordinates of its
+	// top-left and bottom-right vertices.
 	function getBarriers() {
 	
 		$level_id = $_POST['level_id'];
 	
-		$barriers = array();
+		$barriers = array(); // holds rows that each correspond to one barrier
 	
-		try {
-			$username = "root";
-    		$password = "";
-   			$host     = "localhost";
-    		$database = "comp2910test1";
+		// Eventually these variables will be collected in another php file for 
+		// convenience.
+		$username = "root";
+    	$password = "";
+   		$host     = "localhost";
+    	$database = "comp2910test1";
 
-    		$link = mysqli_connect($host, $username, $password, $database);
-    		$query = "SELECT barrier_name, 
-							 barrier_x1,
-							 barrier_y1,
-							 barrier_x2,
-							 barrier_y2
-					  FROM barriers
-					  WHERE level_id='" . $level_id . "';";
+    	$link = mysqli_connect($host, $username, $password, $database);
+    	$query = "SELECT barrier_name, 
+						 barrier_x1,
+						 barrier_y1,
+						 barrier_x2,
+						 barrier_y2
+				  FROM barriers
+				  WHERE level_id='" . $level_id . "';";
 			
-			$result = mysqli_query($link, $query);
+		$result = mysqli_query($link, $query);
 	
-			if($result) {
-				while($row = mysqli_fetch_array($result)) {
-					$barriers[] = $row;
-				}
+		if($result) {
+			while($row = mysqli_fetch_array($result)) {
+				$barriers[] = $row;
 			}
-		} catch(PDOException $e) {
-	  		echo $e->getMessage();
 		}
 	
 		$json = json_encode($barriers);
@@ -39,6 +44,9 @@
 	
 	}
 	
+	// Reads in the username using a session variable and the level and time using post
+	// variables. Then invokes the save() function in class.game.php to send the
+	// game data to the database. Does not have a return value.
 	function saveGame() {
 		$uname = $_SESSION['user_name'];
 		$level = $_POST['level'];
@@ -51,63 +59,62 @@
 		$game->save();
 	}
 	
+	// Returns the total number of levels in the database as a string.
 	function getNumberOfLevels() {
-		try {
-			$username = "root";
-    		$password = "";
-   			$host     = "localhost";
-    		$database = "comp2910test1";
+		$username = "root";
+    	$password = "";
+   		$host     = "localhost";
+    	$database = "comp2910test1";
     		
-    		$link = mysqli_connect($host, $username, $password, $database);
-    		$query = "SELECT Count(level_id) AS NumberOfLevels FROM levels;";
+    	$link = mysqli_connect($host, $username, $password, $database);
+    	$query = "SELECT Count(level_id) AS NumberOfLevels FROM levels;";
 			
-			$result = mysqli_query($link, $query);
+		$result = mysqli_query($link, $query);
 	
-			if($result) {
-				$row = mysqli_fetch_array($result);
-				if($row['NumberOfLevels']) {
-					return json_encode(array("number"=>$row['NumberOfLevels']));
-				}
+		if($result) {
+			$row = mysqli_fetch_array($result);
+			if($row['NumberOfLevels']) {
+				return json_encode(array("number"=>$row['NumberOfLevels']));
 			}
-			return json_encode(array("number"=>"1"));
-		} catch(PDOException $e) {
-			echo $e->getMessage();
 		}
+		return json_encode(array("number"=>"1")); // just in case the query fails
 	}
 	
+	// Reads in a level as a post variable and returns an array with all the game times
+	// for that level sorted in order from shortest to longest. Eventually this will be
+	// limited to a certain number of times, and will return the user_name instead of the
+	// user_id.
 	function getShortestTimes() {
 		$level = $_POST['level'];
 		
 		$times = array();
 		
-		try {
-			$username = "root";
-    		$password = "";
-   			$host     = "localhost";
-    		$database = "comp2910test1";
+		$username = "root";
+    	$password = "";
+   		$host     = "localhost";
+    	$database = "comp2910test1";
 
-    		$link = mysqli_connect($host, $username, $password, $database);
-    		$query = "SELECT game_time,
-							 user_id
-					  FROM games
-					  WHERE level_id=" . ($level + 1) . 
-					" ORDER BY game_time ASC;";
+    	$link = mysqli_connect($host, $username, $password, $database);
+    	$query = "SELECT game_time,
+						 user_id
+				  FROM games
+				  WHERE level_id=" . ($level + 1) . 
+				" ORDER BY game_time ASC;";
 			
-			$result = mysqli_query($link, $query);
+		$result = mysqli_query($link, $query);
 	
-			if($result) {
-				while($row = mysqli_fetch_array($result)) {
-					$times[] = $row;
-				}
+		if($result) {
+			while($row = mysqli_fetch_array($result)) {
+				$times[] = $row;
 			}
-		} catch(PDOException $e) {
-			echo $e->getMessage();
 		}
 		
 		$json = json_encode($times);
 		return $json;
 	}
 	
+	// Reads in a username as a post variable and returns that user's best time in the
+	// tutorial level.
 	function displayTutorialScore() {
 		$username = "root";
     	$password = "";
@@ -132,6 +139,8 @@
 		return $json;
 	}
 	
+	// Runs whenever this file is invoked by the jQuery $.post function; reads in the
+	// name of the function as a post variable and echoes the output of that function.
 	$function = $_POST['function'];
 	switch ($function) {
 		case 'getBarriers':
