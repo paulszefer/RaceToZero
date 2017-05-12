@@ -6,9 +6,9 @@
 
 <div id='content'>
 	<div class='contentactual'>
-		<h1>Huehue</h1>
+		<h1>Leaderboard</h1>
 		<br>
-		<p>hueheuhue</p>
+		<p>Text here</p>
 		<table id="besttimes" border="1">
 			<!--This table is populated with data using the js/leaderboard.js file.-->
 			<tr>

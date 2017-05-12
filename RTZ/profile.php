@@ -45,7 +45,7 @@
 	</div>
 	<!--The following is a work in progress. The user will be able to change their
 	profile picture to another (random) picture.-->
-	<div class'inline'>
+	<!--<div class'inline'>
     	<img src="img/setprofilepic.png" name="canvas" width="225" height="150" />
 	</div>
     <br><br>
@@ -53,7 +53,7 @@
 		<input onclick="displayImage();" type="button" value="Change Image">
 	</div>
 	<br><br>
-    <br>
+    <br>-->
 </div>
 <div id='footer'>
 	<div class='footercontent'>
