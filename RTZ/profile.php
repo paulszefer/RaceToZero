@@ -1,7 +1,9 @@
 <?php
-	//require_once('PDO_conn.php');
-	
+	// Queries the database in order to get the current user's score on the tutorial
+	// level.
 	function displayTutorialScore() {
+	
+		// Eventually these will be in their own file for convenience.
 		$username = "root";
     	$password = "";
    		$host     = "localhost";
@@ -41,16 +43,17 @@
         </ul>
         <br>
 	</div>
+	<!--The following is a work in progress. The user will be able to change their
+	profile picture to another (random) picture.-->
 	<div class'inline'>
-    		<img src="img/setprofilepic.png" name="canvas" width="225" height="150" />
-			</div>
-    		<br><br>
-			<div class='button'>
-			<input onclick="displayImage();" type="button" value="Change Image">
-			</div>
-			<br><br>
-                <br>
-			</div>
+    	<img src="img/setprofilepic.png" name="canvas" width="225" height="150" />
+	</div>
+    <br><br>
+	<div class='button'>
+		<input onclick="displayImage();" type="button" value="Change Image">
+	</div>
+	<br><br>
+    <br>
 </div>
 <div id='footer'>
 	<div class='footercontent'>

@@ -1,3 +1,7 @@
+// JavaScript to interchange profile pictures from 
+// the default picture to the next 5 and back to 
+// default picture.
+
 var count = 0;
     
     function displayImage() {
