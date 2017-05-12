@@ -1,0 +1,7 @@
+/* Applies to the game_container div on the index page. */
+#game_container {
+    min-width: 36vh;
+    min-height: 64vh;
+    margin: auto;
+    position: relative;
+}

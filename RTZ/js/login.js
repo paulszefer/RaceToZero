@@ -1,47 +1,54 @@
+//Gloabls
+var passRegEx = new RegExp(/^[a-zA-Z0-9]{6,}$/),
+	//a-z, 0-9 includes - _ and . 6-10 characters total, after first match, no more
+	validChars = new RegExp(/^[a-z0-9]{6,10}(?!.{1,})$/);
+
 //Login form js
 function loginvalidation() {
-	if (userOrEmailValid()){
-		return true;
-	} else {
-		alert("Form input invalid");
-		return false;
-	}
+	return (loginUserValid() && loginPassValid());
 }	
 function loginUserValid(){
-	var userOrEmail = document.getElementById("UserOrEmail").value,
-		//a-z, 0-9 includes - _ and . 6-10 characters total, after first match, no more
-		validChars = new RegExp(/^[a-z0-9]{6,10}(?!.{1,})$/),
-		l = userOrEmail.length;	
+	var loginUser = document.getElementById("loginUsername").value,
+		l = loginUser.length;	
 	if (l < 6 ) {
-		document.getElementById("UserOrEmailErrorField").innerHTML = "Username less than 6 chars";
+		document.getElementById("loginUsernameErrorField").innerHTML = "Username less than 6 chars";
 		return false;
 		//another else if if username taken
 	} else if (l > 10){
-		document.getElementById("UserOrEmailErrorField").innerHTML = "Username more than 10 chars";
+		document.getElementById("loginUsernameErrorField").innerHTML = "Username more than 10 chars";
 		return false;
-	} else if (!validChars.test(userOrEmail)){
-		document.getElementById("UserOrEmailErrorField").innerHTML = "Username contains illegal characters";
+	} else if (!validChars.test(loginUser)){
+		document.getElementById("loginUsernameErrorField").innerHTML = "Username contains illegal characters";
 		return false;
 	} else {
-		document.getElementById("UserOrEmailErrorField").innerHTML = "Username valid";
+		document.getElementById("loginUsernameErrorField").innerHTML = "Username valid";
 		return true;
 	}
 }
-function loginEmailValid() {
-	var domain = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/); //checks email for single occurrence of @ and valid domain containing only valid characters.
-	var email = document.getElementById("UserOrEmail").value;
-	return (domain.test(email));
-}
-function userOrEmailValid(){
-	if (loginUserValid()){
-		document.getElementById("UserOrEmailErrorField").innerHTML = "Login format allowed.";
-		return true;
-	} else {
-		document.getElementById("UserOrEmailErrorField").innerHTML = 
-		"Login must be username or E-mail address in the accepted format.";
+//Sanitizes login format
+function loginPassValid(){
+	var loginPass = document.getElementById("loginPassword").value;
+	if (!passRegEX.test(loginPass)){
+		document.getElementById("loginPassErrorField").innerHTML = "Are you trying to drop table???";
 		return false;
+	} else {
+		return true;
 	}
 }
+// function loginEmailValid() {
+// 	var domain = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/); //checks email for single occurrence of @ and valid domain containing only valid characters.
+// 	var email = document.getElementById("UserOrEmail").value;
+// 	return (domain.test(email));
+// }
+// function userOrEmailValid(){
+// 	if (loginUserValid()){
+// 		document.getElementById("UserOrEmailErrorField").innerHTML = "Login format allowed.";
+// 		return true;
+// 	} else {
+// 		document.getElementById("UserOrEmailErrorField").innerHTML = "Username format invalid.";
+// 		return false;
+// 	}
+// }
 
 //Registration form js
 var ERROR_DISPLAY = "Errors in fields: ",
@@ -53,16 +60,16 @@ function validateForm() {
 	if (!userValid()){
 		ERROR_FIELD.push("Username");
 	}
-	if (!emailValid()){
-		ERROR_FIELD.push("Email");
-	}
+	// if (!emailValid()){
+	// 	ERROR_FIELD.push("Email");
+	// }
 	if (!passwordValid()){
 		ERROR_FIELD.push("Password");
 	}
-	if (!agreeValid()){
-		ERROR_FIELD.push("TOS Agreement");
-	}
-	if(userValid() && emailValid() && passwordValid() && agreeValid()){
+	// if (!agreeValid()){
+	// 	ERROR_FIELD.push("TOS Agreement");
+	// }
+	if(userValid() && passwordValid()){
 		return true;
 	} else {
 		alert(ERROR_DISPLAY + ERROR_FIELD);
@@ -71,23 +78,21 @@ function validateForm() {
 }
 //returns true if username is valid
 function userValid(){
-	var username = document.getElementById("username").value,
-		//a-z, 0-9 includes - _ and . 6-10 characters total, after first match, no more
-		validChars = new RegExp(/^[a-z0-9]{6,10}(?!.{1,})$/),
+	var username = document.getElementById("regUsername").value,
 		l = username.length;
-	//document.getElementById("usernameErrorField").innerHTML = "you wrote:" + l + username;	
+	//document.getElementById("regUsernameErrorField").innerHTML = "you wrote:" + l + username;	
 	if (l < 6 ) {
-		document.getElementById("usernameErrorField").innerHTML = "Username less than 6 chars";
+		document.getElementById("regUsernameErrorField").innerHTML = "Username less than 6 chars";
 		return false;
 		//another else if if username taken
 	} else if (l > 10){
-		document.getElementById("usernameErrorField").innerHTML = "Username more than 10 chars";
+		document.getElementById("regUsernameErrorField").innerHTML = "Username more than 10 chars";
 		return false;
 	} else if (!validChars.test(username)){
-		document.getElementById("usernameErrorField").innerHTML = "Username contains illegal characters";
+		document.getElementById("regUsernameErrorField").innerHTML = "Username contains illegal characters";
 		return false;
 	} else {
-		document.getElementById("usernameErrorField").innerHTML = "Username valid";
+		document.getElementById("regUsernameErrorField").innerHTML = "Username valid";
 		return true;
 	}
 }
@@ -112,27 +117,28 @@ function emailValid() {
 }
 //password checkbutton, true if length less than 10 and password===cpass
 function passwordValid() {
-	var pass = document.getElementById("password").value,
-		confirmpass = document.getElementById("cpassword").value;
-	if (pass.length > 10) {
-		document.getElementById("cpassErrorField").innerHTML = "Password longer than 10";
+	var pass = document.getElementById("regPassword").value,
+		confirmpass = document.getElementById("cRegPassword").value;
+	if (!(pass.length > 0)){
+		document.getElementById("cRegPassErrorField").innerHTML = "Please Enter a password";
 		return false;
-	} else if (!(pass.length > 0 && pass.length <= 10)){
-		document.getElementById("cpassErrorField").innerHTML = "Please Enter a password";
-	} else if (pass === confirmpass) {
-		document.getElementById("cpassErrorField").innerHTML = "Password OK.";
-		return true;
-	} else {
-		document.getElementById("cpassErrorField").innerHTML = "Passwords do not match.";
+	} else if (!(pass === confirmpass)) {
+		document.getElementById("cRegPassErrorField").innerHTML = "Passwords do not match.";
 		return false;
-	}
-}
-function agreeValid() {
-	if (!consentYes.checked){
-		document.getElementById("agreeErrorField").innerHTML = '<span style="color:red">Please agree to TOS</span>';
+	} else if (!passRegEx.test(pass)) {
+		document.getElementById("cRegPassErrorField").innerHTML = "Password format invalid.";
 		return false;
 	} else {
-		document.getElementById("agreeErrorField").innerHTML = "";
+		document.getElementById("cRegPassErrorField").innerHTML = "Password OK.";
 		return true;
 	}
 }
+// function agreeValid() {
+// 	if (!consentYes.checked){
+// 		document.getElementById("agreeErrorField").innerHTML = '<span style="color:red">Please agree to TOS</span>';
+// 		return false;
+// 	} else {
+// 		document.getElementById("agreeErrorField").innerHTML = "";
+// 		return true;
+// 	}
+// }

@@ -1,96 +1,79 @@
 <?php
-
+//Grabs connection script
 require_once('PDO_conn.php');
 
-class USER
-{	
-
+class USER {
 	private $conn;
 	private $myId;
 	private $loggedIn;
 	
-	public function __construct($DB_conn)
-	{
+	public function __construct($DB_conn) {
 		//I'm assuming $this->conn is USER.conn (java)
 		$this->conn = $DB_conn;
     }
 	
-	//Sets up registration
-	public function register($uname,$umail,$upass)
-	{
-		try
-		{
-			#$new_password = password_hash($upass, PASSWORD_DEFAULT);
-			//INSERT into table columns
-			$stmt = $this->conn->prepare("INSERT INTO users(username,user_email,user_pass) VALUES(:uname, :umail, :upass)");
+	//Sets up registration function
+	public function register($uname,$upass,$photourl) {
+		try {
+			$stmt = $this->conn->prepare(
+				"INSERT INTO users(user_name,user_password,user_photo) 
+				VALUES(:uname, :upass, :photourl)");
 			$stmt->bindparam(":uname", $uname);
-			$stmt->bindparam(":umail", $umail);
-			$stmt->bindparam(":upass", $upass); //NOTE HASHED PASSWORD IS PUT INTO TABLE
+			$stmt->bindparam(":upass", $upass);
+			$stmt->bindparam(":photourl", $photourl);
 			$stmt->execute();
 			return $stmt;	
 		}
-		catch(PDOException $e)
-		{
+		catch(PDOException $e) {
 			echo $e->getMessage();
 		}
 	}
 
 	//Returns true or false if username/email is in DB, then check password
-	public function doLogin($uname,$umail,$upass)
-	{
-		try
-		{
-			//Fetches everything on users table
+	public function doLogin($uname,$upass) {
+		try {
 			$stmt = $this->conn->prepare(
-				"SELECT username, user_email, user_pass 
+				"SELECT user_name, user_password
 				FROM users 
-				WHERE username=:uname OR user_email=:umail"
+				WHERE user_name=:uname"
 				);
-			//execute with params in this format works as if
-			// $stmt->bindparam(":uname", $uname);
-			// $stmt->bindparam(":umail", $umail);
-			// $stmt->execute();
-			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
-			//PDO::FETCH_ASSOC returns an associative array, indexed by col names
-			//PDO::FETCH_BOTH returns an associative array, indexed both by col name AND number
-			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-			//FETCH::ASSOC output (array) is saved into $userRow
-			if($stmt->rowCount() == 1)
-			{
-				//If by good DB design, 1 row is returned, check if $upass(user inputted pass) matches returned password
-				if($upass == $userRow['user_pass'])
-				{
+			$stmt->execute(array(':uname'=>$uname));
+			$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+			//If a row is returned
+			if($stmt->rowCount() == 1) {
+				//If password = db returned password
+				if($upass == $userRow['user_password']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
-					$this->myId = $userRow['id'];
+					$this->myId = $userRow['user_id'];
 					//$_SESSION['user_session'] = $userRow['id'];
+					//temp ghetto fix atm
 					$_SESSION['user_session'] = "in";
-					$_SESSION['username'] = $userRow['username'];
-					$_SESSION['userid'] = $userRow['id'];
+					$_SESSION['user_name'] = $userRow['user_name'];
+					$_SESSION['user_id'] = $userRow['user_id'];
+					//set this user loggedIn status as true
 					$this->loggedIn = true;
 					return true;
 					//Assigns the session number as the user_id (when user registered onto DB)
 				}
-				else
-				{
+				else {
 					$this->loggedIn = false;
 					return false;
 				}
 			}
 		}
-		catch(PDOException $e)
-		{
+		catch(PDOException $e) {
 			echo $e->getMessage();
 		}
 	}
 	
-	public function is_loggedin()
-	{
+	//checks if an user object is logged in
+	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
-		/*if(isset($_SESSION['user_session']))
+		if(isset($_SESSION['user_session']))
 		{
 			return true;
-		}*/
-		/*if($this->loggedIn) {
+		}
+		if($this->loggedIn) {
 			if($_SESSION['user_session'] == $this->myId)
 			{
 				return true;
@@ -99,33 +82,27 @@ class USER
 			}
 		} else {
 			return false;
-		}*/
-		if(empty($_SESSION['user_session'])){
-			return false;
-		} else {
-			return($_SESSION['user_session'] == "in");
 		}
 	}
 	
-	//I guess we change $url for redirect
-	public function redirect($url)
-	{
+	//Redirects user to another page
+	public function redirect($url) {
 		header("Location: $url");
 	}
 	
-	public function doLogout()
-	{
-		//$_SESSION['user_session'] = "";
+	//unsets current user's session set by doLogin(), and destroys current session
+	public function doLogout() {
 		$loggedIn = false;
 		unset($_SESSION['user_session']);
-		unset($_SESSION['username']);
-		unset($_SESSION['userid']);
+		unset($_SESSION['user_name']);
+		unset($_SESSION['user_id']);
 		session_write_close();
+		session_destroy();
 		return true;
 	}
 	
-	public function postComment()
-	{
+	//TO be implemented if there is time
+	public function postComment() {
 		
 	}
 } //end of user class
