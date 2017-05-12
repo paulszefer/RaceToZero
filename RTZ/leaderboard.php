@@ -10,6 +10,7 @@
 		<br>
 		<p>hueheuhue</p>
 		<table id="besttimes" border="1">
+			<!--This table is populated with data using the js/leaderboard.js file.-->
 			<tr>
 				<th>Placement</th>
 				<th>User_id</th>
