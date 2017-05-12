@@ -9,7 +9,4 @@ $(function() {
         $("#mobilenav").attr('style', '');
         $("#overlay").attr('style', '');
     });
-    function (){
-
-    }
 });
