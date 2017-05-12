@@ -1,5 +1,7 @@
 <?php
-//this file should really be hidden somewhere else, but whatever for now
+
+// This file will be heavily modified/replaced later, because we will be using mysqli
+// instead.
 session_start();
 
 //for localhost testing
