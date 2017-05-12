@@ -1,6 +1,6 @@
 <?php
-
-	require_once('PDO_conn.php');
+	session_start();
+	//require_once('PDO_conn.php');
 	
 	function getBarriers() {
 	
@@ -12,7 +12,7 @@
 			$username = "root";
     		$password = "";
    			$host     = "localhost";
-    		$database = "comp1536project";
+    		$database = "comp2910test1";
 
     		$link = mysqli_connect($host, $username, $password, $database);
     		$query = "SELECT barrier_name, 
@@ -40,14 +40,14 @@
 	}
 	
 	function saveGame() {
-		$uname = $_POST['uname'];
+		$uname = $_SESSION['user_name'];
 		$level = $_POST['level'];
 		$time = $_POST['time'];
 	
 		include_once('class.game.php');
 	
-		$game = new GAME($DB_conn, $uname, $level, $time);
-	
+		$game = new GAME($uname, $level, $time);
+		
 		$game->save();
 	}
 	
@@ -56,8 +56,8 @@
 			$username = "root";
     		$password = "";
    			$host     = "localhost";
-    		$database = "comp1536project";
-
+    		$database = "comp2910test1";
+    		
     		$link = mysqli_connect($host, $username, $password, $database);
     		$query = "SELECT Count(level_id) AS NumberOfLevels FROM levels;";
 			
@@ -77,7 +77,6 @@
 	
 	function getShortestTimes() {
 		$level = $_POST['level'];
-		$level = 1;
 		
 		$times = array();
 		
@@ -85,13 +84,13 @@
 			$username = "root";
     		$password = "";
    			$host     = "localhost";
-    		$database = "comp1536project";
+    		$database = "comp2910test1";
 
     		$link = mysqli_connect($host, $username, $password, $database);
     		$query = "SELECT game_time,
 							 user_id
 					  FROM games
-					  WHERE level_id=" . $level . 
+					  WHERE level_id=" . ($level + 1) . 
 					" ORDER BY game_time ASC;";
 			
 			$result = mysqli_query($link, $query);
@@ -113,20 +112,20 @@
 		$username = "root";
     	$password = "";
    		$host     = "localhost";
-    	$database = "comp1536project";
+    	$database = "comp2910test1";
 
     	$link = mysqli_connect($host, $username, $password, $database);
     	$query = "SELECT game_time
 				  FROM games
 				  	INNER JOIN users ON games.user_id = users.user_id
 				  WHERE level_id=0
-				  	AND user_name=$_POST['user_name']
-				  ORDER BY game_time ASC;";
+				 	AND user_name=" . $_POST['user_name'] .
+				" ORDER BY game_time ASC;";
 			
 		$result = mysqli_query($link, $query);
 	
 		if($result) {
-			$row = mysqli_fetch_array($result)
+			$row = mysqli_fetch_array($result);
 		}
 		
 		$json = json_encode(array('time'=>$row['game_time']));
