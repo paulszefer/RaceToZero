@@ -240,7 +240,7 @@ $(function () {
                     let scoreInSeconds = Math.floor(score / 1000);
                     scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
                     $.post("accessdb.php", { function: "saveGame", level: actualLevel, time: scoreInSeconds }, function(data) {
-                    	alert(data);
+                    	//alert(data);
                     });
                     time.style.fontSize = "2em";
                     scoreDiv.appendChild(time);
