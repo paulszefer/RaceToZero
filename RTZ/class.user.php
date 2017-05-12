@@ -34,7 +34,7 @@ class USER {
 	public function doLogin($uname,$upass) {
 		try {
 			$stmt = $this->conn->prepare(
-				"SELECT user_name, user_password
+				"SELECT user_name, user_password, user_id
 				FROM users 
 				WHERE user_name=:uname"
 				);
@@ -43,9 +43,9 @@ class USER {
 			if($stmt->rowCount() == 1) {
 				if($upass == $userRow['user_password']) {
 					//sets the $_SESSION array at 'user_session' as id grabbed from DB table users
-					$this->myId = $userRow['user_id'];
-					//$_SESSION['user_session'] = $userRow['id'];
-					$_SESSION['user_session'] = "in";
+					$this->myId = $userRow['user_name'];
+					$_SESSION['user_session'] = $userRow['user_name'];
+					// $_SESSION['user_session'] = "in";
 					$_SESSION['user_name'] = $userRow['user_name'];
 					$_SESSION['user_id'] = $userRow['user_id'];
 					$this->loggedIn = true;
@@ -65,10 +65,10 @@ class USER {
 	
 	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
-		if(isset($_SESSION['user_session']))
-		{
-			return true;
-		}
+		// if(isset($_SESSION['user_session']))
+		// {
+		// 	return true;
+		// }
 		if($this->loggedIn) {
 			if($_SESSION['user_session'] == $this->myId)
 			{

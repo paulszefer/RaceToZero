@@ -4,6 +4,10 @@
 	margin: auto;
 	text-align:center;
 }
+#logincontent input {
+	text-align: left;
+	width:100%;
+}
 #loginform button{
 	text-align: center;
 	font-size: 1.5em;
@@ -11,13 +15,9 @@
 #logincontent table{
 	width:80%;
 	margin:auto;
-	font-size: 1.25em;
+	font-size: 1.5em;
 }
-#logincontent input {
-	text-align: left;
-	width:100%;
-	font-size: 1.25em;
-}
+
 /*page specific anchor colors*/
 .content a, .content a:visited{
 	color:orange;
@@ -47,14 +47,6 @@
 	width: 90%;
 	text-align:left;
 	font-size:1em;
-}
-.disclaimtext p{
-	font-size: 1em;
-}
-.disclaimtext h2{
-	font-size: 1em;
-	font-weight:bold;
-	text-align: center;
 }
 .required::after{
 	content: "*";

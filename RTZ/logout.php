@@ -1,7 +1,7 @@
 <?php
 require_once('PDO_conn.php');
 
-if($user->is_loggedin()){
+if(isset($_SESSION['user_session'])){
 	//Log user out
 	$user->doLogout();
 	$user->redirect('login.php');
