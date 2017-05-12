@@ -1,7 +1,7 @@
 $(function () {
 
-    $("#playButton").click(function () {
-        $(this).css("display", "none");
+    // $("#playButton").click(function () {
+    //     $(this).css("display", "none");
 
 
         /**
@@ -21,10 +21,25 @@ $(function () {
          *
          */
 
+        let gameContainer = document.createElement("div");
+        gameContainer.id = "game_container";
+        gameContainer.style.posititon = "relative";
+        document.getElementsByClassName("contentactual")[0].appendChild(gameContainer);
+
+        let gameWindow = document.createElement("div");
+        gameWindow.id = "game_window";
+        gameWindow.style.position = "absolute";
+        gameWindow.style.left = 0;
+        gameWindow.style.top = 0;
+
+        let gameWrapper = gameContainer;
+        let gameDiv = gameWindow;
+
+
         /** Setup. */
-        let gameWrapper = document.getElementById("gamedivwrapper");
-        let gameDivWrapper = document.getElementById("gamediv");
-        let gameDiv;
+        // let gameWrapper = document.getElementById("gamedivwrapper");
+        // let gameDivWrapper = document.getElementById("gamediv");
+        //let gameDiv;
         let clock;
         let scoreDiv;
         let game = new Game();
@@ -34,14 +49,13 @@ $(function () {
         function setup() {
 
             // create div to hold game
-            // document.write("<div id='game_div'></div>");
+            gameWindow = document.createElement("div");
             gameDiv = document.createElement("div");
             gameDiv.id = "game_div";
             gameDiv.style.position = "absolute";
             gameDiv.style.left = 0;
             gameDiv.style.top = 0;
-            gameDiv.style.width = "inherit";
-            gameDivWrapper.appendChild(gameDiv);
+            gameWrapper.appendChild(gameDiv);
 
             // gameDiv = $("#game_div");
             gameDiv.style.display = "none";
@@ -62,8 +76,8 @@ $(function () {
             scoreDiv.style.top = 0;
             scoreDiv.style.left = 0;
             scoreDiv.style.zIndex = 10;
-            scoreDiv.style.width = Math.round(gameWrapper.offsetWidth);
-            scoreDiv.style.height = Math.round(gameWrapper.offsetHeight);
+            scoreDiv.style.width = gameContainer.parentNode.offsetWidth + "px";
+            scoreDiv.style.height = gameContainer.parentNode.offsetHeight + "px";
             scoreDiv.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
 
             // add elements to score screen;
@@ -106,7 +120,7 @@ $(function () {
 
             // create the level using the retrieved level
             // width, height incremented by 1 to avoid ArrayOutOfBounds exceptions
-            level = new Level(levelID, width + 1, height + 1);
+            level = new Level(levelID, width + 1, height + 1g);
 
             // load common level data
             barriers = [
@@ -220,6 +234,8 @@ $(function () {
                     // score element for score screen
                     let time = document.createElement("p");
                     time.innerHTML = parseTime(score);
+                    time.style.color = "white";
+                    // TODO - send score to database
                     time.style.fontSize = "2em";
                     scoreDiv.appendChild(time);
 
@@ -243,10 +259,10 @@ $(function () {
             clicked = newClicked;
         }
 
-        $("body").click(function (e) {
+        $(gameContainer).click(function (e) {
             if (!clicked && score > 100) {
-                let divPosX = $(gameDiv).position().left;
-                let divPosY = $(gameDiv).position().top;
+                let divPosX = $(this).position().left;
+                let divPosY = $(this).position().top;
                 let mousePosX = e.pageX - divPosX;
                 let mousePosY = e.pageY - divPosY;
 
@@ -255,7 +271,7 @@ $(function () {
                 setTimeout(setClicked, 500, false);
             }
         })
-    });
+    // });
 });
 
 function parseTime(ms) {
