@@ -1,15 +1,17 @@
 $(function() {
+    //#navburger clicked, expand #mobilenav and #overylay
     $("#navburger").click(function() {
         $("#mobilenav").css("width", "100%");
         $("#overlay").css("width", "100%");
         $("#overlay").css("height", $('body').height());
     });
-    //Closes mobilenav when navoverlay is clicked
+    //resets mobilenav when navoverlay is clicked
     $('#overlay').click(function(){
         $("#mobilenav").attr('style', '');
         $("#overlay").attr('style', '');
     });
     
+// shitty user feedback resulted no fade
 //     //After scrolling down, save var
 //     var scrolled;
 //     //sets scrolled to true if scroll happened
