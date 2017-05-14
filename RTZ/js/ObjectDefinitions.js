@@ -665,7 +665,6 @@ class PhysicalObject {
         element.css("position", "absolute");
         element.css("left", this._x1);
         element.css("top", this._y1);
-
     }
 }
 
@@ -693,6 +692,129 @@ class Air extends PhysicalObject {
 class Goal extends PhysicalObject {
     constructor(name, x1, y1, x2, y2) {
         super(name, x1, y1, x2, y2, GOAL);
+    }
+}
+
+/**
+ * Defines an extra object. This could be a question, answer, hint.
+ */
+class Extra {
+    constructor(name, x1, y1, x2, y2, elementType, elementHTML) {
+        this._name = name;
+        this._x1 = x1;
+        this._y1 = y1;
+        this._x2 = x2;
+        this._y2 = y2;
+        this._elementType = elementType;
+        this._elementHTML = elementHTML;
+    }
+
+    render() {
+        let e = document.createElement(this.elementType);
+        e.id = this.name;
+        e.style.position = "absolute";
+        e.style.top = this.y1 + "px";
+        e.style.left = this.x1 + "px";
+        e.style.width = this.x2 - this.x1;
+        e.style.height = this.y2 - this.y1;
+        e.style.fontSize = "2em";
+        e.innerHTML = this.elementHTML;
+        document.getElementById("game_window").appendChild(e);
+    }
+
+    /**
+     * Returns the name.
+     */
+    get name() {
+        return this._name;
+    }
+    /**
+     * Sets the name.
+     */
+    set name(name) {
+        this._name = name;
+    }
+    /**
+     * Returns the x coordinate of the top-left corner.
+     */
+    get x1() {
+        return this._x1;
+    }
+    /**
+     * Sets the x coordinate of the top-left corner.
+     */
+    set x1(x) {
+        this._x1 = x;
+    }
+
+    /**
+     * Returns the y coordinate of the top-left corner.
+     */
+    get y1() {
+        return this._y1;
+    }
+
+    /**
+     * Sets the y coordinate of the top-left corner.
+     */
+    set y1(y) {
+        this._y1 = y;
+    }
+
+    /**
+     * Returns the x coordinate of the bottom-right corner.
+     */
+    get x2() {
+        return this._x2;
+    }
+
+    /**
+     * Sets the x coordinate of the bottom-right corner.
+     */
+    set x2(x) {
+        this._x2 = x;
+    }
+
+    /**
+     * Returns the y coordinate of the bottom-right corner.
+     */
+    get y2() {
+        return this._y2;
+    }
+
+    /**
+     * Sets the y coordinate of the bottom-right corner.
+     */
+    set y2(y) {
+        this._y2 = y;
+    }
+
+    /**
+     * Returns the element type.
+     */
+    get elementType() {
+        return this._elementType;
+    }
+
+    /**
+     * Sets the element type.
+     */
+    set elementType(type) {
+        this._elementType = type;
+    }
+
+    /**
+     * Returns the html content.
+     */
+    get elementHTML() {
+        return this._elementHTML;
+    }
+
+    /**
+     * Sets the html content.
+     */
+    set elementHTML(html) {
+        this._elementHTML = html;
     }
 }
 

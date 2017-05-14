@@ -123,6 +123,7 @@ $(function () {
     let level;
     let barriers;
     let airs;
+    let extras;
     let goal;
     let playItem;
     let foodItem;
@@ -158,6 +159,8 @@ $(function () {
 
         airs = [];
 
+        extras = [];
+
         /**
          * Defines the play area and fills the background with the appropriate colour.
          */
@@ -184,6 +187,12 @@ $(function () {
                 new Barrier("platform3", Math.round(width * 0.35), height - playItemSize * 2, Math.round(width * 0.65), height - playItemSize),
                 new Barrier("platform4", Math.round(width * 0.8), height - playItemSize * 2, width, height - playItemSize)
             );
+            extras.push(
+                new Extra("question", 100, 100, 0, 0, "p", "questiontext"),
+                new Extra("answer1", 100, 120, 0, 0, "p", "answer1text"),
+                new Extra("answer2", 100, 140, 0, 0, "p", "answer1text"),
+                new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
+            ); // TODO - add correct positioning
             goal = new Goal("goal", Math.round(width * 0.65), height - playItemSize * 1.5, Math.round(width * 0.8), height - playItemSize);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
@@ -221,6 +230,13 @@ $(function () {
         for (let i = 0; i < airs.length; i++) {
             airs[i].drawPhysicalObject();
             level.addAir(airs[i]);
+        }
+
+        /**
+         * Displays the extras.
+         */
+        for (let i = 0; i < extras.length; i++) {
+            extras[i].render();
         }
 
         /**
