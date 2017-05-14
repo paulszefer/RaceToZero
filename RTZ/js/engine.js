@@ -78,13 +78,13 @@ $(function () {
 
         /**
          * Creates the element that displays the timer(the user's score).
-         * TODO - currently hidden, changing z-index should fix it
          */
         timer = document.createElement("p");
         timer.id = "timer";
         timer.style.position = "absolute";
         timer.style.top = 0;
         timer.style.left = 0;
+        timer.style.zIndex = 10;
         gameWindow.appendChild(timer);
 
         /**
