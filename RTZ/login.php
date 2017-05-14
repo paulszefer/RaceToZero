@@ -3,7 +3,7 @@
 require_once('PDO_conn.php');
 
 //if user is logged in, redirect em to index.php
-if($user->is_loggedin()){
+if(isset($_SESSION['user_session'])){
 	$user->redirect('index.php');
 }
 //renamed
@@ -67,9 +67,9 @@ if(isset($_POST['login']))
 	//if the doLogin function returns true.
 	if($user->doLogin($FormLoginUsername, $FormLoginPassword))
 	{
-		$user->redirect('index.php');
+		$user->redirect('login.php');
 	} 
-	else 
+	else
 	{
 		$error = "Login info wrong";
 	}

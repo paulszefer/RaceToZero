@@ -69,20 +69,7 @@ class USER {
 	//checks if an user object is logged in
 	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
-		if(isset($_SESSION['user_session']))
-		{
-			return true;
-		}
-		if($this->loggedIn) {
-			if($_SESSION['user_session'] == $this->myId)
-			{
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+		return isset($_SESSION['user_session']);
 	}
 	
 	//Redirects user to another page
@@ -101,9 +88,5 @@ class USER {
 		return true;
 	}
 	
-	//TO be implemented if there is time
-	public function postComment() {
-		
-	}
 } //end of user class
 ?>
