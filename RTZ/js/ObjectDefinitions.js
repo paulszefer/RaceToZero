@@ -699,14 +699,14 @@ class Goal extends PhysicalObject {
  * Defines an extra object. This could be a question, answer, hint.
  */
 class Extra {
-    constructor(name, x1, y1, x2, y2, elementType, elementHTML) {
+    constructor(name, x1, y1, x2, y2, elementType, elementData) {
         this._name = name;
         this._x1 = x1;
         this._y1 = y1;
         this._x2 = x2;
         this._y2 = y2;
         this._elementType = elementType;
-        this._elementHTML = elementHTML;
+        this._elementData = elementData;
     }
 
     render() {
@@ -717,8 +717,14 @@ class Extra {
         e.style.left = this.x1 + "px";
         e.style.width = this.x2 - this.x1;
         e.style.height = this.y2 - this.y1;
-        e.style.fontSize = "2em";
-        e.innerHTML = this.elementHTML;
+
+        if (this.elementType === "p") {
+            e.style.fontSize = "2em";
+            e.innerHTML = this.elementData;
+        } else if (this.elementType === "img") {
+            e.alt = this.name;
+            e.src = this.elementData;
+        }
         document.getElementById("game_window").appendChild(e);
     }
 
@@ -804,17 +810,17 @@ class Extra {
     }
 
     /**
-     * Returns the html content.
+     * Returns the element-specific data.
      */
-    get elementHTML() {
-        return this._elementHTML;
+    get elementData() {
+        return this._elementData;
     }
 
     /**
-     * Sets the html content.
+     * Sets the element-specific data.
      */
-    set elementHTML(html) {
-        this._elementHTML = html;
+    set elementData(data) {
+        this._elementData = data;
     }
 }
 

@@ -176,6 +176,11 @@ $(function () {
             airs.push(
                 new Air("air1", barrierSize, height - Math.round(playItemSize), goalSize + barrierSize, height)
             );
+            extras.push(
+                new Extra("hint_tap_here", Math.round(barrierSize * 1.2), Math.round(barrierSize * 1.2), Math.round(barrierSize * 6.2), 0, "p", "Tap here"),
+                new Extra("tap_image", Math.round(barrierSize * 1.6), Math.round(barrierSize * 3.6), Math.round(barrierSize * 2.6), Math.round(barrierSize * 4.6), "img", "img/tapimage.png"),
+                new Extra("arrow", Math.round(barrierSize * 1.4), Math.round(barrierSize * 8), Math.round(barrierSize * 2.4), Math.round(barrierSize * 9), "img", "img/arrow.png")
+            );
             goal = new Goal("goal", barrierSize, height - Math.round(playItemSize * 0.5), goalSize + barrierSize, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
@@ -192,7 +197,7 @@ $(function () {
                 new Extra("answer1", 100, 120, 0, 0, "p", "answer1text"),
                 new Extra("answer2", 100, 140, 0, 0, "p", "answer1text"),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
-            ); // TODO - add correct positioning
+            ); // TODO - add correct info
             goal = new Goal("goal", Math.round(width * 0.65), height - playItemSize * 1.5, Math.round(width * 0.8), height - playItemSize);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
