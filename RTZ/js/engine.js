@@ -297,7 +297,8 @@ $(function () {
     function move() {
         // occurs when there is a collision with the goal i.e. level is complete
         // TODO - move to separate function
-        if (level.move() === 5) {
+        let moveReturnValue = level.move();
+        if (moveReturnValue === 5) {
             clearInterval(intervalId);
             game.level += 1;
             if (game.level % 2 === 0) {
@@ -329,6 +330,8 @@ $(function () {
                 }
                 init();
             }
+        } else if (moveReturnValue === 6) {
+            // TODO - somehow display that that is the wrong answer
         }
         drawFoodItem();
         // game timer runs every 20ms, so score should increment by 20
