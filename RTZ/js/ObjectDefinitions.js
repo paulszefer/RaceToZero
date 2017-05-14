@@ -21,7 +21,7 @@ const QUESTION = 1;
 const AIR = 0;
 const SOLID = 1;
 const GOAL = 2;
-const WRONG = 3; // TODO - remove
+const WRONG = 3;
 
 /**
  * A game object that keeps track of the current level.
@@ -40,39 +40,41 @@ class Game {
         this.createHTML(); // TODO - Unused, remove?
     }
 
-	/**
-	 * Sets the current level of the game.
-	 */
+    /**
+     * Sets the current level of the game.
+     */
     set level(id) {
         this._level = id;
     }
 
-	/**
-	 * Returns the current level of the game.
-	 */
+    /**
+     * Returns the current level of the game.
+     */
     get level() {
         return this._level;
     }
 
-	/**
-	 * Sets the current state of the game.
-	 */
+    /**
+     * Sets the current state of the game.
+     */
     set state(state) {
         this._state = state;
     }
 
-	/**
-	 * Returns the current state of the game.
-	 */
+    /**
+     * Returns the current state of the game.
+     */
     get state() {
         return this._state;
     }
+
     /**
      * Sets the elements of the game.
      */
     set elements(elements) {
         this._elements = elements;
     }
+
     /**
      * Returns the elements of the game.
      */
@@ -87,9 +89,9 @@ class Game {
         this.elements.push(element);
     }
 
-	/**
-	 * Returns the user's current level. Currently the user always starts from level 0.
-	 */
+    /**
+     * Returns the user's current level. Currently the user always starts from level 0.
+     */
     retrieveLevel() {
         // TODO - get last played level from database, use 0 if not logged in
         return 0;
@@ -238,7 +240,7 @@ class Level {
     }
 
     /**
-     * Adds an object by setting all pixels within a certain range to a certain pixel 
+     * Adds an object by setting all pixels within a certain range to a certain pixel
      * type.
      */
     addPhysicalObject(x1, y1, x2, y2, pixelType) {
@@ -268,6 +270,13 @@ class Level {
      */
     addGoal(goal) {
         this.addPhysicalObject(goal.x1, goal.y1, goal.x2, goal.y2, GOAL);
+    }
+
+    /**
+     * Adds a wrong answer section.
+     */
+    addWrong(wrong) {
+        this.addPhysicalObject(wrong.x1, wrong.y1, wrong.x2, wrong.y2, WRONG);
     }
 
     /**
@@ -325,6 +334,10 @@ class Level {
             // collision with a goal
             this.playItem.move();
             return 5;
+        } else if (collision === 6) {
+            // collision with a wrong answer section
+            this.playItem.move();
+            return 6;
         }
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
@@ -390,8 +403,9 @@ class Level {
 
     /**
      * Checks to see if the object is currently colliding with anything.
-     * Returns 0 if no collision, 1 if top collision, 2 if right-side collision, 3 if 
-     * bottom collision, 4 if left-side collision, 5 if it collides with a goal.
+     * Returns 0 if no collision, 1 if top collision, 2 if right-side collision, 3 if
+     * bottom collision, 4 if left-side collision, 5 if it collides with a goal,
+     * 6 if it collides with a wrong answer section.
      */
     checkCollisions(x, y) {
         let size = this._playItem.size;
@@ -417,6 +431,14 @@ class Level {
                 return 5;
             } else if (this._board[x2][y1].type === GOAL) {
                 return 5;
+            } else if (this._board[x1][y1].type === WRONG) {
+                return 6;
+            } else if (this._board[x2][y2].type === WRONG) {
+                return 6;
+            } else if (this._board[x1][y2].type === WRONG) {
+                return 6;
+            } else if (this._board[x2][y1].type === WRONG) {
+                return 6;
             }
         }
         return 0;
@@ -472,7 +494,7 @@ class Level {
     }
 
     /**
-     * Handles the case where the bottom-right corner of the object collides with a 
+     * Handles the case where the bottom-right corner of the object collides with a
      * barrier.
      */
     bottomRightCollision(x1, y1) {
@@ -505,7 +527,7 @@ class Level {
     }
 
     /**
-     * Handles the case where the bottom-left corner of the object collides with a 
+     * Handles the case where the bottom-left corner of the object collides with a
      * barrier.
      */
     bottomLeftCollision(x1, y1) {
@@ -559,18 +581,21 @@ class PhysicalObject {
     get name() {
         return this._name;
     }
+
     /**
      * Sets the name.
      */
     set name(name) {
         this._name = name;
     }
+
     /**
      * Returns the x coordinate of the top-left corner.
      */
     get x1() {
         return this._x1;
     }
+
     /**
      * Sets the x coordinate of the top-left corner.
      */
@@ -648,6 +673,8 @@ class PhysicalObject {
             objectColour = BACKGROUND_COLOUR;
         } else if (this._pixelType === GOAL) {
             objectColour = BACKGROUND_COLOUR;
+        } else if (this._pixelType === WRONG) {
+            objectColour = BACKGROUND_COLOUR;
         }
 
         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -696,6 +723,31 @@ class Goal extends PhysicalObject {
 }
 
 /**
+ * Defines a wrong. Keeps track of a corresponding element's ID that holds the text for this wrong answer.
+ */
+class Wrong extends PhysicalObject {
+    constructor(name, x1, y1, x2, y2, answerID) {
+        super(name, x1, y1, x2, y2, GOAL);
+        this._answerID = answerID;
+    }
+
+    /**
+     * Returns the ID of the element holding the text for this wrong answer.
+     * Used to create visual effects when a wrong answer is selected.
+     */
+    get answerID() {
+        return this._answerID;
+    }
+
+    /**
+     * Sets the ID.
+     */
+    set answerID(id) {
+        this._answer = id;
+    }
+}
+
+/**
  * Defines an extra object. This could be a question, answer, hint.
  */
 class Extra {
@@ -734,18 +786,21 @@ class Extra {
     get name() {
         return this._name;
     }
+
     /**
      * Sets the name.
      */
     set name(name) {
         this._name = name;
     }
+
     /**
      * Returns the x coordinate of the top-left corner.
      */
     get x1() {
         return this._x1;
     }
+
     /**
      * Sets the x coordinate of the top-left corner.
      */
@@ -962,7 +1017,7 @@ class PlayItem {
     }
 
     /**
-     * Moves the object based on its velocity vector and starting coordinates. Does not 
+     * Moves the object based on its velocity vector and starting coordinates. Does not
      * take collisions into account.
      */
     move() {
