@@ -195,7 +195,7 @@
 	            <br><br>
 	            <p>Food Factory Zero is a time-based drag and drop game. All you need to do is pick and match the ingredients with recipes.</p>
 				<br>
-	            <p>Link: <a href='http://students.bcitdev.com/A01006039/ffz/'>Check it out here!</a></p>
+	            <p>Link: <a href='https://foodfactoryzero.firebaseapp.com/'>Check it out here!</a></p>
 	            <br>
 	            <hr>
 				<h2>Captin Plan-It</h2>
@@ -203,7 +203,9 @@
 				<img src='img/cp3.png' height='150' width='150' alt='captin plan-it logo'>
 				<br><br>
 	            <p>Captain Plan-It is an educational quiz game where you can answer questions related to food groups. Answer correctly to earn keys which can unlock accessories for your own personal hero!</p>
-				<br><br>
+				<br>
+				<p>Link: <a href='http://students.bcitdev.com/A01009216/Captain-Plan-It/index.php'>Check it out here!</a></p>
+				<br>
 	            <hr>
 	            <h2>Food Fall</h2>
 	            <br>
