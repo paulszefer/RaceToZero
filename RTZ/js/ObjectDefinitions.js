@@ -285,7 +285,7 @@ class Level {
      * TODO - check incrementally to fix bugs with moving through thin barriers
      */
     move() {
-		//console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy);
+		console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy);
 
         // don't move if out of bounds
         // TODO - query width and height from div
@@ -303,15 +303,11 @@ class Level {
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
         let collision = this.checkCollisions(tempX, tempY);
-        //console.log(collision);
+        console.log(collision);
         if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
         	this.playItem.isGrounded = true;
-        	this.playItem.dy = 0;
-        	if (this.playItem.dx > 0) {
-        		this.playItem.dx--;
-        	} else if (this.playItem.dx < 0) {
-        		this.playItem.dx++;
-        	}
+        	
+        	
         	if (collision === 2) {
         		// right side collision
         		this.snapToRight(tempY);
@@ -322,6 +318,12 @@ class Level {
         		this.playItem.reverseDX();
         	} else {
         		this.playItem.move();
+        	}
+        	this.playItem.dy = 0;
+        	if (this.playItem.dx > 0) {
+        		this.playItem.dx--;
+        	} else if (this.playItem.dx < 0) {
+        		this.playItem.dx++;
         	}
         } else {
 
@@ -549,6 +551,7 @@ class Level {
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
 		if (this._board[x2][y1].type === SOLID) {
+			console.log("error one");
             return 2;
         } else if (this._board[x1][y2].type === SOLID) {
             return 3;
@@ -559,12 +562,14 @@ class Level {
             if (this._playItem.dx <= 0) {
 				return 3;
 			}
-			if (this._playItem.dy >= 0) {
+			if (this._playItem.dy <= 0) {
+				console.log("error two");
 				return 2;
 			}
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX2 + move][origY2].type === SOLID) {
+                console.log("error three");
                     return 2;
                 } else if (this._board[origX2][origY2 + move].type === SOLID) {
                     return 3;
