@@ -200,7 +200,8 @@ $(function () {
             ); // TODO - add correct info
             goal = new Goal("goal", Math.round(width * 0.65), Math.round(height - playItemSize * 1.5), Math.round(width * 0.8), height - playItemSize);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(181, 612, -5, -8, playItemSize, foodItem);
         } else if (levelID === 2) {
             // TODO - add correct level data
             barriers.push(

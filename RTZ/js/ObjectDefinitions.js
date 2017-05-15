@@ -319,7 +319,7 @@ class Level {
                 this.snapToBottom(tempX);
             }
             // TODO - make this refer to a constant defined in the constant section above
-            if (this.playItem.dy < 2) { // SNAPTOGROUND = 2
+            if (Math.abs(this.playItem.dy) < 2) { // SNAPTOGROUND = 2
                 this.playItem.snapToGround();
                 this.playItem.move();
             } else {
@@ -504,11 +504,10 @@ class Level {
         let y2 = y1 + size;
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
-
-        if (this._board[x2][y1].type === SOLID) {
-            return 2;
-        } else if (this._board[x1][y2].type === SOLID) {
+		if (this._board[x1][y2].type === SOLID) {
             return 3;
+        } else if (this._board[x2][y1].type === SOLID) {
+            return 2;
         } else {
             if (this._playItem.isGrounded) {
                 return 3;
