@@ -293,11 +293,42 @@ class Level {
         if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
             return;
         }
-
+        // check if currently grounded
+        // if currently grounded, check left/right collisions
+        //		if left/right collision, reverse dx
+        // if not currently grounded, check all collisions
+        //		if top collision, blahblahblah
+        // 
+        
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
+        let collision = this.checkCollisions(tempX, tempY);
+        
+        if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
+        	this.playItem.isGrounded = true;
+        	this.playItem.dy = 0;
+        	if (this.playItem.dx > 0) {
+        		this.playItem.dx--;
+        	} else if (this.playItem.dx < 0) {
+        		this.playItem.dx++;
+        	}
+        	if (collision === 2) {
+        		// right side collision
+        		this.snapToRight(tempY);
+        		this.playItem.reverseDX();
+        	} else if (collision === 4) {
+        		// left side collision
+        		this.snapToLeft(tempY);
+        		this.playItem.reverseDX();
+        	} else {
+        		this.playItem.move();
+        	}
+        } else {
 
-        // check if next movement causes a collision
+        /*let tempX = this.playItem.x + this.playItem.dx;
+        let tempY = this.playItem.y + this.playItem.dy;
+
+        // check if next movement causes a collision*/
         let collision = this.checkCollisions(tempX, tempY);
         if (collision === 0) {
             // no collision, move normally
@@ -339,6 +370,7 @@ class Level {
             // collision with a wrong answer section
             this.playItem.move();
             return 6;
+        }
         }
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
@@ -416,14 +448,14 @@ class Level {
         let y2 = y + size;
 
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
-            if (this._board[x1][y2].type === SOLID) {
-                return this.bottomLeftCollision(x1, y1);
-            } else if (this._board[x2][y2].type === SOLID) {
-                return this.bottomRightCollision(x1, y1);
-            } else if (this._board[x1][y1].type === SOLID) {
+            if (this._board[x1][y1].type === SOLID) {
                 return this.topLeftCollision(x1, y1);
             } else if (this._board[x2][y1].type === SOLID) {
                 return this.topRightCollision(x1, y1);
+            } else if (this._board[x1][y2].type === SOLID) {
+                return this.bottomLeftCollision(x1, y1);
+            } else if (this._board[x2][y2].type === SOLID) {
+                return this.bottomRightCollision(x1, y1);
             } else if (this._board[x1][y1].type === GOAL) {
                 return 5;
             } else if (this._board[x2][y2].type === GOAL) {
@@ -504,10 +536,10 @@ class Level {
         let y2 = y1 + size;
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
-		if (this._board[x1][y2].type === SOLID) {
-            return 3;
-        } else if (this._board[x2][y1].type === SOLID) {
+		if (this._board[x2][y1].type === SOLID) {
             return 2;
+        } else if (this._board[x1][y2].type === SOLID) {
+            return 3;
         } else {
             if (this._playItem.isGrounded) {
                 return 3;
@@ -537,10 +569,10 @@ class Level {
         let origX1 = x1 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
 
-		if (this._board[x2][y2].type === SOLID) {
-			return 3;
-		} else if (this._board[x1][y1].type === SOLID) {
+		if (this._board[x1][y1].type === SOLID) {
 			return 4;
+		} else if (this._board[x2][y2].type === SOLID) {
+			return 3;
 		} else {
 			if (this._playItem.isGrounded) {
 				return 3;
