@@ -483,14 +483,15 @@ class Level {
      */
     topLeftCollision(x1, y1) {
         let size = this._playItem.size;
+        let halfSize = Math.round(this.playItem.size / 2);
         let x2 = x1 + size;
         let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
-        if (this._board[x2][y1].type === SOLID) {
+        if (this._board[x2 - halfSize][y1].type === SOLID) {
             return 1;
-        } else if (this._board[x1][y2].type === SOLID) {
+        } else if (this._board[x1][y2 - halfSize].type === SOLID) {
             return 4;
         } else {
         	if (this._playItem.dx >= 0) {
@@ -545,14 +546,14 @@ class Level {
      */
     bottomRightCollision(x1, y1) {
         let size = this._playItem.size;
+        let halfSize = Math.round(size / 2);
         let x2 = x1 + size;
         let y2 = y1 + size;
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
-		if (this._board[x2][y1 + 5].type === SOLID) {
-			console.log("error one");
+		if (this._board[x2][y1 + halfSize].type === SOLID) {
             return 2;
-        } else if (this._board[x1 + 5][y2].type === SOLID) {
+        } else if (this._board[x1 + halfSize][y2].type === SOLID) {
             return 3;
         } else {
             if (this._playItem.isGrounded) {
@@ -562,13 +563,11 @@ class Level {
 				return 3;
 			}
 			if (this._playItem.dy <= 0) {
-				console.log("error two");
 				return 2;
 			}
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX2 + move][origY2].type === SOLID) {
-                console.log("error three");
                     return 2;
                 } else if (this._board[origX2][origY2 + move].type === SOLID) {
                     return 3;
@@ -586,14 +585,15 @@ class Level {
      */
     bottomLeftCollision(x1, y1) {
     	let size = this._playItem.size;
+    	let halfSize = Math.round(size / 2);
     	let x2 = x1 + size;
     	let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
 
-		if (this._board[x1][y1].type === SOLID) {
+		if (this._board[x1][y1 + halfSize].type === SOLID) {
 			return 4;
-		} else if (this._board[x2][y2].type === SOLID) {
+		} else if (this._board[x2 - halfSize][y2].type === SOLID) {
 			return 3;
 		} else {
 			if (this._playItem.isGrounded) {

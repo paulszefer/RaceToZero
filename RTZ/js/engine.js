@@ -199,7 +199,7 @@ $(function () {
                 new Extra("answer2", 100, 140, 0, 0, "p", "answer1text"),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
             ); // TODO - add correct info
-            goal = new Goal("goal", Math.round(width * 0.65), Math.round(height - playItemSize * 1.5), Math.round(width * 0.8), height - playItemSize);
+            //goal = new Goal("goal", Math.round(width * 0.65), Math.round(height - playItemSize * 1.5), Math.round(width * 0.8), height - playItemSize);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(144, 532, 0, -13, playItemSize, foodItem);
