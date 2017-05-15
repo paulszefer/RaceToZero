@@ -87,6 +87,24 @@ class USER {
 		session_destroy();
 		return true;
 	}
+	//Grabs user profile image
+	public function getUserProfileImage(){
+		try 
+		{
+			//Select the userimage filename
+			$statement = $this->conn->prepare("SELECT user_photo
+				FROM users 
+				WHERE user_name=:uname");
+			$statement->execute(array(':uname' => $_SESSION['user_name']));
+			//store found rows in $row
+			$row = $statement->fetch(PDO::FETCH_ASSOC);
+			//return user_photo name
+			return ($row['user_photo']);
+		}
+		catch(PDOException $e) {
+			echo $e->getMessage();
+		}
+	}
 	
 } //end of user class
 ?>

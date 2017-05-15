@@ -48,6 +48,22 @@
 			<!-- This div is used for the nav on mobile. -->
             <div id="mobilenav">
                 <ul>
+				<?php
+					//If user is logged in, display their profile picture and name
+					if(isset($_SESSION['user_session']))
+					{					
+						echo
+						(
+						"<a href='profile.php'>
+						<li class='mobilelist'>
+							<div class='mobilelistimg'>
+								<img src='img/profilepics/".$user->getUserProfileImage()."'>
+							</div>
+							<div>".$_SESSION['user_name']."</div>
+						</li></a>"
+						);
+					}
+				?>
                 <a href='index.php'><li class='mobilelist'><div>Home</div></li></a>
 				<a href='resource.php'><li class='mobilelist'><div>Resources</div></li></a>
 				<a href='leaderboard.php'><li class='mobilelist'><div>Leaderboard</div></li></a>
@@ -55,8 +71,7 @@
 					if(isset($_SESSION['user_session']))
 					{
 						echo 
-						"<a href='profile.php'><li class='mobilelist'><div>Profile</div></li></a>
-						<a href='logout.php'><li class='mobilelist'><div>Logout</div></li></a>";
+						"<a href='logout.php'><li class='mobilelist'><div>Logout</div></li></a>";
 					} else {
 						echo 
 						"<a href='login.php'><li class='mobilelist'><div>Login/Register</div></li></a>";
