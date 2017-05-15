@@ -76,12 +76,12 @@
     padding:0;
 }
 /*media query for the boxes when screen too thin*/
-@media only screen and (max-width: 490px) {
+/*@media only screen and (max-width: 490px) {
     .contentboxwrapper {
         width:100%;
         min-height:10vh;
     }
-}
+}*/
 /*this is where we put actual content for each topic*/
 /* main content boxes */
 .expandedcontentbox{
