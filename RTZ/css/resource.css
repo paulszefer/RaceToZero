@@ -135,7 +135,7 @@ button{
 }
 /* spans text appended to the end of each question and displays based on answer */
 .correcttext, .incorrecttext{
-    font-weight: bold;
+    font-family: MavenPL300;
     display: none;
 }
 .correcttext{
