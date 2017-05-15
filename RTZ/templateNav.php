@@ -6,7 +6,7 @@
 		<div id='navCont'>
 			<div class='navlogo'>
 				<a href='index.php'><img src='img/logo.png' alt='logo'></a>
-				<div class='loginstatus'>
+<!-- 				<div class='loginstatus'>
 					<p>
 					<?php
 						if(isset($_SESSION['user_session']))
@@ -19,7 +19,7 @@
 						}
 					?>
 					</p>
-				</div>
+				</div> -->
 				<div id='navburger'>
 					<img src='img/menuicon.png'>
 				</div>
@@ -48,6 +48,7 @@
 			<!-- This div is used for the nav on mobile. -->
             <div id="mobilenav">
                 <ul>
+                <div id='xButton' src='img/xButton.png'></div>
 				<?php
 					//If user is logged in, display their profile picture and name
 					if(isset($_SESSION['user_session']))
@@ -56,11 +57,16 @@
 						(
 						"<a href='profile.php'>
 						<li class='mobilelist'>
+							<div>".$_SESSION['user_name']."</div>
 							<div class='mobilelistimg'>
 								<img src='img/profilepics/".$user->getUserProfileImage()."'>
 							</div>
-							<div>".$_SESSION['user_name']."</div>
 						</li></a>"
+						);
+					} else {
+						echo
+						(
+						"<a href='login.php'><li class='mobilelist'><div>Not logged in</div></li></a>"
 						);
 					}
 				?>
