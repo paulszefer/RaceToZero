@@ -213,12 +213,6 @@
 				<br><br>
 	            <p>Food Fall is a game that teaches you the effects of food waste - and to have fun too!</p>
 	            <br>
-	            <hr>
-				<h2>FoodTrivia</h2>
-	            <br>
-	            <img src='img/setprofilepic.png' height='150' width='150' alt='foodtrivia logo'>
-	            <p>FoodTrivia teaches you about food waste and strategies on how to reduce avoidable food waste.</p>
-	            <br>
 			</div>
 			<!--start of the topic boxes-->
 			<div class='contentboxwrapper'>
