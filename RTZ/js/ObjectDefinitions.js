@@ -416,12 +416,12 @@ class Level {
         let y2 = y + size;
 
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
-            if (this._board[x1][y1].type === SOLID) {
-                return this.topLeftCollision(x1, y1);
+            if (this._board[x1][y2].type === SOLID) {
+                return this.bottomLeftCollision(x1, y1);
             } else if (this._board[x2][y2].type === SOLID) {
                 return this.bottomRightCollision(x1, y1);
-            } else if (this._board[x1][y2].type === SOLID) {
-                return this.bottomLeftCollision(x1, y1);
+            } else if (this._board[x1][y1].type === SOLID) {
+                return this.topLeftCollision(x1, y1);
             } else if (this._board[x2][y1].type === SOLID) {
                 return this.topRightCollision(x1, y1);
             } else if (this._board[x1][y1].type === GOAL) {
@@ -531,21 +531,33 @@ class Level {
      * barrier.
      */
     bottomLeftCollision(x1, y1) {
+    	let size = this._playItem.size;
+    	let x2 = x1 + size;
+    	let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
-        let origY2 = y1 + this._playItem.size - this._playItem.dy;
+        let origY2 = y2 - this._playItem.dy;
 
-        let move = 0;
-        while (move < this._playItem.size) {
-            if (this._playItem.isGrounded) {
-                return 3;
-            }
-            if (this._board[origX1 - move][origY2].type === SOLID) {
-                return 4;
-            } else if (this._board[origX1][origY2 + move].type === SOLID) {
-                return 3;
-            } else {
-                move++;
-            }
+		if (this._board[x2][y2].type === SOLID) {
+			return 3;
+		} else if (this._board[x1][y1].type === SOLID) {
+			return 4;
+		} else {
+			if (this._playItem.isGrounded) {
+				return 3;
+			}
+        	let move = 0;
+        	while (move < this._playItem.size) {
+            	if (this._playItem.isGrounded) {
+                	return 3;
+            	}
+            	if (this._board[origX1 - move][origY2].type === SOLID) {
+                	return 4;
+            	} else if (this._board[origX1][origY2 + move].type === SOLID) {
+                	return 3;
+            	} else {
+                	move++;
+            	}
+        	}
         }
         return 0;
     }
