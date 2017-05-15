@@ -2,6 +2,7 @@
 #overlay{
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.7);
+	width:100%;
 	height:0;
 	-webkit-transition: height 0.1s;
 	z-index: 500;
@@ -64,11 +65,11 @@ text-align:center;
 }
 /*mobilenav is the nav menu that shows up when navburger is clicked in mobile*/
 #mobilenav{
-	width:0;
+	width:100%;
+	height:0;
 	position:absolute;
 	left:0;
 	top:0;
-	/*height:100vh;*/
 	-webkit-transition: height 0.3s;
 	-moz-transition: height 0.3s;
 	background-color: black;
@@ -81,16 +82,32 @@ text-align:center;
 	font-size: 5vw;
 	font-family: MavenPL300;
 }
-/*#mobilenav ul li{
-	min-height:15vh;
-	width:100%;
-	display: table;
-	padding-right:1em;
-}*/
+/*The xbutton in mobilenav*/
+#xButton{
+	position: absolute;
+	content: url('../img/xButton.png');
+	height:6vh;
+	width:6vh;
+	left:3vh;
+	top:3vh;
+}
+#xButton:hover{
+	content: url('../img/xButtonInv.png');
+}
+#mobilenav ul{
+	padding: 0 10vw 0 10vw;
+}
 #mobilenav ul li div{
 	vertical-align: middle;
 	display:table-cell;
 	text-align: left;
+}
+/*for the first mobilenav li elements*/
+#mobilenav > ul > a:nth-child(2) > li > div:nth-child(1), #mobilenav > ul > a:nth-child(2) > li > div.mobilelistimg{
+	text-align: right;
+	width:auto;
+	right:0;
+	white-space: nowrap;
 }
 .mobilelist{
 	min-height:15vh;

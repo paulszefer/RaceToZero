@@ -12,7 +12,7 @@ if(isset($_POST['register-btn']))
 {
 	$FormRegUsername = $_POST['regUsername'];
 	$FormRegPassword = $_POST['regPassword'];
-	$PhotoURL = "url"; // We'll handle the URL later
+	$PhotoURL = rand(0,10); // takes random integer for disp image
 
 	//Error handling
 	if ($FormRegUsername == ""){
@@ -41,9 +41,9 @@ if(isset($_POST['register-btn']))
 					if($user->doLogin($FormRegUsername, $FormRegPassword))
 						{
 							//Optional redirect
-							// $user->redirect('index.php');
+							$user->redirect('index.php');
 						} 
-						else 
+						else
 						{
 							echo "<script type='text/javascript'>alert('Unknown reg error');</script>";
 						}
@@ -94,13 +94,13 @@ if(isset($_POST['login']))
 					<td><input type="text" name="loginUsername" id="loginUsername" oninput="loginUserValid()"></td>
 				</tr>	
 				<tr>
-					<td colspan="3"><p id="loginUsernameErrorField" style="text-align:center">&nbsp</p></td>
+					<td colspan="3"><p id="loginUsernameErrorField" style="text-align:center">&nbsp;</p></td>
 				</tr>
 				<tr>
 					<td><label class="required" for="password">Password</label></td>
 					<td colspan="3"><input type="password" name="loginPassword" id="loginPassword"></td>
 				</tr>
-				<tr><td colspan="3"><p id="loginPassErrorField" style="text-align:center">&nbsp</p></td></tr>
+				<tr><td colspan="3"><p id="loginPassErrorField" style="text-align:center">&nbsp;</p></td></tr>
 					</table>
 				<br>
 				<button name="login" value="login" type="submit">Login</button>
