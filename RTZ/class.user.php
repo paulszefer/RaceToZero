@@ -47,7 +47,7 @@ class USER {
 					$this->myId = $userRow['user_id'];
 					//$_SESSION['user_session'] = $userRow['id'];
 					//temp ghetto fix atm
-					$_SESSION['user_session'] = "in";
+					$_SESSION['user_session'] = $userRow['user_name'];
 					$_SESSION['user_name'] = $userRow['user_name'];
 					$_SESSION['user_id'] = $userRow['user_id'];
 					//set this user loggedIn status as true
