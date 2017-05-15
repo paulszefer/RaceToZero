@@ -285,7 +285,7 @@ class Level {
      * TODO - check incrementally to fix bugs with moving through thin barriers
      */
     move() {
-		console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy);
+
 
         // don't move if out of bounds
         // TODO - query width and height from div
@@ -303,11 +303,10 @@ class Level {
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
         let collision = this.checkCollisions(tempX, tempY);
-        console.log(collision);
+        //		console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
+        //console.log(collision);
         if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
         	this.playItem.isGrounded = true;
-        	
-        	
         	if (collision === 2) {
         		// right side collision
         		this.snapToRight(tempY);
@@ -550,10 +549,10 @@ class Level {
         let y2 = y1 + size;
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
-		if (this._board[x2][y1].type === SOLID) {
+		if (this._board[x2][y1 + 5].type === SOLID) {
 			console.log("error one");
             return 2;
-        } else if (this._board[x1][y2].type === SOLID) {
+        } else if (this._board[x1 + 5][y2].type === SOLID) {
             return 3;
         } else {
             if (this._playItem.isGrounded) {

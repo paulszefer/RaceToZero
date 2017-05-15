@@ -183,8 +183,8 @@ $(function () {
             );
             goal = new Goal("goal", barrierSize, height - Math.round(playItemSize * 0.5), goalSize + barrierSize, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            //playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
-  			playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+  			//playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
         } else if (levelID === 1) {
             // TODO - remove row of white pixels at the bottom
             barriers.push(
@@ -201,8 +201,8 @@ $(function () {
             ); // TODO - add correct info
             goal = new Goal("goal", Math.round(width * 0.65), Math.round(height - playItemSize * 1.5), Math.round(width * 0.8), height - playItemSize);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            //playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
-            playItem = new PlayItem(144, 532, 6, -13, playItemSize, foodItem);
+            playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(144, 532, 0, -13, playItemSize, foodItem);
         } else if (levelID === 2) {
             // TODO - add correct level data
             barriers.push(
