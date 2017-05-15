@@ -14,11 +14,13 @@
 /*wrapper for each of topic box*/
 .contentboxwrapper{
     width:49%;
-    background-color:black;
+    background-color:#6AD9D9;
     min-height:25vh;
     display:inline-block;
-    color:white;
+    color:black;
     margin:0.24999999%;
+    border: solid black 2px;
+    font-family: MavenPL300;
 }
 /*topic box*/
 .contentbox{
@@ -41,10 +43,10 @@
 }
 .bigcontentboxwrapper{
     width:98.5%;
-    background-color:black;
+    background-color:#6AD9D9;
     min-height:100%;
     display:inline-block;
-    color:white;
+    color:black;
     margin:0.24999999%;
     text-align: center;
 }
