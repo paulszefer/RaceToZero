@@ -285,11 +285,12 @@ class Level {
      * TODO - check incrementally to fix bugs with moving through thin barriers
      */
     move() {
+		//console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy);
 
         // don't move if out of bounds
         // TODO - query width and height from div
         // TODO - this also doesn't work
-        if (this.playItem.x1 < 0 || this.playItem.y1 < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
+        if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
             return;
         }
 
