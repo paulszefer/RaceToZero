@@ -303,7 +303,7 @@ class Level {
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
         let collision = this.checkCollisions(tempX, tempY);
-        
+        //console.log(collision);
         if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
         	this.playItem.isGrounded = true;
         	this.playItem.dy = 0;
@@ -387,7 +387,7 @@ class Level {
      */
     snapToTop(tempX) {
         let move = 0;
-        while (this.checkCollisions(tempX, this._playItem.y - move) !== 1) {
+        while (this.checkCollisions(tempX, this._playItem.y - move) === 0) {
             move++;
         }
         let ratio = this._playItem.dx / this._playItem.dy;
@@ -400,7 +400,7 @@ class Level {
      */
     snapToRight(tempY) {
         let move = 0;
-        while (this.checkCollisions(this._playItem.x + move, tempY) !== 2) {
+        while (this.checkCollisions(this._playItem.x + move, tempY) === 0) {
             move++;
         }
         let ratio = this._playItem.dy / this._playItem.dx;
@@ -413,7 +413,7 @@ class Level {
      */
     snapToBottom(tempX) {
         let move = 0;
-        while (this.checkCollisions(tempX, this._playItem.y + move) !== 3) {
+        while (this.checkCollisions(tempX, this._playItem.y + move) === 0) {
             move++;
         }
         let ratio = this._playItem.dx / this._playItem.dy;
@@ -426,7 +426,7 @@ class Level {
      */
     snapToLeft(tempY) {
         let move = 0;
-        while (this.checkCollisions(this._playItem.x - move, tempY) !== 4) {
+        while (this.checkCollisions(this._playItem.x - move, tempY) === 0) {
             move++;
         }
         let ratio = this._playItem.dy / this._playItem.dx;
@@ -492,6 +492,12 @@ class Level {
         } else if (this._board[x1][y2].type === SOLID) {
             return 4;
         } else {
+        	if (this._playItem.dx >= 0) {
+				return 1;
+			}
+			if (this._playItem.dy >= 0) {
+				return 4;
+			}
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX1 - move][origY1].type === SOLID) {
@@ -513,6 +519,12 @@ class Level {
         let origX2 = x1 + this._playItem.size - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
+		if (this._playItem.dx <= 0) {
+			return 1;
+		}
+		if (this._playItem.dy >= 0) {
+			return 2;
+		}
         let move = 0;
         while (move < this._playItem.size) {
             if (this._board[origX2 + move][origY1].type === SOLID) {
@@ -544,6 +556,12 @@ class Level {
             if (this._playItem.isGrounded) {
                 return 3;
             }
+            if (this._playItem.dx <= 0) {
+				return 3;
+			}
+			if (this._playItem.dy >= 0) {
+				return 2;
+			}
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX2 + move][origY2].type === SOLID) {
@@ -576,6 +594,13 @@ class Level {
 		} else {
 			if (this._playItem.isGrounded) {
 				return 3;
+			}
+			// either left side or bottom side
+			if (this._playItem.dx >= 0) {
+				return 3;
+			}
+			if (this._playItem.dy <= 0) {
+				return 4;
 			}
         	let move = 0;
         	while (move < this._playItem.size) {
