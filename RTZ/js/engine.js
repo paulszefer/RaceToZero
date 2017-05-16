@@ -451,7 +451,9 @@ $(function () {
                 function reInit() {
                     scoreOverlay.style.display = "none";
                     score = 0;
-                    timer.style.display = "block";
+                    if (game.level >= 0) {
+                        timer.style.display = "block";
+                    }
                     let overlay_elements = scoreOverlay.children;
                     for (let i = overlay_elements.length - 1; i >= 0; i--) {
                         scoreOverlay.removeChild(overlay_elements[i]);
