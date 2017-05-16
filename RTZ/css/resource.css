@@ -52,8 +52,8 @@
 /*this is the affiliated apps content box*/
 .bigexpandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
     z-index:10;
     height:0;
     width:0;
@@ -71,7 +71,7 @@
 }
 .bigexpandedcontentbox img, .bigexpandedcontentbox p{
     padding-left: 50px;
-    color: #FFFE88;
+    color: black;
 }
 .contentbox h1{
     padding:0;
