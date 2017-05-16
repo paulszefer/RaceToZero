@@ -428,9 +428,6 @@ $(function () {
                 
                 scoreOverlay.style.display = "block";
                 timer.style.display = "none";
-
-                //x=107 y=365.5 PAAAAANIIIIIIIIIIIIIIIC
-                //i blame ian
                 
                 retryButton.onclick = function() {
                 	game.level -= 1;
