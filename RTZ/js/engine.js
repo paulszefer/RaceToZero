@@ -202,7 +202,7 @@ $(function () {
             //goal = new Goal("goal", Math.round(width * 0.65), Math.round(height - playItemSize * 1.5), Math.round(width * 0.8), height - playItemSize);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(144, 532, 0, -13, playItemSize, foodItem);
+            //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
         } else if (levelID === 2) {
             // TODO - add correct level data
             barriers.push(
@@ -276,6 +276,11 @@ $(function () {
          * Initializes the timer that handles game ticks.
          */
         intervalId = setInterval(move, 20);
+        
+        function stopInterval() {
+        	clearInterval(intervalId);
+        }
+        //setTimeout(stopInterval, 2000);
     }
 
     /**
