@@ -14,12 +14,11 @@
 /*wrapper for each of topic box*/
 .contentboxwrapper{
     width:49%;
-    background-color:#6AD9D9;
+    background-color:white;
     min-height:25vh;
     display:inline-block;
     color:black;
     margin:0.24999999%;
-    border: solid black 2px;
     font-family: MavenPL300;
 }
 /*topic box*/
@@ -43,7 +42,7 @@
 }
 .bigcontentboxwrapper{
     width:98.5%;
-    background-color:#6AD9D9;
+    background-color:white;
     min-height:100%;
     display:inline-block;
     color:black;
@@ -88,8 +87,8 @@
 /* main content boxes */
 .expandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
     z-index:10;
     height:0;
     width:0;
