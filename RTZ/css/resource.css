@@ -14,12 +14,11 @@
 /*wrapper for each of topic box*/
 .contentboxwrapper{
     width:49%;
-    background-color:white;
+    background-color:black;
     min-height:25vh;
     display:inline-block;
-    color:black;
+    color:white;
     margin:0.24999999%;
-    font-family: MavenPL300;
 }
 /*topic box*/
 .contentbox{
@@ -42,18 +41,18 @@
 }
 .bigcontentboxwrapper{
     width:98.5%;
-    background-color:white;
+    background-color:black;
     min-height:100%;
     display:inline-block;
-    color:black;
+    color:white;
     margin:0.24999999%;
     text-align: center;
 }
 /*this is the affiliated apps content box*/
 .bigexpandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
-    color:black;
-    background-color: white;
+    color:white;
+    background-color: black;
     z-index:10;
     height:0;
     width:0;
@@ -71,7 +70,7 @@
 }
 .bigexpandedcontentbox img, .bigexpandedcontentbox p{
     padding-left: 50px;
-    color: black;
+    color: #FFFE88;
 }
 .contentbox h1{
     padding:0;
@@ -87,8 +86,8 @@
 /* main content boxes */
 .expandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
-    color:black;
-    background-color: white;
+    color:white;
+    background-color: black;
     z-index:10;
     height:0;
     width:0;
