@@ -185,9 +185,9 @@ $(function () {
   			//playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
         } else if (levelID === 1) { // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
-            let questiontext = "questiontext";
-            let answer1 = "answer1text";
-            let answer2 = "answer2text";
+            let questiontext = "How much of the food produced around the world is wasted?";
+            let answer1 = "One half";
+            let answer2 = "One third";
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight),
                 new Barrier("ground1", 0, height - barrierHeight * 4, width * 0.25, height),
@@ -195,7 +195,7 @@ $(function () {
                 new Barrier("ground3", width * 0.75, height - barrierHeight * 4, width, height)
             );
             extras.push(
-                new Extra("question", 100, 100, 0, 0, "p", questiontext),
+                new Extra("question", Math.round(width * 0.3), Math.round(height * 0.25), 0, 0, "p", questiontext),
                 new Extra("answer1", 100, 120, 0, 0, "p", answer1),
                 new Extra("answer2", 100, 140, 0, 0, "p", answer2),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
