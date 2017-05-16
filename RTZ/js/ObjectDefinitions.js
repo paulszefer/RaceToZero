@@ -649,10 +649,10 @@ class PhysicalObject {
      */
     constructor(name, x1, y1, x2, y2, pixelType) {
         this._name = name;
-        this._x1 = x1;
-        this._y1 = y1;
-        this._x2 = x2;
-        this._y2 = y2;
+        this._x1 = Math.round(x1);
+        this._y1 = Math.round(y1);
+        this._x2 = Math.round(x2);
+        this._y2 = Math.round(y2);
         this._pixelType = pixelType;
     }
 
@@ -681,7 +681,7 @@ class PhysicalObject {
      * Sets the x coordinate of the top-left corner.
      */
     set x1(x) {
-        this._x1 = x;
+        this._x1 = Math.round(x);
     }
 
     /**
@@ -695,7 +695,7 @@ class PhysicalObject {
      * Sets the y coordinate of the top-left corner.
      */
     set y1(y) {
-        this._y1 = y;
+        this._y1 = Math.round(y);
     }
 
     /**
@@ -709,7 +709,7 @@ class PhysicalObject {
      * Sets the x coordinate of the bottom-right corner.
      */
     set x2(x) {
-        this._x2 = x;
+        this._x2 = Math.round(x);
     }
 
     /**
@@ -723,7 +723,7 @@ class PhysicalObject {
      * Sets the y coordinate of the bottom-right corner.
      */
     set y2(y) {
-        this._y2 = y;
+        this._y2 = Math.round(y);
     }
 
     /**
@@ -834,10 +834,10 @@ class Wrong extends PhysicalObject {
 class Extra {
     constructor(name, x1, y1, x2, y2, elementType, elementData) {
         this._name = name;
-        this._x1 = x1;
-        this._y1 = y1;
-        this._x2 = x2;
-        this._y2 = y2;
+        this._x1 = Math.round(x1);
+        this._y1 = Math.round(y1);
+        this._x2 = Math.round(x2);
+        this._y2 = Math.round(y2);
         this._elementType = elementType;
         this._elementData = elementData;
     }
@@ -886,7 +886,7 @@ class Extra {
      * Sets the x coordinate of the top-left corner.
      */
     set x1(x) {
-        this._x1 = x;
+        this._x1 = Math.round(x);
     }
 
     /**
@@ -900,7 +900,7 @@ class Extra {
      * Sets the y coordinate of the top-left corner.
      */
     set y1(y) {
-        this._y1 = y;
+        this._y1 = Math.round(y);
     }
 
     /**
@@ -914,7 +914,7 @@ class Extra {
      * Sets the x coordinate of the bottom-right corner.
      */
     set x2(x) {
-        this._x2 = x;
+        this._x2 = Math.round(x);
     }
 
     /**
@@ -970,8 +970,8 @@ class PlayItem {
      * Automatically sets the item to be a 50x50 square.
      */
     constructor(x, y, dx, dy, size, foodItem) {
-        this._x = x;
-        this._y = y;
+        this._x = Math.round(x);
+        this._y = Math.round(y);
         this._dx = dx;
         this._dy = dy;
         this._size = size;
@@ -989,8 +989,8 @@ class PlayItem {
     /**
      * Sets the x coordinate.
      */
-    set x(value) {
-        this._x = value;
+    set x(x) {
+        this._x = Math.round(x);
     }
 
     /**
@@ -1003,8 +1003,8 @@ class PlayItem {
     /**
      * Sets the y coordinate.
      */
-    set y(value) {
-        this._y = value;
+    set y(y) {
+        this._y = Math.round(y);
     }
 
     /**

@@ -5,3 +5,23 @@
     margin: auto;
     position: relative;
 }
+
+/* Styles the level select window. */
+#level_select {
+    width: 60%;
+    height: 80%;
+    margin: auto;
+    padding: 2%;
+    background-color: gray;
+    z-index: 5000000000;
+}
+
+/* Styles a level select button. */
+.level_select_button {
+    width: 60%;
+    height: 40%;
+    margin: 4% auto;
+    text-align: center;
+    background-color: white;
+}
+
