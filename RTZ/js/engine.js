@@ -46,6 +46,11 @@ $(function () {
     let scoreOverlay;
     let game;
 
+    /**
+     * Constants.
+     */
+    const NUMBER_OF_LEVELS = 5;
+
     setup();
 
     /**
@@ -219,6 +224,25 @@ $(function () {
             goal = new Goal("goal", barrierWidth, height - barrierWidth, Math.round(playItemSize * 5 / 2), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 2 / 5) - playItemSize, barrierWidth + 10, 0, 0, playItemSize, foodItem);
+        } else if (levelID === -1) {
+            // level select screen
+            let levelSelect = document.createElement("div");
+            levelSelect.id = "level_select";
+            
+            let level;
+            for (let i = 0; i < NUMBER_OF_LEVELS; i++) {
+                level = document.createElement("div");
+                level.id = "level_" + i;
+                level.className = "level_select_button";
+                if (i = 0) {
+                    level.innerHTML = "Tutorial";
+                } else {
+                    level.innerHTML = "Level " + i;
+                }
+                levelSelect.appendChild(level);
+            }
+
+            gameWindow.appendChild(levelSelect);
         }
 
         /**
