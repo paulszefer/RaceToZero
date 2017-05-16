@@ -166,7 +166,7 @@ $(function () {
         extras = [];
 
         
-		//levelID = -1;
+		levelID = 9;
         /**
          * Load data for the current level.
          */
@@ -183,6 +183,7 @@ $(function () {
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.4 - playItemSize, height * 0.2, 0, 0, playItemSize, foodItem);
   			//playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
+  			//x=107 y=365.5
         } else if (levelID === 1) { // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
             let questiontext = "How much of the food produced around the world is wasted?";
@@ -221,9 +222,12 @@ $(function () {
         } else if (levelID === 3) { // Level 1 Question Stage
             // TODO - add correct level data
             barriers.push(
-                new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierHeight)
+                new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierHeight),
+            	new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.75), Math.round(width * 0.30), Math.round(height * 0.95)),
+            	new Barrier("barrier2", Math.round(width * 0.45), Math.round(height * 0.75), Math.round(width * 0.55), Math.round(height * 0.95)),
+            	new Barrier("barrier3", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95))
             );
-            goal = new Goal("goal", barrierWidth, height - barrierWidth, Math.round(playItemSize * 5 / 2), height);
+            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) { // Level 2 Game Stage (staircase)
@@ -238,7 +242,21 @@ $(function () {
         	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
         	playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) { // Level 2 Question Stage
-        
+        	barriers.push(
+                new Barrier("platform1", Math.round(width * 0.75), Math.round(height * 0.20), Math.round(width * 0.95), Math.round(height * 0.30)),
+            	new Barrier("platform2", Math.round(width * 0.30), Math.round(height * 0.30), Math.round(width * 0.45), Math.round(height * 0.35)),
+            	new Barrier("platform3", Math.round(width * 0.55), Math.round(height * 0.50), Math.round(width * 0.70), Math.round(height * 0.55)),
+            	new Barrier("platform4", Math.round(width * 0.30), Math.round(height * 0.80), Math.round(width * 0.45), Math.round(height * 0.85)),
+            	new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.25), Math.round(width * 0.30), Math.round(height * 0.55)),
+            	new Barrier("barrier2", Math.round(width * 0.05), Math.round(height * 0.45), Math.round(width * 0.20), Math.round(height * 0.55)),
+            	new Barrier("barrier3", Math.round(width * 0.70), Math.round(height * 0.40), Math.round(width * 0.80), Math.round(height * 0.60)),
+            	new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.50), Math.round(width * 0.95), Math.round(height * 0.60)),
+            	new Barrier("barrier5", Math.round(width * 0.20), Math.round(height * 0.75), Math.round(width * 0.30), Math.round(height * 0.95)),
+            	new Barrier("barrier6", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95))
+            );
+            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.95);
+            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 6) { // Level 3 Game Stage (obstacles)
         	barriers.push(
         		new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.45)),
@@ -260,7 +278,21 @@ $(function () {
         	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
         	playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 7) { // Level 3 Question Stage
-        
+        	barriers.push(
+                new Barrier("mainwall", Math.round(width * 0.70), Math.round(height * 0.05), Math.round(width * 0.80), Math.round(height * 0.80)),
+        		new Barrier("floor", Math.round(width * 0.30), Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
+        		new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.20), Math.round(width * 0.30), Math.round(height * 0.30)),
+        		new Barrier("platform2", Math.round(width * 0.05), Math.round(height * 0.45), Math.round(width * 0.30), Math.round(height * 0.55)),
+        		new Barrier("platform3", Math.round(width * 0.05), Math.round(height * 0.70), Math.round(width * 0.30), Math.round(height * 0.80)),
+        		new Barrier("ledge4", Math.round(width * 0.60), Math.round(height * 0.35), Math.round(width * 0.70), Math.round(height * 0.40)),
+        		new Barrier("ledge5", Math.round(width * 0.60), Math.round(height * 0.60), Math.round(width * 0.70), Math.round(height * 0.65)),
+        		new Barrier("floating1", Math.round(width * 0.40), Math.round(height * 0.20), Math.round(width * 0.49), Math.round(height * 0.25)),
+        		new Barrier("floating2", Math.round(width * 0.40), Math.round(height * 0.45), Math.round(width * 0.49), Math.round(height * 0.50)),
+        		new Barrier("floating3", Math.round(width * 0.40), Math.round(height * 0.75), Math.round(width * 0.49), Math.round(height * 0.80))
+            );
+            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
+            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 8) { // Level 4 Game Stage (maze)
         	barriers.push(
         		new Barrier("floor", Math.round(width * 0.20), Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
@@ -287,9 +319,27 @@ $(function () {
         	);
         	goal = new Goal("goal", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.20), Math.round(height * 1.00));
         	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-        	playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 5, 20, playItemSize, foodItem);
+        	playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) { // Level 4 Question Stage
-        
+        	barriers.push(
+                new Barrier("topleftwall", Math.round(width * 0.15), Math.round(height * 0.05), Math.round(width * 0.25), Math.round(height * 0.20)),
+                new Barrier("topleftfloor", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.35), Math.round(height * 0.40)),
+                new Barrier("midlefthang", Math.round(width * 0.20), Math.round(height * 0.40), Math.round(width * 0.35), Math.round(height * 0.55)),
+                new Barrier("leftwall", Math.round(width * 0.20), Math.round(height * 0.65), Math.round(width * 0.35), Math.round(height * 0.95)),
+                new Barrier("botleftlip", Math.round(width * 0.35), Math.round(height * 0.70), Math.round(width * 0.45), Math.round(height * 0.75)),
+                new Barrier("botlefttooth", Math.round(width * 0.35), Math.round(height * 0.75), Math.round(width * 0.40), Math.round(height * 0.80)),
+                new Barrier("botrightchunk", Math.round(width * 0.50), Math.round(height * 0.85), Math.round(width * 0.75), Math.round(height * 0.95)),
+                new Barrier("botrightfloor", Math.round(width * 0.55), Math.round(height * 0.70), Math.round(width * 0.70), Math.round(height * 0.85)),
+                new Barrier("botrightlip1", Math.round(width * 0.70), Math.round(height * 0.70), Math.round(width * 0.75), Math.round(height * 0.75)),
+                new Barrier("botrightlip2", Math.round(width * 0.90), Math.round(height * 0.70), Math.round(width * 0.95), Math.round(height * 0.75)),
+                new Barrier("botright", Math.round(width * 0.90), Math.round(height * 0.85), Math.round(width * 0.95), Math.round(height * 0.95)),
+                new Barrier("toprightchunk", Math.round(width * 0.55), Math.round(height * 0.25), Math.round(width * 0.80), Math.round(height * 0.50)),
+                new Barrier("toprightfloor", Math.round(width * 0.80), Math.round(height * 0.35), Math.round(width * 0.95), Math.round(height * 0.50)),
+                new Barrier("toprightlip", Math.round(width * 0.70), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.25))
+            );
+            goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
+            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            playItem = new PlayItem(Math.round(width * 0.10 - playItemSize * 0.5), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === -1) {
             // level select screen
             let levelSelect = document.createElement("div");
