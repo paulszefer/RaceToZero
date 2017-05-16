@@ -165,11 +165,8 @@ $(function () {
 
         extras = [];
 
-        /**
-         * Defines the play area and fills the background with the appropriate colour.
-         */
-        new Air("playArea", 0, 0, width, height).drawPhysicalObject();
-		//levelID = 1;
+        
+		//levelID = -1;
         /**
          * Load data for the current level.
          */
@@ -308,12 +305,22 @@ $(function () {
                 } else {
                     level.innerHTML = "Level " + i;
                 }
+                level.onclick = function() {
+                	console.log(i);
+                	game.level = i * 2;
+                	init();
+                }
                 levelSelect.appendChild(level);
             }
             gameWindow.appendChild(levelSelect);
         }
 		
 		if (levelID >= 0) {
+		
+		/**
+         * Defines the play area and fills the background with the appropriate colour.
+         */
+        new Air("playArea", 0, 0, width, height).drawPhysicalObject();
 		
         /**
          * Displays the barriers, then adds the barriers to the level object.
