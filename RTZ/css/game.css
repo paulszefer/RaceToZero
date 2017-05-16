@@ -6,6 +6,40 @@
     position: relative;
 }
 
+/* Applies to the game_window div on the index page. */
+#game_window {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#timer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    color: white;
+    z-index: 10;
+}
+
+#score_overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 2em;
+}
+
+.score_overlay_button {
+    width: 25%;
+    background-color: red;
+    color: yellow;
+}
+
 /* Styles the level select window. */
 #level_select {
     width: 60%;
@@ -13,7 +47,7 @@
     margin: auto;
     padding: 2%;
     background-color: gray;
-    z-index: 5000000000;
+    z-index:10;
 }
 
 /* Styles a level select button. */
@@ -25,3 +59,6 @@
     background-color: white;
 }
 
+#food_image {
+    position: absolute;
+}

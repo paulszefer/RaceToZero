@@ -25,7 +25,9 @@
  * - add ^ to game object
  * - start game timer
  *
- * TODO - Transfer all game element styling to game.css
+ * TODO - Transfer all game element styling to game.css - in progress
+ * TODO - extras should have a class to style z-index
+ * TODO - before moving, should be Math.floor(), not Math.round()
  */
 $(function () {
 
@@ -60,7 +62,6 @@ $(function () {
          */
         gameContainer = document.createElement("div");
         gameContainer.id = "game_container";
-        gameContainer.style.posititon = "relative";
 
         // .contentactual is the div that holds the content on each page
         // TODO - change .contentactual to #contentactual
@@ -71,11 +72,6 @@ $(function () {
          */
         gameWindow = document.createElement("div");
         gameWindow.id = "game_window";
-        gameWindow.style.display = "none";
-        gameWindow.style.position = "absolute";
-        gameWindow.style.left = 0;
-        gameWindow.style.top = 0;
-        gameWindow.style.width = "100%";
         gameContainer.appendChild(gameWindow);
 
         /**
@@ -83,27 +79,15 @@ $(function () {
          */
         timer = document.createElement("p");
         timer.id = "timer";
-        timer.style.position = "absolute";
-        timer.style.top = 0;
-        timer.style.left = "50%";
-        timer.style.color = "white";
-        timer.style.zIndex = 10;
         gameContainer.appendChild(timer);
 
         /**
          * Creates the element that stores the end of level score overlay.
-         * TODO - Add all information to overlay
-         * TODO - Style overlay with CSS
          */
         scoreOverlay = document.createElement("div");
         scoreOverlay.id = "score_overlay";
-        scoreOverlay.style.display = "none";
-        scoreOverlay.style.position = "absolute";
-        scoreOverlay.style.top = 0;
-        scoreOverlay.style.left = 0;
         scoreOverlay.style.width = gameContainer.parentNode.offsetWidth + "px";
         scoreOverlay.style.height = gameContainer.parentNode.offsetHeight + "px";
-        scoreOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
         gameContainer.appendChild(scoreOverlay);
 
         /**
@@ -309,7 +293,7 @@ $(function () {
                 	console.log(i);
                 	game.level = i * 2;
                 	init();
-                }
+                };
                 levelSelect.appendChild(level);
             }
             gameWindow.appendChild(levelSelect);
@@ -369,18 +353,11 @@ $(function () {
         document.getElementById("game_window").appendChild(imgElement);
 
         foodImage = $("#food_image");
-        foodImage.css("position", "absolute");
 
         /**
          * Initializes the timer that handles game ticks.
          */
         intervalId = setInterval(move, 20);
-        
-        // function stopInterval() {
-        // 	clearInterval(intervalId);
-        // }
-        //setTimeout(stopInterval, 2000);
-        //setClicked(false);
         }
     }
 
@@ -431,23 +408,18 @@ $(function () {
                 });
                 
                 scoreOverlay.appendChild(time);
-                scoreOverlay.style.fontSize = "2em";
-                scoreOverlay.style.color = "white";
                 
                 let retryButton = document.createElement("div");
-                retryButton.style.width = "25%";
-                retryButton.style.backgroundColor = "red";
-                retryButton.style.color = "yellow";
+                retryButton.id = "retry_button";
+                retryButton.className = "score_overlay_button";
                 retryButton.innerHTML = "Retry";
                 let selectLevelButton = document.createElement("div");
-                selectLevelButton.style.width = "25%";
-                selectLevelButton.style.backgroundColor = "blue";
-                selectLevelButton.style.color = "yellow";
+                selectLevelButton.id = "select_level_button";
+                selectLevelButton.className = "score_overlay_button";
                 selectLevelButton.innerHTML = "Select Level";
                 let nextLevelButton = document.createElement("div");
-                nextLevelButton.style.width = "25%";
-                nextLevelButton.style.backgroundColor = "green";
-                nextLevelButton.style.color = "yellow";
+                nextLevelButton.id = "next_level_button";
+                nextLevelButton.className = "score_overlay_button";
                 nextLevelButton.innerHTML = "Next Level";
                 
                 scoreOverlay.appendChild(retryButton);
@@ -455,7 +427,6 @@ $(function () {
                 scoreOverlay.appendChild(nextLevelButton);
                 
                 scoreOverlay.style.display = "block";
-                
                 timer.style.display = "none";
 
                 //x=107 y=365.5 PAAAAANIIIIIIIIIIIIIIIC
@@ -474,7 +445,7 @@ $(function () {
                 nextLevelButton.onclick = function() {
                 	game.level += 1;
         			reInit();
-                }
+                };
                 
                 function reInit() {
                 	scoreOverlay.style.display = "none";
@@ -488,44 +459,9 @@ $(function () {
                 	for (let i = level_elements.length - 1; i >= 0; i--) {
                 	    level_elements[i].parentNode.removeChild(level_elements[i]);
                 	}
-                	//setClicked(true);
                 	init();
                 }
         	}
-            /*clearInterval(intervalId);
-            game.level += 1;
-            if (game.level % 2 === 0) {
-                scoreOverlay.style.display = "block";
-
-                // score element for score screen
-                let time = document.createElement("p");
-                time.innerHTML = parseTime(score);
-                time.style.color = "white";
-                // send score to database
-                let actualLevel = game.level / 2;
-                let scoreInSeconds = Math.floor(score / 1000);
-                scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
-                $.post("accessdb.php", {
-                    function: "saveGame",
-                    level: actualLevel,
-                    time: scoreInSeconds
-                }, function (data) {
-                    //alert(data);
-                });
-                time.style.fontSize = "2em";
-                scoreOverlay.appendChild(time);
-
-                timer.parentNode.removeChild(timer);
-                
-                
-                
-            } else {
-                let level_elements = document.getElementById("game_window").children;
-                for (let i = level_elements.length - 1; i >= 0; i--) {
-                    level_elements[i].parentNode.removeChild(level_elements[i]);
-                }
-                init();
-            }*/
         } else if (moveReturnValue === 6) {
             // TODO - somehow display that that is the wrong answer
         }
@@ -551,19 +487,20 @@ $(function () {
      */
     $(gameContainer).click(function (e) {
         // prevents initial input
-        // TODO - remove "if statement" if play button is not used because it is unnecessary
         if (!clicked && score > 100) {
             let divPosX = $(this).position().left;
             let divPosY = $(this).position().top;
             let mousePosX = e.pageX - divPosX;
             let mousePosY = e.pageY - divPosY;
 
-            // implements a delay between inputs
+            // moves the item based on the click
             playItem.clicked(mousePosX, mousePosY);
-            clicked = false;
-            //setTimeout(setClicked, 500, false);
+
+            // implements a delay between inputs TODO - choose delay
+            // clicked = true;
+            // setTimeout(setClicked, 500, false);
         }
-    })
+    });
 
     /** Unused play game button block closure. */
     // });
