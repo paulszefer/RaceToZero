@@ -25,7 +25,9 @@
  * - add ^ to game object
  * - start game timer
  *
- * TODO - Transfer all game element styling to game.css
+ * TODO - Transfer all game element styling to game.css - in progress
+ * TODO - extras should have a class to style z-index
+ * TODO - before moving, should be Math.floor(), not Math.round()
  */
 $(function () {
 
@@ -60,7 +62,6 @@ $(function () {
          */
         gameContainer = document.createElement("div");
         gameContainer.id = "game_container";
-        gameContainer.style.posititon = "relative";
 
         // .contentactual is the div that holds the content on each page
         // TODO - change .contentactual to #contentactual
@@ -71,11 +72,6 @@ $(function () {
          */
         gameWindow = document.createElement("div");
         gameWindow.id = "game_window";
-        gameWindow.style.display = "none";
-        gameWindow.style.position = "absolute";
-        gameWindow.style.left = 0;
-        gameWindow.style.top = 0;
-        gameWindow.style.width = "100%";
         gameContainer.appendChild(gameWindow);
 
         /**
@@ -83,27 +79,15 @@ $(function () {
          */
         timer = document.createElement("p");
         timer.id = "timer";
-        timer.style.position = "absolute";
-        timer.style.top = 0;
-        timer.style.left = "50%";
-        timer.style.color = "white";
-        timer.style.zIndex = 10;
         gameContainer.appendChild(timer);
 
         /**
          * Creates the element that stores the end of level score overlay.
-         * TODO - Add all information to overlay
-         * TODO - Style overlay with CSS
          */
         scoreOverlay = document.createElement("div");
         scoreOverlay.id = "score_overlay";
-        scoreOverlay.style.display = "none";
-        scoreOverlay.style.position = "absolute";
-        scoreOverlay.style.top = 0;
-        scoreOverlay.style.left = 0;
         scoreOverlay.style.width = gameContainer.parentNode.offsetWidth + "px";
         scoreOverlay.style.height = gameContainer.parentNode.offsetHeight + "px";
-        scoreOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
         gameContainer.appendChild(scoreOverlay);
 
         /**
@@ -165,8 +149,8 @@ $(function () {
 
         extras = [];
 
-        
-		//levelID = -1;
+
+        //levelID = -1;
         /**
          * Load data for the current level.
          */
@@ -182,7 +166,7 @@ $(function () {
             goal = new Goal("goal", barrierWidth, height - barrierHeight, goalSize + barrierWidth, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.4 - playItemSize, height * 0.2, 0, 0, playItemSize, foodItem);
-  			//playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
         } else if (levelID === 1) { // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
             let questiontext = "How much of the food produced around the world is wasted?";
@@ -227,69 +211,69 @@ $(function () {
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) { // Level 2 Game Stage (staircase)
-        	barriers.push(
-        		new Barrier("step0", Math.round(width * 0.05), Math.round(height * 0.80), Math.round(width * 0.80), Math.round(height)),
-        		new Barrier("step1", Math.round(width * 0.20), Math.round(height * 0.65), Math.round(width * 0.80), Math.round(height * 0.95)),
-				new Barrier("step2", Math.round(width * 0.35), Math.round(height * 0.50), Math.round(width * 0.80), Math.round(height * 0.75)),
-				new Barrier("step3", Math.round(width * 0.50), Math.round(height * 0.35), Math.round(width * 0.80), Math.round(height * 0.60)),
-				new Barrier("step4", Math.round(width * 0.65), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.45))
-        	);
-        	goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), height);
-        	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-        	playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
+            barriers.push(
+                new Barrier("step0", Math.round(width * 0.05), Math.round(height * 0.80), Math.round(width * 0.80), Math.round(height)),
+                new Barrier("step1", Math.round(width * 0.20), Math.round(height * 0.65), Math.round(width * 0.80), Math.round(height * 0.95)),
+                new Barrier("step2", Math.round(width * 0.35), Math.round(height * 0.50), Math.round(width * 0.80), Math.round(height * 0.75)),
+                new Barrier("step3", Math.round(width * 0.50), Math.round(height * 0.35), Math.round(width * 0.80), Math.round(height * 0.60)),
+                new Barrier("step4", Math.round(width * 0.65), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.45))
+            );
+            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), height);
+            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) { // Level 2 Question Stage
-        
+
         } else if (levelID === 6) { // Level 3 Game Stage (obstacles)
-        	barriers.push(
-        		new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.45)),
-        		new Barrier("platform2", Math.round(width * 0.25), Math.round(height * 0.65), Math.round(width * 0.95), Math.round(height * 0.80)),
-        		new Barrier("floor", Math.round(width * 0.05), Math.round(height * 0.90), Math.round(width * 0.80), Math.round(height * 0.95)),
-        		new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.05), Math.round(width * 0.30), Math.round(height * 0.20)),
-        		new Barrier("barrier2", Math.round(width * 0.40), Math.round(height * 0.15), Math.round(width * 0.50), Math.round(height * 0.30)),
-        		new Barrier("barrier3", Math.round(width * 0.60), Math.round(height * 0.05), Math.round(width * 0.70), Math.round(height * 0.20)),
-        		new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.05), Math.round(width * 0.87), Math.round(height * 0.15)),
-        		new Barrier("barrier5", Math.round(width * 0.80), Math.round(height * 0.25), Math.round(width * 0.85), Math.round(height * 0.40)),
-        		new Barrier("barrier6", Math.round(width * 0.30), Math.round(height * 0.45), Math.round(width * 0.40), Math.round(height * 0.55)),
-        		new Barrier("barrier7", Math.round(width * 0.05), Math.round(height * 0.53), Math.round(width * 0.15), Math.round(height * 0.60)),
-        		new Barrier("barrier8", Math.round(width * 0.55), Math.round(height * 0.55), Math.round(width * 0.60), Math.round(height * 0.65)),
-        		new Barrier("barrier9", Math.round(width * 0.70), Math.round(height * 0.55), Math.round(width * 0.75), Math.round(height * 0.65)),
-        		new Barrier("barrier10", Math.round(width * 0.50), Math.round(height * 0.60), Math.round(width * 0.55), Math.round(height * 0.65)),
-        		new Barrier("barrier11", Math.round(width * 0.75), Math.round(height * 0.60), Math.round(width * 0.80), Math.round(height * 0.65))
-        	);
-        	goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), Math.round(height * 1.00));
-        	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-        	playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
+            barriers.push(
+                new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.45)),
+                new Barrier("platform2", Math.round(width * 0.25), Math.round(height * 0.65), Math.round(width * 0.95), Math.round(height * 0.80)),
+                new Barrier("floor", Math.round(width * 0.05), Math.round(height * 0.90), Math.round(width * 0.80), Math.round(height * 0.95)),
+                new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.05), Math.round(width * 0.30), Math.round(height * 0.20)),
+                new Barrier("barrier2", Math.round(width * 0.40), Math.round(height * 0.15), Math.round(width * 0.50), Math.round(height * 0.30)),
+                new Barrier("barrier3", Math.round(width * 0.60), Math.round(height * 0.05), Math.round(width * 0.70), Math.round(height * 0.20)),
+                new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.05), Math.round(width * 0.87), Math.round(height * 0.15)),
+                new Barrier("barrier5", Math.round(width * 0.80), Math.round(height * 0.25), Math.round(width * 0.85), Math.round(height * 0.40)),
+                new Barrier("barrier6", Math.round(width * 0.30), Math.round(height * 0.45), Math.round(width * 0.40), Math.round(height * 0.55)),
+                new Barrier("barrier7", Math.round(width * 0.05), Math.round(height * 0.53), Math.round(width * 0.15), Math.round(height * 0.60)),
+                new Barrier("barrier8", Math.round(width * 0.55), Math.round(height * 0.55), Math.round(width * 0.60), Math.round(height * 0.65)),
+                new Barrier("barrier9", Math.round(width * 0.70), Math.round(height * 0.55), Math.round(width * 0.75), Math.round(height * 0.65)),
+                new Barrier("barrier10", Math.round(width * 0.50), Math.round(height * 0.60), Math.round(width * 0.55), Math.round(height * 0.65)),
+                new Barrier("barrier11", Math.round(width * 0.75), Math.round(height * 0.60), Math.round(width * 0.80), Math.round(height * 0.65))
+            );
+            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), Math.round(height * 1.00));
+            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 7) { // Level 3 Question Stage
-        
+
         } else if (levelID === 8) { // Level 4 Game Stage (maze)
-        	barriers.push(
-        		new Barrier("floor", Math.round(width * 0.20), Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
-        		new Barrier("innerbox1", Math.round(width * 0.35), Math.round(height * 0.40), Math.round(width * 0.45), Math.round(height * 0.45)),
-        		new Barrier("innerbox2", Math.round(width * 0.55), Math.round(height * 0.40), Math.round(width * 0.65), Math.round(height * 0.45)),
-        		new Barrier("innerbox3", Math.round(width * 0.60), Math.round(height * 0.45), Math.round(width * 0.65), Math.round(height * 0.60)),
-        		new Barrier("innerbox4", Math.round(width * 0.35), Math.round(height * 0.55), Math.round(width * 0.60), Math.round(height * 0.60)),
-        		new Barrier("innerbox5", Math.round(width * 0.35), Math.round(height * 0.30), Math.round(width * 0.40), Math.round(height * 0.55)),
-        		new Barrier("outerbox1", Math.round(width * 0.25), Math.round(height * 0.25), Math.round(width * 0.80), Math.round(height * 0.30)),
-        		new Barrier("outerbox2", Math.round(width * 0.75), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.70)),
-        		new Barrier("outerbox3", Math.round(width * 0.25), Math.round(height * 0.70), Math.round(width * 0.85), Math.round(height * 0.75)),
-        		new Barrier("outerbox4", Math.round(width * 0.20), Math.round(height * 0.55), Math.round(width * 0.25), Math.round(height * 0.75)),
-        		new Barrier("outerbox5", Math.round(width * 0.20), Math.round(height * 0.25), Math.round(width * 0.25), Math.round(height * 0.45)),
-        		new Barrier("blocker", Math.round(width * 0.05), Math.round(height * 0.65), Math.round(width * 0.20), Math.round(height * 0.70)),
-        		new Barrier("barrier1", Math.round(width * 0.30), Math.round(height * 0.05), Math.round(width * 0.35), Math.round(height * 0.10)),
-        		new Barrier("barrier2", Math.round(width * 0.30), Math.round(height * 0.20), Math.round(width * 0.35), Math.round(height * 0.25)),
-        		new Barrier("barrier3", Math.round(width * 0.55), Math.round(height * 0.15), Math.round(width * 0.60), Math.round(height * 0.25)),
-        		new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.30), Math.round(width * 0.85), Math.round(height * 0.35)),
-        		new Barrier("barrier5", Math.round(width * 0.90), Math.round(height * 0.50), Math.round(width * 0.95), Math.round(height * 0.55)),
-        		new Barrier("barrier6", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.75), Math.round(height * 0.80)),
-        		new Barrier("barrier7", Math.round(width * 0.55), Math.round(height * 0.85), Math.round(width * 0.60), Math.round(height * 0.90)),
-        		new Barrier("barrier8", Math.round(width * 0.40), Math.round(height * 0.75), Math.round(width * 0.45), Math.round(height * 0.80)),
-        		new Barrier("barrier9", Math.round(width * 0.28), Math.round(height * 0.85), Math.round(width * 0.33), Math.round(height * 0.90))
-        	);
-        	goal = new Goal("goal", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.20), Math.round(height * 1.00));
-        	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-        	playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 5, 20, playItemSize, foodItem);
+            barriers.push(
+                new Barrier("floor", Math.round(width * 0.20), Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
+                new Barrier("innerbox1", Math.round(width * 0.35), Math.round(height * 0.40), Math.round(width * 0.45), Math.round(height * 0.45)),
+                new Barrier("innerbox2", Math.round(width * 0.55), Math.round(height * 0.40), Math.round(width * 0.65), Math.round(height * 0.45)),
+                new Barrier("innerbox3", Math.round(width * 0.60), Math.round(height * 0.45), Math.round(width * 0.65), Math.round(height * 0.60)),
+                new Barrier("innerbox4", Math.round(width * 0.35), Math.round(height * 0.55), Math.round(width * 0.60), Math.round(height * 0.60)),
+                new Barrier("innerbox5", Math.round(width * 0.35), Math.round(height * 0.30), Math.round(width * 0.40), Math.round(height * 0.55)),
+                new Barrier("outerbox1", Math.round(width * 0.25), Math.round(height * 0.25), Math.round(width * 0.80), Math.round(height * 0.30)),
+                new Barrier("outerbox2", Math.round(width * 0.75), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.70)),
+                new Barrier("outerbox3", Math.round(width * 0.25), Math.round(height * 0.70), Math.round(width * 0.85), Math.round(height * 0.75)),
+                new Barrier("outerbox4", Math.round(width * 0.20), Math.round(height * 0.55), Math.round(width * 0.25), Math.round(height * 0.75)),
+                new Barrier("outerbox5", Math.round(width * 0.20), Math.round(height * 0.25), Math.round(width * 0.25), Math.round(height * 0.45)),
+                new Barrier("blocker", Math.round(width * 0.05), Math.round(height * 0.65), Math.round(width * 0.20), Math.round(height * 0.70)),
+                new Barrier("barrier1", Math.round(width * 0.30), Math.round(height * 0.05), Math.round(width * 0.35), Math.round(height * 0.10)),
+                new Barrier("barrier2", Math.round(width * 0.30), Math.round(height * 0.20), Math.round(width * 0.35), Math.round(height * 0.25)),
+                new Barrier("barrier3", Math.round(width * 0.55), Math.round(height * 0.15), Math.round(width * 0.60), Math.round(height * 0.25)),
+                new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.30), Math.round(width * 0.85), Math.round(height * 0.35)),
+                new Barrier("barrier5", Math.round(width * 0.90), Math.round(height * 0.50), Math.round(width * 0.95), Math.round(height * 0.55)),
+                new Barrier("barrier6", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.75), Math.round(height * 0.80)),
+                new Barrier("barrier7", Math.round(width * 0.55), Math.round(height * 0.85), Math.round(width * 0.60), Math.round(height * 0.90)),
+                new Barrier("barrier8", Math.round(width * 0.40), Math.round(height * 0.75), Math.round(width * 0.45), Math.round(height * 0.80)),
+                new Barrier("barrier9", Math.round(width * 0.28), Math.round(height * 0.85), Math.round(width * 0.33), Math.round(height * 0.90))
+            );
+            goal = new Goal("goal", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.20), Math.round(height * 1.00));
+            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 5, 20, playItemSize, foodItem);
         } else if (levelID === 9) { // Level 4 Question Stage
-        
+
         } else if (levelID === -1) {
             // level select screen
             let levelSelect = document.createElement("div");
@@ -305,82 +289,75 @@ $(function () {
                 } else {
                     level.innerHTML = "Level " + i;
                 }
-                level.onclick = function() {
-                	console.log(i);
-                	game.level = i * 2;
-                	init();
-                }
+                level.onclick = function () {
+                    console.log(i);
+                    game.level = i * 2;
+                    init();
+                };
                 levelSelect.appendChild(level);
             }
             gameWindow.appendChild(levelSelect);
         }
-		
-		if (levelID >= 0) {
-		
-		/**
-         * Defines the play area and fills the background with the appropriate colour.
-         */
-        new Air("playArea", 0, 0, width, height).drawPhysicalObject();
-		
-        /**
-         * Displays the barriers, then adds the barriers to the level object.
-         */
-        for (let i = 0; i < barriers.length; i++) {
-            barriers[i].drawPhysicalObject();
-            level.addBarrier(barriers[i]);
-        }
 
-        /**
-         * Displays the airs, then adds the airs to the level object.
-         */
-        for (let i = 0; i < airs.length; i++) {
-            airs[i].drawPhysicalObject();
-            level.addAir(airs[i]);
-        }
+        if (levelID >= 0) {
 
-        /**
-         * Displays the extras.
-         */
-        for (let i = 0; i < extras.length; i++) {
-            extras[i].render();
-        }
+            /**
+             * Defines the play area and fills the background with the appropriate colour.
+             */
+            new Air("playArea", 0, 0, width, height).drawPhysicalObject();
 
-        /**
-         * Displays the goal, then adds the goal to the level object.
-         */
-        goal.drawPhysicalObject();
-        level.addGoal(goal);
+            /**
+             * Displays the barriers, then adds the barriers to the level object.
+             */
+            for (let i = 0; i < barriers.length; i++) {
+                barriers[i].drawPhysicalObject();
+                level.addBarrier(barriers[i]);
+            }
 
-        /**
-         * Adds the play item to the level object.
-         */
-        level.playItem = playItem;
+            /**
+             * Displays the airs, then adds the airs to the level object.
+             */
+            for (let i = 0; i < airs.length; i++) {
+                airs[i].drawPhysicalObject();
+                level.addAir(airs[i]);
+            }
 
-        /**
-         * Creates the img element to display the play item, then adds it to the game window.
-         */
-        let url = level.playItem.foodItem.imageURL;
-        let imgElement = document.createElement("img");
-        imgElement.id = "food_image";
-        imgElement.src = url;
-        imgElement.width = playItemSize;
-        imgElement.height = playItemSize;
-        imgElement.alt = "food image";
-        document.getElementById("game_window").appendChild(imgElement);
+            /**
+             * Displays the extras.
+             */
+            for (let i = 0; i < extras.length; i++) {
+                extras[i].render();
+            }
 
-        foodImage = $("#food_image");
-        foodImage.css("position", "absolute");
+            /**
+             * Displays the goal, then adds the goal to the level object.
+             */
+            goal.drawPhysicalObject();
+            level.addGoal(goal);
 
-        /**
-         * Initializes the timer that handles game ticks.
-         */
-        intervalId = setInterval(move, 20);
-        
-        // function stopInterval() {
-        // 	clearInterval(intervalId);
-        // }
-        //setTimeout(stopInterval, 2000);
-        //setClicked(false);
+            /**
+             * Adds the play item to the level object.
+             */
+            level.playItem = playItem;
+
+            /**
+             * Creates the img element to display the play item, then adds it to the game window.
+             */
+            let url = level.playItem.foodItem.imageURL;
+            let imgElement = document.createElement("img");
+            imgElement.id = "food_image";
+            imgElement.src = url;
+            imgElement.width = playItemSize;
+            imgElement.height = playItemSize;
+            imgElement.alt = "food image";
+            document.getElementById("game_window").appendChild(imgElement);
+
+            foodImage = $("#food_image");
+
+            /**
+             * Initializes the timer that handles game ticks.
+             */
+            intervalId = setInterval(move, 20);
         }
     }
 
@@ -388,8 +365,10 @@ $(function () {
      * Redraws the food item in the correct place by changing css positioning.
      */
     function drawFoodItem() {
-        foodImage.css("left", level.playItem.x);
-        foodImage.css("top", level.playItem.y);
+        if (foodImage) {
+            foodImage.css("left", level.playItem.x);
+            foodImage.css("top", level.playItem.y);
+        }
     }
 
     drawFoodItem();
@@ -407,125 +386,81 @@ $(function () {
         // TODO - move to separate function
         let moveReturnValue = level.move();
         if (moveReturnValue === 5) {
-        	clearInterval(intervalId);
-        	if (game.level % 2 === 0) {
-        		game.level += 1;
-        		let level_elements = document.getElementById("game_window").children;
-                for (let i = level_elements.length - 1; i >= 0; i--) {
-                    level_elements[i].parentNode.removeChild(level_elements[i]);
-                }
-                init();
-        	} else {
-        		let time = document.createElement("p");
-                time.innerHTML = parseTime(score);
-                
-                let actualLevel = game.level / 2;
-                let scoreInSeconds = Math.floor(score / 1000);
-                scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
-                $.post("accessdb.php", {
-                    function: "saveGame",
-                    level: actualLevel,
-                    time: scoreInSeconds
-                }, function (data) {
-                    //alert(data);
-                });
-                
-                scoreOverlay.appendChild(time);
-                scoreOverlay.style.fontSize = "2em";
-                scoreOverlay.style.color = "white";
-                
-                let retryButton = document.createElement("div");
-                retryButton.style.width = "25%";
-                retryButton.style.backgroundColor = "red";
-                retryButton.style.color = "yellow";
-                retryButton.innerHTML = "Retry";
-                let selectLevelButton = document.createElement("div");
-                selectLevelButton.style.width = "25%";
-                selectLevelButton.style.backgroundColor = "blue";
-                selectLevelButton.style.color = "yellow";
-                selectLevelButton.innerHTML = "Select Level";
-                let nextLevelButton = document.createElement("div");
-                nextLevelButton.style.width = "25%";
-                nextLevelButton.style.backgroundColor = "green";
-                nextLevelButton.style.color = "yellow";
-                nextLevelButton.innerHTML = "Next Level";
-                
-                scoreOverlay.appendChild(retryButton);
-                scoreOverlay.appendChild(selectLevelButton);
-                scoreOverlay.appendChild(nextLevelButton);
-                
-                scoreOverlay.style.display = "block";
-                
-                timer.style.display = "none";
-
-                //x=107 y=365.5 PAAAAANIIIIIIIIIIIIIIIC
-                //i blame ian
-                
-                retryButton.onclick = function() {
-                	game.level -= 1;
-                	reInit();
-                };
-                
-                selectLevelButton.onclick = function() {
-                	game.level = -1;
-        			reInit();
-                };
-                
-                nextLevelButton.onclick = function() {
-                	game.level += 1;
-        			reInit();
-                }
-                
-                function reInit() {
-                	scoreOverlay.style.display = "none";
-                	score = 0;
-					timer.style.display = "block";
-                	let overlay_elements = scoreOverlay.children;
-                	for (let i = overlay_elements.length - 1; i >= 0; i--) {
-                	    scoreOverlay.removeChild(overlay_elements[i]);
-                	}
-                	let level_elements = document.getElementById("game_window").children;
-                	for (let i = level_elements.length - 1; i >= 0; i--) {
-                	    level_elements[i].parentNode.removeChild(level_elements[i]);
-                	}
-                	//setClicked(true);
-                	init();
-                }
-        	}
-            /*clearInterval(intervalId);
-            game.level += 1;
+            clearInterval(intervalId);
             if (game.level % 2 === 0) {
-                scoreOverlay.style.display = "block";
-
-                // score element for score screen
-                let time = document.createElement("p");
-                time.innerHTML = parseTime(score);
-                time.style.color = "white";
-                // send score to database
-                let actualLevel = game.level / 2;
-                let scoreInSeconds = Math.floor(score / 1000);
-                scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
-                $.post("accessdb.php", {
-                    function: "saveGame",
-                    level: actualLevel,
-                    time: scoreInSeconds
-                }, function (data) {
-                    //alert(data);
-                });
-                time.style.fontSize = "2em";
-                scoreOverlay.appendChild(time);
-
-                timer.parentNode.removeChild(timer);
-                
-                
-                
-            } else {
+                game.level += 1;
                 let level_elements = document.getElementById("game_window").children;
                 for (let i = level_elements.length - 1; i >= 0; i--) {
                     level_elements[i].parentNode.removeChild(level_elements[i]);
                 }
                 init();
-            }*/
+            } else {
+                let time = document.createElement("p");
+                time.innerHTML = parseTime(score);
+
+                let actualLevel = game.level / 2;
+                let scoreInSeconds = Math.floor(score / 1000);
+                scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
+                $.post("accessdb.php", {
+                    function: "saveGame",
+                    level: actualLevel,
+                    time: scoreInSeconds
+                }, function (data) {
+                    //alert(data);
+                });
+
+                scoreOverlay.appendChild(time);
+
+                let retryButton = document.createElement("div");
+                retryButton.id = "retry_button";
+                retryButton.className = "score_overlay_button";
+                retryButton.innerHTML = "Retry";
+                let selectLevelButton = document.createElement("div");
+                selectLevelButton.id = "select_level_button";
+                selectLevelButton.className = "score_overlay_button";
+                selectLevelButton.innerHTML = "Select Level";
+                let nextLevelButton = document.createElement("div");
+                nextLevelButton.id = "next_level_button";
+                nextLevelButton.className = "score_overlay_button";
+                nextLevelButton.innerHTML = "Next Level";
+
+                scoreOverlay.appendChild(retryButton);
+                scoreOverlay.appendChild(selectLevelButton);
+                scoreOverlay.appendChild(nextLevelButton);
+
+                scoreOverlay.style.display = "block";
+                timer.style.display = "none";
+
+                retryButton.onclick = function () {
+                    game.level -= 1;
+                    reInit();
+                };
+
+                selectLevelButton.onclick = function () {
+                    game.level = -1;
+                    reInit();
+                };
+
+                nextLevelButton.onclick = function () {
+                    game.level += 1;
+                    reInit();
+                };
+
+                function reInit() {
+                    scoreOverlay.style.display = "none";
+                    score = 0;
+                    timer.style.display = "block";
+                    let overlay_elements = scoreOverlay.children;
+                    for (let i = overlay_elements.length - 1; i >= 0; i--) {
+                        scoreOverlay.removeChild(overlay_elements[i]);
+                    }
+                    let level_elements = document.getElementById("game_window").children;
+                    for (let i = level_elements.length - 1; i >= 0; i--) {
+                        level_elements[i].parentNode.removeChild(level_elements[i]);
+                    }
+                    init();
+                }
+            }
         } else if (moveReturnValue === 6) {
             // TODO - somehow display that that is the wrong answer
         }
@@ -551,19 +486,20 @@ $(function () {
      */
     $(gameContainer).click(function (e) {
         // prevents initial input
-        // TODO - remove "if statement" if play button is not used because it is unnecessary
         if (!clicked && score > 100) {
             let divPosX = $(this).position().left;
             let divPosY = $(this).position().top;
             let mousePosX = e.pageX - divPosX;
             let mousePosY = e.pageY - divPosY;
 
-            // implements a delay between inputs
+            // moves the item based on the click
             playItem.clicked(mousePosX, mousePosY);
-            clicked = false;
-            //setTimeout(setClicked, 500, false);
+
+            // implements a delay between inputs TODO - choose delay
+            // clicked = true;
+            // setTimeout(setClicked, 500, false);
         }
-    })
+    });
 
     /** Unused play game button block closure. */
     // });
