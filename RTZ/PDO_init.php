@@ -23,7 +23,7 @@
         $db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // turn emulation off in MySQL driver - only really used in older of MYSQL
         $db_conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        
+        $sql_dbdelete = "DROP DATABASE " . $db_name . ";";
         // Creates the database and tells mySQl to use it.
         $sql_dbcreation = "CREATE DATABASE IF NOT EXISTS " . $db_name . ";";
         $sql_dbuse = "USE " . $db_name;
@@ -126,6 +126,7 @@
     		FOREIGN KEY (level_id) REFERENCES levels(level_id);";
     	
     	// Executes all of the above queries.
+    	$db_conn->exec($sql_dbdelete);
     	$db_conn->exec($sql_dbcreation);
     	$db_conn->exec($sql_dbuse);
     	$db_conn->exec($sql_users);

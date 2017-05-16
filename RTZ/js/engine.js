@@ -45,10 +45,6 @@ $(function () {
     let timer;
     let scoreOverlay;
     let game;
-
-    /**
-     * Constants.
-     */
     const NUMBER_OF_LEVELS = 5;
 
     setup();
@@ -79,6 +75,7 @@ $(function () {
         gameWindow.style.position = "absolute";
         gameWindow.style.left = 0;
         gameWindow.style.top = 0;
+        gameWindow.style.width = "100%";
         gameContainer.appendChild(gameWindow);
 
         /**
@@ -88,9 +85,10 @@ $(function () {
         timer.id = "timer";
         timer.style.position = "absolute";
         timer.style.top = 0;
-        timer.style.left = 0;
+        timer.style.left = "50%";
+        timer.style.color = "white";
         timer.style.zIndex = 10;
-        gameWindow.appendChild(timer);
+        gameContainer.appendChild(timer);
 
         /**
          * Creates the element that stores the end of level score overlay.
@@ -171,11 +169,11 @@ $(function () {
          * Defines the play area and fills the background with the appropriate colour.
          */
         new Air("playArea", 0, 0, width, height).drawPhysicalObject();
-		levelID = 8;
+		//levelID = 1;
         /**
          * Load data for the current level.
          */
-        if (levelID === 0) {
+        if (levelID === 0) { // Tutorial Level Game Stage
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight)
             );
@@ -188,25 +186,31 @@ $(function () {
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.4 - playItemSize, height * 0.2, 0, 0, playItemSize, foodItem);
   			//playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
-        } else if (levelID === 1) {
+        } else if (levelID === 1) { // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
+            let questiontext = "questiontext";
+            let answer1 = "answer1text";
+            let answer2 = "answer2text";
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight),
-                new Barrier("ground1", 0, height - barrierHeight * 3, width * 0.25, height),
-                new Barrier("ground2", width * 0.4, height - barrierHeight * 3, width * 0.6, height),
-                new Barrier("ground3", width * 0.75, height - barrierHeight * 3, width, height)
+                new Barrier("ground1", 0, height - barrierHeight * 4, width * 0.25, height),
+                new Barrier("ground2", width * 0.4, height - barrierHeight * 4, width * 0.6, height),
+                new Barrier("ground3", width * 0.75, height - barrierHeight * 4, width, height)
             );
             extras.push(
-                new Extra("question", 100, 100, 0, 0, "p", "questiontext"),
-                new Extra("answer1", 100, 120, 0, 0, "p", "answer1text"),
-                new Extra("answer2", 100, 140, 0, 0, "p", "answer1text"),
+                new Extra("question", 100, 100, 0, 0, "p", questiontext),
+                new Extra("answer1", 100, 120, 0, 0, "p", answer1),
+                new Extra("answer2", 100, 140, 0, 0, "p", answer2),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
             ); // TODO - add correct info
+            scoreOverlay.innerHTML = "Question: " + questiontext;
+            scoreOverlay.innerHTML += "<br>";
+            scoreOverlay.innerHTML += "Answer: " + answer2;
             goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height - barrierHeight);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
-        } else if (levelID === 2) {
+        } else if (levelID === 2) { // Level 1 Game Stage (platform)
             // TODO - add correct level data
             barriers.push(
                 new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierWidth),
@@ -217,25 +221,28 @@ $(function () {
             goal = new Goal("goal", Math.round(width * 0.5 - playItemSize * 0.75), height - barrierHeight, Math.round(width * 0.5 + playItemSize * 0.75), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
-        } else if (levelID === 3) {
+        } else if (levelID === 3) { // Level 1 Question Stage
             // TODO - add correct level data
             barriers.push(
-                new Barrier("platform1", 0, Math.round(height * 2 / 5), Math.round(width * 2 / 5), Math.round(height * 2 / 5) + barrierWidth)
+                new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierHeight)
             );
             goal = new Goal("goal", barrierWidth, height - barrierWidth, Math.round(playItemSize * 5 / 2), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 2 / 5) - playItemSize, barrierWidth + 10, 0, 0, playItemSize, foodItem);
-        } else if (levelID === 4) {
+            playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
+        } else if (levelID === 4) { // Level 2 Game Stage (staircase)
         	barriers.push(
-        		new Barrier("step1", Math.round(width * 0.25), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95)),
-				new Barrier("step2", Math.round(width * 0.40), Math.round(height * 0.60), Math.round(width * 0.80), Math.round(height * 0.75)),
-				new Barrier("step3", Math.round(width * 0.55), Math.round(height * 0.45), Math.round(width * 0.80), Math.round(height * 0.60)),
-				new Barrier("step4", Math.round(width * 0.70), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.45))
+        		new Barrier("step0", Math.round(width * 0.05), Math.round(height * 0.80), Math.round(width * 0.80), Math.round(height)),
+        		new Barrier("step1", Math.round(width * 0.20), Math.round(height * 0.65), Math.round(width * 0.80), Math.round(height * 0.95)),
+				new Barrier("step2", Math.round(width * 0.35), Math.round(height * 0.50), Math.round(width * 0.80), Math.round(height * 0.75)),
+				new Barrier("step3", Math.round(width * 0.50), Math.round(height * 0.35), Math.round(width * 0.80), Math.round(height * 0.60)),
+				new Barrier("step4", Math.round(width * 0.65), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.45))
         	);
         	goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), height);
         	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
         	playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
-        } else if (levelID === 6) {
+        } else if (levelID === 5) { // Level 2 Question Stage
+        
+        } else if (levelID === 6) { // Level 3 Game Stage (obstacles)
         	barriers.push(
         		new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.45)),
         		new Barrier("platform2", Math.round(width * 0.25), Math.round(height * 0.65), Math.round(width * 0.95), Math.round(height * 0.80)),
@@ -255,7 +262,9 @@ $(function () {
         	goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), Math.round(height * 1.00));
         	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
         	playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
-        } else if (levelID === 8) {
+        } else if (levelID === 7) { // Level 3 Question Stage
+        
+        } else if (levelID === 8) { // Level 4 Game Stage (maze)
         	barriers.push(
         		new Barrier("floor", Math.round(width * 0.20), Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
         		new Barrier("innerbox1", Math.round(width * 0.35), Math.round(height * 0.40), Math.round(width * 0.45), Math.round(height * 0.45)),
@@ -282,7 +291,8 @@ $(function () {
         	goal = new Goal("goal", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.20), Math.round(height * 1.00));
         	foodItem = new FoodItem("Box", "box", "img/orange.png", true);
         	playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 5, 20, playItemSize, foodItem);
-
+        } else if (levelID === 9) { // Level 4 Question Stage
+        
         } else if (levelID === -1) {
             // level select screen
             let levelSelect = document.createElement("div");
@@ -293,7 +303,7 @@ $(function () {
                 level = document.createElement("div");
                 level.id = "level_" + i;
                 level.className = "level_select_button";
-                if (i = 0) {
+                if (i === 0) {
                     level.innerHTML = "Tutorial";
                 } else {
                     level.innerHTML = "Level " + i;
@@ -302,7 +312,9 @@ $(function () {
             }
             gameWindow.appendChild(levelSelect);
         }
-
+		
+		if (levelID >= 0) {
+		
         /**
          * Displays the barriers, then adds the barriers to the level object.
          */
@@ -361,6 +373,8 @@ $(function () {
         // 	clearInterval(intervalId);
         // }
         //setTimeout(stopInterval, 2000);
+        //setClicked(false);
+        }
     }
 
     /**
@@ -386,7 +400,92 @@ $(function () {
         // TODO - move to separate function
         let moveReturnValue = level.move();
         if (moveReturnValue === 5) {
-            clearInterval(intervalId);
+        	clearInterval(intervalId);
+        	if (game.level % 2 === 0) {
+        		game.level += 1;
+        		let level_elements = document.getElementById("game_window").children;
+                for (let i = level_elements.length - 1; i >= 0; i--) {
+                    level_elements[i].parentNode.removeChild(level_elements[i]);
+                }
+                init();
+        	} else {
+        		let time = document.createElement("p");
+                time.innerHTML = parseTime(score);
+                
+                let actualLevel = game.level / 2;
+                let scoreInSeconds = Math.floor(score / 1000);
+                scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
+                $.post("accessdb.php", {
+                    function: "saveGame",
+                    level: actualLevel,
+                    time: scoreInSeconds
+                }, function (data) {
+                    //alert(data);
+                });
+                
+                scoreOverlay.appendChild(time);
+                scoreOverlay.style.fontSize = "2em";
+                scoreOverlay.style.color = "white";
+                
+                let retryButton = document.createElement("div");
+                retryButton.style.width = "25%";
+                retryButton.style.backgroundColor = "red";
+                retryButton.style.color = "yellow";
+                retryButton.innerHTML = "Retry";
+                let selectLevelButton = document.createElement("div");
+                selectLevelButton.style.width = "25%";
+                selectLevelButton.style.backgroundColor = "blue";
+                selectLevelButton.style.color = "yellow";
+                selectLevelButton.innerHTML = "Select Level";
+                let nextLevelButton = document.createElement("div");
+                nextLevelButton.style.width = "25%";
+                nextLevelButton.style.backgroundColor = "green";
+                nextLevelButton.style.color = "yellow";
+                nextLevelButton.innerHTML = "Next Level";
+                
+                scoreOverlay.appendChild(retryButton);
+                scoreOverlay.appendChild(selectLevelButton);
+                scoreOverlay.appendChild(nextLevelButton);
+                
+                scoreOverlay.style.display = "block";
+                
+                timer.style.display = "none";
+
+                //x=107 y=365.5 PAAAAANIIIIIIIIIIIIIIIC
+                //i blame ian
+                
+                retryButton.onclick = function() {
+                	game.level -= 1;
+                	reInit();
+                };
+                
+                selectLevelButton.onclick = function() {
+                	game.level = -1;
+        			reInit();
+                };
+                
+                nextLevelButton.onclick = function() {
+                	game.level += 1;
+        			reInit();
+                }
+                
+                function reInit() {
+                	scoreOverlay.style.display = "none";
+                	score = 0;
+					timer.style.display = "block";
+                	let overlay_elements = scoreOverlay.children;
+                	for (let i = overlay_elements.length - 1; i >= 0; i--) {
+                	    scoreOverlay.removeChild(overlay_elements[i]);
+                	}
+                	let level_elements = document.getElementById("game_window").children;
+                	for (let i = level_elements.length - 1; i >= 0; i--) {
+                	    level_elements[i].parentNode.removeChild(level_elements[i]);
+                	}
+                	//setClicked(true);
+                	init();
+                }
+        	}
+            /*clearInterval(intervalId);
             game.level += 1;
             if (game.level % 2 === 0) {
                 scoreOverlay.style.display = "block";
@@ -395,7 +494,7 @@ $(function () {
                 let time = document.createElement("p");
                 time.innerHTML = parseTime(score);
                 time.style.color = "white";
-                // TODO - send score to database
+                // send score to database
                 let actualLevel = game.level / 2;
                 let scoreInSeconds = Math.floor(score / 1000);
                 scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
@@ -410,13 +509,16 @@ $(function () {
                 scoreOverlay.appendChild(time);
 
                 timer.parentNode.removeChild(timer);
+                
+                
+                
             } else {
                 let level_elements = document.getElementById("game_window").children;
                 for (let i = level_elements.length - 1; i >= 0; i--) {
                     level_elements[i].parentNode.removeChild(level_elements[i]);
                 }
                 init();
-            }
+            }*/
         } else if (moveReturnValue === 6) {
             // TODO - somehow display that that is the wrong answer
         }

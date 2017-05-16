@@ -13,6 +13,7 @@
     margin: auto;
     padding: 2%;
     background-color: gray;
+    z-index: 5000000000;
 }
 
 /* Styles a level select button. */
