@@ -113,8 +113,8 @@ $(function () {
     /** Declare/Initialize game variables. */
     let width = gameContainer.parentNode.offsetWidth;
     let height = gameContainer.parentNode.offsetHeight;
-    let barrierSize = Math.round(width / 10);
-    let playItemSize = Math.round(width / 10); // TODO - make playItem use this value
+    let barrierSize = Math.max(Math.round(width / 20), 30);
+    let playItemSize = Math.max(Math.round(width / 20), 30); // TODO - make playItem use this value
     let goalSize = playItemSize * 1.5;
     let score = 0;
 
