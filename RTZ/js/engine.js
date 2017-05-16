@@ -166,7 +166,7 @@ $(function () {
         extras = [];
 
         
-		levelID = 9;
+		//levelID = 9;
         /**
          * Load data for the current level.
          */
