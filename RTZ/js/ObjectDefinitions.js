@@ -286,18 +286,51 @@ class Level {
      */
     move() {
 
+
         // don't move if out of bounds
         // TODO - query width and height from div
         // TODO - this also doesn't work
-        if (this.playItem.x1 < 0 || this.playItem.y1 < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
+        if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
             return;
         }
-
+        // check if currently grounded
+        // if currently grounded, check left/right collisions
+        //		if left/right collision, reverse dx
+        // if not currently grounded, check all collisions
+        //		if top collision, blahblahblah
+        // 
+        
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
-
-        // check if next movement causes a collision
         let collision = this.checkCollisions(tempX, tempY);
+        //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
+        //console.log(collision);
+        if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
+        	this.playItem.isGrounded = true;
+        	if (collision === 2) {
+        		// right side collision
+        		this.snapToRight(tempY);
+        		this.playItem.reverseDX();
+        	} else if (collision === 4) {
+        		// left side collision
+        		this.snapToLeft(tempY);
+        		this.playItem.reverseDX();
+        	} else {
+        		this.playItem.move();
+        	}
+        	this.playItem.dy = 0;
+        	if (this.playItem.dx > 0) {
+        		this.playItem.dx--;
+        	} else if (this.playItem.dx < 0) {
+        		this.playItem.dx++;
+        	}
+        } else {
+
+        /*let tempX = this.playItem.x + this.playItem.dx;
+        let tempY = this.playItem.y + this.playItem.dy;
+
+        // check if next movement causes a collision*/
+        //let collision = this.checkCollisions(tempX, tempY);
         if (collision === 0) {
             // no collision, move normally
             this.playItem.move();
@@ -318,7 +351,7 @@ class Level {
                 this.snapToBottom(tempX);
             }
             // TODO - make this refer to a constant defined in the constant section above
-            if (this.playItem.dy < 2) { // SNAPTOGROUND = 2
+            if (Math.abs(this.playItem.dy) < 2) { // SNAPTOGROUND = 2
                 this.playItem.snapToGround();
                 this.playItem.move();
             } else {
@@ -339,6 +372,7 @@ class Level {
             this.playItem.move();
             return 6;
         }
+        }
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
 
@@ -354,12 +388,14 @@ class Level {
      */
     snapToTop(tempX) {
         let move = 0;
-        while (this.checkCollisions(tempX, this._playItem.y - move) !== 1) {
+        while (this.checkCollisions(tempX, this._playItem.y - move) === 0) {
             move++;
         }
+        if (this.playItem.dy !== 0) {
         let ratio = this._playItem.dx / this._playItem.dy;
         this._playItem.x = this._playItem.x - (move * ratio);
         this._playItem.y = this._playItem.y - move;
+        }
     }
 
     /**
@@ -367,12 +403,14 @@ class Level {
      */
     snapToRight(tempY) {
         let move = 0;
-        while (this.checkCollisions(this._playItem.x + move, tempY) !== 2) {
+        while (this.checkCollisions(this._playItem.x + move, tempY) === 0) {
             move++;
         }
+        if (this.playItem.dx !== 0) {
         let ratio = this._playItem.dy / this._playItem.dx;
         this._playItem.x = this._playItem.x + move;
         this._playItem.y = this._playItem.y + (move * ratio);
+        }
     }
 
     /**
@@ -380,12 +418,14 @@ class Level {
      */
     snapToBottom(tempX) {
         let move = 0;
-        while (this.checkCollisions(tempX, this._playItem.y + move) !== 3) {
+        while (this.checkCollisions(tempX, this._playItem.y + move) === 0) {
             move++;
         }
+        if (this.playItem.dy !== 0) {
         let ratio = this._playItem.dx / this._playItem.dy;
         this._playItem.x = this._playItem.x + (move * ratio);
         this._playItem.y = this._playItem.y + move;
+        }
     }
 
     /**
@@ -393,12 +433,14 @@ class Level {
      */
     snapToLeft(tempY) {
         let move = 0;
-        while (this.checkCollisions(this._playItem.x - move, tempY) !== 4) {
+        while (this.checkCollisions(this._playItem.x - move, tempY) === 0) {
             move++;
         }
+        if (this.playItem.dx !== 0) {
         let ratio = this._playItem.dy / this._playItem.dx;
         this._playItem.x = this._playItem.x - move;
         this._playItem.y = this._playItem.y - (move * ratio);
+        }
     }
 
     /**
@@ -417,12 +459,12 @@ class Level {
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
             if (this._board[x1][y1].type === SOLID) {
                 return this.topLeftCollision(x1, y1);
-            } else if (this._board[x2][y2].type === SOLID) {
-                return this.bottomRightCollision(x1, y1);
-            } else if (this._board[x1][y2].type === SOLID) {
-                return this.bottomLeftCollision(x1, y1);
             } else if (this._board[x2][y1].type === SOLID) {
                 return this.topRightCollision(x1, y1);
+            } else if (this._board[x1][y2].type === SOLID) {
+                return this.bottomLeftCollision(x1, y1);
+            } else if (this._board[x2][y2].type === SOLID) {
+                return this.bottomRightCollision(x1, y1);
             } else if (this._board[x1][y1].type === GOAL) {
                 return 5;
             } else if (this._board[x2][y2].type === GOAL) {
@@ -449,16 +491,23 @@ class Level {
      */
     topLeftCollision(x1, y1) {
         let size = this._playItem.size;
+        let halfSize = Math.round(this.playItem.size / 2);
         let x2 = x1 + size;
         let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
-        if (this._board[x2][y1].type === SOLID) {
+        if (this._board[x2 - halfSize][y1].type === SOLID) {
             return 1;
-        } else if (this._board[x1][y2].type === SOLID) {
+        } else if (this._board[x1][y2 - halfSize].type === SOLID) {
             return 4;
         } else {
+        	if (this._playItem.dx > 0) {
+				return 1;
+			}
+			if (this._playItem.dy > 0) {
+				return 4;
+			}
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX1 - move][origY1].type === SOLID) {
@@ -480,6 +529,12 @@ class Level {
         let origX2 = x1 + this._playItem.size - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
+		if (this._playItem.dx < 0) {
+			return 1;
+		}
+		if (this._playItem.dy > 0) {
+			return 2;
+		}
         let move = 0;
         while (move < this._playItem.size) {
             if (this._board[origX2 + move][origY1].type === SOLID) {
@@ -499,19 +554,25 @@ class Level {
      */
     bottomRightCollision(x1, y1) {
         let size = this._playItem.size;
+        let halfSize = Math.round(size / 2);
         let x2 = x1 + size;
         let y2 = y1 + size;
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
-
-        if (this._board[x2][y1].type === SOLID) {
+		if (this._board[x2][y1 + halfSize].type === SOLID) {
             return 2;
-        } else if (this._board[x1][y2].type === SOLID) {
+        } else if (this._board[x1 + halfSize][y2].type === SOLID) {
             return 3;
         } else {
             if (this._playItem.isGrounded) {
                 return 3;
             }
+            if (this._playItem.dx < 0) {
+				return 3;
+			}
+			if (this._playItem.dy < 0) {
+				return 2;
+			}
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX2 + move][origY2].type === SOLID) {
@@ -531,21 +592,41 @@ class Level {
      * barrier.
      */
     bottomLeftCollision(x1, y1) {
+    	let size = this._playItem.size;
+    	let halfSize = Math.round(size / 2);
+    	let x2 = x1 + size;
+    	let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
-        let origY2 = y1 + this._playItem.size - this._playItem.dy;
+        let origY2 = y2 - this._playItem.dy;
 
-        let move = 0;
-        while (move < this._playItem.size) {
-            if (this._playItem.isGrounded) {
-                return 3;
-            }
-            if (this._board[origX1 - move][origY2].type === SOLID) {
-                return 4;
-            } else if (this._board[origX1][origY2 + move].type === SOLID) {
-                return 3;
-            } else {
-                move++;
-            }
+		if (this._board[x1][y1 + halfSize].type === SOLID) {
+			return 4;
+		} else if (this._board[x2 - halfSize][y2].type === SOLID) {
+			return 3;
+		} else {
+			if (this._playItem.isGrounded) {
+				return 3;
+			}
+			// either left side or bottom side
+			if (this._playItem.dx > 0) {
+				return 3;
+			}
+			if (this._playItem.dy < 0) {
+				return 4;
+			}
+        	let move = 0;
+        	while (move < this._playItem.size) {
+            	if (this._playItem.isGrounded) {
+                	return 3;
+            	}
+            	if (this._board[origX1 - move][origY2].type === SOLID) {
+                	return 4;
+            	} else if (this._board[origX1][origY2 + move].type === SOLID) {
+                	return 3;
+            	} else {
+                	move++;
+            	}
+        	}
         }
         return 0;
     }

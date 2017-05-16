@@ -33,7 +33,7 @@ class USER {
 	public function doLogin($uname,$upass) {
 		try {
 			$stmt = $this->conn->prepare(
-				"SELECT user_name, user_password
+				"SELECT user_name, user_password, user_id
 				FROM users 
 				WHERE user_name=:uname"
 				);
@@ -98,8 +98,8 @@ class USER {
 			$statement->execute(array(':uname' => $_SESSION['user_name']));
 			//store found rows in $row
 			$row = $statement->fetch(PDO::FETCH_ASSOC);
-			//return user_photo name
-			return ($row['user_photo']);
+			//return user_photo name, concatenate with png extension
+			return ($row['user_photo']).".png";
 		}
 		catch(PDOException $e) {
 			echo $e->getMessage();

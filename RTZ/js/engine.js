@@ -113,8 +113,8 @@ $(function () {
     /** Declare/Initialize game variables. */
     let width = gameContainer.parentNode.offsetWidth;
     let height = gameContainer.parentNode.offsetHeight;
-    let barrierSize = Math.round(width / 10);
-    let playItemSize = Math.round(width / 10); // TODO - make playItem use this value
+    let barrierSize = Math.max(Math.round(width / 20), 30);
+    let playItemSize = Math.max(Math.round(width / 20), 30); // TODO - make playItem use this value
     let goalSize = playItemSize * 1.5;
     let score = 0;
 
@@ -184,6 +184,7 @@ $(function () {
             goal = new Goal("goal", barrierSize, height - Math.round(playItemSize * 0.5), goalSize + barrierSize, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+  			//playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
         } else if (levelID === 1) {
             // TODO - remove row of white pixels at the bottom
             barriers.push(
@@ -198,9 +199,10 @@ $(function () {
                 new Extra("answer2", 100, 140, 0, 0, "p", "answer1text"),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
             ); // TODO - add correct info
-            goal = new Goal("goal", Math.round(width * 0.65), height - playItemSize * 1.5, Math.round(width * 0.8), height - playItemSize);
+            //goal = new Goal("goal", Math.round(width * 0.65), Math.round(height - playItemSize * 1.5), Math.round(width * 0.8), height - playItemSize);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
         } else if (levelID === 2) {
             // TODO - add correct level data
             barriers.push(
@@ -274,6 +276,11 @@ $(function () {
          * Initializes the timer that handles game ticks.
          */
         intervalId = setInterval(move, 20);
+        
+        function stopInterval() {
+        	clearInterval(intervalId);
+        }
+        //setTimeout(stopInterval, 2000);
     }
 
     /**
