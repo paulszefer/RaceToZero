@@ -1,7 +1,7 @@
 /* Applies to the game_container div on the index page. */
 #game_container {
     min-width: 36vh;
-    min-height: 64vh;
+    min-height: 100vh;
     height: 100%;
     margin: auto;
     position: relative;
@@ -55,7 +55,7 @@
 /* Styles a level select button. */
 .level_select_button {
     width: 60%;
-    height: 40%;
+    height: 5%;
     padding: 2% 0;
     margin: 4% auto;
     text-align: center;
