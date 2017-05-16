@@ -113,9 +113,10 @@ $(function () {
     /** Declare/Initialize game variables. */
     let width = gameContainer.parentNode.offsetWidth;
     let height = gameContainer.parentNode.offsetHeight;
-    let barrierSize = Math.max(Math.round(width / 20), 30);
-    let playItemSize = Math.max(Math.round(width / 20), 30); // TODO - make playItem use this value
-    let goalSize = playItemSize * 1.5;
+    let barrierWidth = Math.max(Math.round(width / 20), 30);
+    let barrierHeight = Math.max(Math.round(height / 20), 30);
+    let playItemSize = Math.max(Math.round(width / 20), 30);
+    let goalSize = playItemSize * 3;
     let score = 0;
 
     /** Declare/Initialize level data. */
@@ -151,10 +152,10 @@ $(function () {
          * Loads the data common to all levels.
          */
         barriers = [
-            new Barrier("top_wall", 0, 0, width, barrierSize),
-            new Barrier("bottom_wall", 0, height - barrierSize, width, height),
-            new Barrier("left_wall", 0, 0, barrierSize, height),
-            new Barrier("right_wall", width - barrierSize, 0, width, height)
+            new Barrier("top_wall", 0, 0, width, barrierHeight),
+            new Barrier("bottom_wall", 0, height - barrierHeight, width, height),
+            new Barrier("left_wall", 0, 0, barrierWidth, height),
+            new Barrier("right_wall", width - barrierWidth, 0, width, height)
         ];
 
         airs = [];
@@ -171,27 +172,24 @@ $(function () {
          */
         if (levelID === 0) {
             barriers.push(
-                new Barrier("platform1", 0, Math.round(height * 0.4), Math.round(width * 0.4), Math.round(height * 0.4) + barrierSize)
-            );
-            airs.push(
-                new Air("air1", barrierSize, height - Math.round(playItemSize), goalSize + barrierSize, height)
+                new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight)
             );
             extras.push(
-                new Extra("hint_tap_here", Math.round(barrierSize * 1.2), Math.round(barrierSize * 1.2), Math.round(barrierSize * 6.2), 0, "p", "Tap here"),
-                new Extra("tap_image", Math.round(barrierSize * 1.6), Math.round(barrierSize * 3.6), Math.round(barrierSize * 2.6), Math.round(barrierSize * 4.6), "img", "img/tapimage.png"),
-                new Extra("arrow", Math.round(barrierSize * 1.4), Math.round(barrierSize * 8), Math.round(barrierSize * 2.4), Math.round(barrierSize * 9), "img", "img/arrow.png")
+                new Extra("hint_tap_here", Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 6.2), 0, "p", "Tap here"),
+                new Extra("tap_image", Math.round(barrierWidth * 1.6), Math.round(barrierWidth * 3.6), Math.round(barrierWidth * 2.6), Math.round(barrierWidth * 4.6), "img", "img/tapimage.png"),
+                new Extra("arrow", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.2), Math.round(barrierWidth * 9), "img", "img/arrow.png")
             );
-            goal = new Goal("goal", barrierSize, height - Math.round(playItemSize * 0.5), goalSize + barrierSize, height);
+            goal = new Goal("goal", barrierWidth, height - barrierHeight, goalSize + barrierWidth, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.4 - playItemSize, height * 0.2, 0, 0, playItemSize, foodItem);
   			//playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
         } else if (levelID === 1) {
             // TODO - remove row of white pixels at the bottom
             barriers.push(
-                new Barrier("platform1", 0, Math.round(height * 0.4), Math.round(width * 0.4), Math.round(height * 0.4) + barrierSize),
-                new Barrier("platform2", 0, height - playItemSize * 2, Math.round(width * 0.2), height - playItemSize),
-                new Barrier("platform3", Math.round(width * 0.35), height - playItemSize * 2, Math.round(width * 0.65), height - playItemSize),
-                new Barrier("platform4", Math.round(width * 0.8), height - playItemSize * 2, width, height - playItemSize)
+                new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight),
+                new Barrier("ground1", 0, height - barrierHeight * 3, width * 0.25, height),
+                new Barrier("ground2", width * 0.4, height - barrierHeight * 3, width * 0.6, height),
+                new Barrier("ground3", width * 0.75, height - barrierHeight * 3, width, height)
             );
             extras.push(
                 new Extra("question", 100, 100, 0, 0, "p", "questiontext"),
@@ -199,28 +197,28 @@ $(function () {
                 new Extra("answer2", 100, 140, 0, 0, "p", "answer1text"),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
             ); // TODO - add correct info
-            //goal = new Goal("goal", Math.round(width * 0.65), Math.round(height - playItemSize * 1.5), Math.round(width * 0.8), height - playItemSize);
+            goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height - barrierHeight);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.4) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
         } else if (levelID === 2) {
             // TODO - add correct level data
             barriers.push(
-                new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierSize),
+                new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierWidth),
                 new Barrier("wall1", 0, Math.round(height * 0.6), Math.round(width * 0.5 - playItemSize * 0.75), height),
                 new Barrier("wall2", Math.round(width * 0.5 + playItemSize * 0.75), Math.round(height * 0.6), width, height)
             );
             goal = new Goal("goal", Math.round(width * 0.5 - playItemSize * 0.75), height - Math.round(playItemSize * 0.5), Math.round(width * 0.5 + playItemSize * 0.75), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierSize + 10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
             // TODO - add correct level data
             barriers.push(
-                new Barrier("platform1", 0, Math.round(height * 2 / 5), Math.round(width * 2 / 5), Math.round(height * 2 / 5) + barrierSize)
+                new Barrier("platform1", 0, Math.round(height * 2 / 5), Math.round(width * 2 / 5), Math.round(height * 2 / 5) + barrierWidth)
             );
-            goal = new Goal("goal", barrierSize, height - barrierSize, Math.round(playItemSize * 5 / 2), height);
+            goal = new Goal("goal", barrierWidth, height - barrierWidth, Math.round(playItemSize * 5 / 2), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 2 / 5) - playItemSize, barrierSize + 10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(Math.round(width * 2 / 5) - playItemSize, barrierWidth + 10, 0, 0, playItemSize, foodItem);
         }
 
         /**
@@ -277,9 +275,9 @@ $(function () {
          */
         intervalId = setInterval(move, 20);
         
-        function stopInterval() {
-        	clearInterval(intervalId);
-        }
+        // function stopInterval() {
+        // 	clearInterval(intervalId);
+        // }
         //setTimeout(stopInterval, 2000);
     }
 
@@ -371,8 +369,8 @@ $(function () {
 
             // implements a delay between inputs
             playItem.clicked(mousePosX, mousePosY);
-            clicked = true;
-            setTimeout(setClicked, 500, false);
+            clicked = false;
+            //setTimeout(setClicked, 500, false);
         }
     })
 
