@@ -354,6 +354,8 @@ $(function () {
 
             foodImage = $("#food_image");
 
+            timer.style.display = "block";
+
             /**
              * Initializes the timer that handles game ticks.
              */
