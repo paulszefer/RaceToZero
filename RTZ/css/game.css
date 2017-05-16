@@ -1,9 +1,45 @@
 /* Applies to the game_container div on the index page. */
 #game_container {
     min-width: 36vh;
-    min-height: 64vh;
+    min-height: 100vh;
+    height: 100%;
     margin: auto;
     position: relative;
+}
+
+/* Applies to the game_window div on the index page. */
+#game_window {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#timer {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    color: white;
+    z-index: 10;
+}
+
+#score_overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 2em;
+}
+
+.score_overlay_button {
+    width: 25%;
+    background-color: red;
+    color: yellow;
 }
 
 /* Styles the level select window. */
@@ -11,17 +47,21 @@
     width: 100%;
     height: 100%;
     margin: auto;
-    padding: 2% 0 0 0;
-    background-color: #F66666;
+    padding: 0 0 0 0;
+    /*background-color: #F66666;*/
+    background: linear-gradient(#F66666, #C63636, #F66666);
     z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* Styles a level select button. */
 .level_select_button {
     width: 60%;
-    height: 40%;
-    padding: 2% 0;
-    margin: 4% auto;
+    height: 5vh;
+    padding: 2vh 0;
+    margin: 6vh auto;
     text-align: center;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
@@ -35,3 +75,6 @@
     background: linear-gradient(white, rgb(160, 160, 160));
 }
 
+#food_image {
+    position: absolute;
+}
