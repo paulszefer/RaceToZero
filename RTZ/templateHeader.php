@@ -7,9 +7,9 @@
 <html lang="en">
 	<head>
 	<link rel="stylesheet" href="css/masterreset.css">
-<!-- 	<link rel="stylesheet" href="css/template2.css">  -->
+    <!--<link rel="stylesheet" href="css/template2.css"> -->
 	<!--<link rel="stylesheet" href="css/template3.css"> -->
-	<!--<link rel="stylesheet" href="css/template4.css">-->
+	<!--<link rel="stylesheet" href="css/template4.css"> -->
 	<link rel="stylesheet" href="css/template5.css">
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
@@ -20,5 +20,4 @@
 
 	<!--template2.css and overlaynav.js for previous setup
 	this is now left nav and TopDown menu bar -->
-	<script src="js/overlaynavTopDown.js"></script> 
-
+	<script src="js/overlaynavTopDown.js"></script>

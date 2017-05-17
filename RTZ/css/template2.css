@@ -1,167 +1,193 @@
 /*#dark transparent overlay for navburger */
-#overlay{
-	position: fixed;
-	background-color: rgba(0, 0, 0, 0.7);
-	width:0;
-	-webkit-transition: width 0.1s;
-	z-index: 500;
+#overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 0;
+    -webkit-transition: width 0.1s;
+    z-index: 500;
 }
+
 /*all img in navCont*/
-#navCont img{
-	height: 20vw;
-	width:auto;
+#navCont img {
+    height: 20vw;
+    width: auto;
 }
-.navlogo{
-	background-color: #95d5f5;/*#3d2e1f;*/
-	background-image: url('../img/bannerBG.gif');
+
+.navlogo {
+    background-color: #95d5f5; /*#3d2e1f;*/
+    background-image: url('../img/bannerBG.gif');
 }
-.navlogo img, .navlogo .loginstatus{
-	display: inline-block;
-	vertical-align: middle;
+
+.navlogo img, .navlogo .loginstatus {
+    display: inline-block;
+    vertical-align: middle;
 }
-.loginstatus{
-	color:white;
-	font-size: 1em;
-	padding:0.5em;
+
+.loginstatus {
+    color: white;
+    font-size: 1em;
+    padding: 0.5em;
 }
+
 /*navlinks is the horizontal navbar for desktop version*/
-.navlinks ul{
-	margin:0;
-	padding:0;
+.navlinks ul {
+    margin: 0;
+    padding: 0;
 }
-.navlinks ul li{
-	list-style-type: none;
-	display: inline-block;
-	font-family: Calibri;
-	padding: 0.5em;
-	font-size: 1.5em;
+
+.navlinks ul li {
+    list-style-type: none;
+    display: inline-block;
+    font-family: Calibri;
+    padding: 0.5em;
+    font-size: 1.5em;
 }
-.navlinks{
-	background-image: url('../img/navgradient.png');
-	background-position: bottom;
-	background-repeat: repeat-x;
-	background-color: black;
+
+.navlinks {
+    background-image: url('../img/navgradient.png');
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-color: black;
 }
-.navlinks a{
-	text-decoration: none;
-	color: #95d5f5; /*navlink color*/
+
+.navlinks a {
+    text-decoration: none;
+    color: #95d5f5; /*navlink color*/
 }
-.navlinks a:hover{
-	border-bottom: 4px solid #95d5f5;
+
+.navlinks a:hover {
+    border-bottom: 4px solid #95d5f5;
 }
-.navbuttonright{
-	float:right;
+
+.navbuttonright {
+    float: right;
 }
+
 /*#mobilenav - burger dropdown navmenu*/
-#mobilenav{
-	width:0;
-	position:fixed;
-	right:0;
-	top:0;
-	height:100vh;
-	-webkit-transition: width 0.3s;
-	-moz-transition: width 0.3s;
-	background-color: black;
-	z-index: 501;
+#mobilenav {
+    width: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    background-color: black;
+    z-index: 501;
 }
-#mobilenav a{
-	text-decoration: none;
-	color:white;
-	font-size: 5vw;
-	font-family: calibri;
-	text-align: right;
+
+#mobilenav a {
+    text-decoration: none;
+    color: white;
+    font-size: 5vw;
+    font-family: calibri;
+    text-align: right;
 }
-#mobilenav ul li{
-	height:20vh;
-	display: table;
-	padding-right:1em;
-	background-color:black;
+
+#mobilenav ul li {
+    height: 20vh;
+    display: table;
+    padding-right: 1em;
+    background-color: black;
 }
-#mobilenav ul li div{
-	vertical-align: middle;
-	display:table-cell;
-	width:60vw;
-	background-color:black;
-	text-align: right;
+
+#mobilenav ul li div {
+    vertical-align: middle;
+    display: table-cell;
+    width: 60vw;
+    background-color: black;
+    text-align: right;
 }
 
 /*body shenanigans*/
-body{
-	background-image: url('../img/bgmesh6.png');
-	font-family: helvetica;
-	z-index: 0;
+body {
+    background-image: url('../img/bgmesh6.png');
+    font-family: helvetica;
+    z-index: 0;
 }
-html,body{
-	min-height:100vh;
+
+html, body {
+    min-height: 100vh;
 }
+
 /*.contentactual is for collaborators to insert their part of the site*/
-.contentactual{
-	width:80%;
-	min-height:100vh;
-	max-width: 981px;
-	/*height:auto;*/
-	margin:auto;
-	background-color: rgba(255, 255, 255, 0.7);
+.contentactual {
+    width: 80%;
+    min-height: 100vh;
+    max-width: 981px;
+    /*height:auto;*/
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.7);
 }
-.contentactual h1{
-	padding:0.5em;
-	padding-top: 1em;
-	padding-bottom: 0;
-	font-size: 2em;
-	font-weight: bold;
+
+.contentactual h1 {
+    padding: 0.5em;
+    padding-top: 1em;
+    padding-bottom: 0;
+    font-size: 2em;
+    font-weight: bold;
 }
-.contentactual p{
-	margin:auto;
-	text-align: justify;
-	width:80%;
+
+.contentactual p {
+    margin: auto;
+    text-align: justify;
+    width: 80%;
 }
+
 /*for styling title tabs*/
-.titletab{
-	width:100%;
-	text-align: center;
-	font-size: 1.5em;
-	padding-top:1em;
-	padding-bottom:1em;
-	background-color: silver;
+.titletab {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: silver;
 }
+
 /*when the screen is smaller than 980px*/
 @media only screen and (max-width: 980px) {
     .contentactual {
-        width:100%;
+        width: 100%;
     }
-    .navlinks{
-    	display:none;
+
+    .navlinks {
+        display: none;
     }
-    #navCont #navburger{
-    	position: fixed;
-    	top:5vw;
-    	right:5vw;
-    	transition: top 0.2s ease-in-out;
-	    -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
-	    -moz-transition: top 0.2s ease-in-out;
+
+    #navCont #navburger {
+        position: fixed;
+        top: 5vw;
+        right: 5vw;
+        transition: top 0.2s ease-in-out;
+        -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
+        -moz-transition: top 0.2s ease-in-out;
     }
-    #navCont #navburger img{
-    	height:10vw;
+
+    #navCont #navburger img {
+        height: 10vw;
     }
 }
+
 /*when the screen is bigger than 980px*/
-@media only screen and (min-width: 981px){
-	/*hides the burger*/
-	#navburger{
-		display:none;
-	}
+@media only screen and (min-width: 981px) {
+    /*hides the burger*/
+    #navburger {
+        display: none;
+    }
 }
-.footercontent{
-	background-color: black;
-	height:50px;
-	display:table;
-	width:100%;
+
+.footercontent {
+    background-color: black;
+    height: 50px;
+    display: table;
+    width: 100%;
 }
-.footercontent p{
-	margin:0;
-	color: white;
-	text-align: center;
-	font-size: 0.75em;
-	display:table-cell;
-	vertical-align: middle;
+
+.footercontent p {
+    margin: 0;
+    color: white;
+    text-align: center;
+    font-size: 0.75em;
+    display: table-cell;
+    vertical-align: middle;
 }

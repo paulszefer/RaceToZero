@@ -7,13 +7,7 @@
  */
 const BACKGROUND_COLOUR = "rgb(255, 255, 255)";
 const BARRIER_COLOUR = "rgb(50, 255, 100)";
-
-/**
- * Game states.
- * @Unused - TODO remove
- */
-const LEVEL = 0;
-const QUESTION = 1;
+const SNAP_TO_GROUND = 2;
 
 /**
  * Types of pixels.
@@ -31,13 +25,10 @@ class Game {
     /**
      * Creates a game object that stores the current game screen and its properties.
      * Used to display the correct screen and to transition between levels.
-     * TODO - elements, state are unused, remove them?
      */
     constructor() {
         this.level = this.retrieveLevel();
-        this.state = 0;
         this.elements;
-        this.createHTML(); // TODO - Unused, remove?
     }
 
     /**
@@ -52,20 +43,6 @@ class Game {
      */
     get level() {
         return this._level;
-    }
-
-    /**
-     * Sets the current state of the game.
-     */
-    set state(state) {
-        this._state = state;
-    }
-
-    /**
-     * Returns the current state of the game.
-     */
-    get state() {
-        return this._state;
     }
 
     /**
@@ -90,15 +67,11 @@ class Game {
     }
 
     /**
-     * Returns the user's current level. Currently the user always starts from level 0.
+     * Returns the user's current level. Currently the user always starts from level -1 (level select).
+     * TODO - this function should be renamed
      */
     retrieveLevel() {
-        // TODO - get last played level from database, use 0 if not logged in
-        return 0;
-    }
-
-    // TODO - Unused, moved to engine.js setup instead, remove it?
-    createHTML() {
+        return -1;
     }
 
     /**
@@ -123,7 +96,6 @@ class Level {
         this._levelID = levelID;
         this._width = width;
         this._height = height;
-        this._state = 0;
 
         // initialize with an empty board (each pixel is air)
         let emptyBoard = new Array(width);
@@ -183,22 +155,6 @@ class Level {
      */
     get height() {
         return this._height;
-    }
-
-    /**
-     * Sets the level state.
-     * @Unused TODO - remove
-     */
-    set state(state) {
-        this._state = state;
-    }
-
-    /**
-     * Gets the level state.
-     * @Unused TODO - remove
-     */
-    get state() {
-        return this._state;
     }
 
     /**
@@ -288,17 +244,10 @@ class Level {
 
 
         // don't move if out of bounds
-        // TODO - query width and height from div
-        // TODO - this also doesn't work
-        if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
+        if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
+            console.log("Error: The item is out of bounds.");
             return;
         }
-        // check if currently grounded
-        // if currently grounded, check left/right collisions
-        //		if left/right collision, reverse dx
-        // if not currently grounded, check all collisions
-        //		if top collision, blahblahblah
-        // 
         
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
@@ -325,12 +274,7 @@ class Level {
         		this.playItem.dx++;
         	}
         } else {
-
-        /*let tempX = this.playItem.x + this.playItem.dx;
-        let tempY = this.playItem.y + this.playItem.dy;
-
-        // check if next movement causes a collision*/
-        //let collision = this.checkCollisions(tempX, tempY);
+        // check if next movement causes a collision
         if (collision === 0) {
             // no collision, move normally
             this.playItem.move();
@@ -350,8 +294,7 @@ class Level {
             if (!this.playItem.isGrounded) {
                 this.snapToBottom(tempX);
             }
-            // TODO - make this refer to a constant defined in the constant section above
-            if (Math.abs(this.playItem.dy) < 2) { // SNAPTOGROUND = 2
+            if (Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
                 this.playItem.snapToGround();
                 this.playItem.move();
             } else {
@@ -843,22 +786,22 @@ class Extra {
     }
 
     render() {
-        let e = document.createElement(this.elementType);
-        e.id = this.name;
-        e.style.position = "absolute";
-        e.style.top = this.y1 + "px";
-        e.style.left = this.x1 + "px";
-        e.style.width = this.x2 - this.x1;
-        e.style.height = this.y2 - this.y1;
+        let extra = document.createElement(this.elementType);
+        extra.id = this.name;
+        extra.className = "extra";
+        extra.style.top = this.y1 + "px";
+        extra.style.left = this.x1 + "px";
+        extra.style.width = this.x2 - this.x1;
+        extra.style.height = this.y2 - this.y1;
 
         if (this.elementType === "p") {
-            e.style.fontSize = "2em";
-            e.innerHTML = this.elementData;
+            extra.style.fontSize = "2em";
+            extra.innerHTML = this.elementData;
         } else if (this.elementType === "img") {
-            e.alt = this.name;
-            e.src = this.elementData;
+            extra.alt = this.name;
+            extra.src = this.elementData;
         }
-        document.getElementById("game_window").appendChild(e);
+        document.getElementById("game_window").appendChild(extra);
     }
 
     /**
@@ -1121,8 +1064,6 @@ class PlayItem {
      * pushing it away from the location of the cursor.
      */
     clicked(mousePosX, mousePosY) {
-        console.log("x : " + mousePosX);
-        console.log("y : " + mousePosY);
         let xDiff = this._x + (this._size / 2) - mousePosX;
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
