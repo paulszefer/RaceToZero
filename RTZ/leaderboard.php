@@ -1,7 +1,6 @@
 <?php include("templateHeader.php");?>
 
 <title>Leaderboard</title>
-<link rel="stylesheet" href="css/leaderboard.css">
 <script src="js/leaderboard.js"></script>
 <?php include("templateNav.php");?>
 
@@ -9,7 +8,7 @@
 	<div class='contentactual'>
 		<h1>Leaderboard</h1>
 		<br>
-		<p>LOL YOU SUCK</p>
+		<p>Text here</p>
 		<table id="besttimes" border="1">
 			<!--This table is populated with data using the js/leaderboard.js file.-->
 			<tr>
