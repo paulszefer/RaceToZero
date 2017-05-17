@@ -252,7 +252,7 @@ class Level {
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
         let collision = this.checkCollisions(tempX, tempY);
-        //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
+        console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
         //console.log(collision);
         if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
         	this.playItem.isGrounded = true;
@@ -1085,15 +1085,16 @@ class PlayItem {
      * before and after every move.
      */
     adjustSpeed() {
-        if (this._dy > 20) {
-            this._dy = 20;
-        } else if (this._dy < -20) {
-            this._dy = -20;
+    	let maxSpeed = 15;
+        if (this._dy > maxSpeed) {
+            this._dy = maxSpeed;
+        } else if (this._dy < -1 * maxSpeed) {
+            this._dy = -1 * maxSpeed;
         }
-        if (this._dx > 20) {
-            this._dx = 20;
-        } else if (this._dx < -20) {
-            this._dx = -20;
+        if (this._dx > maxSpeed) {
+            this._dx = maxSpeed;
+        } else if (this._dx < -1 * maxSpeed) {
+            this._dx = -1 * maxSpeed;
         }
     }
 
