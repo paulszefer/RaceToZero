@@ -1,0 +1,96 @@
+.contentactual .extra {
+	text-align: center;
+	z-index: 50;
+}
+
+#tutorialquestion {
+	width: 50%;
+}
+
+#tutorialanswer1 {
+	width: 15%;
+}
+
+#tutorialanswer2 {
+	width: 15%;
+}
+
+#lvl1question {
+	width: 50%;
+}
+
+#lvl1answer1 {
+	width: 15%;
+}
+
+#lvl1answer2 {
+	width: 15%;
+}
+
+#lvl1answer3 {
+	width: 15%;
+}
+
+#lvl1answer4 {
+	width: 15%;
+}
+
+#lvl2question {
+	width: 50%;
+}
+
+#lvl2answerMeat {
+	width: 15%;
+}
+
+#lvl2answerBread {
+	width: 15%;
+}
+
+#lvl2answerFruits {
+	width: 15%;
+}
+
+#lvl2answerAll {
+	width: 15%;
+}
+
+#lvl3question {
+	width: 50%;
+}
+
+#lvl3answerRefrigerate {
+	width: 25%;
+}
+
+#lvl3answerToast {
+	width: 25%;
+}
+
+#lvl3answerSoak {
+	width: 25%;
+}
+
+#lvl3answerBreak {
+	width: 25%;
+}
+
+#lvl4question {
+	width: 50%;
+}
+
+#lvl4answerThousand {
+	width: 15%;
+}
+
+#lvl4answerMillion {
+	width: 20%;
+}
+
+#lvl4answerBillion {
+	width: 15%;
+}
+
+#lvl4answerTrillion {
+	width: 15%;
+}
