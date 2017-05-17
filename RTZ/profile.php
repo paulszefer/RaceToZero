@@ -34,7 +34,7 @@
 		<h1>Profile</h1>
 		<br>
 		<div class='row'>
-			<div class = 'col half-col'>
+			<div class = 'col'>
 			<?php
 				//If user is logged in, display their profile picture
 				//If by chance not, 
@@ -52,7 +52,9 @@
 				}
 			?>
 			</div>
-			<div class = 'col half-col'>
+		</div>	
+		<div class='row'>	
+			<div class = 'col'>
 			<ul>
 	            <li>Username: <?php echo $_SESSION['user_name']; ?></li>
 	            <li>&nbsp;</li>
