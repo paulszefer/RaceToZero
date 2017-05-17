@@ -786,22 +786,22 @@ class Extra {
     }
 
     render() {
-        let e = document.createElement(this.elementType);
-        e.id = this.name;
-        e.style.position = "absolute";
-        e.style.top = this.y1 + "px";
-        e.style.left = this.x1 + "px";
-        e.style.width = this.x2 - this.x1;
-        e.style.height = this.y2 - this.y1;
+        let extra = document.createElement(this.elementType);
+        extra.id = this.name;
+        extra.className = "extra";
+        extra.style.top = this.y1 + "px";
+        extra.style.left = this.x1 + "px";
+        extra.style.width = this.x2 - this.x1;
+        extra.style.height = this.y2 - this.y1;
 
         if (this.elementType === "p") {
-            e.style.fontSize = "2em";
-            e.innerHTML = this.elementData;
+            extra.style.fontSize = "2em";
+            extra.innerHTML = this.elementData;
         } else if (this.elementType === "img") {
-            e.alt = this.name;
-            e.src = this.elementData;
+            extra.alt = this.name;
+            extra.src = this.elementData;
         }
-        document.getElementById("game_window").appendChild(e);
+        document.getElementById("game_window").appendChild(extra);
     }
 
     /**

@@ -62,6 +62,7 @@ $(function () {
          */
         gameContainer = document.createElement("div");
         gameContainer.id = "game_container";
+        gameContainer.className = "unselectable";
 
         // .contentactual is the div that holds the content on each page
         // TODO - change .contentactual to #contentactual
@@ -522,7 +523,6 @@ $(function () {
         }
         let level_elements = document.getElementById("game_window").children;
         for (let i = level_elements.length - 1; i >= 0; i--) {
-            console.log(level_elements[i]);
             level_elements[i].parentNode.removeChild(level_elements[i]);
         }
         init();
