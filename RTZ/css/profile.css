@@ -5,8 +5,9 @@
 }
 .col{
 	vertical-align: top;
-	display: inline-block;
 	top:0;
+	text-align: center;
+	margin:auto;
 }
 .half-col{
 	width:49%;
