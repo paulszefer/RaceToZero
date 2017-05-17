@@ -466,18 +466,21 @@ $(function () {
                 retryButton.id = "retry_button";
                 retryButton.className = "score_overlay_button";
                 retryButton.innerHTML = "Retry";
+                scoreOverlay.appendChild(retryButton);
+
                 let selectLevelButton = document.createElement("div");
                 selectLevelButton.id = "select_level_button";
                 selectLevelButton.className = "score_overlay_button";
                 selectLevelButton.innerHTML = "Select Level";
-                let nextLevelButton = document.createElement("div");
-                nextLevelButton.id = "next_level_button";
-                nextLevelButton.className = "score_overlay_button";
-                nextLevelButton.innerHTML = "Next Level";
-
-                scoreOverlay.appendChild(retryButton);
                 scoreOverlay.appendChild(selectLevelButton);
-                scoreOverlay.appendChild(nextLevelButton);
+
+                if (game.level < NUMBER_OF_LEVELS - 1) {
+                    let nextLevelButton = document.createElement("div");
+                    nextLevelButton.id = "next_level_button";
+                    nextLevelButton.className = "score_overlay_button";
+                    nextLevelButton.innerHTML = "Next Level";
+                    scoreOverlay.appendChild(nextLevelButton);
+                }
 
                 scoreOverlay.style.display = "block";
                 timer.style.display = "none";
