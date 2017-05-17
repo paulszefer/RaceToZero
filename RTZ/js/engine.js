@@ -105,6 +105,7 @@ $(function () {
     let barriers;
     let airs;
     let extras;
+    let wrongs;
     let goal;
     let playItem;
     let foodItem;
@@ -141,6 +142,8 @@ $(function () {
         airs = [];
 
         extras = [];
+
+        wrongs = [];
 
         //levelID = -1;
 
@@ -220,11 +223,13 @@ $(function () {
                 new Extra("question1", Math.round(width * 0.3), Math.round(height * 0.25), 0, 0, "p", question1),
                 new Extra("question2", Math.round(width * 0.3), Math.round(height * 0.30), 0, 0, "p", question2),
                 new Extra("answer1", Math.round(width * 0.26), Math.round(height * 0.75), 0, 0, "p", answer1),
-                new Extra("answer2", Math.round(width * 0.60), Math.round(height * 0.75), 0, 0, "p", answer2),
-                new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
+                new Extra("answer2", Math.round(width * 0.60), Math.round(height * 0.75), 0, 0, "p", answer2)
+            );
+            wrongs.push(
+                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
-            goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height * 0.9);
+            goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
@@ -474,6 +479,14 @@ $(function () {
              */
             for (let i = 0; i < extras.length; i++) {
                 extras[i].render();
+            }
+
+            /**
+             * Adds the wrongs to the level object.
+             */
+            for (let i = 0; i < wrongs.length; i++) {
+                wrongs[i].drawPhysicalObject();
+                level.addWrong(wrongs[i]);
             }
 
             /**

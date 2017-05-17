@@ -232,7 +232,16 @@ class Level {
      * Adds a wrong answer section.
      */
     addWrong(wrong) {
-        this.addPhysicalObject(wrong.x1, wrong.y1, wrong.x2, wrong.y2, WRONG);
+        let x1 = wrong.x1;
+        let y1 = wrong.y1;
+        let x2 = wrong.x2;
+        let y2 = wrong.y2;
+        for (let i = x1; i <= x2; i++) {
+            for (let j = y1; j <= y2; j++) {
+                this._board[i][j].type = WRONG;
+                this._board[i][j].answerID = wrong.answerID;
+            }
+        }
     }
 
     /**
@@ -248,73 +257,139 @@ class Level {
             console.log("Error: The item is out of bounds.");
             return;
         }
-        
+
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
         let collision = this.checkCollisions(tempX, tempY);
-        console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
+        //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
         //console.log(collision);
         if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
-        	this.playItem.isGrounded = true;
-        	if (collision === 2) {
-        		// right side collision
-        		this.snapToRight(tempY);
-        		this.playItem.reverseDX();
-        	} else if (collision === 4) {
-        		// left side collision
-        		this.snapToLeft(tempY);
-        		this.playItem.reverseDX();
-        	} else {
-        		this.playItem.move();
-        	}
-        	this.playItem.dy = 0;
-        	if (this.playItem.dx > 0) {
-        		this.playItem.dx--;
-        	} else if (this.playItem.dx < 0) {
-        		this.playItem.dx++;
-        	}
-        } else {
-        // check if next movement causes a collision
-        if (collision === 0) {
-            // no collision, move normally
-            this.playItem.move();
-            this.playItem.isGrounded = false;
-        } else if (collision === 1) {
-            // top-side collision
-            this.snapToTop(tempX);
-            this.playItem.reverseDY();
-            this.playItem.isGrounded = false;
-        } else if (collision === 2) {
-            // right-side collision
-            this.snapToRight(tempY);
-            this.playItem.reverseDX();
-            this.playItem.isGrounded = false;
-        } else if (collision === 3) {
-            // bottom-side collision
-            if (!this.playItem.isGrounded) {
-                this.snapToBottom(tempX);
-            }
-            if (Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
-                this.playItem.snapToGround();
-                this.playItem.move();
+            this.playItem.isGrounded = true;
+            if (collision === 2) {
+                // right side collision
+                this.snapToRight(tempY);
+                this.playItem.reverseDX();
+            } else if (collision === 4) {
+                // left side collision
+                this.snapToLeft(tempY);
+                this.playItem.reverseDX();
             } else {
+                this.playItem.move();
+            }
+            this.playItem.dy = 0;
+            if (this.playItem.dx > 0) {
+                this.playItem.dx--;
+            } else if (this.playItem.dx < 0) {
+                this.playItem.dx++;
+            }
+        } else {
+            // check if next movement causes a collision
+            if (collision === 0) {
+                // no collision, move normally
+                this.playItem.move();
+                this.playItem.isGrounded = false;
+            } else if (collision === 1) {
+                // top-side collision
+                this.snapToTop(tempX);
                 this.playItem.reverseDY();
                 this.playItem.isGrounded = false;
+            } else if (collision === 2) {
+                // right-side collision
+                this.snapToRight(tempY);
+                this.playItem.reverseDX();
+                this.playItem.isGrounded = false;
+            } else if (collision === 3) {
+                // bottom-side collision
+                if (!this.playItem.isGrounded) {
+                    this.snapToBottom(tempX);
+                }
+                if (Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
+                    this.playItem.snapToGround();
+                    this.playItem.move();
+                } else {
+                    this.playItem.reverseDY();
+                    this.playItem.isGrounded = false;
+                }
+            } else if (collision === 4) {
+                // left-side collision
+                this.snapToLeft(tempY);
+                this.playItem.reverseDX();
+                this.playItem.isGrounded = false;
+            } else if (collision === 5) {
+                // collision with a goal
+                this.playItem.move();
+                return 5;
+            } else if (collision === 6) {
+                // collision with a wrong answer section
+                this.playItem.move();
+
+                // find associated wrong answer
+                let x1 = this.playItem.x;
+                let y1 = this.playItem.y;
+                let x2 = this.playItem.x + this.playItem.size;
+                let y2 = this.playItem.y + this.playItem.size;
+
+                let topLeftPixel = this.board[x1][y1];
+                let topRightPixel = this.board[x2][y1];
+                let bottomLeftPixel = this.board[x1][y2];
+                let bottomRightPixel = this.board[x2][y2];
+                let wrongPixelX;
+                let wrongPixelY;
+
+                if (topLeftPixel.type === WRONG) {
+                    document.getElementById(topLeftPixel.answerID).style.color = "red";
+                    document.getElementById(topLeftPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x1;
+                    wrongPixelY = y1;
+                } else if (topRightPixel.type === WRONG) {
+                    document.getElementById(topRightPixel.answerID).style.color = "red";
+                    document.getElementById(topRightPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x2;
+                    wrongPixelY = y1;
+                } else if (bottomLeftPixel.type === WRONG) {
+                    document.getElementById(bottomLeftPixel.answerID).style.color = "red";
+                    document.getElementById(bottomLeftPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x1;
+                    wrongPixelY = y2;
+                    // console.log(wrongPixelX + "  " + wrongPixelY);
+                } else if (bottomRightPixel.type === WRONG) {
+                    document.getElementById(bottomRightPixel.answerID).style.color = "red";
+                    document.getElementById(bottomRightPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x2;
+                    wrongPixelY = y2;
+                }
+
+                // replace "wrong" section with air to prevent further triggers
+                let wrongX1;
+                let wrongY1;
+                let wrongX2;
+                let wrongY2;
+
+                while (wrongPixelX >= 0 && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelX--;
+                }
+                wrongPixelX++;
+                wrongX1 = wrongPixelX;
+                while (wrongPixelY >= 0 && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelY--;
+                }
+                wrongPixelY++;
+                wrongY1 = wrongPixelY;
+                while (wrongPixelX <= this.width && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelX++;
+                }
+                wrongPixelX--;
+                wrongX2 = wrongPixelX;
+                while (wrongPixelY <= this.height && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelY++;
+                }
+                wrongPixelY--;
+                wrongY2 = wrongPixelY;
+
+                this.addAir(new Air("air" + wrongX1, wrongX1, wrongY1, wrongX2, wrongY2));
+                //console.log(this.board[wrongX1 + 3][wrongY1 + 3].type);
+                return 6;
             }
-        } else if (collision === 4) {
-            // left-side collision
-            this.snapToLeft(tempY);
-            this.playItem.reverseDX();
-            this.playItem.isGrounded = false;
-        } else if (collision === 5) {
-            // collision with a goal
-            this.playItem.move();
-            return 5;
-        } else if (collision === 6) {
-            // collision with a wrong answer section
-            this.playItem.move();
-            return 6;
-        }
         }
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
@@ -335,9 +410,9 @@ class Level {
             move++;
         }
         if (this.playItem.dy !== 0) {
-        let ratio = this._playItem.dx / this._playItem.dy;
-        this._playItem.x = this._playItem.x - (move * ratio);
-        this._playItem.y = this._playItem.y - move;
+            let ratio = this._playItem.dx / this._playItem.dy;
+            this._playItem.x = this._playItem.x - (move * ratio);
+            this._playItem.y = this._playItem.y - move;
         }
     }
 
@@ -350,9 +425,9 @@ class Level {
             move++;
         }
         if (this.playItem.dx !== 0) {
-        let ratio = this._playItem.dy / this._playItem.dx;
-        this._playItem.x = this._playItem.x + move;
-        this._playItem.y = this._playItem.y + (move * ratio);
+            let ratio = this._playItem.dy / this._playItem.dx;
+            this._playItem.x = this._playItem.x + move;
+            this._playItem.y = this._playItem.y + (move * ratio);
         }
     }
 
@@ -365,9 +440,9 @@ class Level {
             move++;
         }
         if (this.playItem.dy !== 0) {
-        let ratio = this._playItem.dx / this._playItem.dy;
-        this._playItem.x = this._playItem.x + (move * ratio);
-        this._playItem.y = this._playItem.y + move;
+            let ratio = this._playItem.dx / this._playItem.dy;
+            this._playItem.x = this._playItem.x + (move * ratio);
+            this._playItem.y = this._playItem.y + move;
         }
     }
 
@@ -380,9 +455,9 @@ class Level {
             move++;
         }
         if (this.playItem.dx !== 0) {
-        let ratio = this._playItem.dy / this._playItem.dx;
-        this._playItem.x = this._playItem.x - move;
-        this._playItem.y = this._playItem.y - (move * ratio);
+            let ratio = this._playItem.dy / this._playItem.dx;
+            this._playItem.x = this._playItem.x - move;
+            this._playItem.y = this._playItem.y - (move * ratio);
         }
     }
 
@@ -445,12 +520,12 @@ class Level {
         } else if (this._board[x1][y2 - halfSize].type === SOLID) {
             return 4;
         } else {
-        	if (this._playItem.dx > 0) {
-				return 1;
-			}
-			if (this._playItem.dy > 0) {
-				return 4;
-			}
+            if (this._playItem.dx > 0) {
+                return 1;
+            }
+            if (this._playItem.dy > 0) {
+                return 4;
+            }
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX1 - move][origY1].type === SOLID) {
@@ -472,12 +547,12 @@ class Level {
         let origX2 = x1 + this._playItem.size - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
-		if (this._playItem.dx < 0) {
-			return 1;
-		}
-		if (this._playItem.dy > 0) {
-			return 2;
-		}
+        if (this._playItem.dx < 0) {
+            return 1;
+        }
+        if (this._playItem.dy > 0) {
+            return 2;
+        }
         let move = 0;
         while (move < this._playItem.size) {
             if (this._board[origX2 + move][origY1].type === SOLID) {
@@ -502,7 +577,7 @@ class Level {
         let y2 = y1 + size;
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
-		if (this._board[x2][y1 + halfSize].type === SOLID) {
+        if (this._board[x2][y1 + halfSize].type === SOLID) {
             return 2;
         } else if (this._board[x1 + halfSize][y2].type === SOLID) {
             return 3;
@@ -511,11 +586,11 @@ class Level {
                 return 3;
             }
             if (this._playItem.dx < 0) {
-				return 3;
-			}
-			if (this._playItem.dy < 0) {
-				return 2;
-			}
+                return 3;
+            }
+            if (this._playItem.dy < 0) {
+                return 2;
+            }
             let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX2 + move][origY2].type === SOLID) {
@@ -535,41 +610,41 @@ class Level {
      * barrier.
      */
     bottomLeftCollision(x1, y1) {
-    	let size = this._playItem.size;
-    	let halfSize = Math.round(size / 2);
-    	let x2 = x1 + size;
-    	let y2 = y1 + size;
+        let size = this._playItem.size;
+        let halfSize = Math.round(size / 2);
+        let x2 = x1 + size;
+        let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
 
-		if (this._board[x1][y1 + halfSize].type === SOLID) {
-			return 4;
-		} else if (this._board[x2 - halfSize][y2].type === SOLID) {
-			return 3;
-		} else {
-			if (this._playItem.isGrounded) {
-				return 3;
-			}
-			// either left side or bottom side
-			if (this._playItem.dx > 0) {
-				return 3;
-			}
-			if (this._playItem.dy < 0) {
-				return 4;
-			}
-        	let move = 0;
-        	while (move < this._playItem.size) {
-            	if (this._playItem.isGrounded) {
-                	return 3;
-            	}
-            	if (this._board[origX1 - move][origY2].type === SOLID) {
-                	return 4;
-            	} else if (this._board[origX1][origY2 + move].type === SOLID) {
-                	return 3;
-            	} else {
-                	move++;
-            	}
-        	}
+        if (this._board[x1][y1 + halfSize].type === SOLID) {
+            return 4;
+        } else if (this._board[x2 - halfSize][y2].type === SOLID) {
+            return 3;
+        } else {
+            if (this._playItem.isGrounded) {
+                return 3;
+            }
+            // either left side or bottom side
+            if (this._playItem.dx > 0) {
+                return 3;
+            }
+            if (this._playItem.dy < 0) {
+                return 4;
+            }
+            let move = 0;
+            while (move < this._playItem.size) {
+                if (this._playItem.isGrounded) {
+                    return 3;
+                }
+                if (this._board[origX1 - move][origY2].type === SOLID) {
+                    return 4;
+                } else if (this._board[origX1][origY2 + move].type === SOLID) {
+                    return 3;
+                } else {
+                    move++;
+                }
+            }
         }
         return 0;
     }
@@ -698,7 +773,7 @@ class PhysicalObject {
         } else if (this._pixelType === GOAL) {
             objectColour = BACKGROUND_COLOUR;
         } else if (this._pixelType === WRONG) {
-            objectColour = BACKGROUND_COLOUR;
+            objectColour = BARRIER_COLOUR;
         }
 
         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -1071,7 +1146,7 @@ class PlayItem {
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
         // used to slow movement so clicks do not shoot the object off at high speeds
-        let divisor = 10;
+        let divisor = 7;
 
         this._dx += Math.round(xDiff / divisor);
         this._dy += Math.round(yDiff / divisor);
@@ -1085,7 +1160,7 @@ class PlayItem {
      * before and after every move.
      */
     adjustSpeed() {
-    	let maxSpeed = 15;
+        let maxSpeed = 15;
         if (this._dy > maxSpeed) {
             this._dy = maxSpeed;
         } else if (this._dy < -1 * maxSpeed) {
@@ -1136,7 +1211,7 @@ class FoodItem {
     constructor(name, type, imageURL, isEdible) {
         this._name = name;
         this._type = type;
-        this.bounceMultiplier = 0.8; // varies by type
+        this.bounceMultiplier = 0.4; // varies by type
         this.gravity = 1; // varies by type
         this._imageURL = imageURL;
         this._isEdible = isEdible;
@@ -1178,5 +1253,19 @@ class Pixel {
      */
     get type() {
         return this._type;
+    }
+
+    /**
+     * Sets the answerID of the pixel.
+     */
+    set answerID(id) {
+        this._answerID = id;
+    }
+
+    /**
+     * Returns the answerID of the pixel.
+     */
+    get answerID() {
+        return this._answerID;
     }
 }

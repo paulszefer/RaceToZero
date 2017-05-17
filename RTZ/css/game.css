@@ -142,12 +142,10 @@
 
 #food_image {
     position: absolute;
-    z-index: 20;
 }
 
 .extra {
     position: absolute;
-    z-index: 50;
 }
 
 .unselectable {
