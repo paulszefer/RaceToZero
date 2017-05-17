@@ -240,9 +240,9 @@ $(function () {
         } else if (levelID === 3) {
             // Level 1 Question Stage
             // TODO - add correct level data
-            let question1 = "Which of these foods have gone";
-            let question2 = "bad if you've found";
-            let question3 = "mould on them?";
+            let question1 = "How much money does a typical";
+            let question2 = "household in Vancouver lose per year";
+            let question3 = "due to food waste?";
             let answer1 = "$200";
             let answer2 = "$700";
             let answer3 = "$1200";
@@ -255,8 +255,8 @@ $(function () {
             );
             extras.push(
                 new Extra("question1", Math.round(width * 0.25), Math.round(height * 0.40), 0, 0, "p", question1),
-                new Extra("question2", Math.round(width * 0.34), Math.round(height * 0.45), 0, 0, "p", question2),
-                new Extra("question3", Math.round(width * 0.36), Math.round(height * 0.50), 0, 0, "p", question3),
+                new Extra("question2", Math.round(width * 0.22), Math.round(height * 0.45), 0, 0, "p", question2),
+                new Extra("question3", Math.round(width * 0.35), Math.round(height * 0.50), 0, 0, "p", question3),
                 new Extra("answer1", Math.round(width * 0.08), Math.round(height * 0.75), 0, 0, "p", answer1),
                 new Extra("answer2", Math.round(width * 0.33), Math.round(height * 0.75), 0, 0, "p", answer2),
                 new Extra("answer3", Math.round(width * 0.58), Math.round(height * 0.75), 0, 0, "p", answer3),
