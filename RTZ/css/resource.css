@@ -14,7 +14,7 @@
 /*wrapper for each of topic box*/
 .contentboxwrapper{
     width:49%;
-    background-color: #556370;
+    background-color: white;
     min-height:25vh;
     display:inline-block;
     color:black;
@@ -42,7 +42,7 @@
 }
 .bigcontentboxwrapper{
     width:98.5%;
-    background-color: #556370;
+    background-color: white;
     min-height:100%;
     display:inline-block;
     color:black;
