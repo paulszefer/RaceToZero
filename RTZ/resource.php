@@ -200,7 +200,7 @@
 	            <hr>
 				<h2>Captin Plan-It</h2>
 				<br>
-				<img src='img/cp3.png' height='150' width='150' alt='captin plan-it logo'>
+				<img src='img/cp3v2.png' height='150' width='150' alt='captin plan-it logo'>
 				<br><br>
 	            <p>Captain Plan-It is an educational quiz game where you can answer questions related to food groups. Answer correctly to earn keys which can unlock accessories for your own personal hero!</p>
 				<br>
@@ -213,6 +213,8 @@
 				<br><br>
 	            <p>Food Fall is a game that teaches you the effects of food waste - and to have fun too!</p>
 	            <br>
+				<p>Link: <a href='http://FoodFall.com'>Check it out here!</a></p>
+				<br>
 			</div>
 			<!--start of the topic boxes-->
 			<div class='contentboxwrapper'>
