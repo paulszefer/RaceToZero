@@ -1,19 +1,34 @@
 /*override default template2.css*/
-
+.row{
+	max-height:100vh;
+	overflow:hidden;
+}
+.col{
+	vertical-align: top;
+	display: inline-block;
+	top:0;
+}
+.half-col{
+	width:49%;
+	min-height:50vh;
+}
+.half-col ul{
+	position:relative;
+	top:50%;
+}
 .contentactual h1 {
     text-align: center;
 }
-
 .contentactual img {
-    padding: 100px 50px 0px 50px;
-    float: left;
     height: 200px;
+    width: 200px;
+    margin:auto;
+    display: block;
+    vertical-align: middle;
 }
-
 .contentactual ul {
-    padding: 150px 50px;
-    float: center;
+	padding:0;
 }
 .button {
-    padding: 60px 50px 50px 45px;
+    
 }

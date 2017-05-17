@@ -203,7 +203,8 @@ $(function () {
         } else if (levelID === 1) {
             // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
-            let questiontext = "How much of the food produced around the world is wasted?";
+            let question1 = "How much of the food produced";
+            let question2 = "around the world is wasted?";
             let answer1 = "One half";
             let answer2 = "One third";
             barriers.push(
@@ -213,11 +214,12 @@ $(function () {
                 new Barrier("ground3", width * 0.75, height - barrierHeight * 4, width, height)
             );
             extras.push(
-                new Extra("question", Math.round(width * 0.3), Math.round(height * 0.25), 0, 0, "p", questiontext),
-                new Extra("answer1", 100, 120, 0, 0, "p", answer1),
-                new Extra("answer2", 100, 140, 0, 0, "p", answer2),
+                new Extra("question1", Math.round(width * 0.3), Math.round(height * 0.25), 0, 0, "p", question1),
+                new Extra("question2", Math.round(width * 0.3), Math.round(height * 0.30), 0, 0, "p", question2),
+                new Extra("answer1", Math.round(width * 0.26), Math.round(height * 0.75), 0, 0, "p", answer1),
+                new Extra("answer2", Math.round(width * 0.60), Math.round(height * 0.75), 0, 0, "p", answer2),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
-            ); // TODO - add correct info
+            );
             scoreOverlay.innerHTML = "<p><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
             goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height - barrierHeight);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
@@ -238,12 +240,29 @@ $(function () {
         } else if (levelID === 3) {
             // Level 1 Question Stage
             // TODO - add correct level data
+            let question1 = "Which of these foods have gone";
+            let question2 = "bad if you've found";
+            let question3 = "mould on them?";
+            let answer1 = "$200";
+            let answer2 = "$700";
+            let answer3 = "$1200";
+            let answer4 = "$2100";
             barriers.push(
                 new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierHeight),
                 new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.75), Math.round(width * 0.30), Math.round(height * 0.95)),
                 new Barrier("barrier2", Math.round(width * 0.45), Math.round(height * 0.75), Math.round(width * 0.55), Math.round(height * 0.95)),
                 new Barrier("barrier3", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95))
             );
+            extras.push(
+                new Extra("question1", Math.round(width * 0.25), Math.round(height * 0.40), 0, 0, "p", question1),
+                new Extra("question2", Math.round(width * 0.34), Math.round(height * 0.45), 0, 0, "p", question2),
+                new Extra("question3", Math.round(width * 0.36), Math.round(height * 0.50), 0, 0, "p", question3),
+                new Extra("answer1", Math.round(width * 0.08), Math.round(height * 0.75), 0, 0, "p", answer1),
+                new Extra("answer2", Math.round(width * 0.33), Math.round(height * 0.75), 0, 0, "p", answer2),
+                new Extra("answer3", Math.round(width * 0.58), Math.round(height * 0.75), 0, 0, "p", answer3),
+                new Extra("answer4", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4)
+            );
+            scoreOverlay.innerHTML = "<p>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
             goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
@@ -261,6 +280,16 @@ $(function () {
             playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
             // Level 2 Question Stage
+            let question1 = "Which of these foods have gone";
+            let question2 = "bad if you've found";
+            let question3 = "mould on them?";
+            let answer1a = "Meat &";
+            let answer1b = "Dairy";
+            let answer2 = "Bread";
+            let answer3a = "Fruits &";
+            let answer3b = "Veggies";
+            let answer4a = "All of";
+            let answer4b = "these";
             barriers.push(
                 new Barrier("platform1", Math.round(width * 0.75), Math.round(height * 0.20), Math.round(width * 0.95), Math.round(height * 0.30)),
                 new Barrier("platform2", Math.round(width * 0.30), Math.round(height * 0.30), Math.round(width * 0.45), Math.round(height * 0.35)),
@@ -273,6 +302,19 @@ $(function () {
                 new Barrier("barrier5", Math.round(width * 0.20), Math.round(height * 0.75), Math.round(width * 0.30), Math.round(height * 0.95)),
                 new Barrier("barrier6", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95))
             );
+            extras.push(
+                new Extra("question1", Math.round(width * 0.25), Math.round(height * 0.10), 0, 0, "p", question1),
+                new Extra("question2", Math.round(width * 0.33), Math.round(height * 0.15), 0, 0, "p", question2),
+                new Extra("question3", Math.round(width * 0.36), Math.round(height * 0.20), 0, 0, "p", question3),
+                new Extra("answer1a", Math.round(width * 0.07), Math.round(height * 0.20), 0, 0, "p", answer1a),
+                new Extra("answer1b", Math.round(width * 0.08), Math.round(height * 0.25), 0, 0, "p", answer1b),
+                new Extra("answer2", Math.round(width * 0.08), Math.round(height * 0.75), 0, 0, "p", answer2),
+                new Extra("answer3a", Math.round(width * 0.81), Math.round(height * 0.40), 0, 0, "p", answer3a),
+                new Extra("answer3b", Math.round(width * 0.81), Math.round(height * 0.45), 0, 0, "p", answer3b),
+                new Extra("answer4a", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4a),
+                new Extra("answer4b", Math.round(width * 0.83), Math.round(height * 0.80), 0, 0, "p", answer4b)
+            );
+            scoreOverlay.innerHTML = "<p>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
@@ -299,6 +341,13 @@ $(function () {
             playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 7) {
             // Level 3 Question Stage
+            let question1 = "What's a good way to make";
+            let question2 = "stale chips taste good again?";
+            let answer1 = "Refrigerate them";
+            let answer2 = "Toast them";
+            let answer3 = "Soak them in water";
+            let answer4a = "Break them into";
+            let answer4b = "smaller pieces";
             barriers.push(
                 new Barrier("mainwall", Math.round(width * 0.70), Math.round(height * 0.05), Math.round(width * 0.80), Math.round(height * 0.80)),
                 new Barrier("floor", Math.round(width * 0.30), Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
@@ -311,6 +360,16 @@ $(function () {
                 new Barrier("floating2", Math.round(width * 0.40), Math.round(height * 0.45), Math.round(width * 0.49), Math.round(height * 0.50)),
                 new Barrier("floating3", Math.round(width * 0.40), Math.round(height * 0.75), Math.round(width * 0.49), Math.round(height * 0.80))
             );
+            extras.push(
+                new Extra("question1", Math.round(width * 0.49), Math.round(height * 0.80), 0, 0, "p", question1),
+                new Extra("question2", Math.round(width * 0.49), Math.round(height * 0.85), 0, 0, "p", question2),
+                new Extra("answer1", Math.round(width * 0.07), Math.round(height * 0.10), 0, 0, "p", answer1),
+                new Extra("answer2", Math.round(width * 0.07), Math.round(height * 0.35), 0, 0, "p", answer2),
+                new Extra("answer3", Math.round(width * 0.07), Math.round(height * 0.60), 0, 0, "p", answer3),
+                new Extra("answer4a", Math.round(width * 0.07), Math.round(height * 0.83), 0, 0, "p", answer4a),
+                new Extra("answer4b", Math.round(width * 0.07), Math.round(height * 0.88), 0, 0, "p", answer4b)
+            );
+            scoreOverlay.innerHTML = "<p>To make stale chips taste good again, just <span class=\"answer\">toast them!</span></p>";
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
@@ -344,6 +403,13 @@ $(function () {
             playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
             // Level 4 Question Stage
+            let question1 = "How much money could the world";
+            let question2 = "save every year if there";
+            let question3 = "was zero food waste?";
+            let answer1 = "$1000";
+            let answer2 = "$1 million";
+            let answer3 = "$1 billion";
+            let answer4 = "$1 trillion";
             barriers.push(
                 new Barrier("topleftwall", Math.round(width * 0.15), Math.round(height * 0.05), Math.round(width * 0.25), Math.round(height * 0.20)),
                 new Barrier("topleftfloor", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.35), Math.round(height * 0.40)),
@@ -360,6 +426,16 @@ $(function () {
                 new Barrier("toprightfloor", Math.round(width * 0.80), Math.round(height * 0.35), Math.round(width * 0.95), Math.round(height * 0.50)),
                 new Barrier("toprightlip", Math.round(width * 0.70), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.25))
             );
+            extras.push(
+                new Extra("question1", Math.round(width * 0.30), Math.round(height * 0.10), 0, 0, "p", question1),
+                new Extra("question2", Math.round(width * 0.30), Math.round(height * 0.15), 0, 0, "p", question2),
+                new Extra("question3", Math.round(width * 0.30), Math.round(height * 0.20), 0, 0, "p", question3),
+                new Extra("answer1", Math.round(width * 0.07), Math.round(height * 0.46), 0, 0, "p", answer1),
+                new Extra("answer2", Math.round(width * 0.37), Math.round(height * 0.81), 0, 0, "p", answer2),
+                new Extra("answer3", Math.round(width * 0.805), Math.round(height * 0.22), 0, 0, "p", answer3),
+                new Extra("answer4", Math.round(width * 0.75), Math.round(height * 0.80), 0, 0, "p", answer4)
+            );
+            scoreOverlay.innerHTML = "<p>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.10 - playItemSize * 0.5), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
