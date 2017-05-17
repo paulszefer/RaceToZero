@@ -800,6 +800,9 @@ class Extra {
         } else if (this.elementType === "img") {
             extra.alt = this.name;
             extra.src = this.elementData;
+            // makes image square
+            extra.width = this.y2 - this.y1;
+            extra.height = this.y2 - this.y1;
         }
         document.getElementById("game_window").appendChild(extra);
     }

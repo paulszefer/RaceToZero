@@ -91,7 +91,7 @@ $(function () {
     }
 
     /** Declare/Initialize game variables. */
-    let width = gameContainer.offsetWidth
+    let width = gameContainer.offsetWidth;
     let height = gameContainer.offsetHeight;
     let barrierWidth = Math.max(Math.round(width / 20), 30);
     let barrierHeight = Math.max(Math.round(height / 20), 30);
@@ -188,11 +188,11 @@ $(function () {
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
             barriers.push(
-                new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight)
+                new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.45 + barrierHeight)
             );
             extras.push(
-                new Extra("hint_tap_here", Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 6.2), 0, "p", "Tap here"),
-                new Extra("tap_image", Math.round(barrierWidth * 1.6), Math.round(barrierWidth * 3.6), Math.round(barrierWidth * 2.6), Math.round(barrierWidth * 4.6), "img", "img/tapimage.png"),
+                new Extra("hint_tap_here", width * 0.15, height * 0.3, 0, 0, "p", "Tap here"),
+                new Extra("tap_image", width * 0.15, height * 0.35, width * 0.2, height * 0.4, "img", "img/tapimage.png"),
                 new Extra("arrow", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.2), Math.round(barrierWidth * 9), "img", "img/arrow.png")
             );
             goal = new Goal("goal", barrierWidth, height - barrierHeight, goalSize + barrierWidth, height);

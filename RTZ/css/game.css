@@ -140,6 +140,7 @@
 
 #food_image {
     position: absolute;
+    z-index: 20;
 }
 
 .extra {
