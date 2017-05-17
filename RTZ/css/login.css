@@ -1,4 +1,25 @@
 /* styles for login form */
+#tabwrapper {
+	background-color: rgb(63, 72, 204);
+	background: linear-gradient(135deg, #6495ED, #B0E0E6, #6495ED);
+	width: 100%; 
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+}
+#logintab {
+
+}
+#regtab {
+	border-right: 1px solid black;
+	float: right;
+}
+.titletab {
+	width: 49.3%;
+	display: inline-block;
+	border-left: 1px solid black;
+	margin: 0;
+	background-color: transparent;
+}
 #logincontent {
 	padding: 5% 0 5% 0;
 	margin: auto;
@@ -47,6 +68,7 @@
 	width: 90%;
 	text-align:left;
 	font-size:1em;
+	display: none;
 }
 
 .required::after{
