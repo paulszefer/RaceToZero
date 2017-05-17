@@ -37,7 +37,7 @@
 		<ul>
             <li>Username: <?php echo $_SESSION['user_name']; ?></li>
             <li>&nbsp;</li>
-            <li>High score: <?php echo displayTutorialScore(); ?></li>
+            <li>High score: <?php echo round(displayTutorialScore() / 1000, 1); ?></li>
             <li>&nbsp;</li>
             <li>Something: helloitsme</li>
         </ul>
