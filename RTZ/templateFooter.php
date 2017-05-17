@@ -17,15 +17,11 @@
 				$(dino).insertBefore("#copyright");
 				trigger2();
 				}
-			}
-
-			
+			}			
 			function trigger2() {
 				var dino = document.createElement("img");
 				dino.src = "img/party-dinosaur.gif";
-				dino.setAttribute("class", "easteregg");
-
-				
+				dino.setAttribute("class", "easteregg");			
 				$(dino).insertAfter("#copyright");
 			}
 // 			function img_create() {
@@ -35,9 +31,6 @@
 // 	img.class = "easteregg"
 //     return img;
 // }
-
-			onload.trigger();
 		</script>
-
 	</body>
 </html>
