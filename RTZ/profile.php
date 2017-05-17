@@ -33,16 +33,34 @@
 	<div class='contentactual'>
 		<h1>Profile</h1>
 		<br>
-        <img src='img/setprofilepic.png'>
-		<ul>
-            <li>Username: <?php echo $_SESSION['user_name']; ?></li>
-            <li>&nbsp;</li>
-            <li>High score: <?php echo round(displayTutorialScore() / 1000, 1); ?></li>
-            <li>&nbsp;</li>
-            <li>Something: helloitsme</li>
-        </ul>
-        <br>
-	</div>
+		<div class='row'>
+			<div class = 'col half-col'>
+			<?php
+				//If user is logged in, display their profile picture
+				//If by chance not, 
+				if(isset($_SESSION['user_session']))
+				{					
+					echo
+					(
+					"<img src='img/profilepics/".$user->getUserProfileImage()."'>"
+					);
+				} else {
+					echo
+					(
+					"<img src='img/profilepics/setprofilepic.png'>"
+					);
+				}
+			?>
+			</div>
+			<div class = 'col half-col'>
+			<ul>
+	            <li>Username: <?php echo $_SESSION['user_name']; ?></li>
+	            <li>&nbsp;</li>
+	            <li>High score: <?php echo displayTutorialScore(); ?></li>
+	            <li>&nbsp;</li>
+	        </ul>
+	        </div>
+		</div>
 	<!--The following is a work in progress. The user will be able to change their
 	profile picture to another (random) picture.-->
 	<!--<div class'inline'>
@@ -54,6 +72,7 @@
 	</div>
 	<br><br>
     <br>-->
+	</div>
 </div>
 <div id='footer'>
 	<div class='footercontent'>
