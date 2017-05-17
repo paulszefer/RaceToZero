@@ -212,7 +212,9 @@ $(function () {
                 new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight),
                 new Barrier("ground1", 0, height - barrierHeight * 4, width * 0.25, height),
                 new Barrier("ground2", width * 0.4, height - barrierHeight * 4, width * 0.6, height),
-                new Barrier("ground3", width * 0.75, height - barrierHeight * 4, width, height)
+                new Barrier("ground3", width * 0.75, height - barrierHeight * 4, width, height),
+                new Barrier("floor1", width * 0.25, height * 0.9, width * 0.4, height - barrierHeight),
+                new Barrier("floor2", width * 0.6, height * 0.9, width * 0.75, height - barrierHeight)
             );
             extras.push(
                 new Extra("question1", Math.round(width * 0.3), Math.round(height * 0.25), 0, 0, "p", question1),
@@ -222,7 +224,7 @@ $(function () {
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
-            goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height - barrierHeight);
+            goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
@@ -240,7 +242,6 @@ $(function () {
             playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
             // Level 1 Question Stage
-            // TODO - add correct level data
             let question1 = "How much money does a typical";
             let question2 = "household in Vancouver lose per year";
             let question3 = "due to food waste?";
@@ -252,7 +253,8 @@ $(function () {
                 new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + barrierHeight),
                 new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.75), Math.round(width * 0.30), Math.round(height * 0.95)),
                 new Barrier("barrier2", Math.round(width * 0.45), Math.round(height * 0.75), Math.round(width * 0.55), Math.round(height * 0.95)),
-                new Barrier("barrier3", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95))
+                new Barrier("barrier3", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95)),
+                new Barrier("floor", 0, height * 0.90, width, height - barrierHeight)
             );
             extras.push(
                 new Extra("question1", Math.round(width * 0.25), Math.round(height * 0.40), 0, 0, "p", question1),
@@ -264,7 +266,7 @@ $(function () {
                 new Extra("answer4", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4)
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
-            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.95);
+            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
@@ -276,7 +278,7 @@ $(function () {
                 new Barrier("step3", Math.round(width * 0.50), Math.round(height * 0.35), Math.round(width * 0.80), Math.round(height * 0.60)),
                 new Barrier("step4", Math.round(width * 0.65), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.45))
             );
-            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height - barrierHeight), Math.round(width * 0.95), height);
+            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height - barrierHeight), Math.round(width - barrierWidth), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
@@ -301,7 +303,8 @@ $(function () {
                 new Barrier("barrier3", Math.round(width * 0.70), Math.round(height * 0.40), Math.round(width * 0.80), Math.round(height * 0.60)),
                 new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.50), Math.round(width * 0.95), Math.round(height * 0.60)),
                 new Barrier("barrier5", Math.round(width * 0.20), Math.round(height * 0.75), Math.round(width * 0.30), Math.round(height * 0.95)),
-                new Barrier("barrier6", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95))
+                new Barrier("barrier6", Math.round(width * 0.70), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95)),
+                new Barrier("floor", 0, height * 0.9, width, height)
             );
             extras.push(
                 new Extra("question1", Math.round(width * 0.25), Math.round(height * 0.10), 0, 0, "p", question1),
@@ -316,7 +319,7 @@ $(function () {
                 new Extra("answer4b", Math.round(width * 0.83), Math.round(height * 0.80), 0, 0, "p", answer4b)
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
-            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.95);
+            goal = new Goal("goal", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             //playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
             playItem = new PlayItem(Math.round(width - Math.max(width * 0.15, barrierWidth + playItemSize + 2)), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
