@@ -560,12 +560,12 @@ $(function () {
     /**
      * Adds a click handler to the game container that handles clicks within the game.
      */
-    $(gameContainer).click(function (e) {
+    $(document.getElementById("content")).click(function (e) {
         // prevents initial input
         if (!clicked && score > 100) {
             let divPosX = $(this).position().left;
             let divPosY = $(this).position().top;
-            let mousePosX = e.pageX - divPosX;
+            let mousePosX = e.pageX - divPosX - $(gameContainer).offset().left;
             let mousePosY = e.pageY - divPosY;
 
             // moves the item based on the click

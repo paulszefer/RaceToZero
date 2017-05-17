@@ -1064,8 +1064,6 @@ class PlayItem {
      * pushing it away from the location of the cursor.
      */
     clicked(mousePosX, mousePosY) {
-        console.log("x : " + mousePosX);
-        console.log("y : " + mousePosY);
         let xDiff = this._x + (this._size / 2) - mousePosX;
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
