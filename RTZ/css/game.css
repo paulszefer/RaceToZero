@@ -41,19 +41,49 @@
 }
 
 #score_overlay {
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.85);
     color: white;
-    font-size: 2em;
+}
+
+#score_overlay p {
+    width: 60%;
+    margin: auto;
+    padding-top: 10%;
+    font-size: 3em;
 }
 
 .score_overlay_button {
-    width: 25%;
-    background-color: red;
-    color: yellow;
+    width: 20%;
+    height: 10%;
+    position: absolute;
+    bottom: 10%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    /*background-color: rgb(148, 232, 136);*/
+    border: 10px rgb(120, 120, 120) outset;
+    border-radius: 12px;
+}
+
+.score_overlay_button p {
+    color: black;
+    font-size: 1em;
+    height: 100%;
+    line-height: 100%;
+}
+
+.score_overlay_button:first-of-type {
+    left: 10%;
+}
+
+.score_overlay_button:nth-of-type(2) {
+    left: 40%;
+}
+
+.score_overlay_button:last-of-type {
+    right: 10%;
 }
 
 /* Styles the level select window. */
@@ -84,6 +114,7 @@
     border: 10px rgb(120, 120, 120) outset;
     border-radius: 12px;
 }
+
 .level_select_button:hover {
     /*background-color: white;*/
     background: linear-gradient(white, rgb(160, 160, 160));

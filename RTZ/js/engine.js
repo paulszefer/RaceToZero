@@ -218,9 +218,7 @@ $(function () {
                 new Extra("answer2", 100, 140, 0, 0, "p", answer2),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
             ); // TODO - add correct info
-            scoreOverlay.innerHTML = "Question: " + questiontext;
-            scoreOverlay.innerHTML += "<br>";
-            scoreOverlay.innerHTML += "Answer: " + answer2;
+            scoreOverlay.innerHTML = "<p><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
             goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height - barrierHeight);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
@@ -465,6 +463,8 @@ $(function () {
                 }
                 init();
             } else {
+                $(".extra").css("display", "none");
+
                 let time = document.createElement("p");
                 time.innerHTML = parseTime(score);
 
@@ -484,19 +484,19 @@ $(function () {
                 let retryButton = document.createElement("div");
                 retryButton.id = "retry_button";
                 retryButton.className = "score_overlay_button";
-                retryButton.innerHTML = "Retry";
+                retryButton.innerHTML = "<p>Retry</p>";
                 scoreOverlay.appendChild(retryButton);
 
                 let selectLevelButton = document.createElement("div");
                 selectLevelButton.id = "select_level_button";
                 selectLevelButton.className = "score_overlay_button";
-                selectLevelButton.innerHTML = "Select Level";
+                selectLevelButton.innerHTML = "<p>Levels</p>";
                 scoreOverlay.appendChild(selectLevelButton);
 
                 let nextLevelButton = document.createElement("div");
                 nextLevelButton.id = "next_level_button";
                 nextLevelButton.className = "score_overlay_button";
-                nextLevelButton.innerHTML = "Next Level";
+                nextLevelButton.innerHTML = "<p>Next</p>";
 
                 if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
                     scoreOverlay.appendChild(nextLevelButton);
