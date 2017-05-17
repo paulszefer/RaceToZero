@@ -241,7 +241,9 @@
 				<div class='contentbox bigcontentbox'>
 					<h1>Affiliated Apps</h1>
 					<br>
-					<img src='img/affiliatedlogo.png'>
+					<div class='affimg'>
+						<img src='img/affiliatedlogo.png'>
+					</div>
 				</div>
 			</div>
 		</div><!--end of contentwrapper-->
