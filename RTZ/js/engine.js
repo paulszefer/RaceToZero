@@ -188,7 +188,8 @@ $(function () {
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
             barriers.push(
-                new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight)
+                new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + barrierHeight)//,
+                //new Barrier("forsandbox", 0, height * 0.9, width, height)
             );
             extras.push(
                 new Extra("hint_tap_here", Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 6.2), 0, "p", "Tap here"),
@@ -642,6 +643,7 @@ $(function () {
      * Adds a click handler to the game container that handles clicks within the game.
      */
     $(document.getElementById("content")).click(function (e) {
+    	console.log("click");
         // prevents initial input
         if (!clicked && score > 100) {
             let divPosX = $(this).position().left;
