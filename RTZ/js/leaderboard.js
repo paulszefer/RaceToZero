@@ -20,7 +20,7 @@ $(document).ready(function() {
 			select.appendChild(option); // adds an option element to the select element
 		}
 	
-		$(".contentactual").append(select); // adds the select element
+		$(".contentactual p").prepend(select); // adds the select element
 	
 		let levelSelected;
 	
