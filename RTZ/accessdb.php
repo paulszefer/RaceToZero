@@ -100,8 +100,15 @@
 				  FROM games
 				  WHERE level_id=" . ($level + 1) . 
 				" ORDER BY game_time ASC;";
-			
-		$result = mysqli_query($link, $query);
+				
+		$query2 = "SELECT game_time,
+						  user_name
+				  FROM games
+				  	INNER JOIN users ON users.user_id = games.user_id
+				  WHERE level_id=" . ($level + 1) . 
+				" ORDER BY game_time ASC;";
+				
+		$result = mysqli_query($link, $query2);
 	
 		if($result) {
 			while($row = mysqli_fetch_array($result)) {
