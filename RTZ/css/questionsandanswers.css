@@ -1,5 +1,6 @@
 .contentactual .extra {
 	text-align: center;
+	z-index: 50;
 }
 
 #tutorialquestion {

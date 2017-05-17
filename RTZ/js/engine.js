@@ -278,6 +278,9 @@ $(function () {
                 //new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1"),
                 //new Wrong("wrong2", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1"),
                 //new Wrong("wrong3", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
+                new Wrong("lvl1wrong1", barrierWidth, height * 0.85, width * 0.20, height * 0.9, "lvl1answer1"),
+                new Wrong("lvl1wrong3", Math.max(width * 0.55, width * 0.45 + playItemSize), height * 0.85, Math.min(width * 0.70, width * 0.80 - playItemSize), height * 0.9, "lvl1answer3"),
+                new Wrong("lvl1wrong4", Math.round(width * 0.80), height * 0.85, width - barrierWidth, height * 0.9, "lvl1answer4")                
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
             goal = new Goal("goal", Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.85, width * 0.45, height * 0.9);
@@ -331,17 +334,19 @@ $(function () {
                 new Extra("lvl2question", Math.round(width * 0.25), Math.round(height * 0.10), 0, 0, "p", question),
                 //new Extra("answer1a", Math.round(width * 0.07), Math.round(height * 0.20), 0, 0, "p", answer1a),
                 //new Extra("answer1b", Math.round(width * 0.08), Math.round(height * 0.25), 0, 0, "p", answer1b),
-                new Extra("lvl2answerMeat", barrierWidth, Math.round(height * 0.20), 0, 0, "p", answerMeat),
-                new Extra("lvl2answerBread", barrierWidth, Math.round(height * 0.75), 0, 0, "p", answerBread),
+                new Extra("lvl2answerMeat", barrierWidth, Math.round(height * 0.35), 0, 0, "p", answerMeat),
+                new Extra("lvl2answerBread", barrierWidth, Math.round(height * 0.83), 0, 0, "p", answerBread),
                 //new Extra("answer3a", Math.round(width * 0.81), Math.round(height * 0.40), 0, 0, "p", answer3a),
                 //new Extra("answer3b", Math.round(width * 0.81), Math.round(height * 0.45), 0, 0, "p", answer3b),
                 new Extra("lvl2answerFruits", width * 0.80, Math.round(height * 0.40), 0, 0, "p", answerFruits),
                 //new Extra("answer4a", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4a),
                 //new Extra("answer4b", Math.round(width * 0.83), Math.round(height * 0.80), 0, 0, "p", answer4b)
-                new Extra("lvl2answerAll", width * 0.80, Math.round(height * 0.75), 0, 0, "p", answerAll)
+                new Extra("lvl2answerAll", width * 0.80, Math.round(height * 0.80), 0, 0, "p", answerAll)
             );
             wrongs.push(
-                //new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
+                new Wrong("lvl2wrongMeat", barrierWidth, height * 0.35, Math.round(width * 0.20), height * 0.45, "lvl2answerMeat"),
+                new Wrong("lvl2wrongBread", barrierWidth, height * 0.80, Math.round(width * 0.20), height * 0.90, "lvl2answerBread"),
+                new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width - barrierWidth, Math.round(height * 0.50), "lvl2answerFruits")                
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9);
@@ -388,7 +393,7 @@ $(function () {
             let answerBreak = "Break them into smaller pieces";
             barriers.push(
                 new Barrier("mainwall", Math.round(width * 0.70), Math.round(height * 0.05), Math.max(width * 0.80, width * 0.70 + playItemSize), Math.round(height * 0.80)),
-                new Barrier("floor", Math.round(width), Math.round(height * 0.85), Math.round(width * 0.95), Math.round(height * 0.95)),
+                new Barrier("floor", 0, Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
                 new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.20), Math.round(width * 0.30), Math.round(height * 0.30)),
                 new Barrier("platform2", Math.round(width * 0.05), Math.round(height * 0.45), Math.round(width * 0.30), Math.round(height * 0.55)),
                 new Barrier("platform3", Math.round(width * 0.05), Math.round(height * 0.70), Math.round(width * 0.30), Math.round(height * 0.80)),
@@ -401,16 +406,18 @@ $(function () {
             extras.push(
                 //new Extra("question1", Math.round(width * 0.49), Math.round(height * 0.80), 0, 0, "p", question1),
                 //new Extra("question2", Math.round(width * 0.49), Math.round(height * 0.85), 0, 0, "p", question2),
-                new Extra("lvl3question", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.round(height * 0.83), 0, 0, "p", question),
+                new Extra("lvl3question", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.round(height * 0.81), 0, 0, "p", question),
                 new Extra("lvl3answerRefrigerate", barrierWidth, Math.round(height * 0.10), 0, 0, "p", answerRefrigerate),
                 new Extra("lvl3answerToast", barrierWidth, Math.round(height * 0.35), 0, 0, "p", answerToast),
                 new Extra("lvl3answerSoak", barrierWidth, Math.round(height * 0.60), 0, 0, "p", answerSoak),
                 //new Extra("answer4a", Math.round(width * 0.07), Math.round(height * 0.83), 0, 0, "p", answer4a),
                 //new Extra("answer4b", Math.round(width * 0.07), Math.round(height * 0.88), 0, 0, "p", answer4b)
-                new Extra("lvl3answerBreak", barrierWidth, Math.round(height * 0.83), 0, 0, "p", answerBreak)
+                new Extra("lvl3answerBreak", barrierWidth, Math.round(height * 0.81), 0, 0, "p", answerBreak)
             );
             wrongs.push(
-                //new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
+                new Wrong("lvl3wrongRefrigerate", barrierWidth, barrierHeight, Math.round(width * 0.20), Math.round(height * 0.20), "lvl3answerRefrigerate"),
+                new Wrong("lvl3wrongSoak", barrierWidth, Math.round(height * 0.55), Math.round(width * 0.20), Math.round(height * 0.70), "lvl3answerSoak"),
+                new Wrong("lvl3wrongBreak", barrierWidth, Math.round(height * 0.80), Math.round(width * 0.20), Math.round(height * 0.90), "lvl3answerBreak")                
             );
             scoreOverlay.innerHTML = "<p class='statement'>To make stale chips taste good again, just <span class=\"answer\">toast them!</span></p>";
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
@@ -479,11 +486,13 @@ $(function () {
                 new Extra("lvl4question", Math.round(width * 0.25), Math.round(height * 0.10), 0, 0, "p", question),
                 new Extra("lvl4answerThousand", barrierWidth, Math.round(height * 0.46), 0, 0, "p", answerThousand),
                 new Extra("lvl4answerMillion", Math.round(width * 0.35), Math.round(height * 0.81), 0, 0, "p", answerMillion),
-                new Extra("lvl4answerBillion", Math.round(width * 0.80), Math.round(height * 0.22), 0, 0, "p", answerBillion),
+                new Extra("lvl4answerBillion", Math.round(width * 0.80), Math.round(height * 0.25), 0, 0, "p", answerBillion),
                 new Extra("lvl4answerTrillion", Math.round(width * 0.75), Math.round(height * 0.80), 0, 0, "p", answerTrillion)
             );
             wrongs.push(
-                //new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
+                new Wrong("lvl4wrongThousand", barrierWidth, Math.round(height * 0.40), Math.round(width * 0.20), Math.round(height * 0.50), "lvl4answerThousand"),
+                new Wrong("lvl4wrongMillion", Math.round(width * 0.35), Math.round(height * 0.85), Math.round(width * 0.55), Math.round(height * 0.90), "lvl4answerMillion"),
+                new Wrong("lvl4wrongBillion", Math.round(width * 0.80), Math.round(height * 0.25), width - barrierWidth, Math.round(height * 0.35), "lvl4answerBillion")                
             );
             scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
