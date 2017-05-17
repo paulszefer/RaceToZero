@@ -275,7 +275,7 @@ $(function () {
                 new Barrier("step3", Math.round(width * 0.50), Math.round(height * 0.35), Math.round(width * 0.80), Math.round(height * 0.60)),
                 new Barrier("step4", Math.round(width * 0.65), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.45))
             );
-            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), height);
+            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height - barrierHeight), Math.round(width * 0.95), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
@@ -317,7 +317,8 @@ $(function () {
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(Math.round(width - Math.max(width * 0.15, barrierWidth + playItemSize + 2)), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 6) {
             // Level 3 Game Stage (obstacles)
             barriers.push(
@@ -336,7 +337,7 @@ $(function () {
                 new Barrier("barrier10", Math.round(width * 0.50), Math.round(height * 0.60), Math.round(width * 0.55), Math.round(height * 0.65)),
                 new Barrier("barrier11", Math.round(width * 0.75), Math.round(height * 0.60), Math.round(width * 0.80), Math.round(height * 0.65))
             );
-            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height * 0.95), Math.round(width * 0.95), Math.round(height * 1.00));
+            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height - barrierHeight), Math.round(width * 0.95), Math.round(height * 1.00));
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 7) {
@@ -398,7 +399,7 @@ $(function () {
                 new Barrier("barrier8", Math.round(width * 0.40), Math.round(height * 0.75), Math.round(width * 0.45), Math.round(height * 0.80)),
                 new Barrier("barrier9", Math.round(width * 0.28), Math.round(height * 0.85), Math.round(width * 0.33), Math.round(height * 0.90))
             );
-            goal = new Goal("goal", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.20), Math.round(height * 1.00));
+            goal = new Goal("goal", Math.round(width * 0.05), Math.round(height - barrierHeight), Math.round(width * 0.20), Math.round(height * 1.00));
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
