@@ -723,7 +723,7 @@ function parseTimeForOverlay(ms) {
     let strH = ""; // probably won't use
     let optionalS = minutes === 1 ? "" : "s";
     let strM = minutes === 0 ? "" : minutes + " minute" + optionalS + " ";
-    let strS = seconds === 0 ? "" : seconds;
+    let strS = seconds;
     let strMS = milliseconds === 0 ? " seconds" : "." + ("" + milliseconds).substr(0, 1) + " seconds";
     
     return strH + strM + strS + strMS;
