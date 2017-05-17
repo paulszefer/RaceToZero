@@ -13,7 +13,7 @@
 			<!--This table is populated with data using the js/leaderboard.js file.-->
 			<tr>
 				<th>Placement</th>
-				<th>User_id</th>
+				<th>Username</th>
 				<th>Time</th>
 			</tr>
 		</table>
