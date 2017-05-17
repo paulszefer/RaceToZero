@@ -6,7 +6,8 @@ $(document).ready(function() {
 	// determine the number of levels currently in the database. Uses this number to 
 	// a drop-down menu that can be used to choose a level.
 	$.post("accessdb.php", { function: "getNumberOfLevels" }, function(data) {
-		numberOfLevels = parseInt(data.number);
+		//numberOfLevels = parseInt(data.number);
+		numberOfLevels = 5;
 		
 		let select = document.createElement("select"); // creates the select element
 		select.setAttribute("id", "levelselect");
@@ -30,13 +31,14 @@ $(document).ready(function() {
 			// and get the shortest times for that level. Then displays those times in
 			// a table.
 			$.post("accessdb.php", { function: "getShortestTimes", level: $level }, function(data) {
+				//alert(data);
 				for (let i = 0; i < data.length; i++) {
 					let row = document.createElement("tr"); // creates a row.
 					let cell1 = document.createElement("td");
 					let placement = document.createTextNode(i + 1);
 					cell1.appendChild(placement);
 					let cell2 = document.createElement("td");
-					let userid = document.createTextNode(data[i]['user_id']);
+					let userid = document.createTextNode(data[i]['user_name']);
 					cell2.appendChild(userid);
 					let cell3 = document.createElement("td");
 					let time = document.createTextNode(data[i]['game_time']);
