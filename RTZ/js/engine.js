@@ -484,19 +484,19 @@ $(function () {
                 let retryButton = document.createElement("div");
                 retryButton.id = "retry_button";
                 retryButton.className = "score_overlay_button";
-                retryButton.innerHTML = "<p>Retry</p>";
+                retryButton.innerHTML = "<img src='img/retrylevel.png' alt='Retry'>";
                 scoreOverlay.appendChild(retryButton);
 
                 let selectLevelButton = document.createElement("div");
                 selectLevelButton.id = "select_level_button";
                 selectLevelButton.className = "score_overlay_button";
-                selectLevelButton.innerHTML = "<p>Levels</p>";
+                selectLevelButton.innerHTML = "<img src='img/levelselect.png' alt='Levels'>";
                 scoreOverlay.appendChild(selectLevelButton);
 
                 let nextLevelButton = document.createElement("div");
                 nextLevelButton.id = "next_level_button";
                 nextLevelButton.className = "score_overlay_button";
-                nextLevelButton.innerHTML = "<p>Next</p>";
+                nextLevelButton.innerHTML = "<img src='img/nextlevel.png' alt='Next'>";
 
                 if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
                     scoreOverlay.appendChild(nextLevelButton);
