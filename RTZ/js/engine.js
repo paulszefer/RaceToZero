@@ -270,6 +270,11 @@ $(function () {
                 new Extra("answer3", Math.round(width * 0.58), Math.round(height * 0.75), 0, 0, "p", answer3),
                 new Extra("answer4", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4)
             );
+            wrongs.push(
+                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1"),
+                new Wrong("wrong2", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1"),
+                new Wrong("wrong3", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
+            );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
             goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
@@ -323,6 +328,9 @@ $(function () {
                 new Extra("answer4a", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4a),
                 new Extra("answer4b", Math.round(width * 0.83), Math.round(height * 0.80), 0, 0, "p", answer4b)
             );
+            wrongs.push(
+                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
+            );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
@@ -330,14 +338,12 @@ $(function () {
             playItem = new PlayItem(Math.round(width - Math.max(width * 0.15, barrierWidth + playItemSize + 2)), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
         } else if (levelID === 6) {
             // Level 3 Game Stage (obstacles)
-            
             let blocks1 = width * 0.50;
             let blocks2 = blocks1 + Math.max(width * 0.05, playItemSize);
             let blocks3 = blocks2 + Math.max(width * 0.05, playItemSize);
             let blocks4 = blocks3 + Math.max(width * 0.10, playItemSize + 10);
             let blocks5 = blocks4 + Math.max(width * 0.05, playItemSize);
             let blocks6 = blocks5 + Math.max(width * 0.05, playItemSize);
-            
             barriers.push(
                 new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.45)),
                 new Barrier("platform2", Math.round(width * 0.25), Math.round(height * 0.65), Math.round(width * 0.95), Math.round(height * 0.80)),
@@ -386,6 +392,9 @@ $(function () {
                 new Extra("answer3", Math.round(width * 0.07), Math.round(height * 0.60), 0, 0, "p", answer3),
                 new Extra("answer4a", Math.round(width * 0.07), Math.round(height * 0.83), 0, 0, "p", answer4a),
                 new Extra("answer4b", Math.round(width * 0.07), Math.round(height * 0.88), 0, 0, "p", answer4b)
+            );
+            wrongs.push(
+                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
             );
             scoreOverlay.innerHTML = "<p class='statement'>To make stale chips taste good again, just <span class=\"answer\">toast them!</span></p>";
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
@@ -453,6 +462,9 @@ $(function () {
                 new Extra("answer2", Math.round(width * 0.37), Math.round(height * 0.81), 0, 0, "p", answer2),
                 new Extra("answer3", Math.round(width * 0.805), Math.round(height * 0.22), 0, 0, "p", answer3),
                 new Extra("answer4", Math.round(width * 0.75), Math.round(height * 0.80), 0, 0, "p", answer4)
+            );
+            wrongs.push(
+                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
