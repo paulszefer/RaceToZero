@@ -91,7 +91,7 @@ $(function () {
     }
 
     /** Declare/Initialize game variables. */
-    let width = gameContainer.offsetWidth
+    let width = gameContainer.offsetWidth;
     let height = gameContainer.offsetHeight;
     let barrierWidth = Math.max(Math.round(width / 20), 30);
     let barrierHeight = Math.max(Math.round(height / 20), 30);
@@ -105,6 +105,7 @@ $(function () {
     let barriers;
     let airs;
     let extras;
+    let wrongs;
     let goal;
     let playItem;
     let foodItem;
@@ -141,6 +142,8 @@ $(function () {
         airs = [];
 
         extras = [];
+
+        wrongs = [];
 
         //levelID = -1;
 
@@ -188,13 +191,13 @@ $(function () {
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
             barriers.push(
-                new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.45 + Math.max(barrierHeight, playItemSize))//,
+                new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.45 + Math.max(barrierHeight, playItemSize))//,
                 //new Barrier("forsandbox", 0, height * 0.9, width, height)
             );
             extras.push(
-                new Extra("hint_tap_here", Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 1.2), Math.round(barrierWidth * 6.2), 0, "p", "Tap here"),
-                new Extra("tap_image", Math.round(barrierWidth * 1.6), Math.round(barrierWidth * 3.6), Math.round(barrierWidth * 2.6), Math.round(barrierWidth * 4.6), "img", "img/tapimage.png"),
-                new Extra("arrow", Math.round(width * 0.05), Math.round(height * 0.95), Math.round(width * 0.2), Math.round(barrierWidth * 9), "img", "img/arrow.png")
+                new Extra("hint_tap_here", width * 0.15, height * 0.3, 0, 0, "p", "Tap here"),
+                new Extra("tap_image", width * 0.15, height * 0.35, width * 0.2, height * 0.4, "img", "img/tapimage.png"),
+                new Extra("arrow", width * 0.15, height * 0.8, width * 0.2, height * 0.85, "img", "img/arrow.png")
             );
             goal = new Goal("goal", barrierWidth, height - barrierHeight, goalSize + barrierWidth, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
@@ -220,8 +223,10 @@ $(function () {
                 new Extra("question1", Math.round(width * 0.3), Math.round(height * 0.25), 0, 0, "p", question1),
                 new Extra("question2", Math.round(width * 0.3), Math.round(height * 0.30), 0, 0, "p", question2),
                 new Extra("answer1", Math.round(width * 0.26), Math.round(height * 0.75), 0, 0, "p", answer1),
-                new Extra("answer2", Math.round(width * 0.60), Math.round(height * 0.75), 0, 0, "p", answer2),
-                new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
+                new Extra("answer2", Math.round(width * 0.60), Math.round(height * 0.75), 0, 0, "p", answer2)
+            );
+            wrongs.push(
+                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
             goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9);
@@ -486,6 +491,14 @@ $(function () {
             }
 
             /**
+             * Adds the wrongs to the level object.
+             */
+            for (let i = 0; i < wrongs.length; i++) {
+                wrongs[i].drawPhysicalObject();
+                level.addWrong(wrongs[i]);
+            }
+
+            /**
              * Displays the goal, then adds the goal to the level object.
              */
             goal.drawPhysicalObject();
@@ -710,7 +723,7 @@ function parseTimeForOverlay(ms) {
     let strH = ""; // probably won't use
     let optionalS = minutes === 1 ? "" : "s";
     let strM = minutes === 0 ? "" : minutes + " minute" + optionalS + " ";
-    let strS = seconds === 0 ? "" : seconds;
+    let strS = seconds;
     let strMS = milliseconds === 0 ? " seconds" : "." + ("" + milliseconds).substr(0, 1) + " seconds";
     
     return strH + strM + strS + strMS;
