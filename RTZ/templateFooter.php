@@ -1,9 +1,7 @@
 <!-- This file provides a footer for every page on the website. -->
 		<div id='footer'>
-			<div class='footercontent'>
-				<div><p id="footerp">
+			<div class='footercontent'><div><p id="footerp">
 				<span id="copyright" onClick="trigger()">Copyright whatever</span>
-				</p></div>
 			</div>
 		</div>
 
