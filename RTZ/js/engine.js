@@ -220,7 +220,7 @@ $(function () {
                 new Extra("answer2", Math.round(width * 0.60), Math.round(height * 0.75), 0, 0, "p", answer2),
                 new Extra("hint1", 100, 160, 0, 0, "p", "hint1text")
             );
-            scoreOverlay.innerHTML = "<p><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
+            scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
             goal = new Goal("goal", width * 0.6, height - barrierHeight * 2, width * 0.75, height - barrierHeight);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
@@ -262,7 +262,7 @@ $(function () {
                 new Extra("answer3", Math.round(width * 0.58), Math.round(height * 0.75), 0, 0, "p", answer3),
                 new Extra("answer4", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4)
             );
-            scoreOverlay.innerHTML = "<p>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
+            scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
             goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierWidth + 10, 0, 0, playItemSize, foodItem);
@@ -314,7 +314,7 @@ $(function () {
                 new Extra("answer4a", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4a),
                 new Extra("answer4b", Math.round(width * 0.83), Math.round(height * 0.80), 0, 0, "p", answer4b)
             );
-            scoreOverlay.innerHTML = "<p>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
+            scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
@@ -369,7 +369,7 @@ $(function () {
                 new Extra("answer4a", Math.round(width * 0.07), Math.round(height * 0.83), 0, 0, "p", answer4a),
                 new Extra("answer4b", Math.round(width * 0.07), Math.round(height * 0.88), 0, 0, "p", answer4b)
             );
-            scoreOverlay.innerHTML = "<p>To make stale chips taste good again, just <span class=\"answer\">toast them!</span></p>";
+            scoreOverlay.innerHTML = "<p class='statement'>To make stale chips taste good again, just <span class=\"answer\">toast them!</span></p>";
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
@@ -435,7 +435,7 @@ $(function () {
                 new Extra("answer3", Math.round(width * 0.805), Math.round(height * 0.22), 0, 0, "p", answer3),
                 new Extra("answer4", Math.round(width * 0.75), Math.round(height * 0.80), 0, 0, "p", answer4)
             );
-            scoreOverlay.innerHTML = "<p>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
+            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(Math.round(width * 0.10 - playItemSize * 0.5), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
@@ -542,7 +542,7 @@ $(function () {
                 $(".extra").css("display", "none");
 
                 let time = document.createElement("p");
-                time.innerHTML = parseTime(score);
+                time.innerHTML = parseTimeForOverlay(score);
 
                 let actualLevel = game.level / 2;
                 let scoreInSeconds = Math.floor(score / 1000);
@@ -554,7 +554,11 @@ $(function () {
                 }, function (data) {
                     //alert(data);
                 });
-
+				
+				let yourTime = document.createElement("p");
+				let yourTimeText = document.createTextNode("Your Time:");
+				yourTime.appendChild(yourTimeText);
+				scoreOverlay.appendChild(yourTime);
                 scoreOverlay.appendChild(time);
 
                 let retryButton = document.createElement("div");
@@ -655,7 +659,7 @@ $(function () {
 });
 
 /**
- * Parses the score to display it.
+ * Parses the score to display it on the in-game timer.
  */
 function parseTime(ms) {
     let hours = Math.floor(ms / 1000 / 60 / 60);
@@ -665,8 +669,34 @@ function parseTime(ms) {
 
     let strH = ""; // hours === 0 ? "0:" : hours + ":";
     let strM = minutes === 0 ? "0:" : minutes + ":";
-    let strS = seconds === 0 ? "0:" : seconds + ":";
+    let strS;
+    //let strS = seconds === 0 ? "0:" : seconds + ":";
+    if (seconds === 0) {
+    	strS = "00.";
+    } else if (seconds < 10) {
+    	strS = "0" + seconds + ".";
+    } else {
+    	strS = seconds + ".";
+    }
     let strMS = ("" + milliseconds).substr(0, 1);
 
+    return strH + strM + strS + strMS;
+}
+
+/**
+ * Parses the score to display it on the score overlay.
+ */
+function parseTimeForOverlay(ms) {
+	let hours = Math.floor(ms / 1000 / 60 / 60);
+    let minutes = Math.floor(ms / 1000 / 60 - hours * 60);
+    let seconds = Math.floor(ms / 1000 - minutes * 60 - hours * 60 * 60);
+    let milliseconds = ms - seconds * 1000 - minutes * 1000 * 60 - hours * 1000 * 60 * 60;
+    
+    let strH = ""; // probably won't use
+    let optionalS = minutes === 1 ? "" : "s";
+    let strM = minutes === 0 ? "" : minutes + " minute" + optionalS + " ";
+    let strS = seconds === 0 ? "" : seconds;
+    let strMS = milliseconds === 0 ? " seconds" : "." + ("" + milliseconds).substr(0, 1) + " seconds";
+    
     return strH + strM + strS + strMS;
 }
