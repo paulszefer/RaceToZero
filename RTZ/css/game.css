@@ -55,7 +55,7 @@
 #score_overlay p {
 	text-align: center;
 	padding-top: 2%;
-	font-size: 3em;
+	font-size: 2.5em;
 }
 
 #score_overlay p.statement{
@@ -63,7 +63,7 @@
     margin: auto;
     padding-top: 10%;
     padding-bottom: 10%;
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 .score_overlay_button {
@@ -83,11 +83,12 @@
 }
 
 .score_overlay_button img {
-    height: 50%;
-    width: 25%;
-    position: absolute;
-    top: 25%;
-    left: 37.5%;
+    height: 6vh;
+    width: 6vh;
+    position: relative;
+    top: 2vh;
+    display: block;
+    margin: auto;
 }
 
 .score_overlay_button:first-of-type {

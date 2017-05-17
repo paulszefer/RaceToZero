@@ -368,7 +368,7 @@ $(function () {
             let answer4b = "smaller pieces";
             barriers.push(
                 new Barrier("mainwall", Math.round(width * 0.70), Math.round(height * 0.05), Math.max(width * 0.80, width * 0.70 + playItemSize), Math.round(height * 0.80)),
-                new Barrier("floor", Math.round(width), Math.round(height * 0.85), Math.round(width * 0.95), Math.round(height * 0.95)),
+                new Barrier("floor", 0, Math.round(height * 0.85), width, Math.round(height * 0.95)),
                 new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.20), Math.round(width * 0.30), Math.round(height * 0.30)),
                 new Barrier("platform2", Math.round(width * 0.05), Math.round(height * 0.45), Math.round(width * 0.30), Math.round(height * 0.55)),
                 new Barrier("platform3", Math.round(width * 0.05), Math.round(height * 0.70), Math.round(width * 0.30), Math.round(height * 0.80)),
