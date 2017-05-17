@@ -339,10 +339,9 @@ $(function () {
                 } else {
                     level.innerHTML = "Level " + i;
                 }
-                level.onclick = function () {
-                    console.log(i);
+                level.onclick = function() {
                     game.level = i * 2;
-                    init();
+                    reInit();
                 };
                 levelSelect.appendChild(level);
             }
@@ -497,23 +496,6 @@ $(function () {
                     game.level += 1;
                     reInit();
                 };
-
-                function reInit() {
-                    scoreOverlay.style.display = "none";
-                    score = 0;
-                    if (game.level >= 0) {
-                        timer.style.display = "block";
-                    }
-                    let overlay_elements = scoreOverlay.children;
-                    for (let i = overlay_elements.length - 1; i >= 0; i--) {
-                        scoreOverlay.removeChild(overlay_elements[i]);
-                    }
-                    let level_elements = document.getElementById("game_window").children;
-                    for (let i = level_elements.length - 1; i >= 0; i--) {
-                        level_elements[i].parentNode.removeChild(level_elements[i]);
-                    }
-                    init();
-                }
             }
         } else if (moveReturnValue === 6) {
             // TODO - somehow display that that is the wrong answer
@@ -523,6 +505,24 @@ $(function () {
         score += 20;
         // update score display (timer)
         timer.innerHTML = parseTime(score);
+    }
+
+    function reInit() {
+        scoreOverlay.style.display = "none";
+        score = 0;
+        if (game.level >= 0) {
+            timer.style.display = "block";
+        }
+        let overlay_elements = scoreOverlay.children;
+        for (let i = overlay_elements.length - 1; i >= 0; i--) {
+            scoreOverlay.removeChild(overlay_elements[i]);
+        }
+        let level_elements = document.getElementById("game_window").children;
+        for (let i = level_elements.length - 1; i >= 0; i--) {
+            console.log(level_elements[i]);
+            level_elements[i].parentNode.removeChild(level_elements[i]);
+        }
+        init();
     }
 
     // TODO - redundant? is it not false by default?
