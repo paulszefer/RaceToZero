@@ -122,26 +122,25 @@ if(isset($_POST['login']))
 				</tr>
 				<tr>
 					<td colspan=4>
-						<label for="regUsername" class="required">Username (6-10 Characters, lowercase + numbers only)</label>
+						<label for="regUsername" class="required">Username (4-16 letters or numbers only)</label>
 						<input type="text" id="regUsername" name="regUsername" oninput="userValid()" required>
 					</td>
 				</tr>
 				<tr>
 					<td colspan=4 id="regUsernameErrorField"></td>
 				</tr>
+				<tr><td>&nbsp;</td></tr>
 				<tr>
 					<td colspan=4>
-						<label for="regPassword" class="required">Password (6+ characters, letter and numbers only)</label>
+						<label for="regPassword" class="required">Password (6+ letters or numbers only)</label>
 						<input type="password" id="regPassword" name="regPassword" required>
 					<td/>
 				</tr>
+				<tr><td>&nbsp;</td></tr>
 				<tr>
-					<td colspan=3>
+					<td colspan=4>
 						<label for="cRegPassword">Confirm Password</label>
 						<input type="password" id="cRegPassword" name="cRegPassword" required>
-					</td>
-					<td>
-						<input type="button" id="passcheck" name="passcheck" value="Check" onclick="passwordValid()">
 					</td>
 				</tr>
 				<tr>

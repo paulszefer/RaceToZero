@@ -1,7 +1,7 @@
 /* styles for login form */
 #tabwrapper {
 	background-color: rgb(63, 72, 204);
-	background: linear-gradient(135deg, #6495ED, #B0E0E6, #6495ED);
+	background: linear-gradient(180deg, #CCCCCC, white, #CCCCCC);
 	width: 100%; 
 	border-bottom: 1px solid black;
 	border-top: 1px solid black;
@@ -28,6 +28,9 @@
 #loginform button{
 	text-align: center;
 	font-size: 1.5em;
+}
+#logincontent label{
+	font-size: 1.25em;
 }
 #logincontent table{
 	width:80%;

@@ -1,7 +1,7 @@
 //Gloabls
 var passRegEx = new RegExp(/^[a-zA-Z0-9]{6,}$/),
     //a-z, 0-9 includes - _ and . 6-10 characters total, after first match, no more
-    validChars = new RegExp(/^[a-z0-9]{6,10}(?!.{1,})$/);
+    validChars = new RegExp(/^[a-zA-Z0-9]{4,16}(?!.{1,})$/);
 
 //Login form js
 
@@ -74,7 +74,7 @@ function validateForm() {
     if (userValid() && passwordValid()) {
         return true;
     } else {
-        alert(ERROR_DISPLAY + ERROR_FIELD);
+        // alert(ERROR_DISPLAY + ERROR_FIELD);
         return false;
     }
 }
@@ -83,12 +83,12 @@ function userValid() {
     var username = document.getElementById("regUsername").value,
         l = username.length;
     //document.getElementById("regUsernameErrorField").innerHTML = "you wrote:" + l + username;
-    if (l < 6) {
-        document.getElementById("regUsernameErrorField").innerHTML = "Username less than 6 chars";
+    if (l < 4) {
+        document.getElementById("regUsernameErrorField").innerHTML = "Username less than 4 chars";
         return false;
         //another else if if username taken
-    } else if (l > 10) {
-        document.getElementById("regUsernameErrorField").innerHTML = "Username more than 10 chars";
+    } else if (l > 16) {
+        document.getElementById("regUsernameErrorField").innerHTML = "Username more than 16 chars";
         return false;
     } else if (!validChars.test(username)) {
         document.getElementById("regUsernameErrorField").innerHTML = "Username contains illegal characters";
