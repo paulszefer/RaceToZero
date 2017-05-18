@@ -193,29 +193,23 @@
 				<br>
 				<img src='img/foodfactorylogo.png' height='150' width='150' alt='food factory logo'>
 	            <br><br>
-	            <p>Food Factory Zero is a time-based drag and drop game. All you need to do is pick and match the ingredients with recipes.</p>
+	            <p><a href='https://foodfactoryzero.firebaseapp.com/'>Food Factory Zero</a> is a time-based drag and drop game. All you need to do is pick and match the ingredients with recipes.</p>
 				<br>
-	            <p>Link: <a href='https://foodfactoryzero.firebaseapp.com/'>Check it out here!</a></p>
-	            <br>
 	            <hr>
 				<h2>Captin Plan-It</h2>
 				<br>
 				<img src='img/cp3v2.png' height='150' width='150' alt='captin plan-it logo'>
 				<br><br>
-	            <p>Captain Plan-It is an educational quiz game where you can answer questions related to food groups. Answer correctly to earn keys which can unlock accessories for your own personal hero!</p>
-				<br>
-				<p>Link: <a href='http://students.bcitdev.com/A01009216/Captain-Plan-It/index.php'>Check it out here!</a></p>
+	            <p><a href='http://students.bcitdev.com/A01009216/Captain-Plan-It/index.php'>Captain Plan-It</a> is an educational quiz game where you can answer questions related to food groups. Answer correctly to earn keys which can unlock accessories for your own personal hero!</p>
 				<br>
 	            <hr>
 	            <h2>Food Fall</h2>
 	            <br>
 				<img src='img/foodfallartwork.jpg' height='150' width='150' alt='food fall logo'>
 				<br><br>
-	            <p>Food Fall is a game that teaches you the effects of food waste - and to have fun too!</p>
+	            <p><a href='http://FoodFall.ca'>Food Fall</a> is a game that teaches you the effects of food waste - and to have fun too!</p>
 	            <br>
-				<p>Link: <a href='http://FoodFall.com'>Check it out here!</a></p>
-				<br>
-			</div>
+				</div>
 			<!--start of the topic boxes-->
 			<div class='contentboxwrapper'>
 				<div class='contentbox'>
