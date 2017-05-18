@@ -400,6 +400,8 @@ class Level {
     }
     
     makeMove() {
+    
+    	
     	// don't move if out of bounds
         if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
             console.log("Error: The item is out of bounds.");
@@ -408,9 +410,8 @@ class Level {
         
         let nextX = this.playItem.x + this.playItem.dx;
         let nextY = this.playItem.y + this.playItem.dy;
-        let currentlyColliding = this.isColliding(nextX, nextY);
-        let goingToCollide = this.isColliding(nextX, nextY);
-        console.log(goingToCollide);
+        let goingToCollide = this.isColliding(nextX, nextY, SOLID);
+        console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + goingToCollide);
         
         // if currentlyColliding:
         //		if goingToCollide:
@@ -435,16 +436,27 @@ class Level {
         	let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
         	let curX = this.playItem.x;
         	let curY = this.playItem.y;
-        	for (let i = 1; i <= biggerComponent; i++) {
+        	let collided = false;
+        	if (this.isHorizontallyColliding(this.playItem.x, this.playItem.y)) {
+        		this.playItem.dx *= -0.6;
+        		collided = true;
+        	}
+        	if (this.isVerticallyColliding(this.playItem.x, this.playItem.y)) {
+        		this.playItem.dy *= -0.6;
+        		collided = true;
+        	}
+        	for (let i = 1; i <= biggerComponent && !collided; i++) {
         		curX += this.playItem.dx / biggerComponent;
         		curY += this.playItem.dy / biggerComponent;
         		let roundedX = Math.round(curX);
         		let roundedY = Math.round(curY);
         		if (this.isHorizontallyColliding(roundedX, roundedY)) {
         			this.playItem.dx *= -0.6;
+        			collided = true;
         		}
         		if (this.isVerticallyColliding(roundedX, roundedY)) {
         			this.playItem.dy *= -0.6;
+        			collided = true;
         		}
         	}
         	this.playItem.x = Math.round(curX);
@@ -470,6 +482,77 @@ class Level {
         // rounds values because display is pixel-based
         // TODO - move rounding to move function?
         this.playItem.round();
+        
+        if (this.isColliding(this.playItem.x, this.playItem.y, GOAL)) {
+        	return 5;
+        } else if (this.isColliding(this.playItem.x, this.playItem.y, WRONG)) {
+        	// find associated wrong answer
+                let x1 = this.playItem.x;
+                let y1 = this.playItem.y;
+                let x2 = this.playItem.x + this.playItem.size;
+                let y2 = this.playItem.y + this.playItem.size;
+
+                let topLeftPixel = this.board[x1][y1];
+                let topRightPixel = this.board[x2][y1];
+                let bottomLeftPixel = this.board[x1][y2];
+                let bottomRightPixel = this.board[x2][y2];
+                let wrongPixelX;
+                let wrongPixelY;
+
+                if (topLeftPixel.type === WRONG) {
+                    document.getElementById(topLeftPixel.answerID).style.color = "red";
+                    document.getElementById(topLeftPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x1;
+                    wrongPixelY = y1;
+                } else if (topRightPixel.type === WRONG) {
+                    document.getElementById(topRightPixel.answerID).style.color = "red";
+                    document.getElementById(topRightPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x2;
+                    wrongPixelY = y1;
+                } else if (bottomLeftPixel.type === WRONG) {
+                    document.getElementById(bottomLeftPixel.answerID).style.color = "red";
+                    document.getElementById(bottomLeftPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x1;
+                    wrongPixelY = y2;
+                    // console.log(wrongPixelX + "  " + wrongPixelY);
+                } else if (bottomRightPixel.type === WRONG) {
+                    document.getElementById(bottomRightPixel.answerID).style.color = "red";
+                    document.getElementById(bottomRightPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x2;
+                    wrongPixelY = y2;
+                }
+
+                // replace "wrong" section with air to prevent further triggers
+                let wrongX1;
+                let wrongY1;
+                let wrongX2;
+                let wrongY2;
+
+                while (wrongPixelX >= 0 && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelX--;
+                }
+                wrongPixelX++;
+                wrongX1 = wrongPixelX;
+                while (wrongPixelY >= 0 && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelY--;
+                }
+                wrongPixelY++;
+                wrongY1 = wrongPixelY;
+                while (wrongPixelX <= this.width && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelX++;
+                }
+                wrongPixelX--;
+                wrongX2 = wrongPixelX;
+                while (wrongPixelY <= this.height && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelY++;
+                }
+                wrongPixelY--;
+                wrongY2 = wrongPixelY;
+
+                this.addAir(new Air("air" + wrongX1, wrongX1, wrongY1, wrongX2, wrongY2));
+                //console.log(this.board[wrongX1 + 3][wrongY1 + 3].type);
+                return 6;
+        }
     }
 
     // TODO - group/normalize these snap functions?
@@ -578,7 +661,7 @@ class Level {
     }
     
     // true if object is colliding; false otherwise
-    isColliding(x, y) {
+    isColliding(x, y, type) {
     	let size = this.playItem.size;
         let x1 = x;
         let y1 = y;
@@ -586,13 +669,13 @@ class Level {
         let y2 = y + size;
         
         if (x1 >= 0 && x2 < this.width && y1 >= 0 && y2 < this.height) {
-        	if (this.board[x1][y1].type === SOLID) {
+        	if (this.board[x1][y1].type === type) {
         		return true;
-        	} else if (this.board[x1][y2].type === SOLID) {
+        	} else if (this.board[x1][y2].type === type) {
         		return true;
-        	} else if (this.board[x2][y1].type === SOLID) {
+        	} else if (this.board[x2][y1].type === type) {
         		return true;
-        	} else if (this.board[x2][y2].type === SOLID) {
+        	} else if (this.board[x2][y2].type === type) {
         		return true;
         	}
         }
