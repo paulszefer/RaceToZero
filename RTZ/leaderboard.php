@@ -9,7 +9,7 @@
 	<div class='contentactual'>
 		<h1>Leaderboard</h1>
 		<br>
-		<p>LOL YOU SUCK</p>
+		<p>&nbsp;</p>
 		<table id="besttimes" border="1">
 			<!--This table is populated with data using the js/leaderboard.js file.-->
 			<tr>
