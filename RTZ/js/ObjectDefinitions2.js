@@ -441,10 +441,10 @@ class Level {
         		let roundedX = Math.round(curX);
         		let roundedY = Math.round(curY);
         		if (this.isHorizontallyColliding(roundedX, roundedY)) {
-        			this.playItem.dx *= -1;
+        			this.playItem.dx *= -0.6;
         		}
         		if (this.isVerticallyColliding(roundedX, roundedY)) {
-        			this.playItem.dy *= -1;
+        			this.playItem.dy *= -0.6;
         		}
         	}
         	this.playItem.x = Math.round(curX);
@@ -453,8 +453,9 @@ class Level {
         	this.playItem.move();
         }
         
-        this.playItem.isGrounded = this.isBottomColliding(this.playItem.x, this.playItem.y) && Math.abs(this.playItem.dy < 2);
+        this.playItem.isGrounded = this.isBottomColliding(this.playItem.x, this.playItem.y) && Math.abs(this.playItem.dy) < 2;
         if (this.playItem.isGrounded) {
+        	this.playItem.dy = 0;
         	if (this.playItem.dx > 0) {
         		this.playItem.dx--;
         	} else if (this.playItem.dx < 0) {
@@ -585,13 +586,13 @@ class Level {
         let y2 = y + size;
         
         if (x1 >= 0 && x2 < this.width && y1 >= 0 && y2 < this.height) {
-        	if (this.board[x1][y1] === SOLID) {
+        	if (this.board[x1][y1].type === SOLID) {
         		return true;
-        	} else if (this.board[x1][y2] === SOLID) {
+        	} else if (this.board[x1][y2].type === SOLID) {
         		return true;
-        	} else if (this.board[x2][y1] === SOLID) {
+        	} else if (this.board[x2][y1].type === SOLID) {
         		return true;
-        	} else if (this.board[x2][y2] === SOLID) {
+        	} else if (this.board[x2][y2].type === SOLID) {
         		return true;
         	}
         }
@@ -607,13 +608,13 @@ class Level {
     	let y2 = y + size;
     	
     	if (x1 >= 0 && x2 < this.width && y1 >= 0 && y2 < this.height) {
-    		if (this.board[x1][y1 + 1] === SOLID) {
+    		if (this.board[x1][y1 + 1].type === SOLID) {
     			return true;
-    		} else if (this.board[x1][y2 - 1] === SOLID) {
+    		} else if (this.board[x1][y2 - 1].type === SOLID) {
     			return true;
-    		} else if (this.board[x2][y1 + 1] === SOLID) {
+    		} else if (this.board[x2][y1 + 1].type === SOLID) {
     			return true;
-    		} else if (this.board[x2][y2 - 1] === SOLID) {
+    		} else if (this.board[x2][y2 - 1].type === SOLID) {
     			return true;
     		}
     	}
@@ -629,13 +630,13 @@ class Level {
     	let y2 = y + size;
     	
     	if (x1 >= 0 && x2 < this.width && y1 >= 0 && y2 < this.height) {
-    		if (this.board[x1 + 1][y1] === SOLID) {
+    		if (this.board[x1 + 1][y1].type === SOLID) {
     			return true;
-    		} else if (this.board[x2 - 1][y1] === SOLID) {
+    		} else if (this.board[x2 - 1][y1].type === SOLID) {
     			return true;
-    		} else if (this.board[x1 + 1][y2] === SOLID) {
+    		} else if (this.board[x1 + 1][y2].type === SOLID) {
     			return true;
-    		} else if (this.board[x2 - 1][y2] === SOLID) {
+    		} else if (this.board[x2 - 1][y2].type === SOLID) {
     			return true;
     		}
     	}
@@ -651,9 +652,9 @@ class Level {
     	let y2 = y + size;
     	
     	if (x1 >= 0 && x2 < this.width && y1 >= 0 && y2 < this.height) {
-    		if (this.board[x1 + 1][y2] === SOLID) {
+    		if (this.board[x1 + 1][y2].type === SOLID) {
     			return true;
-    		} else if (this.board[x2 - 1][y2] === SOLID) {
+    		} else if (this.board[x2 - 1][y2].type === SOLID) {
     			return true;
     		}
     	}
