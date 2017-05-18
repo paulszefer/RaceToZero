@@ -83,7 +83,7 @@ $(function () {
         });
         retryImage = document.createElement("img");
         retryImage.id = "retrylevel";
-        retryImage.src = "img/retrylevel.png";
+        retryImage.src = "img/retrylevelwhite.png";
         retryButton.appendChild(retryImage);
         gameContainer.appendChild(retryButton);
 
@@ -579,7 +579,7 @@ $(function () {
     function move() {
         // occurs when there is a collision with the goal i.e. level is complete
         // TODO - move to separate function
-        let moveReturnValue = level.move();
+        let moveReturnValue = level.makeMove();
         if (moveReturnValue === 5) {
             clearInterval(intervalId);
             if (game.level % 2 === 0) {
