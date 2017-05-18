@@ -224,8 +224,6 @@ $(function () {
         } else if (levelID === 1) {
             // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
-            //let question1 = "How much of the food produced";
-            //let question2 = "around the world is wasted?";
             let question = "How much of the food produced around the world is wasted?";
             let answer1 = "One half";
             let answer2 = "One third";
@@ -238,11 +236,9 @@ $(function () {
                 new Barrier("floor2", width * 0.6, height * 0.9, width * 0.75, height - barrierHeight)
             );
             extras.push(
-                //new Extra("question1", Math.round(width * 0.3), Math.round(height * 0.25), 0, 0, "p", question1),
-                //new Extra("question2", Math.round(width * 0.3), Math.round(height * 0.30), 0, 0, "p", question2),
-                new Extra("tutorialquestion", Math.round(width * 0.25), Math.round(height * 0.30), 0, 0, "p", question),
-                new Extra("tutorialanswer1", Math.round(width * 0.25), Math.round(height * 0.75), 0, 0, "p", answer1),
-                new Extra("tutorialanswer2", Math.round(width * 0.6), Math.round(height * 0.75), 0, 0, "p", answer2)
+                new Extra("tutorialquestion", width * 0.25, height * 0.30, 0, 0, "p", question),
+                new Extra("tutorialanswer1", width * 0.25, height * 0.75, 0, 0, "p", answer1),
+                new Extra("tutorialanswer2", width * 0.6, height * 0.75, 0, 0, "p", answer2)
             );
             wrongs.push(
                 new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1")
@@ -260,116 +256,87 @@ $(function () {
                 new Barrier("wall1", 0, Math.round(height * 0.6), Math.round(width * 0.5 - playItemSize * 0.75), height),
                 new Barrier("wall2", Math.round(width * 0.5 + playItemSize * 0.75), Math.round(height * 0.6), width, height)
             );
-            //goal = new Goal("goal", Math.round(width * 0.5 - playItemSize * 0.75), height - Math.round(playItemSize * 0.5), Math.round(width * 0.5 + playItemSize * 0.75), height);
             goal = new Goal("goal", Math.round(width * 0.5 - playItemSize * 0.75), height - barrierHeight, Math.round(width * 0.5 + playItemSize * 0.75), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), Math.max(height * 0.1, barrierHeight + 5), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width / 2 - playItemSize / 2, Math.max(height * 0.1, barrierHeight + 5), 0, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
             // Level 1 Question Stage
-            //let question1 = "How much money does a typical";
-            //let question2 = "household in Vancouver lose per year";
-            //let question3 = "due to food waste?";
             let question = "How much money does a typical household in Vancouver lose per year due to food waste?";
             let answer1 = "$200";
             let answer2 = "$700";
             let answer3 = "$1200";
             let answer4 = "$2100";
             barriers.push(
-                new Barrier("platform1", Math.round(width * 0.4), Math.round(height * 0.3), Math.round(width * 0.6), Math.round(height * 0.3) + Math.max(barrierHeight, playItemSize)),
-                new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.75), Math.max(width * 0.30, width * 0.20 + playItemSize), Math.round(height * 0.95)),
-                new Barrier("barrier2", Math.round(width * 0.45), Math.round(height * 0.75), Math.max(width * 0.55, width * 0.45 + playItemSize), Math.round(height * 0.95)),
-                new Barrier("barrier3", Math.min(width * 0.70, width * 0.80 - playItemSize), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95)),
+                new Barrier("platform1", width * 0.4, height * 0.3, width * 0.6, height * 0.3 + Math.max(barrierHeight, playItemSize)),
+                new Barrier("barrier1", width * 0.20, height * 0.75, Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.95),
+                new Barrier("barrier2", width * 0.45, height * 0.75, Math.max(width * 0.55, width * 0.45 + playItemSize), height * 0.95),
+                new Barrier("barrier3", Math.min(width * 0.70, width * 0.80 - playItemSize), height * 0.75, width * 0.80, height * 0.95),
                 new Barrier("floor", 0, height * 0.90, width, height - barrierHeight)
             );
             extras.push(
-                //new Extra("question1", Math.round(width * 0.25), Math.round(height * 0.40), 0, 0, "p", question1),
-                //new Extra("question2", Math.round(width * 0.22), Math.round(height * 0.45), 0, 0, "p", question2),
-                //new Extra("question3", Math.round(width * 0.35), Math.round(height * 0.50), 0, 0, "p", question3),
-                new Extra("lvl1question", Math.round(width * 0.25), Math.round(height * 0.40), 0, 0, "p", question),
-                new Extra("lvl1answer1", barrierWidth, Math.round(height * 0.75), 0, 0, "p", answer1),
-                new Extra("lvl1answer2", Math.max(width * 0.30, width * 0.20 + playItemSize), Math.round(height * 0.75), 0, 0, "p", answer2),
-                new Extra("lvl1answer3", Math.max(width * 0.55, width * 0.45 + playItemSize), Math.round(height * 0.75), 0, 0, "p", answer3),
-                new Extra("lvl1answer4", Math.round(width * 0.80), Math.round(height * 0.75), 0, 0, "p", answer4)
+                new Extra("lvl1question", width * 0.25, height * 0.40, 0, 0, "p", question),
+                new Extra("lvl1answer1", barrierWidth, height * 0.75, 0, 0, "p", answer1),
+                new Extra("lvl1answer2", Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.75, 0, 0, "p", answer2),
+                new Extra("lvl1answer3", Math.max(width * 0.55, width * 0.45 + playItemSize), height * 0.75, 0, 0, "p", answer3),
+                new Extra("lvl1answer4", width * 0.80, height * 0.75, 0, 0, "p", answer4)
             );
             wrongs.push(
-                //new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1"),
-                //new Wrong("wrong2", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1"),
-                //new Wrong("wrong3", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
                 new Wrong("lvl1wrong1", barrierWidth, height * 0.85, width * 0.20, height * 0.9, "lvl1answer1"),
                 new Wrong("lvl1wrong3", Math.max(width * 0.55, width * 0.45 + playItemSize), height * 0.85, Math.min(width * 0.70, width * 0.80 - playItemSize), height * 0.9, "lvl1answer3"),
-                new Wrong("lvl1wrong4", Math.round(width * 0.80), height * 0.85, width - barrierWidth, height * 0.9, "lvl1answer4")
+                new Wrong("lvl1wrong4", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9, "lvl1answer4")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
             goal = new Goal("goal", Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.85, width * 0.45, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width / 2 - playItemSize / 2), barrierHeight + 10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width / 2 - playItemSize / 2, barrierHeight + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
             // Level 2 Game Stage (staircase)
             barriers.push(
-                new Barrier("step0", Math.round(width * 0.05), Math.round(height * 0.80), Math.round(width * 0.80), Math.round(height)),
-                new Barrier("step1", Math.round(width * 0.20), Math.round(height * 0.65), Math.round(width * 0.80), Math.round(height * 0.95)),
-                new Barrier("step2", Math.round(width * 0.35), Math.round(height * 0.50), Math.round(width * 0.80), Math.round(height * 0.75)),
-                new Barrier("step3", Math.round(width * 0.50), Math.round(height * 0.35), Math.round(width * 0.80), Math.round(height * 0.60)),
-                new Barrier("step4", Math.min(width * 0.65, width * 0.80 - playItemSize), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.45))
+                new Barrier("step0", width * 0.05, height * 0.80, width * 0.80, height),
+                new Barrier("step1", width * 0.20, height * 0.65, width * 0.80, height * 0.95),
+                new Barrier("step2", width * 0.35, height * 0.50, width * 0.80, height * 0.75),
+                new Barrier("step3", width * 0.50, height * 0.35, width * 0.80, height * 0.60),
+                new Barrier("step4", Math.min(width * 0.65, width * 0.80 - playItemSize), height * 0.20, width * 0.80, height * 0.45)
             );
-            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height - barrierHeight), Math.round(width - barrierWidth), height);
+            goal = new Goal("goal", width * 0.80, height - barrierHeight, width - barrierWidth, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.30), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.10, height * 0.30, 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
             // Level 2 Question Stage
-            //let question1 = "Which of these foods have gone";
-            //let question2 = "bad if you've found";
-            //let question3 = "mould on them?";
             let question = "Which of these foods have gone bad if you've found mould on them?";
-            //let answer1a = "Meat &";
-            //let answer1b = "Dairy";
             let answerMeat = "Meat & Dairy";
             let answerBread = "Bread";
-            //let answer3a = "Fruits &";
-            //let answer3b = "Veggies";
             let answerFruits = "Fruits & Veggies";
-            //let answer4a = "All of";
-            //let answer4b = "these";
             let answerAll = "All of these";
             barriers.push(
-                new Barrier("platform1", Math.round(width * 0.75), Math.round(height * 0.20), Math.max(width * 0.95, width * 0.75 + playItemSize), Math.round(height * 0.30)),
-                new Barrier("platform2", Math.max(width * 0.30, width * 0.20 + playItemSize) - 1, Math.round(height * 0.30), Math.max(width * 0.45, width * 0.30 + playItemSize), Math.round(height * 0.35)),
-                new Barrier("platform3", Math.round(width * 0.55), Math.round(height * 0.50), Math.max(width * 0.70, width * 0.55 + playItemSize), Math.round(height * 0.55)),
-                new Barrier("platform4", Math.max(width * 0.30, width * 0.20 + playItemSize) - 1, Math.round(height * 0.80), Math.max(width * 0.45, width * 0.30 + playItemSize), Math.round(height * 0.85)),
-                new Barrier("barrier1", Math.round(width * 0.20), Math.round(height * 0.25), Math.max(width * 0.30, width * 0.20 + playItemSize), Math.round(height * 0.55)),
-                new Barrier("barrier2", Math.round(width * 0.05), Math.round(height * 0.45), Math.round(width * 0.20), Math.round(height * 0.55)),
-                new Barrier("barrier3", Math.min(width * 0.70, width * 0.80 - playItemSize), Math.round(height * 0.40), Math.round(width * 0.80), Math.round(height * 0.60)),
-                new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.50), Math.round(width * 0.95), Math.round(height * 0.60)),
-                new Barrier("barrier5", Math.round(width * 0.20), Math.round(height * 0.75), Math.max(width * 0.30, width * 0.20 + playItemSize), Math.round(height * 0.95)),
-                new Barrier("barrier6", Math.min(width * 0.70, width * 0.80 - playItemSize), Math.round(height * 0.75), Math.round(width * 0.80), Math.round(height * 0.95)),
+                new Barrier("platform1", width * 0.75, height * 0.20, Math.max(width * 0.95, width * 0.75 + playItemSize), height * 0.30),
+                new Barrier("platform2", Math.max(width * 0.30, width * 0.20 + playItemSize) - 1, height * 0.30, Math.max(width * 0.45, width * 0.30 + playItemSize), height * 0.35),
+                new Barrier("platform3", width * 0.55, height * 0.50, Math.max(width * 0.70, width * 0.55 + playItemSize), height * 0.55),
+                new Barrier("platform4", Math.max(width * 0.30, width * 0.20 + playItemSize) - 1, height * 0.80, Math.max(width * 0.45, width * 0.30 + playItemSize), height * 0.85),
+                new Barrier("barrier1", width * 0.20, height * 0.25, Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.55),
+                new Barrier("barrier2", width * 0.05, height * 0.45, width * 0.20, height * 0.55),
+                new Barrier("barrier3", Math.min(width * 0.70, width * 0.80 - playItemSize), height * 0.40, width * 0.80, height * 0.60),
+                new Barrier("barrier4", width * 0.80, height * 0.50, width * 0.95, height * 0.60),
+                new Barrier("barrier5", width * 0.20, height * 0.75, Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.95),
+                new Barrier("barrier6", Math.min(width * 0.70, width * 0.80 - playItemSize), height * 0.75, width * 0.80, height * 0.95),
                 new Barrier("floor", 0, height * 0.9, width, height)
             );
             extras.push(
-                //new Extra("question1", Math.round(width * 0.25), Math.round(height * 0.10), 0, 0, "p", question1),
-                //new Extra("question2", Math.round(width * 0.33), Math.round(height * 0.15), 0, 0, "p", question2),
-                //new Extra("question3", Math.round(width * 0.36), Math.round(height * 0.20), 0, 0, "p", question3),
-                new Extra("lvl2question", Math.round(width * 0.25), Math.round(height * 0.10), 0, 0, "p", question),
-                //new Extra("answer1a", Math.round(width * 0.07), Math.round(height * 0.20), 0, 0, "p", answer1a),
-                //new Extra("answer1b", Math.round(width * 0.08), Math.round(height * 0.25), 0, 0, "p", answer1b),
-                new Extra("lvl2answerMeat", barrierWidth, Math.round(height * 0.35), 0, 0, "p", answerMeat),
-                new Extra("lvl2answerBread", barrierWidth, Math.round(height * 0.83), 0, 0, "p", answerBread),
-                //new Extra("answer3a", Math.round(width * 0.81), Math.round(height * 0.40), 0, 0, "p", answer3a),
-                //new Extra("answer3b", Math.round(width * 0.81), Math.round(height * 0.45), 0, 0, "p", answer3b),
-                new Extra("lvl2answerFruits", width * 0.80, Math.round(height * 0.40), 0, 0, "p", answerFruits),
-                //new Extra("answer4a", Math.round(width * 0.83), Math.round(height * 0.75), 0, 0, "p", answer4a),
-                //new Extra("answer4b", Math.round(width * 0.83), Math.round(height * 0.80), 0, 0, "p", answer4b)
-                new Extra("lvl2answerAll", width * 0.80, Math.round(height * 0.80), 0, 0, "p", answerAll)
+                new Extra("lvl2question", width * 0.25, height * 0.10, 0, 0, "p", question),
+                new Extra("lvl2answerMeat", barrierWidth, height * 0.35, 0, 0, "p", answerMeat),
+                new Extra("lvl2answerBread", barrierWidth, height * 0.83, 0, 0, "p", answerBread),
+                new Extra("lvl2answerFruits", width * 0.80, height * 0.40, 0, 0, "p", answerFruits),
+                new Extra("lvl2answerAll", width * 0.80, height * 0.80, 0, 0, "p", answerAll)
             );
             wrongs.push(
-                new Wrong("lvl2wrongMeat", barrierWidth, height * 0.35, Math.round(width * 0.20), height * 0.45, "lvl2answerMeat"),
-                new Wrong("lvl2wrongBread", barrierWidth, height * 0.80, Math.round(width * 0.20), height * 0.90, "lvl2answerBread"),
-                new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width - barrierWidth, Math.round(height * 0.50), "lvl2answerFruits")
+                new Wrong("lvl2wrongMeat", barrierWidth, height * 0.35, width * 0.20, height * 0.45, "lvl2answerMeat"),
+                new Wrong("lvl2wrongBread", barrierWidth, height * 0.80, width * 0.20, height * 0.90, "lvl2answerBread"),
+                new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width - barrierWidth, height * 0.50, "lvl2answerFruits")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            //playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
-            playItem = new PlayItem(Math.round(width - Math.max(width * 0.15, barrierWidth + playItemSize + 2)), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width - Math.max(width * 0.15, barrierWidth + playItemSize + 2), height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 6) {
             // Level 3 Game Stage (obstacles)
             let blocks1 = width * 0.50;
@@ -379,142 +346,126 @@ $(function () {
             let blocks5 = blocks4 + Math.max(width * 0.05, playItemSize);
             let blocks6 = blocks5 + Math.max(width * 0.05, playItemSize);
             barriers.push(
-                new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.45)),
-                new Barrier("platform2", Math.round(width * 0.25), Math.round(height * 0.65), Math.round(width * 0.95), Math.round(height * 0.80)),
-                new Barrier("floor", Math.round(width * 0.05), Math.round(height * 0.90), Math.round(width * 0.80), Math.round(height * 0.95)),
-                new Barrier("barrier1", Math.min(width * 0.20, width * 0.30 - playItemSize), Math.round(height * 0.05), Math.round(width * 0.30), Math.round(height * 0.20)),
-                new Barrier("barrier2", Math.round(width * 0.40), Math.round(height * 0.15), Math.max(width * 0.50, width * 0.40 + playItemSize), Math.round(height * 0.30)),
-                new Barrier("barrier3", Math.round(width * 0.60), Math.round(height * 0.05), Math.max(width * 0.70, width * 0.60 + playItemSize), Math.round(height * 0.18)),
-                new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.05), Math.max(width * 0.87, width * 0.80 + playItemSize), Math.max(height * 0.12, height * 0.05 + playItemSize)),
-                new Barrier("lip", Math.round(width * 0.77), Math.min(height * 0.28, height * 0.30 - playItemSize), Math.min(width * 0.85, width - barrierWidth - playItemSize - 5), Math.round(height * 0.40)),
-                new Barrier("barrier6", Math.min(width * 0.30, width * 0.40 - playItemSize), Math.round(height * 0.45), Math.round(width * 0.40), Math.round(height * 0.55)),
-                new Barrier("barrier7", Math.round(width * 0.05), Math.min(height * 0.53, height * 0.60 - playItemSize), Math.round(width * 0.15), Math.round(height * 0.60)),
-                new Barrier("barrier8", blocks2, Math.round(height * 0.55), blocks3, Math.round(height * 0.65)),
-                new Barrier("barrier9", blocks4, Math.round(height * 0.55), blocks5, Math.round(height * 0.65)),
-                new Barrier("barrier10", blocks1, Math.round(height * 0.60), blocks2, Math.round(height * 0.65)),
-                new Barrier("barrier11", blocks5, Math.round(height * 0.60), blocks6, Math.round(height * 0.65))
+                new Barrier("platform1", width * 0.05, height * 0.30, width * 0.80, height * 0.45),
+                new Barrier("platform2", width * 0.25, height * 0.65, width * 0.95, height * 0.80),
+                new Barrier("floor", width * 0.05, height * 0.90, width * 0.80, height * 0.95),
+                new Barrier("barrier1", Math.min(width * 0.20, width * 0.30 - playItemSize), height * 0.05, width * 0.30, height * 0.20),
+                new Barrier("barrier2", width * 0.40, height * 0.15, Math.max(width * 0.50, width * 0.40 + playItemSize), height * 0.30),
+                new Barrier("barrier3", width * 0.60, height * 0.05, Math.max(width * 0.70, width * 0.60 + playItemSize), height * 0.18),
+                new Barrier("barrier4", width * 0.80, height * 0.05, Math.max(width * 0.87, width * 0.80 + playItemSize), Math.max(height * 0.12, height * 0.05 + playItemSize)),
+                new Barrier("lip", width * 0.77, Math.min(height * 0.28, height * 0.30 - playItemSize), Math.min(width * 0.85, width - barrierWidth - playItemSize - 5), height * 0.40),
+                new Barrier("barrier6", Math.min(width * 0.30, width * 0.40 - playItemSize), height * 0.45, width * 0.40, height * 0.55),
+                new Barrier("barrier7", width * 0.05, Math.min(height * 0.53, height * 0.60 - playItemSize), width * 0.15, height * 0.60),
+                new Barrier("barrier8", blocks2, height * 0.55, blocks3, height * 0.65),
+                new Barrier("barrier9", blocks4, height * 0.55, blocks5, height * 0.65),
+                new Barrier("barrier10", blocks1, height * 0.60, blocks2, height * 0.65),
+                new Barrier("barrier11", blocks5, height * 0.60, blocks6, height * 0.65)
             );
-            goal = new Goal("goal", Math.round(width * 0.80), Math.round(height - barrierHeight), Math.min(width * 0.95, width - barrierWidth), Math.round(height * 1.00));
+            goal = new Goal("goal", width * 0.80, height - barrierHeight, Math.min(width * 0.95, width - barrierWidth), height * 1.00);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.10), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.10, height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 7) {
             // Level 3 Question Stage
-            //let question1 = "What's a good way to make";
-            //let question2 = "stale chips taste good again?";
             let question = "What's a good way to make stale chips taste good again?";
             let answerRefrigerate = "Refrigerate them";
             let answerToast = "Toast them";
             let answerSoak = "Soak them in water";
-            //let answer4a = "Break them into";
-            //let answer4b = "smaller pieces";
             let answerBreak = "Break them into smaller pieces";
             barriers.push(
-                new Barrier("mainwall", Math.round(width * 0.70), Math.round(height * 0.05), Math.max(width * 0.80, width * 0.70 + playItemSize), Math.round(height * 0.80)),
-                new Barrier("floor", 0, Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
-                new Barrier("platform1", Math.round(width * 0.05), Math.round(height * 0.20), Math.round(width * 0.30), Math.round(height * 0.30)),
-                new Barrier("platform2", Math.round(width * 0.05), Math.round(height * 0.45), Math.round(width * 0.30), Math.round(height * 0.55)),
-                new Barrier("platform3", Math.round(width * 0.05), Math.round(height * 0.70), Math.round(width * 0.30), Math.round(height * 0.80)),
-                new Barrier("ledge4", Math.round(width * 0.60), Math.min(height * 0.35, height * 0.40 - playItemSize), Math.round(width * 0.70), Math.round(height * 0.40)),
-                new Barrier("ledge5", Math.round(width * 0.60), Math.min(height * 0.60, height * 0.65 - playItemSize), Math.round(width * 0.70), Math.round(height * 0.65)),
-                new Barrier("floating1", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.min(height * 0.20, height * 0.25 - playItemSize), Math.round(width * 0.49), Math.round(height * 0.25)),
-                new Barrier("floating2", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.min(height * 0.45, height * 0.50 - playItemSize), Math.round(width * 0.49), Math.round(height * 0.50)),
-                new Barrier("floating3", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.min(height * 0.75, height * 0.80 - playItemSize), Math.round(width * 0.49), Math.round(height * 0.80))
+                new Barrier("mainwall", width * 0.70, height * 0.05, Math.max(width * 0.80, width * 0.70 + playItemSize), height * 0.80),
+                new Barrier("floor", 0, height * 0.90, width * 0.95, height * 0.95),
+                new Barrier("platform1", width * 0.05, height * 0.20, width * 0.30, height * 0.30),
+                new Barrier("platform2", width * 0.05, height * 0.45, width * 0.30, height * 0.55),
+                new Barrier("platform3", width * 0.05, height * 0.70, width * 0.30, height * 0.80),
+                new Barrier("ledge4", width * 0.60, Math.min(height * 0.35, height * 0.40 - playItemSize), width * 0.70, height * 0.40),
+                new Barrier("ledge5", width * 0.60, Math.min(height * 0.60, height * 0.65 - playItemSize), width * 0.70, height * 0.65),
+                new Barrier("floating1", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.min(height * 0.20, height * 0.25 - playItemSize), width * 0.49, height * 0.25),
+                new Barrier("floating2", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.min(height * 0.45, height * 0.50 - playItemSize), width * 0.49, height * 0.50),
+                new Barrier("floating3", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.min(height * 0.75, height * 0.80 - playItemSize), width * 0.49, height * 0.80)
             );
             extras.push(
-                //new Extra("question1", Math.round(width * 0.49), Math.round(height * 0.80), 0, 0, "p", question1),
-                //new Extra("question2", Math.round(width * 0.49), Math.round(height * 0.85), 0, 0, "p", question2),
-                new Extra("lvl3question", Math.min(width * 0.40, width * 0.49 - playItemSize), Math.round(height * 0.81), 0, 0, "p", question),
-                new Extra("lvl3answerRefrigerate", barrierWidth, Math.round(height * 0.10), 0, 0, "p", answerRefrigerate),
-                new Extra("lvl3answerToast", barrierWidth, Math.round(height * 0.35), 0, 0, "p", answerToast),
-                new Extra("lvl3answerSoak", barrierWidth, Math.round(height * 0.60), 0, 0, "p", answerSoak),
-                //new Extra("answer4a", Math.round(width * 0.07), Math.round(height * 0.83), 0, 0, "p", answer4a),
-                //new Extra("answer4b", Math.round(width * 0.07), Math.round(height * 0.88), 0, 0, "p", answer4b)
-                new Extra("lvl3answerBreak", barrierWidth, Math.round(height * 0.81), 0, 0, "p", answerBreak)
+                new Extra("lvl3question", Math.min(width * 0.40, width * 0.49 - playItemSize), height * 0.81, 0, 0, "p", question),
+                new Extra("lvl3answerRefrigerate", barrierWidth, height * 0.10, 0, 0, "p", answerRefrigerate),
+                new Extra("lvl3answerToast", barrierWidth, height * 0.35, 0, 0, "p", answerToast),
+                new Extra("lvl3answerSoak", barrierWidth, height * 0.60, 0, 0, "p", answerSoak),
+                new Extra("lvl3answerBreak", barrierWidth, height * 0.81, 0, 0, "p", answerBreak)
             );
             wrongs.push(
-                new Wrong("lvl3wrongRefrigerate", barrierWidth, barrierHeight, Math.round(width * 0.20), Math.round(height * 0.20), "lvl3answerRefrigerate"),
-                new Wrong("lvl3wrongSoak", barrierWidth, Math.round(height * 0.55), Math.round(width * 0.20), Math.round(height * 0.70), "lvl3answerSoak"),
-                new Wrong("lvl3wrongBreak", barrierWidth, Math.round(height * 0.80), Math.round(width * 0.20), Math.round(height * 0.90), "lvl3answerBreak")
+                new Wrong("lvl3wrongRefrigerate", barrierWidth, barrierHeight, width * 0.20, height * 0.20, "lvl3answerRefrigerate"),
+                new Wrong("lvl3wrongSoak", barrierWidth, height * 0.55, width * 0.20, height * 0.70, "lvl3answerSoak"),
+                new Wrong("lvl3wrongBreak", barrierWidth, height * 0.80, width * 0.20, height * 0.90, "lvl3answerBreak")
             );
-            scoreOverlay.innerHTML = "<p class='statement'>To make stale chips taste good again, just <span class=\"answer\">toast them!</span></p>";
+            scoreOverlay.innerHTML = "<p class='statement'>If your chips have gone stale, don't throw them out - just <span class=\"answer\">toast them!</span></p>";
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.85), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 8) {
             // Level 4 Game Stage (maze)
             barriers.push(
-                new Barrier("floor", Math.round(width * 0.20), Math.round(height * 0.90), Math.round(width * 0.95), Math.round(height * 0.95)),
-                new Barrier("innerbox1", Math.round(width * 0.35), Math.round(height * 0.40), Math.round(width * 0.45), Math.round(height * 0.45)),
-                new Barrier("innerbox2", Math.round(width * 0.55), Math.round(height * 0.40), Math.round(width * 0.65), Math.round(height * 0.45)),
-                new Barrier("innerbox3", Math.round(width * 0.60), Math.round(height * 0.45), Math.round(width * 0.65), Math.round(height * 0.60)),
-                new Barrier("innerbox4", width * 0.35, Math.round(height * 0.55), Math.round(width * 0.60), Math.round(height * 0.60)),
-                new Barrier("innerbox5", width * 0.35, Math.round(height * 0.30), Math.round(width * 0.40), Math.round(height * 0.55)),
-                new Barrier("outerbox1", Math.round(width * 0.25), Math.round(height * 0.25), Math.round(width * 0.80), Math.round(height * 0.30)),
-                new Barrier("outerbox2", Math.round(width * 0.75), Math.round(height * 0.30), Math.round(width * 0.80), Math.round(height * 0.70)),
-                new Barrier("outerbox3", Math.round(width * 0.25), Math.round(height * 0.70), Math.round(width * 0.85), Math.round(height * 0.75)),
-                new Barrier("outerbox4", Math.min(width * 0.20, width * 0.25 - playItemSize), Math.round(height * 0.55), Math.round(width * 0.25), Math.round(height * 0.75)),
-                new Barrier("outerbox5", Math.min(width * 0.20, width * 0.25 - playItemSize), Math.round(height * 0.25), Math.round(width * 0.25), Math.round(height * 0.45)),
-                new Barrier("blocker", Math.round(width * 0.05), Math.round(height * 0.65), Math.round(width * 0.20), Math.round(height * 0.70)),
-                new Barrier("barrier1", Math.min(width * 0.30, width * 0.35 - playItemSize), Math.round(height * 0.05), Math.round(width * 0.35), Math.round(height * 0.10)),
-                new Barrier("barrier2", Math.min(width * 0.30, width * 0.35 - playItemSize), Math.round(height * 0.20), Math.round(width * 0.35), Math.round(height * 0.25)),
-                new Barrier("barrier3", Math.round(width * 0.55), Math.round(height * 0.15), Math.max(width * 0.60, width * 0.55 + playItemSize), Math.round(height * 0.25)),
-                new Barrier("barrier4", Math.round(width * 0.80), Math.round(height * 0.30), Math.round(width * 0.85), Math.round(height * 0.35)),
-                new Barrier("barrier5", Math.round(width * 0.90), Math.round(height * 0.50), Math.round(width * 0.95), Math.round(height * 0.55)),
-                new Barrier("barrier6", Math.round(width * 0.70), Math.round(height * 0.75), Math.max(width * 0.75, width * 0.70 + playItemSize), Math.round(height * 0.80)),
-                new Barrier("barrier7", Math.round(width * 0.55), Math.round(height * 0.85), Math.max(width * 0.60, width * 0.55 + playItemSize), Math.round(height * 0.90)),
-                new Barrier("barrier8", Math.round(width * 0.40), Math.round(height * 0.75), Math.max(width * 0.45, width * 0.40 + playItemSize), Math.round(height * 0.80)),
-                new Barrier("barrier9", Math.min(width * 0.28, width * 0.33 - playItemSize), Math.round(height * 0.85), Math.round(width * 0.33), Math.round(height * 0.90))
+                new Barrier("floor", width * 0.20, height * 0.90, width * 0.95, height * 0.95),
+                new Barrier("innerbox1", width * 0.35, height * 0.40, width * 0.45, height * 0.45),
+                new Barrier("innerbox2", width * 0.55, height * 0.40, width * 0.65, height * 0.45),
+                new Barrier("innerbox3", width * 0.60, height * 0.45, width * 0.65, height * 0.60),
+                new Barrier("innerbox4", width * 0.35, height * 0.55, width * 0.60, height * 0.60),
+                new Barrier("innerbox5", width * 0.35, height * 0.30, width * 0.40, height * 0.55),
+                new Barrier("outerbox1", width * 0.25, height * 0.25, width * 0.80, height * 0.30),
+                new Barrier("outerbox2", width * 0.75, height * 0.30, width * 0.80, height * 0.70),
+                new Barrier("outerbox3", width * 0.25, height * 0.70, width * 0.85, height * 0.75),
+                new Barrier("outerbox4", Math.min(width * 0.20, width * 0.25 - playItemSize), height * 0.55, width * 0.25, height * 0.75),
+                new Barrier("outerbox5", Math.min(width * 0.20, width * 0.25 - playItemSize), height * 0.25, width * 0.25, height * 0.45),
+                new Barrier("blocker", width * 0.05, height * 0.65, width * 0.20, height * 0.70),
+                new Barrier("barrier1", Math.min(width * 0.30, width * 0.35 - playItemSize), height * 0.05, width * 0.35, height * 0.10),
+                new Barrier("barrier2", Math.min(width * 0.30, width * 0.35 - playItemSize), height * 0.20, width * 0.35, height * 0.25),
+                new Barrier("barrier3", width * 0.55, height * 0.15, Math.max(width * 0.60, width * 0.55 + playItemSize), height * 0.25),
+                new Barrier("barrier4", width * 0.80, height * 0.30, width * 0.85, height * 0.35),
+                new Barrier("barrier5", width * 0.90, height * 0.50, width * 0.95, height * 0.55),
+                new Barrier("barrier6", width * 0.70, height * 0.75, Math.max(width * 0.75, width * 0.70 + playItemSize), height * 0.80),
+                new Barrier("barrier7", width * 0.55, height * 0.85, Math.max(width * 0.60, width * 0.55 + playItemSize), height * 0.90),
+                new Barrier("barrier8", width * 0.40, height * 0.75, Math.max(width * 0.45, width * 0.40 + playItemSize), height * 0.80),
+                new Barrier("barrier9", Math.min(width * 0.28, width * 0.33 - playItemSize), height * 0.85, width * 0.33, height * 0.90)
             );
-            goal = new Goal("goal", Math.max(width * 0.05, barrierWidth), Math.round(height - barrierHeight), Math.round(width * 0.20), Math.round(height * 1.00));
+            goal = new Goal("goal", Math.max(width * 0.05, barrierWidth), height - barrierHeight, width * 0.20, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.round(width * 0.45), Math.round(height * 0.48), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.45, height * 0.48, 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
             // Level 4 Question Stage
-            //let question1 = "How much money could the world";
-            //let question2 = "save every year if there";
-            //let question3 = "was zero food waste?";
             let question = "How much money could the world save every year if there was zero food waste?";
             let answerThousand = "$1000";
             let answerMillion = "$1 million";
             let answerBillion = "$1 billion";
             let answerTrillion = "$1 trillion";
             barriers.push(
-                new Barrier("topleftwall", Math.round(width * 0.15), Math.round(height * 0.05), Math.round(width * 0.25), Math.round(height * 0.20)),
-                new Barrier("topleftfloor", Math.round(width * 0.05), Math.round(height * 0.30), Math.round(width * 0.35), Math.round(height * 0.40)),
-                new Barrier("midlefthang", Math.round(width * 0.20), Math.round(height * 0.40), Math.round(width * 0.35), Math.round(height * 0.55)),
-                new Barrier("leftwall", Math.round(width * 0.20), Math.round(height * 0.65), Math.round(width * 0.35), Math.round(height * 0.95)),
-                new Barrier("botleftlip", Math.round(width * 0.35), Math.round(height * 0.70), Math.round(width * 0.45), Math.round(height * 0.75)),
-                //new Barrier("botlefttooth", Math.round(width * 0.35), Math.round(height * 0.75), Math.round(width * 0.40), Math.round(height * 0.80)),
-                //new Barrier("botrightchunk", Math.round(width * 0.50), Math.round(height * 0.85), Math.round(width * 0.75), Math.round(height * 0.95)),
-                new Barrier("botrightchunk", Math.round(width * 0.55), Math.round(height * 0.85), Math.round(width * 0.75), Math.round(height * 0.95)),
-                new Barrier("botrightfloor", Math.round(width * 0.55), Math.round(height * 0.70), Math.round(width * 0.70), Math.round(height * 0.85)),
-                new Barrier("botrightlip1", Math.round(width * 0.70), Math.round(height * 0.70), Math.round(width * 0.75), Math.round(height * 0.75)),
-                new Barrier("botrightlip2", Math.round(width * 0.90), Math.round(height * 0.70), Math.round(width * 0.95), Math.round(height * 0.75)),
-                new Barrier("botright", Math.round(width * 0.90), Math.round(height * 0.85), Math.round(width * 0.95), Math.round(height * 0.95)),
-                new Barrier("toprightchunk", Math.round(width * 0.55), Math.round(height * 0.25), Math.round(width * 0.80), Math.round(height * 0.50)),
-                new Barrier("toprightfloor", Math.round(width * 0.80), Math.round(height * 0.35), Math.round(width * 0.95), Math.round(height * 0.50)),
-                new Barrier("toprightlip", Math.round(width * 0.70), Math.round(height * 0.20), Math.round(width * 0.80), Math.round(height * 0.25)),
+                new Barrier("topleftwall", width * 0.15, height * 0.05, width * 0.25, height * 0.20),
+                new Barrier("topleftfloor", width * 0.05, height * 0.30, width * 0.35, height * 0.40),
+                new Barrier("midlefthang", width * 0.20, height * 0.40, width * 0.35, height * 0.55),
+                new Barrier("leftwall", width * 0.20, height * 0.65, width * 0.35, height * 0.95),
+                new Barrier("botleftlip", width * 0.35, height * 0.70, width * 0.45, height * 0.75),
+                new Barrier("botrightchunk", width * 0.55, height * 0.85, width * 0.75, height * 0.95),
+                new Barrier("botrightfloor", width * 0.55, height * 0.70, width * 0.70, height * 0.85),
+                new Barrier("botrightlip1", width * 0.70, height * 0.70, width * 0.75, height * 0.75),
+                new Barrier("botrightlip2", width * 0.90, height * 0.70, width * 0.95, height * 0.75),
+                new Barrier("botright", width * 0.90, height * 0.85, width * 0.95, height * 0.95),
+                new Barrier("toprightchunk", width * 0.55, height * 0.25, width * 0.80, height * 0.50),
+                new Barrier("toprightfloor", width * 0.80, height * 0.35, width * 0.95, height * 0.50),
+                new Barrier("toprightlip", width * 0.70, height * 0.20, width * 0.80, height * 0.25),
                 new Barrier("floor", 0, height * 0.90, width, height - barrierHeight)
             );
             extras.push(
-                //new Extra("question1", Math.round(width * 0.30), Math.round(height * 0.10), 0, 0, "p", question1),
-                //new Extra("question2", Math.round(width * 0.30), Math.round(height * 0.15), 0, 0, "p", question2),
-                //new Extra("question3", Math.round(width * 0.30), Math.round(height * 0.20), 0, 0, "p", question3),
-                new Extra("lvl4question", Math.round(width * 0.25), Math.round(height * 0.10), 0, 0, "p", question),
-                new Extra("lvl4answerThousand", barrierWidth, Math.round(height * 0.46), 0, 0, "p", answerThousand),
-                new Extra("lvl4answerMillion", Math.round(width * 0.35), Math.round(height * 0.81), 0, 0, "p", answerMillion),
-                new Extra("lvl4answerBillion", Math.round(width * 0.80), Math.round(height * 0.25), 0, 0, "p", answerBillion),
-                new Extra("lvl4answerTrillion", Math.round(width * 0.75), Math.round(height * 0.80), 0, 0, "p", answerTrillion)
+                new Extra("lvl4question", width * 0.25, height * 0.10, 0, 0, "p", question),
+                new Extra("lvl4answerThousand", barrierWidth, height * 0.46, 0, 0, "p", answerThousand),
+                new Extra("lvl4answerMillion", width * 0.35, height * 0.81, 0, 0, "p", answerMillion),
+                new Extra("lvl4answerBillion", width * 0.80, height * 0.25, 0, 0, "p", answerBillion),
+                new Extra("lvl4answerTrillion", width * 0.75, height * 0.80, 0, 0, "p", answerTrillion)
             );
             wrongs.push(
-                new Wrong("lvl4wrongThousand", barrierWidth, Math.round(height * 0.40), Math.round(width * 0.20), Math.round(height * 0.50), "lvl4answerThousand"),
-                new Wrong("lvl4wrongMillion", Math.round(width * 0.35), Math.round(height * 0.85), Math.round(width * 0.55), Math.round(height * 0.90), "lvl4answerMillion"),
-                new Wrong("lvl4wrongBillion", Math.round(width * 0.80), Math.round(height * 0.25), width - barrierWidth, Math.round(height * 0.35), "lvl4answerBillion")
+                new Wrong("lvl4wrongThousand", barrierWidth, height * 0.40, width * 0.20, height * 0.50, "lvl4answerThousand"),
+                new Wrong("lvl4wrongMillion", width * 0.35, height * 0.85, width * 0.55, height * 0.90, "lvl4answerMillion"),
+                new Wrong("lvl4wrongBillion", width * 0.80, height * 0.25, width - barrierWidth, height * 0.35, "lvl4answerBillion")
             );
-            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
+            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste. Wow!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(Math.max(Math.round(width * 0.10 - playItemSize * 0.5), barrierWidth + 5), Math.round(height * 0.10), 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(Math.max(width * 0.10 - playItemSize * 0.5, barrierWidth + 5), height * 0.10, 0, 0, playItemSize, foodItem);
         }
 
         if (levelID >= 0) {

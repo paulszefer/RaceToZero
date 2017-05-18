@@ -1,6 +1,7 @@
 <?php
 	// Queries the database in order to get the current user's score on the tutorial
 	// level.
+	// Currently unused; will probably be deleted later. (replaced with getLevelScore())
 	function displayTutorialScore() {
 	
 		// Eventually these will be in their own file for convenience.
