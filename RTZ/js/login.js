@@ -12,12 +12,12 @@ function loginvalidation() {
 function loginUserValid() {
     var loginUser = document.getElementById("loginUsername").value,
         l = loginUser.length;
-    if (l < 6) {
-        document.getElementById("loginUsernameErrorField").innerHTML = "Username less than 6 chars";
+    if (l < 4) {
+        document.getElementById("loginUsernameErrorField").innerHTML = "Username less than 4 chars";
         return false;
         //another else if if username taken
-    } else if (l > 10) {
-        document.getElementById("loginUsernameErrorField").innerHTML = "Username more than 10 chars";
+    } else if (l > 16) {
+        document.getElementById("loginUsernameErrorField").innerHTML = "Username more than 16 chars";
         return false;
     } else if (!validChars.test(loginUser)) {
         document.getElementById("loginUsernameErrorField").innerHTML = "Username contains illegal characters";
