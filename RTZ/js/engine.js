@@ -76,6 +76,9 @@ $(function () {
         retryButton.id = "retry_button";
         $(retryButton).click(function () {
             clearInterval(intervalId);
+            if (game.level % 2 === 1) {
+            	game.level--;
+            }
             reInit();
         });
         retryImage = document.createElement("img");
