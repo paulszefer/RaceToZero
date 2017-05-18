@@ -165,7 +165,7 @@ $(function () {
 
         wrongs = [];
 
-        //levelID = 6;
+        //levelID = 5;
 
         /**
          * Load data for the current level.
@@ -262,8 +262,15 @@ $(function () {
             goal = new Goal("goal", Math.round(width * 0.5 - playItemSize * 0.75), height - barrierHeight, Math.round(width * 0.5 + playItemSize * 0.75), height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width / 2 - playItemSize / 2, Math.max(height * 0.1, barrierHeight + 5), 0, 0, playItemSize, foodItem);
+       		//playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
             // Level 1 Question Stage
+            
+            let barrier1Left = Math.max(width * 0.20, barrierWidth + playItemSize + 10);
+            let barrier1Right = barrier1Left + Math.max(width * 0.10, playItemSize);
+            let barrier3Right = Math.min(width * 0.80, width - barrierWidth - playItemSize - 10);
+            let barrier3Left = barrier3Right - Math.max(width * 0.10, playItemSize);
+            
             let question = "How much money does a typical household in Vancouver lose per year due to food waste?";
             let answer1 = "$200";
             let answer2 = "$700";
@@ -271,7 +278,8 @@ $(function () {
             let answer4 = "$2100";
             barriers.push(
                 new Barrier("platform1", width * 0.4, height * 0.3, width * 0.6, height * 0.3 + Math.max(barrierHeight, playItemSize)),
-                new Barrier("barrier1", width * 0.20, height * 0.75, Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.95),
+                //new Barrier("barrier1", width * 0.20, height * 0.75, Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.95),
+                new Barrier("barrier1", barrier1Left, height * 0.75, barrier1Right, height * 0.95),
                 new Barrier("barrier2", width * 0.45, height * 0.75, Math.max(width * 0.55, width * 0.45 + playItemSize), height * 0.95),
                 new Barrier("barrier3", Math.min(width * 0.70, width * 0.80 - playItemSize), height * 0.75, width * 0.80, height * 0.95),
                 new Barrier("floor", 0, height * 0.90, width, height - barrierHeight)
@@ -289,7 +297,7 @@ $(function () {
                 new Wrong("lvl1wrong4", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9, "lvl1answer4")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
-            goal = new Goal("goal", Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.85, width * 0.45, height * 0.9);
+            goal = new Goal("goal", barrier1Right, height * 0.85, width * 0.45, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width / 2 - playItemSize / 2, barrierHeight + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
@@ -340,6 +348,7 @@ $(function () {
             goal = new Goal("goal", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width - Math.max(width * 0.15, barrierWidth + playItemSize + 2), height * 0.10, 0, 0, playItemSize, foodItem);
+        	//playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
         } else if (levelID === 6) {
             // Level 3 Game Stage (obstacles)
             let blocks1 = width * 0.50;
@@ -367,7 +376,7 @@ $(function () {
             goal = new Goal("goal", width * 0.80, height - barrierHeight, Math.min(width * 0.95, width - barrierWidth), height * 1.00);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.10, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(294, 275, 15, -1, playItemSize, foodItem); //sends the food object into a glitch
+            //playItem = new PlayItem(227, 202, 13, 4, playItemSize, foodItem); //sends the food object into a glitch
         } else if (levelID === 7) {
             // Level 3 Question Stage
             let question = "What's a good way to make stale chips taste good again?";
@@ -697,8 +706,8 @@ $(function () {
             playItem.clicked(mousePosX, mousePosY);
 
             // implements a delay between inputs TODO - choose delay
-            // clicked = true;
-            // setTimeout(setClicked, 500, false);
+        	//clicked = true;
+            //setTimeout(setClicked, 200, false);
         }
     });
 });
