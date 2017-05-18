@@ -1,6 +1,7 @@
 <?php
 	// Queries the database in order to get the current user's score on the tutorial
 	// level.
+	// Currently unused; will probably be deleted later. (replaced with getLevelScore())
 	function displayTutorialScore() {
 	
 		// Eventually these will be in their own file for convenience.
@@ -15,6 +16,29 @@
 				  	INNER JOIN users ON games.user_id = users.user_id
 				  WHERE level_id=1
 				  	AND user_name=\"" . $_SESSION['user_name'] . 
+			  "\" ORDER BY game_time ASC;";
+		$result = mysqli_query($link, $query);
+		if($result) {
+			$row = mysqli_fetch_array($result);
+		}
+		
+		return $row['game_time'];
+	}
+	
+	// Queries the database in order to get the current user's score on any level.
+	function getLevelScore($level) {
+		// Eventually these will be in their own file for convenience.
+		$username = "root";
+    	$password = "";
+   		$host     = "localhost";
+    	$database = "comp2910test1";
+    	
+    	$link = mysqli_connect($host, $username, $password, $database);
+    	$query = "SELECT game_time
+				  FROM games
+				  	INNER JOIN users ON games.user_id = users.user_id
+				  WHERE level_id=" . $level .
+				  "	AND user_name=\"" . $_SESSION['user_name'] . 
 			  "\" ORDER BY game_time ASC;";
 		$result = mysqli_query($link, $query);
 		if($result) {
@@ -58,7 +82,23 @@
 			<ul>
 	            <li>Username: <?php echo $_SESSION['user_name']; ?></li>
 	            <li>&nbsp;</li>
-	            <li>High score: <?php echo displayTutorialScore(); ?></li>
+	            <li>Best Times: 
+	            	<?php 
+	            		//echo displayTutorialScore(); 
+	            		echo "<table>";
+	            			echo "<tr>";
+	            				echo "<th>Level</th>";
+	            				echo "<th>Time</th>";
+	            			echo "</tr>";
+	            			for ($i = 1; $i <= 5; $i++) { // edit if extra level(s) added
+	            				echo "<tr>";
+	            					echo "<td>" . (($i == 1) ? "Tutorial" : $i) . "</td>";
+	            					echo "<td>" . getLevelScore($i) . "</td>";
+	            				echo "</tr>";
+	            			}
+	            		echo "</table>";
+	            	?>
+	            	</li>
 	            <li>&nbsp;</li>
 	        </ul>
 	        </div>

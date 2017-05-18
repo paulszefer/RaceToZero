@@ -1,37 +1,72 @@
 /*Universal styles:*/
-.contentactual{
+.contentactual {
     background-color: none;
 }
-#navburger{
-    position:fixed;
-    z-index:499;
+
+#navburger {
+    position: fixed;
+    z-index: 499;
 }
-#footer{
+
+/*retrylevel appears*/
+#retrylevel {
+    display: none;
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    width: 5vh;
+    height: 5vh;
+    transition: top 0.2s ease-in-out;
+    -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
+    -moz-transition: top 0.2s ease-in-out;
+    z-index: 100;
+}
+
+/*navburger's height*/
+#retrylevel img {
+    height: 5vh;
+}
+
+#footer {
     overflow: hidden;
 }
+
 /*override default template2.css*/
 /*when screen is 768px or smaller*/
 @media only screen and (max-width: 768px) {
     .contentactual {
-        max-width:100%;
+        max-width: 100%;
     }
-    .navlogo a{
-        display:none;
+
+    .navlogo a {
+        display: none;
     }
-    .navlinks, .navlogo, #footer{
-        height:0;
+
+    .navlinks, .navlogo, #footer {
+        height: 0;
         overflow: hidden;
     }
-    #navCont{
+
+    #navCont {
         min-height: 0;
     }
-    #navburger{
+
+    #navburger {
         position: fixed;
-        top:2vh;
-        left:1vh;
-        z-index:499;
+        top: 2vh;
+        left: 1vh;
+        z-index: 499;
     }
-    #navburger img{
+
+    #navburger img {
         height: 100%;
+    }
+
+    /*retrylevel appears*/
+    #retrylevel {
+        position: fixed;
+        top: 3vh;
+        right: 3vh;
+        z-index: 499;
     }
 }

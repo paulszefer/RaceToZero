@@ -126,7 +126,7 @@
 button{
     font-size: 1em;
     background: linear-gradient(180deg, #6495ED, #B0E0E6, #6495ED);
-    background-color: #6495ED;
+    /*background-color: #6495ED;*/
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
     text-align: center;
@@ -153,3 +153,4 @@ button{
 .incorrecttext{
     color: red;
 }
+

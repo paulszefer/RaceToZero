@@ -870,7 +870,8 @@ class Extra {
         extra.style.height = this.y2 - this.y1;
 
         if (this.elementType === "p") {
-            extra.style.fontSize = "2em";
+            //extra.style.fontSize = "2em";
+            extra.style.fontSize = "3vh";
             extra.innerHTML = this.elementData;
         } else if (this.elementType === "img") {
             extra.alt = this.name;
