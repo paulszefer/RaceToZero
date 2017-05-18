@@ -165,7 +165,7 @@ $(function () {
 
         wrongs = [];
 
-        //levelID = 5;
+        //levelID = 6;
 
         /**
          * Load data for the current level.
@@ -376,7 +376,7 @@ $(function () {
             goal = new Goal("goal", width * 0.80, height - barrierHeight, Math.min(width * 0.95, width - barrierWidth), height * 1.00);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.10, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(227, 202, 13, 4, playItemSize, foodItem); //sends the food object into a glitch
+            //playItem = new PlayItem(565, 131, -15, -15, playItemSize, foodItem); //sends the food object into a glitch
         } else if (levelID === 7) {
             // Level 3 Question Stage
             let question = "What's a good way to make stale chips taste good again?";

@@ -412,7 +412,9 @@ class Level {
         let nextY = this.playItem.y + this.playItem.dy;
         let goingToCollide = this.isColliding(nextX, nextY, SOLID);
         console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + goingToCollide);
-        
+        if (goingToCollide) {
+        	console.log("breakpoint here");
+        }
         // if currentlyColliding:
         //		if goingToCollide:
         //			start moving pixel-by-pixel
@@ -439,11 +441,9 @@ class Level {
         	let collided = false;
         	if (this.isHorizontallyColliding(this.playItem.x, this.playItem.y)) {
         		this.playItem.dx *= -0.6;
-        		collided = true;
         	}
         	if (this.isVerticallyColliding(this.playItem.x, this.playItem.y)) {
         		this.playItem.dy *= -0.6;
-        		collided = true;
         	}
         	for (let i = 1; i <= biggerComponent && !collided; i++) {
         		curX += this.playItem.dx / biggerComponent;
