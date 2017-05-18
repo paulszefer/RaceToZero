@@ -83,7 +83,7 @@ $(function () {
         });
         retryImage = document.createElement("img");
         retryImage.id = "retrylevel";
-        retryImage.src = "img/retrylevelwhite.png";
+        retryImage.src = "img/retrylevel.png";
         retryButton.appendChild(retryImage);
         gameContainer.appendChild(retryButton);
 
