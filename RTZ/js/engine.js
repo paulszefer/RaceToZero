@@ -576,6 +576,8 @@ $(function () {
             imgElement.width = playItemSize;
             imgElement.height = playItemSize;
             imgElement.alt = "food image";
+            imgElement.style.left = level.playItem.x + "px";
+            imgElement.style.top = level.playItem.y + "px";
             document.getElementById("game_window").appendChild(imgElement);
 
             foodImage = $("#food_image");
