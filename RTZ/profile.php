@@ -53,6 +53,7 @@
 <link rel="stylesheet" href="css/profile.css">
 <?php include("templateNav.php");?>
 
+<title>Race to Zero - Profile</title>
 <div id='content'>
 	<div class='contentactual'>
 		<h1>Profile</h1>

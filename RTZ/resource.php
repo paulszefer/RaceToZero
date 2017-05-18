@@ -1,7 +1,7 @@
 <?php include("templateHeader.php");?>
 
 <!--insert page specific js css here-->
-<title>Resources</title>
+<title>Race To Zero - Resources</title>
 <link rel="stylesheet" href="css/resource.css">
 <script src="js/resource.js"></script>
 <?php include("templateNav.php");?>

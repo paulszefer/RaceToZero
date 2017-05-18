@@ -77,7 +77,7 @@ if(isset($_POST['login']))
 
 ?>
 <!--insert page specific js css here-->
-<title>Login/Registration</title>
+<title>Race to Zero - Login</title>
 <link rel="stylesheet" href="css/login.css">
 <script src="js/login.js"></script>
 <?php include("templateNav.php");?>

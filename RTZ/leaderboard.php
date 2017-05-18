@@ -1,6 +1,6 @@
 <?php include("templateHeader.php");?>
 
-<title>Leaderboard</title>
+<title>Race To Zero - Leaderboard</title>
 <link rel="stylesheet" href="css/leaderboard.css">
 <script src="js/leaderboard.js"></script>
 <?php include("templateNav.php");?>
