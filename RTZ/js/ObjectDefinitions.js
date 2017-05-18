@@ -251,7 +251,7 @@ class Level {
      */
     move() {
 
-
+		
         // don't move if out of bounds
         if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
             console.log("Error: The item is out of bounds.");
@@ -526,7 +526,7 @@ class Level {
             if (this._playItem.dy > 0) {
                 return 4;
             }
-            let move = 0;
+            /*let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX1 - move][origY1].type === SOLID) {
                     return 4;
@@ -535,6 +535,25 @@ class Level {
                 } else {
                     move++;
                 }
+            }*/
+            let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+            for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+            	if (this.board[currentX1][currentY1].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX1 + move][currentY1].type !== SOLID) {
+            				return 4;
+            			}
+            			if (this.board[currentX1][currentY1 + move].type !== SOLID) {
+            				return 1;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
             }
             return 0;
         }
@@ -553,7 +572,7 @@ class Level {
         if (this._playItem.dy > 0) {
             return 2;
         }
-        let move = 0;
+        /*let move = 0;
         while (move < this._playItem.size) {
             if (this._board[origX2 + move][origY1].type === SOLID) {
                 return 2;
@@ -562,7 +581,26 @@ class Level {
             } else {
                 move++;
             }
-        }
+        }*/
+        let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+        for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+            	if (this.board[currentX2][currentY1].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX2 - move][currentY1].type !== SOLID) {
+            				return 2;
+            			}
+            			if (this.board[currentX2][currentY1 + move].type !== SOLID) {
+            				return 1;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
+            }
         return 0;
     }
 
@@ -591,7 +629,7 @@ class Level {
             if (this._playItem.dy < 0) {
                 return 2;
             }
-            let move = 0;
+            /*let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX2 + move][origY2].type === SOLID) {
                     return 2;
@@ -600,6 +638,25 @@ class Level {
                 } else {
                     move++;
                 }
+            }*/
+            let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+            for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+            	if (this.board[currentX2][currentY2].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX2 - move][currentY2].type !== SOLID) {
+            				return 2;
+            			}
+            			if (this.board[currentX2][currentY2 - move].type !== SOLID) {
+            				return 3;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
             }
             return 0;
         }
@@ -632,7 +689,7 @@ class Level {
             if (this._playItem.dy < 0) {
                 return 4;
             }
-            let move = 0;
+            /*let move = 0;
             while (move < this._playItem.size) {
                 if (this._playItem.isGrounded) {
                     return 3;
@@ -644,6 +701,26 @@ class Level {
                 } else {
                     move++;
                 }
+            }*/
+            let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+            for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+            	console.log(currentX1);
+            	if (this.board[currentX1][currentY2].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX1 + move][currentY2].type !== SOLID) {
+            				return 4;
+            			}
+            			if (this.board[currentX1][currentY2 - move].type !== SOLID) {
+            				return 3;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
             }
         }
         return 0;
@@ -989,7 +1066,6 @@ class PlayItem {
 
     /**
      * Sets the starting coordinates and velocity vector, as well as the type of food.
-     * Automatically sets the item to be a 50x50 square.
      */
     constructor(x, y, dx, dy, size, foodItem) {
         this._x = Math.round(x);
@@ -1212,7 +1288,7 @@ class FoodItem {
     constructor(name, type, imageURL, isEdible) {
         this._name = name;
         this._type = type;
-        this.bounceMultiplier = 0.4; // varies by type
+        this.bounceMultiplier = 0.6; // varies by type
         this.gravity = 1; // varies by type
         this._imageURL = imageURL;
         this._isEdible = isEdible;
