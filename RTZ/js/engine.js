@@ -36,6 +36,8 @@ $(function () {
      */
     let gameContainer;
     let gameWindow;
+    let retryButton;
+    let retryImage;
     let timer;
     let scoreOverlay;
     let game;
@@ -66,6 +68,21 @@ $(function () {
         gameWindow = document.createElement("div");
         gameWindow.id = "game_window";
         gameContainer.appendChild(gameWindow);
+
+        /**
+         * Creates the retry button within the level.
+         */
+        retryButton = document.createElement("div");
+        retryButton.id = "retry_button";
+        $(retryButton).click(function () {
+            clearInterval(intervalId);
+            reInit();
+        });
+        retryImage = document.createElement("img");
+        retryImage.id = "retrylevel";
+        retryImage.src = "img/retrylevelwhite.png";
+        retryButton.appendChild(retryImage);
+        gameContainer.appendChild(retryButton);
 
         /**
          * Creates the element that displays the timer(the user's score).
@@ -157,7 +174,7 @@ $(function () {
             playButton.id = "play_button";
             gameWindow.appendChild(playButton);
 
-            $(playButton).click(function() {
+            $(playButton).click(function () {
                 let gameXDisplacement = $(window).width() * 0.5;
                 let gameYDisplacement = $(window).height() * 0.5;
                 window.scrollTo(gameXDisplacement, gameYDisplacement);
@@ -280,7 +297,7 @@ $(function () {
                 //new Wrong("wrong3", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "answer1")
                 new Wrong("lvl1wrong1", barrierWidth, height * 0.85, width * 0.20, height * 0.9, "lvl1answer1"),
                 new Wrong("lvl1wrong3", Math.max(width * 0.55, width * 0.45 + playItemSize), height * 0.85, Math.min(width * 0.70, width * 0.80 - playItemSize), height * 0.9, "lvl1answer3"),
-                new Wrong("lvl1wrong4", Math.round(width * 0.80), height * 0.85, width - barrierWidth, height * 0.9, "lvl1answer4")                
+                new Wrong("lvl1wrong4", Math.round(width * 0.80), height * 0.85, width - barrierWidth, height * 0.9, "lvl1answer4")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
             goal = new Goal("goal", Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.85, width * 0.45, height * 0.9);
@@ -346,7 +363,7 @@ $(function () {
             wrongs.push(
                 new Wrong("lvl2wrongMeat", barrierWidth, height * 0.35, Math.round(width * 0.20), height * 0.45, "lvl2answerMeat"),
                 new Wrong("lvl2wrongBread", barrierWidth, height * 0.80, Math.round(width * 0.20), height * 0.90, "lvl2answerBread"),
-                new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width - barrierWidth, Math.round(height * 0.50), "lvl2answerFruits")                
+                new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width - barrierWidth, Math.round(height * 0.50), "lvl2answerFruits")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width - barrierWidth, height * 0.9);
@@ -417,7 +434,7 @@ $(function () {
             wrongs.push(
                 new Wrong("lvl3wrongRefrigerate", barrierWidth, barrierHeight, Math.round(width * 0.20), Math.round(height * 0.20), "lvl3answerRefrigerate"),
                 new Wrong("lvl3wrongSoak", barrierWidth, Math.round(height * 0.55), Math.round(width * 0.20), Math.round(height * 0.70), "lvl3answerSoak"),
-                new Wrong("lvl3wrongBreak", barrierWidth, Math.round(height * 0.80), Math.round(width * 0.20), Math.round(height * 0.90), "lvl3answerBreak")                
+                new Wrong("lvl3wrongBreak", barrierWidth, Math.round(height * 0.80), Math.round(width * 0.20), Math.round(height * 0.90), "lvl3answerBreak")
             );
             scoreOverlay.innerHTML = "<p class='statement'>To make stale chips taste good again, just <span class=\"answer\">toast them!</span></p>";
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
@@ -492,7 +509,7 @@ $(function () {
             wrongs.push(
                 new Wrong("lvl4wrongThousand", barrierWidth, Math.round(height * 0.40), Math.round(width * 0.20), Math.round(height * 0.50), "lvl4answerThousand"),
                 new Wrong("lvl4wrongMillion", Math.round(width * 0.35), Math.round(height * 0.85), Math.round(width * 0.55), Math.round(height * 0.90), "lvl4answerMillion"),
-                new Wrong("lvl4wrongBillion", Math.round(width * 0.80), Math.round(height * 0.25), width - barrierWidth, Math.round(height * 0.35), "lvl4answerBillion")                
+                new Wrong("lvl4wrongBillion", Math.round(width * 0.80), Math.round(height * 0.25), width - barrierWidth, Math.round(height * 0.35), "lvl4answerBillion")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
@@ -563,6 +580,7 @@ $(function () {
 
             foodImage = $("#food_image");
 
+            retryImage.style.display = "block";
             timer.style.display = "block";
 
             /**
@@ -621,11 +639,11 @@ $(function () {
                 }, function (data) {
                     //alert(data);
                 });
-				
-				let yourTime = document.createElement("p");
-				let yourTimeText = document.createTextNode("Your Time:");
-				yourTime.appendChild(yourTimeText);
-				scoreOverlay.appendChild(yourTime);
+
+                let yourTime = document.createElement("p");
+                let yourTimeText = document.createTextNode("Your Time:");
+                yourTime.appendChild(yourTimeText);
+                scoreOverlay.appendChild(yourTime);
                 scoreOverlay.appendChild(time);
 
                 let retryButton = document.createElement("div");
@@ -650,6 +668,7 @@ $(function () {
                 }
 
                 scoreOverlay.style.display = "block";
+                retryImage.style.display = "none";
                 timer.style.display = "none";
 
                 retryButton.onclick = function () {
@@ -681,6 +700,7 @@ $(function () {
         scoreOverlay.style.display = "none";
         score = 0;
         if (game.level >= 0) {
+            retryImage.style.display = "block";
             timer.style.display = "block";
         }
         let overlay_elements = scoreOverlay.children;
@@ -708,7 +728,7 @@ $(function () {
      * Adds a click handler to the game container that handles clicks within the game.
      */
     $(document.getElementById("content")).click(function (e) {
-    	console.log("click");
+        console.log("click");
         // prevents initial input
         if (!clicked && score > 100) {
             let divPosX = $(this).position().left;
@@ -740,11 +760,11 @@ function parseTime(ms) {
     let strS;
     //let strS = seconds === 0 ? "0:" : seconds + ":";
     if (seconds === 0) {
-    	strS = "00.";
+        strS = "00.";
     } else if (seconds < 10) {
-    	strS = "0" + seconds + ".";
+        strS = "0" + seconds + ".";
     } else {
-    	strS = seconds + ".";
+        strS = seconds + ".";
     }
     let strMS = ("" + milliseconds).substr(0, 1);
 
@@ -755,16 +775,16 @@ function parseTime(ms) {
  * Parses the score to display it on the score overlay.
  */
 function parseTimeForOverlay(ms) {
-	let hours = Math.floor(ms / 1000 / 60 / 60);
+    let hours = Math.floor(ms / 1000 / 60 / 60);
     let minutes = Math.floor(ms / 1000 / 60 - hours * 60);
     let seconds = Math.floor(ms / 1000 - minutes * 60 - hours * 60 * 60);
     let milliseconds = ms - seconds * 1000 - minutes * 1000 * 60 - hours * 1000 * 60 * 60;
-    
+
     let strH = ""; // probably won't use
     let optionalS = minutes === 1 ? "" : "s";
     let strM = minutes === 0 ? "" : minutes + " minute" + optionalS + " ";
     let strS = seconds;
     let strMS = milliseconds === 0 ? " seconds" : "." + ("" + milliseconds).substr(0, 1) + " seconds";
-    
+
     return strH + strM + strS + strMS;
 }
