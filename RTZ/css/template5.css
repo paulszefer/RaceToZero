@@ -233,7 +233,6 @@ html,body{
 .footercontent{
     background-color: white;
     height:10vh;
-    display:table;
     width:100%;
     border-top: solid black 1px;
 }
@@ -242,6 +241,8 @@ html,body{
     color: black;
     text-align: center;
     font-size: 1em;
-    display:table-cell;
-    vertical-align: middle;
+    line-height: 10vh;
+}
+.easteregg {
+    width: 25px;
 }

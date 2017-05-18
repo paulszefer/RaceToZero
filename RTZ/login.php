@@ -85,7 +85,10 @@ if(isset($_POST['login']))
 <div id='content'>
 	<div class='contentactual'>
 		<!--Login section of the php-->
+		<div id='tabwrapper'>
 		<div id='logintab' class='titletab'>Login</div>
+		<div id='regtab' class='titletab'>Register</div>
+		</div>
 		<div id='logincontent'>
 			<form id="loginform" method="post" onsubmit="return loginvalidation()" action="login.php">
 				<table>
@@ -108,7 +111,6 @@ if(isset($_POST['login']))
 		</div><!--end of logincontent-->
 		
 		<!--registration section of the php-->
-		<div id='regtab' class='titletab'>Register</div>
 		<div id='regcontent'>
 			<form name="registration" method ="post" action="login.php" id="registration" class="registration" onsubmit="return validateForm()">
 				<table>

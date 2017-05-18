@@ -34,9 +34,12 @@
 #timer {
     display: none;
     position: absolute;
-    top: 0;
-    left: 50%;
-    color: white;
+    width: 100%;
+    text-align: center;
+    top: 1%;
+    /*left: 50%;*/
+    color: black;
+    font-size: 1.5em;
     z-index: 10;
 }
 
@@ -50,10 +53,17 @@
 }
 
 #score_overlay p {
+	text-align: center;
+	padding-top: 2%;
+	font-size: 2.5em;
+}
+
+#score_overlay p.statement{
     width: 60%;
     margin: auto;
     padding-top: 10%;
-    font-size: 3em;
+    padding-bottom: 10%;
+    font-size: 2.5em;
 }
 
 .score_overlay_button {
@@ -73,11 +83,12 @@
 }
 
 .score_overlay_button img {
-    height: 50%;
-    width: 25%;
-    position: absolute;
-    top: 25%;
-    left: 37.5%;
+    height: 6vh;
+    width: 6vh;
+    position: relative;
+    top: 2vh;
+    display: block;
+    margin: auto;
 }
 
 .score_overlay_button:first-of-type {
@@ -93,7 +104,7 @@
 }
 
 .answer {
-    color: green;
+    color: #00ff00;
 }
 
 /* Styles the level select window. */
@@ -102,8 +113,8 @@
     height: 100%;
     margin: auto;
     padding: 0 0 0 0;
-    /*background-color: #F66666;*/
-    background: linear-gradient(#F66666, #C63636, #F66666);
+    background-color: #F66666;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     z-index: 10;
     position: absolute;
     top: 0;
@@ -117,8 +128,8 @@
     padding: 2vh 0;
     margin: 6vh auto;
     text-align: center;
-    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
-    /*background-color: rgb(148, 232, 136);*/
+    background-color: rgb(148, 232, 136);
+    background: linear-gradient(170deg, #C63636, #F66666, #C63636);
     color: black;
     font-size: 2em;
     border: 10px rgb(120, 120, 120) outset;
@@ -132,6 +143,7 @@
 
 #food_image {
     position: absolute;
+    z-index: 500;
 }
 
 .extra {

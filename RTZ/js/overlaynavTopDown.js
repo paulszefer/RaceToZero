@@ -62,4 +62,13 @@ $(function() {
 //         }
 //         lastPosition = currentPos;
 //     }
+    var harunyaCounter = 0;
+    $("#mobilenav").click(function(){
+        harunyaCounter++;
+        if(harunyaCounter > 5){
+            $("#mobilenav > ul > a:nth-child(2) > li > div:nth-child(1)").html('Haruna');
+            $("#mobilenav > ul > a:nth-child(2) > li > div.mobilelistimg").html('<img src="img/profilepics/haruna.png">');
+        }
+    });
+
 });
