@@ -211,7 +211,7 @@ $(function () {
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
             barriers.push(
-                new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.45 + Math.max(barrierHeight, playItemSize))//,
+                new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)//,
                 //new Barrier("forsandbox", 0, height * 0.9, width, height)
             );
             extras.push(
@@ -231,7 +231,7 @@ $(function () {
             let answer1 = "One half";
             let answer2 = "One third";
             barriers.push(
-                new Barrier("platform1", 0, height * 0.45, width * 0.4, height * 0.50),
+                new Barrier("platform1", 0, height * 0.44, width * 0.4, height * 0.505),
                 new Barrier("ground1", 0, height * 0.80, width * 0.25, height),
                 new Barrier("ground2", width * 0.4, height * 0.80, width * 0.6, height),
                 new Barrier("ground3", width * 0.75, height * 0.80, width, height),
@@ -255,7 +255,7 @@ $(function () {
             // Level 1 Game Stage (platform)
             // TODO - add correct level data
             barriers.push(
-                new Barrier("platform1", width * 0.4, height * 0.3, width * 0.6, height * 0.35),
+                new Barrier("platform1", width * 0.4, height * 0.29, width * 0.6, height * 0.355),
                 new Barrier("wall1", 0, height * 0.6, width * 0.4625, height),
                 new Barrier("wall2", width * 0.5375, height * 0.6, width, height)
             );
@@ -277,7 +277,7 @@ $(function () {
             let answer3 = "$1200";
             let answer4 = "$2100";
             barriers.push(
-                new Barrier("platform1", width * 0.4, height * 0.3, width * 0.6, height * 0.35),
+                new Barrier("platform1", width * 0.4, height * 0.29, width * 0.6, height * 0.355),
                 //new Barrier("barrier1", width * 0.20, height * 0.75, Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.95),
                 new Barrier("barrier1", width * 0.20, height * 0.75, width * 0.30, height * 0.95),
                 new Barrier("barrier2", width * 0.45, height * 0.75, width * 0.55, height * 0.95),
@@ -321,9 +321,9 @@ $(function () {
             let answerAll = "All of these";
             barriers.push(
                 new Barrier("platform1", width * 0.75, height * 0.20, width * 0.95, height * 0.30),
-                new Barrier("platform2", width * 0.30, height * 0.30, width * 0.45, height * 0.35),
-                new Barrier("platform3", width * 0.55, height * 0.50, width * 0.70, height * 0.55),
-                new Barrier("platform4", width * 0.30, height * 0.80, width * 0.45, height * 0.85),
+                new Barrier("platform2", width * 0.30, height * 0.29, width * 0.45, height * 0.355),
+                new Barrier("platform3", width * 0.55, height * 0.49, width * 0.70, height * 0.555),
+                new Barrier("platform4", width * 0.30, height * 0.79, width * 0.45, height * 0.855),
                 new Barrier("barrier1", width * 0.20, height * 0.25, width * 0.30, height * 0.55),
                 new Barrier("barrier2", width * 0.05, height * 0.45, width * 0.20, height * 0.55),
                 new Barrier("barrier3", width * 0.70, height * 0.40, width * 0.80, height * 0.60),
@@ -364,8 +364,8 @@ $(function () {
                 new Barrier("barrier1", width * 0.20, height * 0.05, width * 0.30, height * 0.20),
                 new Barrier("barrier2", width * 0.40, height * 0.15, width * 0.50, height * 0.30),
                 new Barrier("barrier3", width * 0.60, height * 0.05, width * 0.70, height * 0.18),
-                new Barrier("barrier4", width * 0.80, height * 0.05, width * 0.87, height * 0.12),
-                new Barrier("lip", width * 0.77, height * 0.28, width * 0.85, height * 0.40),
+                new Barrier("barrier4", width * 0.82, height * 0.05, width * 0.88, height * 0.12),
+                new Barrier("lip", width * 0.80, height * 0.25, width * 0.85, height * 0.40),
                 new Barrier("barrier6", width * 0.30, height * 0.45, width * 0.40, height * 0.55),
                 new Barrier("barrier7", width * 0.05, height * 0.53, width * 0.15, height * 0.60),
                 new Barrier("barrier8", blocks2, height * 0.55, blocks3, height * 0.65),
@@ -390,11 +390,11 @@ $(function () {
                 new Barrier("platform1", width * 0.05, height * 0.20, width * 0.30, height * 0.30),
                 new Barrier("platform2", width * 0.05, height * 0.45, width * 0.30, height * 0.55),
                 new Barrier("platform3", width * 0.05, height * 0.70, width * 0.30, height * 0.80),
-                new Barrier("ledge4", width * 0.60, height * 0.35, width * 0.70, height * 0.40),
-                new Barrier("ledge5", width * 0.60, height * 0.60, width * 0.70, height * 0.65),
-                new Barrier("floating1", width * 0.40, height * 0.20, width * 0.49, height * 0.25),
-                new Barrier("floating2", width * 0.40, height * 0.45, width * 0.49, height * 0.50),
-                new Barrier("floating3", width * 0.40, height * 0.75, width * 0.49, height * 0.80)
+                new Barrier("ledge4", width * 0.60, height * 0.34, width * 0.70, height * 0.405),
+                new Barrier("ledge5", width * 0.60, height * 0.59, width * 0.70, height * 0.655),
+                new Barrier("floating1", width * 0.40, height * 0.19, width * 0.49, height * 0.255),
+                new Barrier("floating2", width * 0.40, height * 0.44, width * 0.49, height * 0.505),
+                new Barrier("floating3", width * 0.40, height * 0.74, width * 0.49, height * 0.805)
             );
             extras.push(
                 new Extra("lvl3question", width * 0.40, height * 0.81, 0, 0, "p", question),
@@ -416,22 +416,22 @@ $(function () {
             // Level 4 Game Stage (maze)
             barriers.push(
                 new Barrier("floor", width * 0.20, height * 0.90, width * 0.95, height * 0.95),
-                new Barrier("innerbox1", width * 0.35, height * 0.40, width * 0.45, height * 0.45),
-                new Barrier("innerbox2", width * 0.55, height * 0.40, width * 0.65, height * 0.45),
+                new Barrier("innerbox1", width * 0.35, height * 0.39, width * 0.45, height * 0.455),
+                new Barrier("innerbox2", width * 0.55, height * 0.39, width * 0.65, height * 0.455),
                 new Barrier("innerbox3", width * 0.60, height * 0.45, width * 0.65, height * 0.60),
                 new Barrier("innerbox4", width * 0.35, height * 0.55, width * 0.60, height * 0.60),
                 new Barrier("innerbox5", width * 0.35, height * 0.30, width * 0.40, height * 0.55),
                 new Barrier("outerbox1", width * 0.25, height * 0.25, width * 0.80, height * 0.30),
                 new Barrier("outerbox2", width * 0.75, height * 0.30, width * 0.80, height * 0.70),
-                new Barrier("outerbox3", width * 0.25, height * 0.70, width * 0.85, height * 0.75),
+                new Barrier("outerbox3", width * 0.25, height * 0.69, width * 0.85, height * 0.755),
                 new Barrier("outerbox4", width * 0.20, height * 0.55, width * 0.25, height * 0.75),
                 new Barrier("outerbox5", width * 0.20, height * 0.25, width * 0.25, height * 0.45),
                 new Barrier("blocker", width * 0.05, height * 0.65, width * 0.20, height * 0.70),
                 new Barrier("barrier1", width * 0.30, height * 0.05, width * 0.35, height * 0.10),
                 new Barrier("barrier2", width * 0.30, height * 0.20, width * 0.35, height * 0.25),
                 new Barrier("barrier3", width * 0.55, height * 0.15, width * 0.60, height * 0.25),
-                new Barrier("barrier4", width * 0.80, height * 0.30, width * 0.85, height * 0.35),
-                new Barrier("barrier5", width * 0.90, height * 0.50, width * 0.95, height * 0.55),
+                new Barrier("barrier4", width * 0.80, height * 0.29, width * 0.85, height * 0.355),
+                new Barrier("barrier5", width * 0.90, height * 0.49, width * 0.95, height * 0.555),
                 new Barrier("barrier6", width * 0.70, height * 0.75, width * 0.75, height * 0.80),
                 new Barrier("barrier7", width * 0.55, height * 0.85, width * 0.60, height * 0.90),
                 new Barrier("barrier8", width * 0.40, height * 0.75, width * 0.45, height * 0.80),
@@ -452,11 +452,11 @@ $(function () {
                 new Barrier("topleftfloor", width * 0.05, height * 0.30, width * 0.35, height * 0.40),
                 new Barrier("midlefthang", width * 0.20, height * 0.40, width * 0.35, height * 0.55),
                 new Barrier("leftwall", width * 0.20, height * 0.65, width * 0.35, height * 0.95),
-                new Barrier("botleftlip", width * 0.35, height * 0.70, width * 0.45, height * 0.75),
+                new Barrier("botleftlip", width * 0.35, height * 0.69, width * 0.45, height * 0.755),
                 new Barrier("botrightchunk", width * 0.55, height * 0.85, width * 0.75, height * 0.95),
-                new Barrier("botrightfloor", width * 0.55, height * 0.70, width * 0.70, height * 0.85),
-                new Barrier("botrightlip1", width * 0.70, height * 0.70, width * 0.75, height * 0.75),
-                new Barrier("botrightlip2", width * 0.90, height * 0.70, width * 0.95, height * 0.75),
+                new Barrier("botrightfloor", width * 0.55, height * 0.69, width * 0.70, height * 0.85),
+                new Barrier("botrightlip1", width * 0.70, height * 0.69, width * 0.75, height * 0.755),
+                new Barrier("botrightlip2", width * 0.90, height * 0.69, width * 0.95, height * 0.755),
                 new Barrier("botright", width * 0.90, height * 0.85, width * 0.95, height * 0.95),
                 new Barrier("toprightchunk", width * 0.55, height * 0.25, width * 0.80, height * 0.50),
                 new Barrier("toprightfloor", width * 0.80, height * 0.35, width * 0.95, height * 0.50),
@@ -562,7 +562,7 @@ $(function () {
     function drawFoodItem() {
         if (foodImage) {
             foodImage.css("left", Math.round(level.playItem.x));
-            foodImage.css("top", Math.round(level.playItem.y));
+            foodImage.css("top", Math.round(level.playItem.y) + 1);
         }
     }
 
