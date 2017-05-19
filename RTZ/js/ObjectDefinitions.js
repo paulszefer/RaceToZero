@@ -19,46 +19,41 @@ const WRONG = 3;
 
 let BOUNCE_MULTIPLIER = 0.6;
 
+// Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
 $(document).keypress(function(event) {
 	if (keyNumber === 0) {
-		if (event.which === 98) {
+		if (event.which === 98) { // "b"
 			keyNumber++;
-			console.log("b");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 1) {
-		if (event.which === 111) {
+		if (event.which === 111) { // "o"
 			keyNumber++;
-			console.log("o");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 2) {
-		if (event.which === 117) {
+		if (event.which === 117) { // "u"
 			keyNumber++;
-			console.log("u");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 3) {
-		if (event.which === 110) {
+		if (event.which === 110) { // "n"
 			keyNumber++;
-			console.log("n");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 4) {
-		if (event.which === 99) {
+		if (event.which === 99) { // "c"
 			keyNumber++;
-			console.log("c");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 5) {
-		if (event.which === 101) {
-			console.log("e");
+		if (event.which === 101) { // "e"
 			if (BOUNCE_MULTIPLIER === 0.6) {
 				BOUNCE_MULTIPLIER = 2;
 			} else {
@@ -315,8 +310,10 @@ class Level {
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
         let collision = this.checkCollisions(tempX, tempY);
+
+        // logs for testing purposes
         //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
-        //console.log(collision);
+
         if (this.checkCollisions(this.playItem.x, this.playItem.y + 1) === 3 && Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
             this.playItem.isGrounded = true;
             if (collision === 2) {
@@ -405,7 +402,6 @@ class Level {
                     document.getElementById(bottomLeftPixel.answerID).style.textDecoration = "line-through";
                     wrongPixelX = x1;
                     wrongPixelY = y2;
-                    // console.log(wrongPixelX + "  " + wrongPixelY);
                 } else if (bottomRightPixel.type === WRONG) {
                     document.getElementById(bottomRightPixel.answerID).style.color = "red";
                     document.getElementById(bottomRightPixel.answerID).style.textDecoration = "line-through";
@@ -441,18 +437,11 @@ class Level {
                 wrongY2 = wrongPixelY;
 
                 this.addAir(new Air("air" + wrongX1, wrongX1, wrongY1, wrongX2, wrongY2));
-                //console.log(this.board[wrongX1 + 3][wrongY1 + 3].type);
                 return 6;
             }
         }
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
-
-        console.log("dx: " + this.playItem.dx + ";     dy: " + this.playItem.dy);
-
-        // rounds values because display is pixel-based
-        // TODO - move rounding to move function?
-        // this.playItem.round();
     }
 
     // TODO - group/normalize these snap functions?
@@ -766,7 +755,6 @@ class Level {
             for (let i = 1; i <= biggerComponent; i++) {
             	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
             	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
-            	console.log(currentX1);
             	if (this.board[currentX1][currentY2].type === SOLID) {
             		let move = 0;
             		while (move < this.playItem.size) {
@@ -917,6 +905,8 @@ class PhysicalObject {
         svgElement.id = this.name;
         svgElement.style.width = objectWidth;
         svgElement.style.height = objectHeight;
+        $(svgElement).css("width", objectWidth);
+        $(svgElement).css("height", objectHeight);
         svgElement.innerHTML = "<rect width=\"" + objectWidth
             + "\" height=\"" + objectHeight
             + "\" style=\"fill:" + objectColour + ";\">";
