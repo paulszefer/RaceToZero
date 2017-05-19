@@ -23,43 +23,37 @@ let BOUNCE_MULTIPLIER = 0.6;
 let keyNumber = 0;
 $(document).keypress(function(event) {
 	if (keyNumber === 0) {
-		if (event.which === 98) {
+		if (event.which === 98) { // "b"
 			keyNumber++;
-			console.log("b");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 1) {
-		if (event.which === 111) {
+		if (event.which === 111) { // "o"
 			keyNumber++;
-			console.log("o");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 2) {
-		if (event.which === 117) {
+		if (event.which === 117) { // "u"
 			keyNumber++;
-			console.log("u");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 3) {
-		if (event.which === 110) {
+		if (event.which === 110) { // "n"
 			keyNumber++;
-			console.log("n");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 4) {
-		if (event.which === 99) {
+		if (event.which === 99) { // "c"
 			keyNumber++;
-			console.log("c");
 		} else {
 			keyNumber = 0;
 		}
 	} else if (keyNumber === 5) {
-		if (event.which === 101) {
-			console.log("e");
+		if (event.which === 101) { // "e"
 			if (BOUNCE_MULTIPLIER === 0.6) {
 				BOUNCE_MULTIPLIER = 2;
 			} else {

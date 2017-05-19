@@ -423,7 +423,7 @@ $(function () {
                 new Barrier("outerbox1", width * 0.25, height * 0.25, width * 0.80, height * 0.30),
                 new Barrier("outerbox2", width * 0.75, height * 0.30, width * 0.80, height * 0.70),
                 new Barrier("outerbox3", width * 0.25, height * 0.69, width * 0.85, height * 0.755),
-                new Barrier("outerbox4", width * 0.20, height * 0.55, width * 0.25, height * 0.75),
+                new Barrier("outerbox4", width * 0.20, height * 0.55, width * 0.25, height * 0.755),
                 new Barrier("outerbox5", width * 0.20, height * 0.25, width * 0.25, height * 0.45),
                 new Barrier("blocker", width * 0.05, height * 0.65, width * 0.20, height * 0.70),
                 new Barrier("barrier1", width * 0.30, height * 0.05, width * 0.35, height * 0.10),
@@ -438,7 +438,7 @@ $(function () {
             );
             goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(width * 0.45, height * 0.48, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.475, height * 0.48, 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
             // Level 4 Question Stage
             let question = "How much money could the world save every year if there was zero food waste?";
