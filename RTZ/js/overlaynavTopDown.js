@@ -15,7 +15,7 @@ $(function() {
         $("#mobilenav").attr('style', '');
         $("#overlay").attr('style', '');
     });
-// shitty user feedback resulted no fade
+
 //     //After scrolling down, save var
 //     var scrolled;
 //     //sets scrolled to true if scroll happened
