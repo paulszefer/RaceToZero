@@ -661,7 +661,10 @@ $(function () {
         // update score display (timer)
         timer.innerHTML = parseTime(score);
     }
-
+	
+	/**
+	 * Reinitializes a level.
+	 */
     function reInit() {
         scoreOverlay.style.display = "none";
         score = 0;

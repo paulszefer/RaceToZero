@@ -19,6 +19,7 @@ const WRONG = 3;
 
 let BOUNCE_MULTIPLIER = 0.6;
 
+// Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
 $(document).keypress(function(event) {
 	if (keyNumber === 0) {
