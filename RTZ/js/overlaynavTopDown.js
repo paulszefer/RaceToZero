@@ -1,7 +1,7 @@
 $(function() {
     //#navburger clicked, expand #mobilenav and #overylay
     $("#navburger").click(function() {
-        $("#mobilenav").css("width", "100%");
+        $("#mobilenav").css("height", "80vh");
         $("#overlay").css("width", "100%");
         $("#overlay").css("height", $('body').height());
     });
@@ -10,7 +10,11 @@ $(function() {
         $("#mobilenav").attr('style', '');
         $("#overlay").attr('style', '');
     });
-    
+    //reset when xButton is pressed
+    $('#xButton').click(function(){
+        $("#mobilenav").attr('style', '');
+        $("#overlay").attr('style', '');
+    });
 // shitty user feedback resulted no fade
 //     //After scrolling down, save var
 //     var scrolled;
@@ -58,4 +62,13 @@ $(function() {
 //         }
 //         lastPosition = currentPos;
 //     }
+    var harunyaCounter = 0;
+    $("#mobilenav").click(function(){
+        harunyaCounter++;
+        if(harunyaCounter > 5){
+            $("#mobilenav > ul > a:nth-child(2) > li > div:nth-child(1)").html('Haruna');
+            $("#mobilenav > ul > a:nth-child(2) > li > div.mobilelistimg").html('<img src="img/profilepics/haruna.png">');
+        }
+    });
+
 });

@@ -45,7 +45,7 @@ if(isset($_POST['register-btn']))
 <?php include("ProtoHeader.php"); ?>
 <link rel="stylesheet" href="css/registration.css" media="screen">
 <script src="css/registration.js"></script>
-<title>Registration</title>
+<title>Race to Zero - Registration</title>
 <?php include("ProtoNavLogged.php"); ?>
 
 	<div id="mainContent">  <!-- Insert your part of the website here. -->

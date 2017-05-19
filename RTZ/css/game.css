@@ -1,7 +1,164 @@
 /* Applies to the game_container div on the index page. */
 #game_container {
     min-width: 36vh;
-    min-height: 64vh;
+    min-height: 100vh;
+    height: 100%;
     margin: auto;
     position: relative;
+}
+
+/* Applies to the game_window div on the index page. */
+#game_window {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#play_button {
+    width: 60%;
+    height: 5vh;
+    padding: 2vh 0;
+    margin: 6vh auto;
+    text-align: center;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    /*background-color: rgb(148, 232, 136);*/
+    color: black;
+    font-size: 2em;
+    border: 10px rgb(120, 120, 120) outset;
+    border-radius: 12px;
+}
+
+#timer {
+    display: none;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 1%;
+    /*left: 50%;*/
+    color: black;
+    font-size: 1.5em;
+    z-index: 10;
+}
+
+#score_overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    z-index: 15;
+}
+
+#score_overlay p {
+	text-align: center;
+	padding-top: 2%;
+	/*font-size: 2.5em;*/
+    font-size: 6vh;
+}
+
+#score_overlay p.statement{
+    width: 60%;
+    margin: auto;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    /*font-size: 2.5em;*/
+    font-size: 6vh;
+}
+
+.score_overlay_button {
+    width: 20%;
+    height: 10%;
+    position: absolute;
+    bottom: 10%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    /*background-color: rgb(148, 232, 136);*/
+    border: 10px rgb(120, 120, 120) outset;
+    border-radius: 12px;
+}
+
+.score_overlay_button:hover {
+    /*background-color: white;*/
+    background: linear-gradient(white, rgb(160, 160, 160));
+}
+
+.score_overlay_button img {
+    height: 6vh;
+    width: 6vh;
+    position: relative;
+    top: 2vh;
+    display: block;
+    margin: auto;
+}
+
+.score_overlay_button:first-of-type {
+    left: 10%;
+}
+
+.score_overlay_button:nth-of-type(2) {
+    left: 39%;
+}
+
+.score_overlay_button:last-of-type {
+    right: 10%;
+}
+
+.answer {
+    color: #00ff00;
+}
+
+/* Styles the level select window. */
+#level_select {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 0 0 0 0;
+    background-color: #FF6F6F;
+    /*background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));*/
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Styles a level select button. */
+.level_select_button {
+    width: 60%;
+    height: 5vh;
+    padding: 2vh 0;
+    margin: 6vh auto;
+    text-align: center;
+    background-color: rgb(148, 232, 136);
+    background: linear-gradient(170deg, rgb(108, 192, 96), rgb(148, 232, 136), rgb(108, 192, 96));
+    color: black;
+    font-size: 2em;
+    border: 10px rgb(120, 120, 120) outset;
+    border-radius: 12px;
+}
+
+.level_select_button:hover {
+    /*background-color: white;*/
+    background: linear-gradient(white, rgb(160, 160, 160));
+}
+
+#food_image {
+    position: absolute;
+    z-index: 12;
+}
+
+.extra {
+    position: absolute;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }

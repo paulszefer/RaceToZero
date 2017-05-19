@@ -14,11 +14,12 @@
 /*wrapper for each of topic box*/
 .contentboxwrapper{
     width:49%;
-    background-color:black;
+    background-color: white;
     min-height:25vh;
     display:inline-block;
-    color:white;
+    color:black;
     margin:0.24999999%;
+    font-family: MavenPL300;
 }
 /*topic box*/
 .contentbox{
@@ -37,22 +38,22 @@
     padding-top: 1em;
 }
 .bigcontentbox img{
-  width:80%;
+    width:80%;
 }
 .bigcontentboxwrapper{
     width:98.5%;
-    background-color:black;
+    background-color: white;
     min-height:100%;
     display:inline-block;
-    color:white;
+    color:black;
     margin:0.24999999%;
     text-align: center;
 }
 /*this is the affiliated apps content box*/
 .bigexpandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
     z-index:10;
     height:0;
     width:0;
@@ -70,24 +71,24 @@
 }
 .bigexpandedcontentbox img, .bigexpandedcontentbox p{
     padding-left: 50px;
-    color: #FFFE88;
+    color: black;
 }
 .contentbox h1{
     padding:0;
 }
 /*media query for the boxes when screen too thin*/
-@media only screen and (max-width: 490px) {
+/*@media only screen and (max-width: 490px) {
     .contentboxwrapper {
         width:100%;
         min-height:10vh;
     }
-}
+}*/
 /*this is where we put actual content for each topic*/
 /* main content boxes */
 .expandedcontentbox{
     /*because we want it to be displayed on top of topic buttons*/
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
     z-index:10;
     height:0;
     width:0;
@@ -112,9 +113,11 @@
 }
 .expandedcontentbox ol{
     list-style: decimal inside;
+    padding: 2vh;
 }
 .expandedcontentbox ul{
     list-style: none inside;
+    padding: 4vh;
 }
 .expandedcontentbox ul li{
     padding-top: 15px;
@@ -122,6 +125,12 @@
 /* quiz buttons */
 button{
     font-size: 1em;
+    background: linear-gradient(180deg, #CCCCCC, white, #CCCCCC);
+    /*background-color: #6495ED;*/
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+    text-align: center;
+    padding: 1vh;
 }
 /* Closing button */
 .xbutton{
@@ -135,7 +144,7 @@ button{
 }
 /* spans text appended to the end of each question and displays based on answer */
 .correcttext, .incorrecttext{
-    font-weight: bold;
+    font-family: MavenPL300;
     display: none;
 }
 .correcttext{

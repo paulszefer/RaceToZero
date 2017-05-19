@@ -2,42 +2,40 @@
 #overlay{
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.7);
+	width:100%;
 	height:0;
 	-webkit-transition: height 0.1s;
 	z-index: 500;
 }
 /*whole navContent - includes .loginstatus, #navburger*/
 #navCont{
-	min-height: 20vh;
+	min-height: 10vh;
 	background-color: #95d5f5;/*#3d2e1f;*/
 }
 /*Logo image*/
 #navCont > div.navlogo > a > img{
-	height:20vh;
-	width:40vh;
-	position:absolute;
+	height:10vh;
 	margin:auto;
 	display:block;
 }
-/*if needed for styling anchor in the logo image*/
-#navCont > div.navlogo > a{
-	margin:auto;
-}
-/**/
+/*.navlogo is container with the nav burger, loginstatus, and logo*/
 .navlogo{
 /*	background-image: url('../img/bannerBG.gif');*/
 }
-/*for displaying all the nav content*/
-.navlogo img, .navlogo .loginstatus{
-	display: inline-block;
-	vertical-align: middle;
+
+#navburger{
+	display:none;
 }
 .loginstatus{
-	color:white;
-	font-size: 1em;
-	padding:0.5em;
+color:white;
+position: absolute;
+top:4vh;
+right:2vw;
+font-size: 1em;
+text-align:center;
 }
-/*navlinks is the horizontal navbar for desktop version*/
+
+/*navlinks is the navbar when screen is wide enough*/
 .navlinks ul{
 	margin:0;
 	padding:0;
@@ -47,7 +45,7 @@
 	display: inline-block;
 	font-family: MavenPL200;
 	padding: 0.5em;
-	font-size: 1.5em;
+	font-size: 1.25em;
 }
 .navlinks{
 	background-image: url('../img/navgradient.png');
@@ -65,13 +63,13 @@
 .navbuttonright{
 	float:right;
 }
-/*#mobilenav is everything related to the dropdown burger menu*/
+/*mobilenav is the nav menu that shows up when navburger is clicked in mobile*/
 #mobilenav{
-	width:0;
+	width:100%;
+	height:0;
 	position:absolute;
 	left:0;
 	top:0;
-/*	height:100vh;*/
 	-webkit-transition: height 0.3s;
 	-moz-transition: height 0.3s;
 	background-color: black;
@@ -84,18 +82,50 @@
 	font-size: 5vw;
 	font-family: MavenPL300;
 }
-#mobilenav ul li{
-	height:15vh;
-	width:100%;
-	display: table;
-	padding-right:1em;
+/*The xbutton in mobilenav*/
+#xButton{
+	position: absolute;
+	content: url('../img/xButton.png');
+	height:6vh;
+	width:6vh;
+	left:3vh;
+	top:3vh;
+}
+#xButton:hover{
+	content: url('../img/xButtonInv.png');
+}
+#mobilenav ul{
+	padding: 0 10vw 0 10vw;
 }
 #mobilenav ul li div{
 	vertical-align: middle;
 	display:table-cell;
 	text-align: left;
 }
-
+/*for the first mobilenav li elements*/
+#mobilenav > ul > a:nth-child(2) > li > div:nth-child(1), #mobilenav > ul > a:nth-child(2) > li > div.mobilelistimg{
+	text-align: right;
+	width:auto;
+	right:0;
+	white-space: nowrap;
+}
+.mobilelist{
+	min-height:15vh;
+	width:100%;
+	display: table;
+	padding-right:1em;
+}
+.mobilelistimg{
+	overflow: hidden;
+	max-height:15vh;
+	width:auto;
+}
+.mobilelistimg img{
+	max-height:14vh;
+	max-width:14vh;
+	padding:0;
+	margin:0;
+}
 /*body shenanigans*/
 @font-face{
 	font-family: MavenPL100;
@@ -111,11 +141,13 @@
 }
 body{
 	font-family: MavenPL100, Arial, Helvetica, sans-serif;
+	font-weight:bold;
 	z-index: 0;
 }
 html,body{
 	height:100%;
 }
+/*.contentactual deals with everything not constant throughout our pages*/
 .contentactual{
 	width:80%;
 	min-height:85vh;
@@ -136,45 +168,60 @@ html,body{
 	text-align: justify;
 	width:80%;
 }
-/*emphasis title tabs*/
+/*for emphasis on certain topics*/
 .titletab{
 	width:100%;
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 2em;
 	padding-top:1em;
 	padding-bottom:1em;
 	background-color: silver;
 }
-/*when the screen is smaller than 980px*/
-@media only screen and (max-width: 980px) {
+
+/*mediaquery shenanigans*/
+/*if screen smaller than 768px*/
+@media only screen and (max-width: 768px) {
     .contentactual {
         width:100%;
     }
     .navlinks{
     	display:none;
     }
+    /*navburger appears*/
     #navCont #navburger{
+    	display:block;
     	position: absolute;
-    	top:5vh;
-    	left:5vh;
+    	top:2.5vh;
+    	left:2.5vh;
     	transition: top 0.2s ease-in-out;
 	    -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
 	    -moz-transition: top 0.2s ease-in-out;
+	    z-index: 100;
     }
+    /*navburger's height*/
     #navCont #navburger img{
     	height:5vh;
     }
-}
-/*when the screen is bigger than 981px*/
-@media only screen and (min-width: 981px){
-	/*hides the navburger*/
-	#navburger{
-		display:none;
+    /*text for displaying if logged in or not*/
+    .loginstatus{
+	color:white;
+	position: static;
+	font-size: 1em;
+	text-align:center;
+	}
+	/*navlogo when screen is stupidly small*/
+	#navCont > div.navlogo > a > img{
+	display: absolute;
+	top:2.5vh;
+	right:2.5vh;
+	height:10vh;
 	}
 }
+
+/*footer styling*/
 .footercontent{
 	background-color: black;
-	height:50px;
+	height:10vh;
 	display:table;
 	width:100%;
 }
@@ -182,7 +229,7 @@ html,body{
 	margin:0;
 	color: white;
 	text-align: center;
-	font-size: 0.75em;
+	font-size: 1em;
 	display:table-cell;
 	vertical-align: middle;
 }
