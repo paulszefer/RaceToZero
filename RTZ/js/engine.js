@@ -99,7 +99,8 @@ $(function () {
          */
         scoreOverlay = document.createElement("div");
         scoreOverlay.id = "score_overlay";
-        scoreOverlay.style.width = gameContainer.parentNode.offsetWidth + "px";
+        // incremented to match level width
+        scoreOverlay.style.width = (gameContainer.parentNode.offsetWidth + 1) + "px";
         scoreOverlay.style.height = gameContainer.parentNode.offsetHeight + "px";
         gameContainer.appendChild(scoreOverlay);
 
@@ -146,7 +147,6 @@ $(function () {
         // create the level using the retrieved level
         // width, height incremented by 1 to avoid ArrayOutOfBounds exceptions
         // TODO - find more elegant solution than incrementing by 1
-        // TODO - because it creates an extra column of pixels when it displays
         level = new Level(levelID, width + 1, height + 1);
 
         /**
