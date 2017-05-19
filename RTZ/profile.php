@@ -83,10 +83,10 @@
 			<ul>
 	            <li>Username: <?php echo $_SESSION['user_name']; ?></li>
 	            <li>&nbsp;</li>
-	            <li>Best Times: 
+	            <li>Your Best Times:<br><br>
 	            	<?php 
 	            		//echo displayTutorialScore(); 
-	            		echo "<table>";
+	            		echo "<table id='bestTimesTable'>";
 	            			echo "<tr>";
 	            				echo "<th>Level</th>";
 	            				echo "<th>Time</th>";
