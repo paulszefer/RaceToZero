@@ -905,6 +905,8 @@ class PhysicalObject {
         svgElement.id = this.name;
         svgElement.style.width = objectWidth;
         svgElement.style.height = objectHeight;
+        $(svgElement).css("width", objectWidth);
+        $(svgElement).css("height", objectHeight);
         svgElement.innerHTML = "<rect width=\"" + objectWidth
             + "\" height=\"" + objectHeight
             + "\" style=\"fill:" + objectColour + ";\">";
