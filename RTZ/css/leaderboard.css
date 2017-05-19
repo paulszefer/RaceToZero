@@ -1,0 +1,32 @@
+/*This is css for the table*/
+#besttimes{
+	min-width: 80%;
+	margin:auto;
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+#besttimes td{
+	text-align:center;
+	border: 1px solid;
+}
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+/*the title row*/
+#besttimes > tbody > tr:nth-child(1){
+	font-weight:bold;
+	font-size: 1.25em;
+	background-color: rgb(137, 232, 148);
+}
+#levelselect{
+	margin:1em;
+	display:block;
+	margin:auto;
+}
+/*Removes the side borders*/
+#besttimes tr td:first-child {
+  border-left: 0;
+}
+#besttimes tr td:last-child {
+  border-right: 0;
+}

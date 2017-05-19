@@ -7,13 +7,7 @@
  */
 const BACKGROUND_COLOUR = "rgb(255, 255, 255)";
 const BARRIER_COLOUR = "rgb(50, 255, 100)";
-
-/**
- * Game states.
- * @Unused - TODO remove
- */
-const LEVEL = 0;
-const QUESTION = 1;
+const SNAP_TO_GROUND = 0.5;
 
 /**
  * Types of pixels.
@@ -21,7 +15,56 @@ const QUESTION = 1;
 const AIR = 0;
 const SOLID = 1;
 const GOAL = 2;
-const WRONG = 3; // TODO - remove
+const WRONG = 3;
+
+let BOUNCE_MULTIPLIER = 0.6;
+
+// Changes the bounce multiplier if the user types "bounce".
+let keyNumber = 0;
+$(document).keypress(function(event) {
+	if (keyNumber === 0) {
+		if (event.which === 98) { // "b"
+			keyNumber++;
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 1) {
+		if (event.which === 111) { // "o"
+			keyNumber++;
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 2) {
+		if (event.which === 117) { // "u"
+			keyNumber++;
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 3) {
+		if (event.which === 110) { // "n"
+			keyNumber++;
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 4) {
+		if (event.which === 99) { // "c"
+			keyNumber++;
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 5) {
+		if (event.which === 101) { // "e"
+			if (BOUNCE_MULTIPLIER === 0.6) {
+				BOUNCE_MULTIPLIER = 2;
+			} else {
+				BOUNCE_MULTIPLIER = 0.6;
+			}
+		} else {
+			keyNumber = 0;
+		}
+	}
+});
+
 
 /**
  * A game object that keeps track of the current level.
@@ -31,48 +74,33 @@ class Game {
     /**
      * Creates a game object that stores the current game screen and its properties.
      * Used to display the correct screen and to transition between levels.
-     * TODO - elements, state are unused, remove them?
      */
     constructor() {
         this.level = this.retrieveLevel();
-        this.state = 0;
         this.elements;
-        this.createHTML(); // TODO - Unused, remove?
     }
 
-	/**
-	 * Sets the current level of the game.
-	 */
+    /**
+     * Sets the current level of the game.
+     */
     set level(id) {
         this._level = id;
     }
 
-	/**
-	 * Returns the current level of the game.
-	 */
+    /**
+     * Returns the current level of the game.
+     */
     get level() {
         return this._level;
     }
 
-	/**
-	 * Sets the current state of the game.
-	 */
-    set state(state) {
-        this._state = state;
-    }
-
-	/**
-	 * Returns the current state of the game.
-	 */
-    get state() {
-        return this._state;
-    }
     /**
      * Sets the elements of the game.
      */
     set elements(elements) {
         this._elements = elements;
     }
+
     /**
      * Returns the elements of the game.
      */
@@ -87,16 +115,12 @@ class Game {
         this.elements.push(element);
     }
 
-	/**
-	 * Returns the user's current level. Currently the user always starts from level 0.
-	 */
+    /**
+     * Returns the user's current level. Currently the user always starts from level -1 (level select).
+     * TODO - this function should be renamed
+     */
     retrieveLevel() {
-        // TODO - get last played level from database, use 0 if not logged in
-        return 0;
-    }
-
-    // TODO - Unused, moved to engine.js setup instead, remove it?
-    createHTML() {
+        return -1;
     }
 
     /**
@@ -121,7 +145,6 @@ class Level {
         this._levelID = levelID;
         this._width = width;
         this._height = height;
-        this._state = 0;
 
         // initialize with an empty board (each pixel is air)
         let emptyBoard = new Array(width);
@@ -184,22 +207,6 @@ class Level {
     }
 
     /**
-     * Sets the level state.
-     * @Unused TODO - remove
-     */
-    set state(state) {
-        this._state = state;
-    }
-
-    /**
-     * Gets the level state.
-     * @Unused TODO - remove
-     */
-    get state() {
-        return this._state;
-    }
-
-    /**
      * Sets the play item of the level.
      */
     set playItem(playItem) {
@@ -238,7 +245,7 @@ class Level {
     }
 
     /**
-     * Adds an object by setting all pixels within a certain range to a certain pixel 
+     * Adds an object by setting all pixels within a certain range to a certain pixel
      * type.
      */
     addPhysicalObject(x1, y1, x2, y2, pixelType) {
@@ -271,67 +278,170 @@ class Level {
     }
 
     /**
+     * Adds a wrong answer section.
+     */
+    addWrong(wrong) {
+        let x1 = wrong.x1;
+        let y1 = wrong.y1;
+        let x2 = wrong.x2;
+        let y2 = wrong.y2;
+        for (let i = x1; i <= x2; i++) {
+            for (let j = y1; j <= y2; j++) {
+                this._board[i][j].type = WRONG;
+                this._board[i][j].answerID = wrong.answerID;
+            }
+        }
+    }
+
+    /**
      * Moves the play item. Before the play item moves, checks to see if it will collide
      * with anything and adjusts accordingly.
      * TODO - check incrementally to fix bugs with moving through thin barriers
      */
     move() {
 
+		
         // don't move if out of bounds
-        // TODO - query width and height from div
-        // TODO - this also doesn't work
-        if (this.playItem.x1 < 0 || this.playItem.y1 < 0 || this.playItem.x2 > this.width || this.playItem.y2 > this.height) {
+        if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
+            console.log("Error: The item is out of bounds.");
             return;
         }
 
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
-
-        // check if next movement causes a collision
         let collision = this.checkCollisions(tempX, tempY);
-        if (collision === 0) {
-            // no collision, move normally
-            this.playItem.move();
-            this.playItem.isGrounded = false;
-        } else if (collision === 1) {
-            // top-side collision
-            this.snapToTop(tempX);
-            this.playItem.reverseDY();
-            this.playItem.isGrounded = false;
-        } else if (collision === 2) {
-            // right-side collision
-            this.snapToRight(tempY);
-            this.playItem.reverseDX();
-            this.playItem.isGrounded = false;
-        } else if (collision === 3) {
-            // bottom-side collision
-            if (!this.playItem.isGrounded) {
-                this.snapToBottom(tempX);
-            }
-            // TODO - make this refer to a constant defined in the constant section above
-            if (this.playItem.dy < 2) { // SNAPTOGROUND = 2
-                this.playItem.snapToGround();
-                this.playItem.move();
+
+        // logs for testing purposes
+        //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
+
+        if (this.checkCollisions(this.playItem.x, this.playItem.y + 1) === 3 && Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
+            this.playItem.isGrounded = true;
+            if (collision === 2) {
+                // right side collision
+                this.snapToRight(tempY);
+                this.playItem.reverseDX();
+            } else if (collision === 4) {
+                // left side collision
+                this.snapToLeft(tempY);
+                this.playItem.reverseDX();
             } else {
+                this.playItem.move();
+            }
+            this.playItem.dy = 0;
+            if (this.playItem.dx > 0) {
+                this.playItem.dx *= 0.9;
+            } else if (this.playItem.dx < 0) {
+                this.playItem.dx *= 0.9;
+            }
+        } else {
+            // check if next movement causes a collision
+            if (collision === 0) {
+                // no collision, move normally
+                this.playItem.move();
+                this.playItem.isGrounded = false;
+            } else if (collision === 1) {
+                // top-side collision
+                this.snapToTop(tempX);
                 this.playItem.reverseDY();
                 this.playItem.isGrounded = false;
+            } else if (collision === 2) {
+                // right-side collision
+                this.snapToRight(tempY);
+                this.playItem.reverseDX();
+                this.playItem.isGrounded = false;
+            } else if (collision === 3) {
+                // bottom-side collision
+                if (!this.playItem.isGrounded) {
+                    this.snapToBottom(tempX);
+                }
+                if (Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
+                    this.playItem.snapToGround();
+                    this.playItem.move();
+                } else {
+                    this.playItem.reverseDY();
+                    this.playItem.isGrounded = false;
+                }
+            } else if (collision === 4) {
+                // left-side collision
+                this.snapToLeft(tempY);
+                this.playItem.reverseDX();
+                this.playItem.isGrounded = false;
+            } else if (collision === 5) {
+                // collision with a goal
+                this.playItem.move();
+                return 5;
+            } else if (collision === 6) {
+                // collision with a wrong answer section
+                this.playItem.move();
+
+                // find associated wrong answer
+                let x1 = Math.round(this.playItem.x);
+                let y1 = Math.round(this.playItem.y);
+                let x2 = x1 + this.playItem.size;
+                let y2 = y1 + this.playItem.size;
+
+                let topLeftPixel = this.board[x1][y1];
+                let topRightPixel = this.board[x2][y1];
+                let bottomLeftPixel = this.board[x1][y2];
+                let bottomRightPixel = this.board[x2][y2];
+                let wrongPixelX;
+                let wrongPixelY;
+
+                if (topLeftPixel.type === WRONG) {
+                    document.getElementById(topLeftPixel.answerID).style.color = "red";
+                    document.getElementById(topLeftPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x1;
+                    wrongPixelY = y1;
+                } else if (topRightPixel.type === WRONG) {
+                    document.getElementById(topRightPixel.answerID).style.color = "red";
+                    document.getElementById(topRightPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x2;
+                    wrongPixelY = y1;
+                } else if (bottomLeftPixel.type === WRONG) {
+                    document.getElementById(bottomLeftPixel.answerID).style.color = "red";
+                    document.getElementById(bottomLeftPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x1;
+                    wrongPixelY = y2;
+                } else if (bottomRightPixel.type === WRONG) {
+                    document.getElementById(bottomRightPixel.answerID).style.color = "red";
+                    document.getElementById(bottomRightPixel.answerID).style.textDecoration = "line-through";
+                    wrongPixelX = x2;
+                    wrongPixelY = y2;
+                }
+
+                // replace "wrong" section with air to prevent further triggers
+                let wrongX1;
+                let wrongY1;
+                let wrongX2;
+                let wrongY2;
+
+                while (wrongPixelX >= 0 && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelX--;
+                }
+                wrongPixelX++;
+                wrongX1 = wrongPixelX;
+                while (wrongPixelY >= 0 && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelY--;
+                }
+                wrongPixelY++;
+                wrongY1 = wrongPixelY;
+                while (wrongPixelX <= this.width && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelX++;
+                }
+                wrongPixelX--;
+                wrongX2 = wrongPixelX;
+                while (wrongPixelY <= this.height && this.board[wrongPixelX][wrongPixelY].type === WRONG) {
+                    wrongPixelY++;
+                }
+                wrongPixelY--;
+                wrongY2 = wrongPixelY;
+
+                this.addAir(new Air("air" + wrongX1, wrongX1, wrongY1, wrongX2, wrongY2));
+                return 6;
             }
-        } else if (collision === 4) {
-            // left-side collision
-            this.snapToLeft(tempY);
-            this.playItem.reverseDX();
-            this.playItem.isGrounded = false;
-        } else if (collision === 5) {
-            // collision with a goal
-            this.playItem.move();
-            return 5;
         }
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
-
-        // rounds values because display is pixel-based
-        // TODO - move rounding to move function?
-        this.playItem.round();
     }
 
     // TODO - group/normalize these snap functions?
@@ -341,12 +451,15 @@ class Level {
      */
     snapToTop(tempX) {
         let move = 0;
-        while (this.checkCollisions(tempX, this._playItem.y - move) !== 1) {
+        while (this.checkCollisions(tempX, this._playItem.y - move) === 0) {
             move++;
         }
-        let ratio = this._playItem.dx / this._playItem.dy;
-        this._playItem.x = this._playItem.x - (move * ratio);
-        this._playItem.y = this._playItem.y - move;
+        move--;
+        if (this.playItem.dy !== 0) {
+            let ratio = this._playItem.dx / this._playItem.dy;
+            this._playItem.x = this._playItem.x - (move * ratio);
+            this._playItem.y = this._playItem.y - move;
+        }
     }
 
     /**
@@ -354,12 +467,15 @@ class Level {
      */
     snapToRight(tempY) {
         let move = 0;
-        while (this.checkCollisions(this._playItem.x + move, tempY) !== 2) {
+        while (this.checkCollisions(this._playItem.x + move, tempY) === 0) {
             move++;
         }
-        let ratio = this._playItem.dy / this._playItem.dx;
-        this._playItem.x = this._playItem.x + move;
-        this._playItem.y = this._playItem.y + (move * ratio);
+        move--;
+        if (this.playItem.dx !== 0) {
+            let ratio = this._playItem.dy / this._playItem.dx;
+            this._playItem.x = this._playItem.x + move;
+            this._playItem.y = this._playItem.y + (move * ratio);
+        }
     }
 
     /**
@@ -367,12 +483,15 @@ class Level {
      */
     snapToBottom(tempX) {
         let move = 0;
-        while (this.checkCollisions(tempX, this._playItem.y + move) !== 3) {
+        while (this.checkCollisions(tempX, this._playItem.y + move) === 0) {
             move++;
         }
-        let ratio = this._playItem.dx / this._playItem.dy;
-        this._playItem.x = this._playItem.x + (move * ratio);
-        this._playItem.y = this._playItem.y + move;
+        move--;
+        if (this.playItem.dy !== 0) {
+            let ratio = this._playItem.dx / this._playItem.dy;
+            this._playItem.x = this._playItem.x + (move * ratio);
+            this._playItem.y = this._playItem.y + move;
+        }
     }
 
     /**
@@ -380,35 +499,39 @@ class Level {
      */
     snapToLeft(tempY) {
         let move = 0;
-        while (this.checkCollisions(this._playItem.x - move, tempY) !== 4) {
+        while (this.checkCollisions(this._playItem.x - move, tempY) === 0) {
             move++;
         }
-        let ratio = this._playItem.dy / this._playItem.dx;
-        this._playItem.x = this._playItem.x - move;
-        this._playItem.y = this._playItem.y - (move * ratio);
+        move--;
+        if (this.playItem.dx !== 0) {
+            let ratio = this._playItem.dy / this._playItem.dx;
+            this._playItem.x = this._playItem.x - move;
+            this._playItem.y = this._playItem.y - (move * ratio);
+        }
     }
 
     /**
      * Checks to see if the object is currently colliding with anything.
-     * Returns 0 if no collision, 1 if top collision, 2 if right-side collision, 3 if 
-     * bottom collision, 4 if left-side collision, 5 if it collides with a goal.
+     * Returns 0 if no collision, 1 if top collision, 2 if right-side collision, 3 if
+     * bottom collision, 4 if left-side collision, 5 if it collides with a goal,
+     * 6 if it collides with a wrong answer section.
      */
     checkCollisions(x, y) {
         let size = this._playItem.size;
-        let x1 = x;
-        let y1 = y;
-        let x2 = x + size;
-        let y2 = y + size;
+        let x1 = Math.round(x);
+        let y1 = Math.round(y);
+        let x2 = x1 + size;
+        let y2 = y1 + size;
 
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
             if (this._board[x1][y1].type === SOLID) {
                 return this.topLeftCollision(x1, y1);
-            } else if (this._board[x2][y2].type === SOLID) {
-                return this.bottomRightCollision(x1, y1);
-            } else if (this._board[x1][y2].type === SOLID) {
-                return this.bottomLeftCollision(x1, y1);
             } else if (this._board[x2][y1].type === SOLID) {
                 return this.topRightCollision(x1, y1);
+            } else if (this._board[x1][y2].type === SOLID) {
+                return this.bottomLeftCollision(x1, y1);
+            } else if (this._board[x2][y2].type === SOLID) {
+                return this.bottomRightCollision(x1, y1);
             } else if (this._board[x1][y1].type === GOAL) {
                 return 5;
             } else if (this._board[x2][y2].type === GOAL) {
@@ -417,6 +540,14 @@ class Level {
                 return 5;
             } else if (this._board[x2][y1].type === GOAL) {
                 return 5;
+            } else if (this._board[x1][y1].type === WRONG) {
+                return 6;
+            } else if (this._board[x2][y2].type === WRONG) {
+                return 6;
+            } else if (this._board[x1][y2].type === WRONG) {
+                return 6;
+            } else if (this._board[x2][y1].type === WRONG) {
+                return 6;
             }
         }
         return 0;
@@ -427,17 +558,24 @@ class Level {
      */
     topLeftCollision(x1, y1) {
         let size = this._playItem.size;
+        let halfSize = Math.round(this.playItem.size / 2);
         let x2 = x1 + size;
         let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
-        if (this._board[x2][y1].type === SOLID) {
+        if (this._board[x2 - halfSize][y1].type === SOLID) {
             return 1;
-        } else if (this._board[x1][y2].type === SOLID) {
+        } else if (this._board[x1][y2 - halfSize].type === SOLID) {
             return 4;
         } else {
-            let move = 0;
+            if (this._playItem.dx > 0) {
+                return 1;
+            }
+            if (this._playItem.dy > 0) {
+                return 4;
+            }
+            /*let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX1 - move][origY1].type === SOLID) {
                     return 4;
@@ -446,6 +584,25 @@ class Level {
                 } else {
                     move++;
                 }
+            }*/
+            let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+            for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+            	if (this.board[currentX1][currentY1].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX1 + move][currentY1].type !== SOLID) {
+            				return 4;
+            			}
+            			if (this.board[currentX1][currentY1 + move].type !== SOLID) {
+            				return 1;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
             }
             return 0;
         }
@@ -458,7 +615,13 @@ class Level {
         let origX2 = x1 + this._playItem.size - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
-        let move = 0;
+        if (this._playItem.dx < 0) {
+            return 1;
+        }
+        if (this._playItem.dy > 0) {
+            return 2;
+        }
+        /*let move = 0;
         while (move < this._playItem.size) {
             if (this._board[origX2 + move][origY1].type === SOLID) {
                 return 2;
@@ -467,30 +630,55 @@ class Level {
             } else {
                 move++;
             }
-        }
+        }*/
+        let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+        for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+            	if (this.board[currentX2][currentY1].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX2 - move][currentY1].type !== SOLID) {
+            				return 2;
+            			}
+            			if (this.board[currentX2][currentY1 + move].type !== SOLID) {
+            				return 1;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
+            }
         return 0;
     }
 
     /**
-     * Handles the case where the bottom-right corner of the object collides with a 
+     * Handles the case where the bottom-right corner of the object collides with a
      * barrier.
      */
     bottomRightCollision(x1, y1) {
         let size = this._playItem.size;
+        let halfSize = Math.round(size / 2);
         let x2 = x1 + size;
         let y2 = y1 + size;
         let origX2 = x2 - this._playItem.dx;
         let origY2 = y2 - this._playItem.dy;
-
-        if (this._board[x2][y1].type === SOLID) {
+        if (this._board[x2][y1 + halfSize].type === SOLID) {
             return 2;
-        } else if (this._board[x1][y2].type === SOLID) {
+        } else if (this._board[x1 + halfSize][y2].type === SOLID) {
             return 3;
         } else {
             if (this._playItem.isGrounded) {
                 return 3;
             }
-            let move = 0;
+            if (this._playItem.dx < 0) {
+                return 3;
+            }
+            if (this._playItem.dy < 0) {
+                return 2;
+            }
+            /*let move = 0;
             while (move < this._playItem.size) {
                 if (this._board[origX2 + move][origY2].type === SOLID) {
                     return 2;
@@ -499,30 +687,88 @@ class Level {
                 } else {
                     move++;
                 }
+            }*/
+            let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+            for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+            	if (this.board[currentX2][currentY2].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX2 - move][currentY2].type !== SOLID) {
+            				return 2;
+            			}
+            			if (this.board[currentX2][currentY2 - move].type !== SOLID) {
+            				return 3;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
             }
             return 0;
         }
     }
 
     /**
-     * Handles the case where the bottom-left corner of the object collides with a 
+     * Handles the case where the bottom-left corner of the object collides with a
      * barrier.
      */
     bottomLeftCollision(x1, y1) {
+        let size = this._playItem.size;
+        let halfSize = Math.round(size / 2);
+        let x2 = x1 + size;
+        let y2 = y1 + size;
         let origX1 = x1 - this._playItem.dx;
-        let origY2 = y1 + this._playItem.size - this._playItem.dy;
+        let origY2 = y2 - this._playItem.dy;
 
-        let move = 0;
-        while (move < this._playItem.size) {
+        if (this._board[x1][y1 + halfSize].type === SOLID) {
+            return 4;
+        } else if (this._board[x2 - halfSize][y2].type === SOLID) {
+            return 3;
+        } else {
             if (this._playItem.isGrounded) {
                 return 3;
             }
-            if (this._board[origX1 - move][origY2].type === SOLID) {
-                return 4;
-            } else if (this._board[origX1][origY2 + move].type === SOLID) {
+            // either left side or bottom side
+            if (this._playItem.dx > 0) {
                 return 3;
-            } else {
-                move++;
+            }
+            if (this._playItem.dy < 0) {
+                return 4;
+            }
+            /*let move = 0;
+            while (move < this._playItem.size) {
+                if (this._playItem.isGrounded) {
+                    return 3;
+                }
+                if (this._board[origX1 - move][origY2].type === SOLID) {
+                    return 4;
+                } else if (this._board[origX1][origY2 + move].type === SOLID) {
+                    return 3;
+                } else {
+                    move++;
+                }
+            }*/
+            let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
+            for (let i = 1; i <= biggerComponent; i++) {
+            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+            	if (this.board[currentX1][currentY2].type === SOLID) {
+            		let move = 0;
+            		while (move < this.playItem.size) {
+            			if (this.board[currentX1 + move][currentY2].type !== SOLID) {
+            				return 4;
+            			}
+            			if (this.board[currentX1][currentY2 - move].type !== SOLID) {
+            				return 3;
+            			}
+            			else {
+            				move++;
+            			}
+            		}
+            	}
             }
         }
         return 0;
@@ -546,10 +792,10 @@ class PhysicalObject {
      */
     constructor(name, x1, y1, x2, y2, pixelType) {
         this._name = name;
-        this._x1 = x1;
-        this._y1 = y1;
-        this._x2 = x2;
-        this._y2 = y2;
+        this._x1 = Math.round(x1);
+        this._y1 = Math.round(y1);
+        this._x2 = Math.round(x2);
+        this._y2 = Math.round(y2);
         this._pixelType = pixelType;
     }
 
@@ -559,23 +805,26 @@ class PhysicalObject {
     get name() {
         return this._name;
     }
+
     /**
      * Sets the name.
      */
     set name(name) {
         this._name = name;
     }
+
     /**
      * Returns the x coordinate of the top-left corner.
      */
     get x1() {
         return this._x1;
     }
+
     /**
      * Sets the x coordinate of the top-left corner.
      */
     set x1(x) {
-        this._x1 = x;
+        this._x1 = Math.round(x);
     }
 
     /**
@@ -589,7 +838,7 @@ class PhysicalObject {
      * Sets the y coordinate of the top-left corner.
      */
     set y1(y) {
-        this._y1 = y;
+        this._y1 = Math.round(y);
     }
 
     /**
@@ -603,7 +852,7 @@ class PhysicalObject {
      * Sets the x coordinate of the bottom-right corner.
      */
     set x2(x) {
-        this._x2 = x;
+        this._x2 = Math.round(x);
     }
 
     /**
@@ -617,7 +866,7 @@ class PhysicalObject {
      * Sets the y coordinate of the bottom-right corner.
      */
     set y2(y) {
-        this._y2 = y;
+        this._y2 = Math.round(y);
     }
 
     /**
@@ -648,6 +897,8 @@ class PhysicalObject {
             objectColour = BACKGROUND_COLOUR;
         } else if (this._pixelType === GOAL) {
             objectColour = BACKGROUND_COLOUR;
+        } else if (this._pixelType === WRONG) {
+            objectColour = BARRIER_COLOUR;
         }
 
         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -665,7 +916,6 @@ class PhysicalObject {
         element.css("position", "absolute");
         element.css("left", this._x1);
         element.css("top", this._y1);
-
     }
 }
 
@@ -697,17 +947,177 @@ class Goal extends PhysicalObject {
 }
 
 /**
+ * Defines a wrong. Keeps track of a corresponding element's ID that holds the text for this wrong answer.
+ */
+class Wrong extends PhysicalObject {
+    constructor(name, x1, y1, x2, y2, answerID) {
+        super(name, x1, y1, x2, y2, GOAL);
+        this._answerID = answerID;
+    }
+
+    /**
+     * Returns the ID of the element holding the text for this wrong answer.
+     * Used to create visual effects when a wrong answer is selected.
+     */
+    get answerID() {
+        return this._answerID;
+    }
+
+    /**
+     * Sets the ID.
+     */
+    set answerID(id) {
+        this._answer = id;
+    }
+}
+
+/**
+ * Defines an extra object. This could be a question, answer, hint.
+ */
+class Extra {
+    constructor(name, x1, y1, x2, y2, elementType, elementData) {
+        this._name = name;
+        this._x1 = Math.round(x1);
+        this._y1 = Math.round(y1);
+        this._x2 = Math.round(x2);
+        this._y2 = Math.round(y2);
+        this._elementType = elementType;
+        this._elementData = elementData;
+    }
+
+    render() {
+        let extra = document.createElement(this.elementType);
+        extra.id = this.name;
+        extra.className = "extra";
+        extra.style.top = this.y1 + "px";
+        extra.style.left = this.x1 + "px";
+        extra.style.width = this.x2 - this.x1;
+        extra.style.height = this.y2 - this.y1;
+
+        if (this.elementType === "p") {
+            //extra.style.fontSize = "2em";
+            extra.style.fontSize = "3vh";
+            extra.innerHTML = this.elementData;
+        } else if (this.elementType === "img") {
+            extra.alt = this.name;
+            extra.src = this.elementData;
+            // makes image square
+            extra.width = this.y2 - this.y1;
+            extra.height = this.y2 - this.y1;
+        }
+        document.getElementById("game_window").appendChild(extra);
+    }
+
+    /**
+     * Returns the name.
+     */
+    get name() {
+        return this._name;
+    }
+
+    /**
+     * Sets the name.
+     */
+    set name(name) {
+        this._name = name;
+    }
+
+    /**
+     * Returns the x coordinate of the top-left corner.
+     */
+    get x1() {
+        return this._x1;
+    }
+
+    /**
+     * Sets the x coordinate of the top-left corner.
+     */
+    set x1(x) {
+        this._x1 = Math.round(x);
+    }
+
+    /**
+     * Returns the y coordinate of the top-left corner.
+     */
+    get y1() {
+        return this._y1;
+    }
+
+    /**
+     * Sets the y coordinate of the top-left corner.
+     */
+    set y1(y) {
+        this._y1 = Math.round(y);
+    }
+
+    /**
+     * Returns the x coordinate of the bottom-right corner.
+     */
+    get x2() {
+        return this._x2;
+    }
+
+    /**
+     * Sets the x coordinate of the bottom-right corner.
+     */
+    set x2(x) {
+        this._x2 = Math.round(x);
+    }
+
+    /**
+     * Returns the y coordinate of the bottom-right corner.
+     */
+    get y2() {
+        return this._y2;
+    }
+
+    /**
+     * Sets the y coordinate of the bottom-right corner.
+     */
+    set y2(y) {
+        this._y2 = y;
+    }
+
+    /**
+     * Returns the element type.
+     */
+    get elementType() {
+        return this._elementType;
+    }
+
+    /**
+     * Sets the element type.
+     */
+    set elementType(type) {
+        this._elementType = type;
+    }
+
+    /**
+     * Returns the element-specific data.
+     */
+    get elementData() {
+        return this._elementData;
+    }
+
+    /**
+     * Sets the element-specific data.
+     */
+    set elementData(data) {
+        this._elementData = data;
+    }
+}
+
+/**
  * Defines the play item (i.e. the item that moves around the screen).
  */
 class PlayItem {
 
     /**
      * Sets the starting coordinates and velocity vector, as well as the type of food.
-     * Automatically sets the item to be a 50x50 square.
      */
     constructor(x, y, dx, dy, size, foodItem) {
-        this._x = x;
-        this._y = y;
+        this._x = Math.round(x);
+        this._y = Math.round(y);
         this._dx = dx;
         this._dy = dy;
         this._size = size;
@@ -725,8 +1135,8 @@ class PlayItem {
     /**
      * Sets the x coordinate.
      */
-    set x(value) {
-        this._x = value;
+    set x(x) {
+        this._x = Math.round(x);
     }
 
     /**
@@ -739,8 +1149,8 @@ class PlayItem {
     /**
      * Sets the y coordinate.
      */
-    set y(value) {
-        this._y = value;
+    set y(y) {
+        this._y = Math.round(y);
     }
 
     /**
@@ -834,7 +1244,7 @@ class PlayItem {
     }
 
     /**
-     * Moves the object based on its velocity vector and starting coordinates. Does not 
+     * Moves the object based on its velocity vector and starting coordinates. Does not
      * take collisions into account.
      */
     move() {
@@ -857,13 +1267,11 @@ class PlayItem {
      * pushing it away from the location of the cursor.
      */
     clicked(mousePosX, mousePosY) {
-        console.log("x : " + mousePosX);
-        console.log("y : " + mousePosY);
         let xDiff = this._x + (this._size / 2) - mousePosX;
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
         // used to slow movement so clicks do not shoot the object off at high speeds
-        let divisor = 10;
+        let divisor = 28;
 
         this._dx += Math.round(xDiff / divisor);
         this._dy += Math.round(yDiff / divisor);
@@ -877,15 +1285,16 @@ class PlayItem {
      * before and after every move.
      */
     adjustSpeed() {
-        if (this._dy > 20) {
-            this._dy = 20;
-        } else if (this._dy < -20) {
-            this._dy = -20;
+        let maxSpeed = 4;
+        if (this._dy > maxSpeed) {
+            this._dy = maxSpeed;
+        } else if (this._dy < -1 * maxSpeed) {
+            this._dy = -1 * maxSpeed;
         }
-        if (this._dx > 20) {
-            this._dx = 20;
-        } else if (this._dx < -20) {
-            this._dx = -20;
+        if (this._dx > maxSpeed) {
+            this._dx = maxSpeed;
+        } else if (this._dx < -1 * maxSpeed) {
+            this._dx = -1 * maxSpeed;
         }
     }
 
@@ -894,14 +1303,9 @@ class PlayItem {
      * it becomes grounded and friction applies.
      */
     snapToGround() {
-        if (this._dy < 2) {
+        if (this._dy < SNAP_TO_GROUND) {
             this._isGrounded = true;
             this._dy = 0;
-            if (this._dx > 0) {
-                this._dx--;
-            } else if (this._dx < 0) {
-                this._dx++;
-            }
         }
     }
 
@@ -927,8 +1331,8 @@ class FoodItem {
     constructor(name, type, imageURL, isEdible) {
         this._name = name;
         this._type = type;
-        this.bounceMultiplier = 0.8; // varies by type
-        this.gravity = 1; // varies by type
+        this.bounceMultiplier = BOUNCE_MULTIPLIER; // varies by type
+        this.gravity = 0.05; // varies by type
         this._imageURL = imageURL;
         this._isEdible = isEdible;
     }
@@ -969,5 +1373,19 @@ class Pixel {
      */
     get type() {
         return this._type;
+    }
+
+    /**
+     * Sets the answerID of the pixel.
+     */
+    set answerID(id) {
+        this._answerID = id;
+    }
+
+    /**
+     * Returns the answerID of the pixel.
+     */
+    get answerID() {
+        return this._answerID;
     }
 }
