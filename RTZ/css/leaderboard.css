@@ -16,7 +16,7 @@ tr:nth-child(even) {
 #besttimes > tbody > tr:nth-child(1){
 	font-weight:bold;
 	font-size: 1.25em;
-	background-color: green;
+	background-color: rgb(137, 232, 148);
 }
 #levelselect{
 	margin:1em;

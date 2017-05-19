@@ -58,7 +58,7 @@ $(function () {
         gameContainer.id = "game_container";
         gameContainer.className = "unselectable";
 
-        // .contentactual is the div that holds the content on each page
+        // .contentactual[0] is the div that holds the content on each page
         // TODO - change .contentactual to #contentactual
         document.getElementsByClassName("contentactual")[0].appendChild(gameContainer);
 
@@ -99,7 +99,8 @@ $(function () {
          */
         scoreOverlay = document.createElement("div");
         scoreOverlay.id = "score_overlay";
-        scoreOverlay.style.width = gameContainer.parentNode.offsetWidth + "px";
+        // incremented to match level width
+        scoreOverlay.style.width = (gameContainer.parentNode.offsetWidth + 1) + "px";
         scoreOverlay.style.height = gameContainer.parentNode.offsetHeight + "px";
         gameContainer.appendChild(scoreOverlay);
 
@@ -146,7 +147,6 @@ $(function () {
         // create the level using the retrieved level
         // width, height incremented by 1 to avoid ArrayOutOfBounds exceptions
         // TODO - find more elegant solution than incrementing by 1
-        // TODO - because it creates an extra column of pixels when it displays
         level = new Level(levelID, width + 1, height + 1);
 
         /**
@@ -165,7 +165,8 @@ $(function () {
 
         wrongs = [];
 
-        //levelID = 5;
+        // for testing purposes to skip straight to certain level
+        // levelID = 5;
 
         /**
          * Load data for the current level.
@@ -223,7 +224,6 @@ $(function () {
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
             playItem = new PlayItem(width * 0.35, height * 0.2, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
-            //x=107 y=365.5
         } else if (levelID === 1) {
             // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
@@ -278,7 +278,6 @@ $(function () {
             let answer4 = "$2100";
             barriers.push(
                 new Barrier("platform1", width * 0.4, height * 0.29, width * 0.6, height * 0.355),
-                //new Barrier("barrier1", width * 0.20, height * 0.75, Math.max(width * 0.30, width * 0.20 + playItemSize), height * 0.95),
                 new Barrier("barrier1", width * 0.20, height * 0.75, width * 0.30, height * 0.95),
                 new Barrier("barrier2", width * 0.45, height * 0.75, width * 0.55, height * 0.95),
                 new Barrier("barrier3", width * 0.70, height * 0.75, width * 0.80, height * 0.95),
@@ -424,7 +423,7 @@ $(function () {
                 new Barrier("outerbox1", width * 0.25, height * 0.25, width * 0.80, height * 0.30),
                 new Barrier("outerbox2", width * 0.75, height * 0.30, width * 0.80, height * 0.70),
                 new Barrier("outerbox3", width * 0.25, height * 0.69, width * 0.85, height * 0.755),
-                new Barrier("outerbox4", width * 0.20, height * 0.55, width * 0.25, height * 0.75),
+                new Barrier("outerbox4", width * 0.20, height * 0.55, width * 0.25, height * 0.755),
                 new Barrier("outerbox5", width * 0.20, height * 0.25, width * 0.25, height * 0.45),
                 new Barrier("blocker", width * 0.05, height * 0.65, width * 0.20, height * 0.70),
                 new Barrier("barrier1", width * 0.30, height * 0.05, width * 0.35, height * 0.10),
@@ -439,7 +438,7 @@ $(function () {
             );
             goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height);
             foodItem = new FoodItem("Box", "box", "img/orange.png", true);
-            playItem = new PlayItem(width * 0.45, height * 0.48, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.475, height * 0.48, 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
             // Level 4 Question Stage
             let question = "How much money could the world save every year if there was zero food waste?";
@@ -652,16 +651,17 @@ $(function () {
                     reInit();
                 };
             }
-        } else if (moveReturnValue === 6) {
-            // TODO - somehow display that that is the wrong answer
         }
         drawFoodItem();
-        // game timer runs every 20ms, so score should increment by 20
+        // game timer runs every 5 ms, so score should increment by 5
         score += 5;
         // update score display (timer)
         timer.innerHTML = parseTime(score);
     }
-
+	
+	/**
+	 * Reinitializes a level.
+	 */
     function reInit() {
         scoreOverlay.style.display = "none";
         score = 0;
@@ -680,7 +680,6 @@ $(function () {
         init();
     }
 
-    // TODO - redundant? is it not false by default?
     let clicked = false;
 
     /**
@@ -694,7 +693,10 @@ $(function () {
      * Adds a click handler to the game container that handles clicks within the game.
      */
     $(document.getElementById("content")).click(function (e) {
-        console.log("click");
+
+        // log for testing purposes
+        // console.log("click");
+
         // prevents initial input
         if (!clicked && score > 100) {
             let divPosX = $(this).position().left;
@@ -705,9 +707,9 @@ $(function () {
             // moves the item based on the click
             playItem.clicked(mousePosX, mousePosY);
 
-            // implements a delay between inputs TODO - choose delay
-        	//clicked = true;
-            //setTimeout(setClicked, 200, false);
+            // implements a delay between inputs - currently unused
+        	// clicked = true;
+            // setTimeout(setClicked, 200, false);
         }
     });
 });
@@ -721,10 +723,9 @@ function parseTime(ms) {
     let seconds = Math.floor(ms / 1000 - minutes * 60 - hours * 60 * 60);
     let milliseconds = ms - seconds * 1000 - minutes * 1000 * 60 - hours * 1000 * 60 * 60;
 
-    let strH = ""; // hours === 0 ? "0:" : hours + ":";
+    let strH = "";
     let strM = minutes === 0 ? "0:" : minutes + ":";
     let strS;
-    //let strS = seconds === 0 ? "0:" : seconds + ":";
     if (seconds === 0) {
         strS = "00.";
     } else if (seconds < 10) {
@@ -746,7 +747,7 @@ function parseTimeForOverlay(ms) {
     let seconds = Math.floor(ms / 1000 - minutes * 60 - hours * 60 * 60);
     let milliseconds = ms - seconds * 1000 - minutes * 1000 * 60 - hours * 1000 * 60 * 60;
 
-    let strH = ""; // probably won't use
+    let strH = ""; // unused
     let optionalS = minutes === 1 ? "" : "s";
     let strM = minutes === 0 ? "" : minutes + " minute" + optionalS + " ";
     let strS = seconds;
