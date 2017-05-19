@@ -17,6 +17,60 @@ const SOLID = 1;
 const GOAL = 2;
 const WRONG = 3;
 
+let BOUNCE_MULTIPLIER = 0.6;
+
+let keyNumber = 0;
+$(document).keypress(function(event) {
+	if (keyNumber === 0) {
+		if (event.which === 98) {
+			keyNumber++;
+			console.log("b");
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 1) {
+		if (event.which === 111) {
+			keyNumber++;
+			console.log("o");
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 2) {
+		if (event.which === 117) {
+			keyNumber++;
+			console.log("u");
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 3) {
+		if (event.which === 110) {
+			keyNumber++;
+			console.log("n");
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 4) {
+		if (event.which === 99) {
+			keyNumber++;
+			console.log("c");
+		} else {
+			keyNumber = 0;
+		}
+	} else if (keyNumber === 5) {
+		if (event.which === 101) {
+			console.log("e");
+			if (BOUNCE_MULTIPLIER === 0.6) {
+				BOUNCE_MULTIPLIER = 2;
+			} else {
+				BOUNCE_MULTIPLIER = 0.6;
+			}
+		} else {
+			keyNumber = 0;
+		}
+	}
+});
+
+
 /**
  * A game object that keeps track of the current level.
  */
@@ -1289,7 +1343,7 @@ class FoodItem {
     constructor(name, type, imageURL, isEdible) {
         this._name = name;
         this._type = type;
-        this.bounceMultiplier = 0.6; // varies by type
+        this.bounceMultiplier = BOUNCE_MULTIPLIER; // varies by type
         this.gravity = 0.05; // varies by type
         this._imageURL = imageURL;
         this._isEdible = isEdible;
