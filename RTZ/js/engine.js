@@ -113,9 +113,9 @@ $(function () {
     /** Declare/Initialize game variables. */
     let width = gameContainer.offsetWidth;
     let height = gameContainer.offsetHeight;
-    let barrierWidth = Math.max(Math.round(width / 20), 30);
-    let barrierHeight = Math.max(Math.round(height / 20), 30);
-    let playItemSize = Math.max(Math.round(width / 20), 32);
+    let barrierWidth = Math.max(Math.round(width / 20), 8);
+    let barrierHeight = Math.max(Math.round(height / 20), 8);
+    let playItemSize = Math.max(Math.round(width / 20), 8);
     let goalSize = playItemSize * 3;
     let score = 0;
 
@@ -552,7 +552,7 @@ $(function () {
             /**
              * Initializes the timer that handles game ticks.
              */
-            intervalId = setInterval(move, 20);
+            intervalId = setInterval(move, 5);
         }
     }
 
@@ -561,8 +561,8 @@ $(function () {
      */
     function drawFoodItem() {
         if (foodImage) {
-            foodImage.css("left", level.playItem.x);
-            foodImage.css("top", level.playItem.y);
+            foodImage.css("left", Math.round(level.playItem.x));
+            foodImage.css("top", Math.round(level.playItem.y));
         }
     }
 
@@ -657,7 +657,7 @@ $(function () {
         }
         drawFoodItem();
         // game timer runs every 20ms, so score should increment by 20
-        score += 20;
+        score += 5;
         // update score display (timer)
         timer.innerHTML = parseTime(score);
     }

@@ -7,7 +7,7 @@
  */
 const BACKGROUND_COLOUR = "rgb(255, 255, 255)";
 const BARRIER_COLOUR = "rgb(50, 255, 100)";
-const SNAP_TO_GROUND = 2;
+const SNAP_TO_GROUND = 0.5;
 
 /**
  * Types of pixels.
@@ -263,7 +263,7 @@ class Level {
         let collision = this.checkCollisions(tempX, tempY);
         //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
         //console.log(collision);
-        if (this.checkCollisions(this.playItem.x, this.playItem.y) === 3 && Math.abs(this.playItem.dy) < 2) {
+        if (this.checkCollisions(this.playItem.x, this.playItem.y + 1) === 3 && Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
             this.playItem.isGrounded = true;
             if (collision === 2) {
                 // right side collision
@@ -278,9 +278,9 @@ class Level {
             }
             this.playItem.dy = 0;
             if (this.playItem.dx > 0) {
-                this.playItem.dx--;
+                this.playItem.dx *= 0.9;
             } else if (this.playItem.dx < 0) {
-                this.playItem.dx++;
+                this.playItem.dx *= 0.9;
             }
         } else {
             // check if next movement causes a collision
@@ -324,10 +324,10 @@ class Level {
                 this.playItem.move();
 
                 // find associated wrong answer
-                let x1 = this.playItem.x;
-                let y1 = this.playItem.y;
-                let x2 = this.playItem.x + this.playItem.size;
-                let y2 = this.playItem.y + this.playItem.size;
+                let x1 = Math.round(this.playItem.x);
+                let y1 = Math.round(this.playItem.y);
+                let x2 = x1 + this.playItem.size;
+                let y2 = y1 + this.playItem.size;
 
                 let topLeftPixel = this.board[x1][y1];
                 let topRightPixel = this.board[x2][y1];
@@ -394,9 +394,11 @@ class Level {
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
 
+        console.log("dx: " + this.playItem.dx + ";     dy: " + this.playItem.dy);
+
         // rounds values because display is pixel-based
         // TODO - move rounding to move function?
-        this.playItem.round();
+        // this.playItem.round();
     }
 
     // TODO - group/normalize these snap functions?
@@ -409,6 +411,7 @@ class Level {
         while (this.checkCollisions(tempX, this._playItem.y - move) === 0) {
             move++;
         }
+        move--;
         if (this.playItem.dy !== 0) {
             let ratio = this._playItem.dx / this._playItem.dy;
             this._playItem.x = this._playItem.x - (move * ratio);
@@ -424,6 +427,7 @@ class Level {
         while (this.checkCollisions(this._playItem.x + move, tempY) === 0) {
             move++;
         }
+        move--;
         if (this.playItem.dx !== 0) {
             let ratio = this._playItem.dy / this._playItem.dx;
             this._playItem.x = this._playItem.x + move;
@@ -439,6 +443,7 @@ class Level {
         while (this.checkCollisions(tempX, this._playItem.y + move) === 0) {
             move++;
         }
+        move--;
         if (this.playItem.dy !== 0) {
             let ratio = this._playItem.dx / this._playItem.dy;
             this._playItem.x = this._playItem.x + (move * ratio);
@@ -454,6 +459,7 @@ class Level {
         while (this.checkCollisions(this._playItem.x - move, tempY) === 0) {
             move++;
         }
+        move--;
         if (this.playItem.dx !== 0) {
             let ratio = this._playItem.dy / this._playItem.dx;
             this._playItem.x = this._playItem.x - move;
@@ -469,10 +475,10 @@ class Level {
      */
     checkCollisions(x, y) {
         let size = this._playItem.size;
-        let x1 = x;
-        let y1 = y;
-        let x2 = x + size;
-        let y2 = y + size;
+        let x1 = Math.round(x);
+        let y1 = Math.round(y);
+        let x2 = x1 + size;
+        let y2 = y1 + size;
 
         if (x1 >= 0 && x2 < this._width && y1 >= 0 && y2 < this._height) {
             if (this._board[x1][y1].type === SOLID) {
@@ -1223,7 +1229,7 @@ class PlayItem {
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
         // used to slow movement so clicks do not shoot the object off at high speeds
-        let divisor = 7;
+        let divisor = 28;
 
         this._dx += Math.round(xDiff / divisor);
         this._dy += Math.round(yDiff / divisor);
@@ -1237,7 +1243,7 @@ class PlayItem {
      * before and after every move.
      */
     adjustSpeed() {
-        let maxSpeed = 15;
+        let maxSpeed = 4;
         if (this._dy > maxSpeed) {
             this._dy = maxSpeed;
         } else if (this._dy < -1 * maxSpeed) {
@@ -1255,14 +1261,9 @@ class PlayItem {
      * it becomes grounded and friction applies.
      */
     snapToGround() {
-        if (this._dy < 2) {
+        if (this._dy < SNAP_TO_GROUND) {
             this._isGrounded = true;
             this._dy = 0;
-            if (this._dx > 0) {
-                this._dx--;
-            } else if (this._dx < 0) {
-                this._dx++;
-            }
         }
     }
 
@@ -1289,7 +1290,7 @@ class FoodItem {
         this._name = name;
         this._type = type;
         this.bounceMultiplier = 0.6; // varies by type
-        this.gravity = 1; // varies by type
+        this.gravity = 0.05; // varies by type
         this._imageURL = imageURL;
         this._isEdible = isEdible;
     }
