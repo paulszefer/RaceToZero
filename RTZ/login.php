@@ -3,76 +3,8 @@
 require_once('PDO_conn.php');
 
 //if user is logged in, redirect em to index.php
-if(isset($_SESSION['user_session'])){
+if($user->is_loggedin()){
 	$user->redirect('index.php');
-}
-//renamed
-//if register-btn is pressed
-if(isset($_POST['register-btn']))
-{
-	$FormRegUsername = $_POST['regUsername'];
-	$FormRegPassword = $_POST['regPassword'];
-	$PhotoURL = rand(0,10); // takes random integer for disp image
-
-	//Error handling
-	if ($FormRegUsername == ""){
-		$error[] = "no username provided";
-	} else if ($FormRegPassword == "") {
-		$error[] = "no password entered";
-	} else {
-		//Now if they actually entered things
-		try 
-		{
-			$statement = $DB_conn->prepare("SELECT user_name, user_password
-				FROM users 
-				WHERE user_name=:uname");
-			$statement->execute(array(':uname' => $FormRegUsername));
-			//store found rows in $row
-			$row = $statement->fetch(PDO::FETCH_ASSOC);
-			//Check if username is already taken
-			if ($row['user_name'] == $FormRegUsername) {
-				$error[] = "username already taken.";
-			} else {			
-				//If username available, then register the user, and automatically login
-				if ($user->register($FormRegUsername, $FormRegPassword, $PhotoURL)) 
-				{				
-					echo "<script type='text/javascript'>alert('Registration successful');</script>";
-					// $user->redirect('login.php');
-					if($user->doLogin($FormRegUsername, $FormRegPassword))
-						{
-							//Optional redirect
-							$user->redirect('index.php');
-						} 
-						else
-						{
-							echo "<script type='text/javascript'>alert('Unknown reg error');</script>";
-						}
-				}
-			}
-		}
-		catch(PDOException $e)
-		{
-			echo $e->getMessage();
-		}
-	}
-}
-
-//if login is pressed
-if(isset($_POST['login']))
-{
-	//Setting variables
-	$FormLoginUsername = $_POST['loginUsername'];
-	$FormLoginPassword = $_POST['loginPassword'];
-
-	//if the doLogin function returns true.
-	if($user->doLogin($FormLoginUsername, $FormLoginPassword))
-	{
-		$user->redirect('login.php');
-	} 
-	else
-	{
-		$error = "Login info wrong";
-	}
 }
 
 ?>
@@ -94,10 +26,10 @@ if(isset($_POST['login']))
 				<table>
 				<tr>
 					<td><label class="required" for="loginUsername">Username</label></td>
-					<td><input type="text" name="loginUsername" id="loginUsername" oninput="loginUserValid()"></td>
+					<td><input type="text" name="loginUsername" id="loginUsername" oninput="loginUserValid()" value=<?php if (isset($_POST['loginUsername'])) echo $_POST['loginUsername'];?>></td>
 				</tr>	
 				<tr>
-					<td colspan="3"><p id="loginUsernameErrorField" style="text-align:center">&nbsp;</p></td>
+					<td colspan="3"><p id="loginUsernameErrorField" style="text-align:center"> &nbsp;</p></td>
 				</tr>
 				<tr>
 					<td><label class="required" for="password">Password</label></td>
@@ -108,11 +40,46 @@ if(isset($_POST['login']))
 				<br>
 				<button name="login" value="login" type="submit">Login</button>
 			</form>
+			<?php
+			//if login is pressed
+			if(isset($_POST['login']))
+			{
+				//Setting variables
+				$FormLoginUsername = $_POST['loginUsername'];
+				$FormLoginPassword = $_POST['loginPassword'];
+
+				//if the doLogin function returns true.
+				if($user->doLogin($FormLoginUsername, $FormLoginPassword))
+				{
+					$user->redirect('login.php');
+				} 
+				else
+				{
+					echo '<p style="text-align:center">'.$user->displayloginError().'</p>';
+				}
+			}
+			?>
 		</div><!--end of logincontent-->
 		
 		<!--registration section of the php-->
 		<div id='regcontent'>
 			<form name="registration" method ="post" action="login.php" id="registration" class="registration" onsubmit="return validateForm()">
+			<p>
+				<?php
+					//if register-btn is pressed
+					if(isset($_POST['register-btn']))
+					{
+						$FormRegUsername = $_POST['regUsername'];
+						$FormRegPassword = $_POST['regPassword'];
+						$PhotoURL = rand(0,10); // takes random integer for disp image
+						$user->register($FormRegUsername, $FormRegPassword, $PhotoURL);
+					}
+				?>
+			</p>
+			<script type = "text/javascript">
+				var insert = "<p style='text-align:center'>"+<?php echo "'".$user->displayRegError()."'"?>+"</p>";
+				$(insert).insertAfter("#loginform");
+			</script>
 				<table>
 				<tr>
 					<th></th> <!---for making 4 columns-->
