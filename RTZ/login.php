@@ -18,27 +18,30 @@ if($user->is_loggedin()){
 	<div class='contentactual'>
 		<!--Login section of the php-->
 		<div id='tabwrapper'>
-		<div id='logintab' class='titletab'>Login</div>
-		<div id='regtab' class='titletab'>Register</div>
+		<div id='logintab' class='titletab activetab'>Login</div>
+		<div id='regtab' class='titletab inactivetab'>Register</div>
 		</div>
 		<div id='logincontent'>
 			<form id="loginform" method="post" onsubmit="return loginvalidation()" action="login.php">
 				<table>
 				<tr>
-					<td><label class="required" for="loginUsername">Username</label></td>
-					<td><input type="text" name="loginUsername" id="loginUsername" oninput="loginUserValid()" value=<?php if (isset($_POST['loginUsername'])) echo $_POST['loginUsername'];?>></td>
+					<td colspan="4"><label for="loginUsername">Username:</label>
+					<input type="text" name="loginUsername" id="loginUsername" oninput="loginUserValid()" value=<?php if (isset($_POST['loginUsername'])) echo $_POST['loginUsername'];?>></td>
 				</tr>	
 				<tr>
-					<td colspan="3"><p id="loginUsernameErrorField" style="text-align:center"> &nbsp;</p></td>
+					<td colspan="4"><p id="loginUsernameErrorField"> &nbsp;</p></td>
 				</tr>
+				<tr><td>&nbsp;</td></tr>
 				<tr>
-					<td><label class="required" for="password">Password</label></td>
-					<td colspan="3"><input type="password" name="loginPassword" id="loginPassword"></td>
+					<td colspan="4"><label for="password">Password:</label>
+					<input type="password" name="loginPassword" id="loginPassword"></td>
 				</tr>
-				<tr><td colspan="3"><p id="loginPassErrorField" style="text-align:center">&nbsp;</p></td></tr>
+				<tr><td colspan="4"><p id="loginPassErrorField">&nbsp;</p></td></tr>
+				<tr><td>&nbsp;</td></tr>
 					</table>
 				<br>
-				<button name="login" value="login" type="submit">Login</button>
+				<!--<button name="login" value="login" type="submit">Login</button>-->
+				<input type="submit" name="login" value="Login">
 			</form>
 			<?php
 			//if login is pressed
@@ -82,36 +85,37 @@ if($user->is_loggedin()){
 			</script>
 				<table>
 				<tr>
-					<th></th> <!---for making 4 columns-->
+					<th></th> <!-- for making 4 columns -->
 					<th></th>
 					<th></th>
 					<th></th>
 				</tr>
 				<tr>
-					<td colspan=4>
-						<label for="regUsername" class="required">Username (4-16 letters or numbers only)</label>
-						<input type="text" id="regUsername" name="regUsername" oninput="userValid()" required>
+					<td colspan="4">
+						<label for="regUsername">Username:</label>
+						<input type="text" id="regUsername" placeholder="(4-16 letters or numbers)" name="regUsername" oninput="userValid()" required>
 					</td>
 				</tr>
 				<tr>
-					<td colspan=4 id="regUsernameErrorField"></td>
+					<td colspan="4" id="regUsernameErrorField">&nbsp;</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr>
-					<td colspan=4>
-						<label for="regPassword" class="required">Password (6+ letters or numbers only)</label>
-						<input type="password" id="regPassword" name="regPassword" required>
+					<td colspan="4">
+						<label for="regPassword">Password:</label>
+						<input type="password" id="regPassword" placeholder="(6+ letters or numbers)" name="regPassword" required>
 					<td/>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td></tr>
 				<tr>
-					<td colspan=4>
+					<td colspan="4">
 						<label for="cRegPassword">Confirm Password</label>
 						<input type="password" id="cRegPassword" name="cRegPassword" required>
 					</td>
 				</tr>
 				<tr>
-					<td colspan=4 id="cRegPassErrorField"></td>
+					<td colspan="4" id="cRegPassErrorField"></td>
 				</tr>
 				</table>
 				<br>
