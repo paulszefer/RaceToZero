@@ -45,7 +45,7 @@ class USER {
 				$statement->execute(array(':uname'=>$uname));
 				$row = $statement->fetch(PDO::FETCH_ASSOC);
 				//Check if username is already taken
-				if ($row['user_name'] == $uname) {
+				if (strtolower($row['user_name']) == strtolower($uname)){
 					$this->registerError = 'Username already taken';
 					return false;
 				} else {
