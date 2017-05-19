@@ -1,23 +1,33 @@
 /* styles for login form */
 #tabwrapper {
-	background-color: #CCCCCC;
-	background: linear-gradient(180deg, #CCCCCC, white, #CCCCCC);
 	width: 100%; 
-	border-bottom: 1px solid black;
-}
-#regtab {
-	border-right: 1px solid black;
-	float: right;
-}
-.titletab {
-	width: 49.3%;
-	display: inline-block;
-	border-left: 1px solid black;
-	margin: 0;
+	display: flex;
+    flex-flow: row wrap;
 	background-color: transparent;
 }
+#regtab {
+	border-left: 1px solid black;
+}
+.inactivetab {
+	border-bottom: 1px solid black;
+	background-color: #DDDDFF;
+}
+.activetab {
+	background-color: transparent;
+}
+.titletab {
+	/*width: 49.3%;*/
+	display: inline-block;
+	display: flex;
+	/*border-top: 1px solid black;*/
+	margin: 0;
+	/*background-color: transparent;*/
+    flex: 1 1 30%;
+	justify-content: center;
+}
 #logincontent {
-	padding: 5% 0 5% 0;
+	padding: 5vh 0 5vh 0;
+	width: 90%;
 	margin: auto;
 	text-align:center;
 }
@@ -25,18 +35,31 @@
 	text-align: center;
 	font-size: 1.5em;
 }
+#loginform td {
+	text-align: left;
+}
+#loginform p {
+text-align: left;
+}
 #logincontent label{
 	font-size: 1.25em;
 }
 #logincontent table{
-	width:80%;
+	width:100%;
 	margin:auto;
 	font-size: 1.25em;
 }
 #logincontent input {
 	text-align: left;
 	width:100%;
-	font-size: 1.25em;
+	font-size: 1.15em;
+}
+#loginUsername {
+	margin-bottom: 7px;
+}
+#loginUsernameErrorField, #loginPassErrorField {
+	margin: 0;
+	padding: 0;
 }
 /* page-specific anchor colors */
 .content a, .content a:visited{
@@ -58,9 +81,12 @@
 	vertical-align: middle;
 }
 .registration table{
-	margin: 5% 0 5% 0; /*margin for table*/
+	margin: 5vh 0 5vh 0; /*margin for table*/
 	width:100%;
 	font-size: 1.5em;
+}
+.registration label {
+	font-size: 1.04em;
 }
 #regcontent{
 	margin: auto;
@@ -103,9 +129,31 @@
 	width:80%;
 	margin:auto;
 }
+input {
+	margin-top: 5px;
+	font-size: 1em;
+	font-family: MavenPL200;
+}
 #registration > input[type="submit"]{
-	width:25%;
+	width:40%;
 	font-size: 1.75em;
+	font-family: MavenPL300;
 	display:block;
 	margin:auto;
+	font-weight: bold;
+}
+#loginform > input[type="submit"]{
+	text-align: center;
+	width:40%;
+	font-size: 1.75em;
+	font-family: MavenPL300;
+	display:block;
+	margin:auto;
+	font-weight: bold;
+}
+@media only screen and (min-width: 769px) {
+	.contentactual {
+		border-left: 1px solid black;
+		border-right: 1px solid black;
+	}
 }

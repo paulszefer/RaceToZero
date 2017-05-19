@@ -146,11 +146,24 @@ function passwordValid() {
 $(function () {
 // Login/Register tab swapping
     $("#logintab").click(function () {
+
+        // if ($("#logintab").hasClass("inactivetab")) {
+            $("#logintab").removeClass("inactivetab");
+            $("#logintab").addClass("activetab");
+            $("#regtab").removeClass("activetab");
+            $("#regtab").addClass("inactivetab");
+        // }
         $("#logincontent").css("display", "block");
         $("#regcontent").css("display", "none");
     });
 
     $("#regtab").click(function () {
+        // if ($("#rebtab").hasClass("inactivetab")) {
+            $("#logintab").removeClass("activetab");
+            $("#logintab").addClass("inactivetab");
+            $("#regtab").removeClass("inactivetab");
+            $("#regtab").addClass("activetab");
+        // }
         $("#regcontent").css("display", "block");
         $("#logincontent").css("display", "none");
     });

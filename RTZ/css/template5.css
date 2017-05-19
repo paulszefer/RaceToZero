@@ -11,6 +11,7 @@
 #navCont {
     min-height: 10vh;
     background-color: rgb(137, 232, 148);
+    border-bottom: 1px black solid;
 }
 
 /*Logo image*/
