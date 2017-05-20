@@ -144,6 +144,10 @@
     background: linear-gradient(white, rgb(160, 160, 160));
 }
 
+#play_area {
+    background: url('../img/gamebg.png');
+}
+
 #food_image {
     position: absolute;
     z-index: 12;

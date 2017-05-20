@@ -487,7 +487,7 @@ $(function () {
             /**
              * Defines the play area and fills the background with the appropriate colour.
              */
-            new Air("playArea", 0, 0, width, height).drawPhysicalObject();
+            new Air("play_area", 0, 0, width, height).drawPhysicalObject();
 
             /**
              * Displays the barriers, then adds the barriers to the level object.
@@ -516,14 +516,14 @@ $(function () {
              * Adds the wrongs to the level object.
              */
             for (let i = 0; i < wrongs.length; i++) {
-                wrongs[i].drawPhysicalObject();
+                // wrongs[i].drawPhysicalObject();
                 level.addWrong(wrongs[i]);
             }
 
             /**
              * Displays the goal, then adds the goal to the level object.
              */
-            goal.drawPhysicalObject();
+            // goal.drawPhysicalObject();
             level.addGoal(goal);
 
             /**
