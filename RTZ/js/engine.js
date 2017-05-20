@@ -36,6 +36,8 @@ $(function () {
      */
     let gameContainer;
     let gameWindow;
+    let navBurger = document.getElementById("navburger");
+    let navImage = navBurger.firstElementChild;
     let retryButton;
     let retryImage;
     let timer;
@@ -77,7 +79,7 @@ $(function () {
         $(retryButton).click(function () {
             clearInterval(intervalId);
             if (game.level % 2 === 1) {
-            	game.level--;
+                game.level--;
             }
             reInit();
         });
@@ -262,15 +264,15 @@ $(function () {
             goal = new Goal("goal", width * 0.4625, height - barrierHeight, width * 0.5375, height);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.1, 0, 0, playItemSize, foodItem);
-       		//playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
             // Level 1 Question Stage
-            
+
             let barrier1Left = Math.max(width * 0.20, barrierWidth + playItemSize + 10);
             let barrier1Right = barrier1Left + Math.max(width * 0.10, playItemSize);
             let barrier3Right = Math.min(width * 0.80, width - barrierWidth - playItemSize - 10);
             let barrier3Left = barrier3Right - Math.max(width * 0.10, playItemSize);
-            
+
             let question = "How much money does a typical household in Vancouver lose per year due to food waste?";
             let answer1 = "$200";
             let answer2 = "$700";
@@ -347,7 +349,7 @@ $(function () {
             goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
-        	//playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
+            //playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
         } else if (levelID === 6) {
             // Level 3 Game Stage (obstacles)
             let blocks1 = width * 0.50;
@@ -545,6 +547,8 @@ $(function () {
 
             foodImage = $("#food_image");
 
+            navBurger.style.top = "7vh";
+            navBurger.style.left = "5vh";
             retryImage.style.display = "block";
             timer.style.display = "block";
 
@@ -552,6 +556,9 @@ $(function () {
              * Initializes the timer that handles game ticks.
              */
             intervalId = setInterval(move, 5);
+        } else {
+            navBurger.style.top = "2vh";
+            navBurger.style.left = "2vh";
         }
     }
 
@@ -632,9 +639,13 @@ $(function () {
                     scoreOverlay.appendChild(nextLevelButton);
                 }
 
-                scoreOverlay.style.display = "block";
+                navBurger.style.top = "2vh";
+                navBurger.style.left = "2vh";
+                navImage.src = "img/menuicon.png";
+
                 retryImage.style.display = "none";
                 timer.style.display = "none";
+                scoreOverlay.style.display = "block";
 
                 retryButton.onclick = function () {
                     game.level -= 1;
@@ -658,14 +669,16 @@ $(function () {
         // update score display (timer)
         timer.innerHTML = parseTime(score);
     }
-	
-	/**
-	 * Reinitializes a level.
-	 */
+
+    /**
+     * Reinitializes a level.
+     */
     function reInit() {
         scoreOverlay.style.display = "none";
+
         score = 0;
         if (game.level >= 0) {
+            navImage.src = "img/menuiconblack.png";
             retryImage.style.display = "block";
             timer.style.display = "block";
         }
@@ -708,7 +721,7 @@ $(function () {
             playItem.clicked(mousePosX, mousePosY);
 
             // implements a delay between inputs - currently unused
-        	// clicked = true;
+            // clicked = true;
             // setTimeout(setClicked, 200, false);
         }
     });
