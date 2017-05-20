@@ -233,8 +233,8 @@ html, body {
     #navCont #navburger {
         display: block;
         position: absolute;
-        top: 2.5vh;
-        left: 2.5vh;
+        top: 7vh;
+        left: 5vh;
         transition: top 0.2s ease-in-out;
         -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
         -moz-transition: top 0.2s ease-in-out;
@@ -243,7 +243,7 @@ html, body {
 
     /*navburger's height*/
     #navCont #navburger img {
-        height: 5vh;
+        height: 7vh;
     }
 
     /*text for displaying if logged in or not*/
@@ -257,8 +257,8 @@ html, body {
     /*navlogo when screen is stupidly small*/
     #navCont > div.navlogo > a > img {
         display: absolute;
-        top: 2.5vh;
-        right: 2.5vh;
+        top: 7vh;
+        right: 5vh;
         height: 10vh;
     }
 }
