@@ -41,7 +41,7 @@ $(document).ready(function() {
 					let userid = document.createTextNode(data[i]['user_name']);
 					cell2.appendChild(userid);
 					let cell3 = document.createElement("td");
-					let time = document.createTextNode("" + (Math.round(data[i]['game_time'] / 100) / 10));
+					let time = document.createTextNode("" + (Math.round(data[i]['game_time'] / 100) / 10) + "s");
 					cell3.appendChild(time);
 					
 					// adds cells to the row: placement, user_id, and time.
