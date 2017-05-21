@@ -177,6 +177,10 @@ $(function () {
             // initial screen with play button
             let playButton = document.createElement("div");
             playButton.id = "play_button";
+            let playButtonText = document.createElement("p");
+            playButtonText.id = "play_button_text";
+            playButtonText.innerHTML = "PLAY";
+            playButton.appendChild(playButtonText);
             gameWindow.appendChild(playButton);
 
             let aboutRTZOverlay = document.createElement("div");

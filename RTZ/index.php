@@ -9,11 +9,14 @@
 /* loads 'play' screen first if the user is not logged in */
     if(isset($_SESSION['user_session']))
     {
-        $gameLevel = -1;
+        $loggedIn = -1;
     } else {
-        $gameLevel = -2;
+        $loggedIn = -2;
     }
 ?>
+<script>
+    let loggedIn = <?php echo $loggedIn; ?>;
+</script>
 
 <script src="js/ObjectDefinitions.js"></script>
 <script src="js/engine.js"></script>

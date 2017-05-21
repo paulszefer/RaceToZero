@@ -116,11 +116,10 @@ class Game {
     }
 
     /**
-     * Returns the user's current level. Currently the user always starts from level -1 (level select).
-     * TODO - this function should be renamed
+     * Returns the level to load: -2 (play screen) if not logged in; -1 (level select screen) if logged in.
      */
     retrieveLevel() {
-        return "<?php echo $gameLevel; ?>";
+        return loggedIn;
     }
 
     /**
