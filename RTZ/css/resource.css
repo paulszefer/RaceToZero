@@ -60,6 +60,7 @@
     -webkit-transition: width 0.3s;
     overflow: hidden;
 }
+
 .bigexpandedcontentbox h1, .bigexpandedcontentbox h2{
     padding-left:30px;
     padding-top:30px;
@@ -72,6 +73,9 @@
 .bigexpandedcontentbox img, .bigexpandedcontentbox p{
     padding-left: 50px;
     color: black;
+}
+.bigexpandedcontentbox p {
+    margin: 0;
 }
 .contentbox h1{
     padding:0;
@@ -155,4 +159,6 @@ button{
 .incorrecttext{
     color: red;
 }
-
+#affappsdesc {
+    text-align: center;
+}

@@ -1,0 +1,137 @@
+#navCont img{
+	height: 100px;
+	width:auto;
+}
+#navCont ul li{
+	list-style-type: none;
+    display: inline-block;
+	font-family: Calibri;
+	padding: 0.5em;
+}
+.navlogo{
+	background-color: #95d5f5;/*#3d2e1f;*/
+	background-image: url('../img/pizzalogo.png');
+}
+.navlogo img, .navlogo .loginstatus{
+	display: inline-block;
+	vertical-align: middle;
+}
+.loginstatus{
+	color:white;
+	font-size: 1em;
+	padding:0.5em;
+}
+.navlinks ul{
+	margin:0;
+	padding:0;
+}
+.navlinks ul li{
+	list-style-type: none;
+	display: inline-block;
+	font-family: Calibri;
+	padding: 0.5em;
+}
+.navlinks{
+	background-image: url('../img/navgradient.png');
+}
+.navlinks a{
+	text-decoration: none;
+	color: #95d5f5; /*navlink color*/
+}
+.navlinks a:hover{
+	border-bottom: 4px solid #95d5f5;
+}
+.navbuttonright{
+	float:right;
+}
+#mobilenav{
+	top:100px;
+	position:fixed;
+}
+#mobilenav a{
+	text-decoration: none;
+	color:white;
+	font-size: 1.5em;
+	font-family: calibri;
+}
+#mobilenav ul li{
+	height:15vh;
+	background-color:black;
+	width:97vw;
+	margin:auto;
+	text-align: center;
+	display: table;
+}
+#mobilenav ul li div{
+	vertical-align: middle;
+	display:table-cell;
+}
+/*body shenanigans*/
+body{
+	background-image: url('../img/bgmesh6.png');
+	font-family: helvetica;
+}
+.contentactual{
+	width:80%;
+	min-height:600px;
+	max-width: 800px;
+	height: 85vh;
+	margin:auto;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+.contentactual h1{
+	padding:0.5em;
+	padding-top: 1em;
+	padding-bottom: 0;
+	font-size: 2em;
+	font-weight: bold;
+}
+.contentactual p{
+	margin:auto;
+	text-align: justify;
+	width:80%;
+}
+@media only screen and (max-width: 980px) {
+    .contentactual {
+        width:100%;
+    }
+    .navlinks{
+    	display:none;
+    }
+    #navCont #navburger{
+    	position: fixed;
+    	top:30px;
+    	right:1em;
+    }
+    #navCont #navburger img{
+    	height: 100%;
+    }
+}
+@media only screen and (min-width: 981px){
+	#navburger{
+		display:none;
+	}
+}
+
+#mobilenav {
+    display: none;
+    background-color: black;
+    color: white;
+    text-align: center;
+    
+}
+
+.footercontent{
+	background-color: black;
+	height:50px;
+	display:table;
+	width:100%;
+}
+.footercontent p{
+	margin:0;
+	color: white;
+	text-align: center;
+	font-size: 0.75em;
+	display:table-cell;
+	vertical-align: middle;
+}
