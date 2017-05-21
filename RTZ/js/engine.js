@@ -36,6 +36,7 @@ $(function () {
      */
     let gameContainer;
     let gameWindow;
+    let musicPlayer;
     let navBurger = document.getElementById("navburger");
     let navImage = navBurger.firstElementChild;
     let retryButton;
@@ -44,6 +45,15 @@ $(function () {
     let scoreOverlay;
     let game;
     const NUMBER_OF_LEVELS = 5;
+    let musicStarted = false;
+    let soundEnabled = true;
+    
+    let musicURLs = ["music/cute.mp3",
+    				 "music/happiness.mp3",
+    				 "music/ukulele.mp3",
+    				 "music/littleidea.mp3",
+    				 "music/buddy.mp3",
+    				 "music/acousticbreeze.mp3"];
 
     setup();
 
@@ -52,6 +62,14 @@ $(function () {
      * and the game object to store game data.
      */
     function setup() {
+
+		/**
+		 * Creates the element that plays music.
+		 */
+		musicPlayer = document.createElement("audio");
+		musicPlayer.volume = 0.2;
+		musicPlayer.onended = newTrack;
+		musicPlayer.pause();
 
         /**
          * Creates the element that contains the game window.
@@ -213,6 +231,10 @@ $(function () {
                     level.innerHTML = "Level " + i;
                 }
                 level.onclick = function () {
+                	if (!musicStarted && soundEnabled) {
+                		musicStarted = true;
+                		newTrack();
+                	}
                     game.level = i * 2;
                     let gameContainerOffset = $(gameContainer).offset();
                     window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
@@ -220,6 +242,32 @@ $(function () {
                 };
                 levelSelect.appendChild(level);
             }
+            
+            let soundButton = document.createElement("div");
+            soundButton.id = "music_button";
+        	/*TODO: style this. should be smaller than the other buttons.*/
+        	if (soundEnabled) {
+        	    soundButton.innerHTML = "Turn sound off";
+        	} else {
+        	    soundButton.innerHTML = "Turn sound on";
+        	}
+                
+            soundButton.onclick = function() {
+                if (soundEnabled) {
+                    soundEnabled = false;
+                    soundButton.innerHTML = "Turn sound on";
+                    musicPlayer.pause();
+                    document.getElementById("successsound").muted = true;
+                } else {
+                    soundEnabled = true;
+                    soundButton.innerHTML = "Turn sound off";
+                    newTrack();
+                    document.getElementById("successsound").muted = false;
+                }
+            }
+            
+            levelSelect.appendChild(soundButton);
+            
             gameWindow.appendChild(levelSelect);
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
@@ -486,7 +534,7 @@ $(function () {
                 new Wrong("lvl4wrongMillion", width * 0.35, height * 0.85, width * 0.55, height * 0.90, "lvl4answerMillion"),
                 new Wrong("lvl4wrongBillion", width * 0.80, height * 0.25, width * 0.95, height * 0.35, "lvl4answerBillion")
             );
-            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste.</p>";
+            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.075, height * 0.10, 0, 0, playItemSize, foodItem);
@@ -606,6 +654,7 @@ $(function () {
                 }
                 init();
             } else {
+        		document.getElementById("successsound").play();
                 $(".extra").css("display", "none");
 
                 let time = document.createElement("p");
@@ -648,6 +697,31 @@ $(function () {
                 if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
                     scoreOverlay.appendChild(nextLevelButton);
                 }
+                
+                let soundButton = document.createElement("p");
+                soundButton.id = "sound_button";
+                /*TODO: style this. should be smaller than the other buttons.*/
+                if (soundEnabled) {
+                    soundButton.innerHTML = "Turn sound off";
+                } else {
+                    soundButton.innerHTML = "Turn sound on";
+                }
+                
+                soundButton.onclick = function() {
+                    if (soundEnabled) {
+                	    soundEnabled = false;
+                	    soundButton.innerHTML = "Turn sound on";
+                	    musicPlayer.pause();
+                	    document.getElementById("successsound").muted = true;
+                    } else {
+                	    soundButton = true;
+                	    soundButton.innerHTML = "Turn sound off";
+                	    newTrack();
+                	    document.getElementById("successsound").muted = false;
+                    }
+                }
+                
+                scoreOverlay.appendChild(soundButton);
 
                 navBurger.style.top = "2vh";
                 navBurger.style.left = "2vh";
@@ -735,6 +809,16 @@ $(function () {
             // setTimeout(setClicked, 200, false);
         }
     });
+    
+    function newTrack() {
+    	if (musicStarted) {
+    		let trackNumber = Math.floor((Math.random() * musicURLs.length));
+        	musicPlayer.setAttribute("src", musicURLs[trackNumber]);
+        	if (soundEnabled) {
+        		musicPlayer.play();
+        	}
+        }
+    }
 });
 
 /**

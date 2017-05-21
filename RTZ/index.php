@@ -27,4 +27,8 @@
 	</div>
 </div>
 
+<audio id="successsound">
+	<source src="music/success.wav" type="audio/mpeg">
+</audio>
+
 <?php include("templateFooter.php");?>
