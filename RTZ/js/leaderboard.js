@@ -32,24 +32,34 @@ $(document).ready(function() {
 			// a table.
 			$.post("accessdb.php", { function: "getShortestTimes", level: $level }, function(data) {
 				//alert(data);
-				for (let i = 0; i < data.length; i++) {
-					let row = document.createElement("tr"); // creates a row.
-					let cell1 = document.createElement("td");
-					let placement = document.createTextNode(i + 1);
-					cell1.appendChild(placement);
-					let cell2 = document.createElement("td");
-					let userid = document.createTextNode(data[i]['user_name']);
-					cell2.appendChild(userid);
-					let cell3 = document.createElement("td");
-					let time = document.createTextNode("" + (Math.round(data[i]['game_time'] / 100) / 10));
-					cell3.appendChild(time);
+				let users = [];
+				let placementNumber = 1;
+				for (let i = 0; i < data.length && placementNumber <= 10; i++) {
+					let name = data[i]['user_name'];
+					if (users.indexOf(name) === -1) {
+						let gameTime = data[i]['game_time'];
+						if (gameTime > 0) {
+							let row = document.createElement("tr"); // creates a row.
+							let cell1 = document.createElement("td");
+							let placement = document.createTextNode(placementNumber);
+							cell1.appendChild(placement);
+							let cell2 = document.createElement("td");
+							let userid = document.createTextNode(name);
+							cell2.appendChild(userid);
+							let cell3 = document.createElement("td");
+							let time = document.createTextNode("" + (Math.round(gameTime / 100) / 10) + "s");
+							cell3.appendChild(time);
 					
-					// adds cells to the row: placement, user_id, and time.
-					row.appendChild(cell1);
-					row.appendChild(cell2);
-					row.appendChild(cell3);
+							// adds cells to the row: placement, user_id, and time.
+							row.appendChild(cell1);
+							row.appendChild(cell2);
+							row.appendChild(cell3);
 					
-					$("#besttimes").append(row); // adds the row to the table.
+							$("#besttimes").append(row); // adds the row to the table.
+							users.push(name);
+							placementNumber++;
+						}
+					}
 				}
 			}, "json");
 		}

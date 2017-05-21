@@ -21,14 +21,37 @@
     width: 60%;
     height: 5vh;
     padding: 2vh 0;
-    margin: 6vh auto;
+    margin: 16vh auto;
     text-align: center;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
     color: black;
+    font-size: 3em;
+    outline: 10px rgb(120, 120, 120) outset;
+}
+
+#play_button:hover {
+    /*background-color: white;*/
+    background: linear-gradient(white, rgb(160, 160, 160));
+}
+
+#play_button p {
+    text-align: center;
+    font-weight: bold;
+}
+
+#about_rtz_overlay {
+    width: 60%;
+    margin: auto;
+    background-color: black;
+    color: white;
     font-size: 2em;
-    border: 10px rgb(120, 120, 120) outset;
-    border-radius: 12px;
+    padding: 2vh;
+    outline: 10px outset rgb(120, 120, 120);
+}
+
+#about_rtz_overlay p {
+    text-align: center;
 }
 
 #timer {
@@ -76,8 +99,8 @@
     bottom: 10%;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
-    border: 10px rgb(120, 120, 120) outset;
-    border-radius: 12px;
+    outline: 10px rgb(120, 120, 120) outset;
+    /*border-radius: 12px;*/
 }
 
 .score_overlay_button:hover {
@@ -99,7 +122,7 @@
 }
 
 .score_overlay_button:nth-of-type(2) {
-    left: 39%;
+    left: 40%;
 }
 
 .score_overlay_button:last-of-type {

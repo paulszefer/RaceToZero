@@ -135,8 +135,10 @@ button{
 /* Closing button */
 .xbutton{
     position:absolute;
-    left: 0;
-    top: 0;
+    left: 2vh;
+    top: 2vh;
+    width: 4vh;
+    height: 4vh;
 }
 /* xbutton for affiliated apps */
 #bigone{
