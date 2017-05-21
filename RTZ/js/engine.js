@@ -324,7 +324,7 @@ $(function () {
                 new Barrier("platform1", width * 0.75, height * 0.20, width * 0.95, height * 0.30),
                 new Barrier("platform2", width * 0.30, height * 0.29, width * 0.45, height * 0.355),
                 new Barrier("platform3", width * 0.55, height * 0.49, width * 0.70, height * 0.555),
-                new Barrier("platform4", width * 0.30, height * 0.79, width * 0.45, height * 0.855),
+                new Barrier("platform4", width * 0.30, height * 0.79, width * 0.45, height),
                 new Barrier("barrier1", width * 0.20, height * 0.25, width * 0.30, height * 0.55),
                 new Barrier("barrier2", width * 0.05, height * 0.45, width * 0.20, height * 0.55),
                 new Barrier("barrier3", width * 0.70, height * 0.40, width * 0.80, height * 0.60),
@@ -476,7 +476,7 @@ $(function () {
                 new Wrong("lvl4wrongMillion", width * 0.35, height * 0.85, width * 0.55, height * 0.90, "lvl4answerMillion"),
                 new Wrong("lvl4wrongBillion", width * 0.80, height * 0.25, width * 0.95, height * 0.35, "lvl4answerBillion")
             );
-            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste. Wow!</p>";
+            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste.</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.075, height * 0.10, 0, 0, playItemSize, foodItem);

@@ -153,6 +153,10 @@
     position: absolute;
 }
 
+.contentactual p {
+    width: initial;
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
