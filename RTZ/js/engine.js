@@ -280,7 +280,7 @@ $(function () {
                 new Extra("tap_image", width * 0.15, height * 0.35, width * 0.2, height * 0.4, "img", "img/taphere.png"),
                 new Extra("arrow", width * 0.15, height * 0.8, width * 0.2, height * 0.85, "img", "img/arrow.png")
             );
-            goal = new Goal("goal", width * 0.05, height * 0.95, width * 0.20, height);
+            goal = new Goal("goal", width * 0.05, height * 0.95, width * 0.20, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
             playItem = new PlayItem(width * 0.35, height * 0.2, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
@@ -307,7 +307,7 @@ $(function () {
                 new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1")
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
-            goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9);
+            goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9, true);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
@@ -320,7 +320,7 @@ $(function () {
                 new Barrier("wall2", width * 0.5375, height * 0.6, width, height)
             );
             goal = new Goal("goal", width * 0.4625, height - barrierHeight, width * 0.5375, height);
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", true);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", false);
             playItem = new PlayItem(width * 0.475, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
@@ -356,7 +356,7 @@ $(function () {
                 new Wrong("lvl1wrong4", width * 0.80, height * 0.85, width * 0.95, height * 0.9, "lvl1answer4")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
-            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90);
+            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90, true);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.05 + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
@@ -368,7 +368,7 @@ $(function () {
                 new Barrier("step3", width * 0.50, height * 0.35, width * 0.80, height * 0.60),
                 new Barrier("step4", width * 0.65, height * 0.20, width * 0.80, height * 0.45)
             );
-            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height);
+            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.30, 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
@@ -404,7 +404,7 @@ $(function () {
                 new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width * 0.95, height * 0.50, "lvl2answerFruits")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
-            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90);
+            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90, true);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
@@ -420,10 +420,11 @@ $(function () {
                 new Barrier("platform1", width * 0.05, height * 0.30, width * 0.80, height * 0.45),
                 new Barrier("platform2", width * 0.25, height * 0.65, width * 0.95, height * 0.80),
                 new Barrier("floor", width * 0.05, height * 0.90, width * 0.80, height * 0.95),
-                // new Barrier("barrier1", width * 0.20, height * 0.05, width * 0.30, height * 0.20),
+                new Barrier("barrier1", width * 0.24, height * 0.05, width * 0.32, height * 0.20),
                 new Barrier("barrier2", width * 0.40, height * 0.15, width * 0.50, height * 0.30),
                 new Barrier("barrier3", width * 0.60, height * 0.05, width * 0.70, height * 0.18),
-                // new Barrier("barrier4", width * 0.82, height * 0.05, width * 0.88, height * 0.12),
+                new Barrier("barrier4", width * 0.80, height * 0.15, width * 0.85, height * 0.20),
+                new Barrier("corner", width * 0.92, height * 0.04, width * 0.96, height * 0.10),
                 new Barrier("lip", width * 0.80, height * 0.25, width * 0.85, height * 0.40),
                 new Barrier("barrier6", width * 0.30, height * 0.45, width * 0.40, height * 0.55),
                 new Barrier("barrier7", width * 0.05, height * 0.53, width * 0.15, height * 0.60),
@@ -432,7 +433,7 @@ $(function () {
                 new Barrier("barrier10", blocks1, height * 0.60, blocks2, height * 0.65),
                 new Barrier("barrier11", blocks5, height * 0.60, blocks6, height * 0.65)
             );
-            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height);
+            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.10, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(227, 202, 13, 4, playItemSize, foodItem); //sends the food object into a glitch
@@ -444,33 +445,33 @@ $(function () {
             let answerSoak = "Soak them in water";
             let answerBreak = "Break them into pieces";
             barriers.push(
-                new Barrier("mainwall", width * 0.70, height * 0.34, width * 0.80, height * 0.80),
-                new Barrier("floor", 0, height * 0.90, width * 0.95, height * 0.95),
+                new Barrier("mainwall", width * 0.70, height * 0.04, width * 0.80, height * 0.80),
+                new Barrier("floor", 0, height * 0.90, width * 0.95, height * 0.96),
                 new Barrier("platform1", width * 0.05, height * 0.20, width * 0.30, height * 0.30),
                 new Barrier("platform2", width * 0.05, height * 0.45, width * 0.30, height * 0.55),
                 new Barrier("platform3", width * 0.05, height * 0.70, width * 0.30, height * 0.80),
-                new Barrier("ledge4", width * 0.60, height * 0.34, width * 0.70, height * 0.405),
-                new Barrier("ledge5", width * 0.60, height * 0.59, width * 0.70, height * 0.655),
-                // new Barrier("floating1", width * 0.40, height * 0.19, width * 0.49, height * 0.255),
+                new Barrier("ledge4", width * 0.60, height * 0.34, width * 0.71, height * 0.405),
+                new Barrier("ledge5", width * 0.60, height * 0.59, width * 0.71, height * 0.655),
+                new Barrier("floating1", width * 0.40, height * 0.19, width * 0.49, height * 0.255),
                 new Barrier("floating2", width * 0.40, height * 0.44, width * 0.49, height * 0.505),
                 new Barrier("floating3", width * 0.40, height * 0.74, width * 0.49, height * 0.805)
             );
             extras.push(
-                new Extra("lvl3question", width * 0.45, height * 0.2, 0, 0, "p", question),
-                // new Extra("lvl3answerRefrigerate", width * 0.05, height * 0.10, 0, 0, "p", answerRefrigerate),
-                new Extra("lvl3answerToast", width * 0.05, height * 0.35, 0, 0, "p", answerToast),
-                new Extra("lvl3answerSoak", width * 0.05, height * 0.60, 0, 0, "p", answerSoak),
-                new Extra("lvl3answerBreak", width * 0.05, height * 0.81, 0, 0, "p", answerBreak)
+                new Extra("lvl3question", width * 0.50, height * 0.81, 0, 0, "p", question),
+                new Extra("lvl3answerRefrigerate", width * 0.20, height * 0.10, 0, 0, "p", answerRefrigerate),
+                new Extra("lvl3answerToast", width * 0.20, height * 0.35, 0, 0, "p", answerToast),
+                new Extra("lvl3answerSoak", width * 0.20, height * 0.60, 0, 0, "p", answerSoak),
+                new Extra("lvl3answerBreak", width * 0.20, height * 0.82, 0, 0, "p", answerBreak)
             );
             wrongs.push(
-                // new Wrong("lvl3wrongRefrigerate", width * 0.05, height * 0.05, width * 0.20, height * 0.20, "lvl3answerRefrigerate"),
+                new Wrong("lvl3wrongRefrigerate", width * 0.05, height * 0.05, width * 0.20, height * 0.20, "lvl3answerRefrigerate"),
                 new Wrong("lvl3wrongSoak", width * 0.05, height * 0.55, width * 0.20, height * 0.70, "lvl3answerSoak"),
-                new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.25, height * 0.90, "lvl3answerBreak")
+                new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.20, height * 0.90, "lvl3answerBreak")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If your chips have gone stale, don't throw them out - just <span class=\"answer\">toast them!</span></p>";
-            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
+            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, true);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
-            playItem = new PlayItem(width * 0.70 - playItemSize / 2, height * 0.10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 8) {
             // Level 4 Game Stage (maze)
             barriers.push(
@@ -496,7 +497,7 @@ $(function () {
                 new Barrier("barrier8", width * 0.40, height * 0.75, width * 0.45, height * 0.80),
                 new Barrier("barrier9", width * 0.28, height * 0.85, width * 0.33, height * 0.90)
             );
-            goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height);
+            goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.48, 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
@@ -574,7 +575,7 @@ $(function () {
              * Adds the wrongs to the level object.
              */
             for (let i = 0; i < wrongs.length; i++) {
-                // wrongs[i].drawPhysicalObject();
+                wrongs[i].drawPhysicalObject();
                 level.addWrong(wrongs[i]);
             }
 
