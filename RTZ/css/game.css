@@ -76,8 +76,8 @@
     bottom: 10%;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
-    border: 10px rgb(120, 120, 120) outset;
-    border-radius: 12px;
+    outline: 10px rgb(120, 120, 120) outset;
+    /*border-radius: 12px;*/
 }
 
 .score_overlay_button:hover {
@@ -99,7 +99,7 @@
 }
 
 .score_overlay_button:nth-of-type(2) {
-    left: 39%;
+    left: 40%;
 }
 
 .score_overlay_button:last-of-type {
