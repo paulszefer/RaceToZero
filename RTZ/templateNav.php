@@ -24,7 +24,7 @@
 					<img src='img/menuicon.png'>
 				</div>
 			</div> <!--end of navlogo-->
-			
+
 			<!-- This div is used for the nav on desktop. -->
 			<div class='navlinks'>
 				<ul>

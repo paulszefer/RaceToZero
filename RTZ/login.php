@@ -80,8 +80,13 @@ if($user->is_loggedin()){
 				?>
 			</p>
 			<script type = "text/javascript">
-				var insert = "<p style='text-align:center'>"+<?php echo "'".$user->displayRegError()."'"?>+"</p>";
-				$(insert).insertAfter("#loginform");
+				var insert = "<p id='regRetError' style='text-align:center; color:red;'>"+<?php echo "'".$user->displayRegError()."'"?>+"</p>";
+				$(insert).insertAfter("#registration");
+				if ($('#regRetError').html()!==''){
+					// Autoclicks the regtab if #regRetError has text
+					$("#regcontent").css("display", "block");
+        			$("#logincontent").css("display", "none");
+				}
 			</script>
 				<table>
 				<tr>
