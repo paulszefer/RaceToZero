@@ -947,11 +947,11 @@ class PhysicalObject {
         } else if (this.pixelType === AIR) {
             objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
         } else if (this.pixelType === RIGHT_ANSWER) {
-        	//objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
-        	objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
+        	objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        	//objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
         } else if (this.pixelType === WRONG) {
-        	//objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
-        	objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
+        	objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        	//objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
         }
         document.getElementById("game_window").appendChild(objectImage);
     }
