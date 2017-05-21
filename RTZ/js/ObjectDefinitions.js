@@ -16,6 +16,7 @@ const AIR = 0;
 const SOLID = 1;
 const GOAL = 2;
 const WRONG = 3;
+const RIGHT_ANSWER = 4;
 
 let BOUNCE_MULTIPLIER = 0.4;
 
@@ -946,6 +947,12 @@ class PhysicalObject {
             objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
         } else if (this.pixelType === AIR) {
             objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === RIGHT_ANSWER) {
+        	//objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        	objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
+        } else if (this.pixelType === WRONG) {
+        	//objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        	objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
         }
         document.getElementById("game_window").appendChild(objectImage);
     }
@@ -973,8 +980,12 @@ class Air extends PhysicalObject {
  * Defines a goal.
  */
 class Goal extends PhysicalObject {
-    constructor(name, x1, y1, x2, y2) {
-        super(name, x1, y1, x2, y2, GOAL);
+    constructor(name, x1, y1, x2, y2, rightAnswer) {
+    	if (rightAnswer) {
+    		super(name, x1, y1, x2, y2, RIGHT_ANSWER);
+    	} else {
+        	super(name, x1, y1, x2, y2, GOAL);
+        }
     }
 }
 
@@ -983,7 +994,7 @@ class Goal extends PhysicalObject {
  */
 class Wrong extends PhysicalObject {
     constructor(name, x1, y1, x2, y2, answerID) {
-        super(name, x1, y1, x2, y2, GOAL);
+        super(name, x1, y1, x2, y2, WRONG);
         this._answerID = answerID;
     }
 
@@ -1028,7 +1039,7 @@ class Extra {
 
         if (this.elementType === "p") {
             //extra.style.fontSize = "2em";
-            extra.style.fontSize = "3vh";
+            extra.style.fontSize = "2.5vh";
             extra.innerHTML = this.elementData;
         } else if (this.elementType === "img") {
             extra.alt = this.name;
