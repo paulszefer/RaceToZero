@@ -4,6 +4,17 @@
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/questionsandanswers.css">
+
+<?php
+/* loads 'play' screen first if the user is not logged in */
+    if(isset($_SESSION['user_session']))
+    {
+        $gameLevel = -1;
+    } else {
+        $gameLevel = -2;
+    }
+?>
+
 <script src="js/ObjectDefinitions.js"></script>
 <script src="js/engine.js"></script>
 <?php include("templateNav.php");?>

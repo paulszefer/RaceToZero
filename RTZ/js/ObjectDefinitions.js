@@ -120,7 +120,7 @@ class Game {
      * TODO - this function should be renamed
      */
     retrieveLevel() {
-        return -1;
+        return "<?php echo $gameLevel; ?>";
     }
 
     /**
