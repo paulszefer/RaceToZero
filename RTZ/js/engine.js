@@ -168,7 +168,7 @@ $(function () {
         wrongs = [];
 
         // for testing purposes to skip straight to certain level
-        // levelID = 5;
+        // levelID = 7;
 
         /**
          * Load data for the current level.
@@ -362,10 +362,10 @@ $(function () {
                 new Barrier("platform1", width * 0.05, height * 0.30, width * 0.80, height * 0.45),
                 new Barrier("platform2", width * 0.25, height * 0.65, width * 0.95, height * 0.80),
                 new Barrier("floor", width * 0.05, height * 0.90, width * 0.80, height * 0.95),
-                new Barrier("barrier1", width * 0.20, height * 0.05, width * 0.30, height * 0.20),
+                // new Barrier("barrier1", width * 0.20, height * 0.05, width * 0.30, height * 0.20),
                 new Barrier("barrier2", width * 0.40, height * 0.15, width * 0.50, height * 0.30),
                 new Barrier("barrier3", width * 0.60, height * 0.05, width * 0.70, height * 0.18),
-                new Barrier("barrier4", width * 0.82, height * 0.05, width * 0.88, height * 0.12),
+                // new Barrier("barrier4", width * 0.82, height * 0.05, width * 0.88, height * 0.12),
                 new Barrier("lip", width * 0.80, height * 0.25, width * 0.85, height * 0.40),
                 new Barrier("barrier6", width * 0.30, height * 0.45, width * 0.40, height * 0.55),
                 new Barrier("barrier7", width * 0.05, height * 0.53, width * 0.15, height * 0.60),
@@ -384,35 +384,35 @@ $(function () {
             let answerRefrigerate = "Refrigerate them";
             let answerToast = "Toast them";
             let answerSoak = "Soak them in water";
-            let answerBreak = "Break them into smaller pieces";
+            let answerBreak = "Break them into pieces";
             barriers.push(
-                new Barrier("mainwall", width * 0.70, height * 0.05, width * 0.80, height * 0.80),
+                new Barrier("mainwall", width * 0.70, height * 0.34, width * 0.80, height * 0.80),
                 new Barrier("floor", 0, height * 0.90, width * 0.95, height * 0.95),
                 new Barrier("platform1", width * 0.05, height * 0.20, width * 0.30, height * 0.30),
                 new Barrier("platform2", width * 0.05, height * 0.45, width * 0.30, height * 0.55),
                 new Barrier("platform3", width * 0.05, height * 0.70, width * 0.30, height * 0.80),
                 new Barrier("ledge4", width * 0.60, height * 0.34, width * 0.70, height * 0.405),
                 new Barrier("ledge5", width * 0.60, height * 0.59, width * 0.70, height * 0.655),
-                new Barrier("floating1", width * 0.40, height * 0.19, width * 0.49, height * 0.255),
+                // new Barrier("floating1", width * 0.40, height * 0.19, width * 0.49, height * 0.255),
                 new Barrier("floating2", width * 0.40, height * 0.44, width * 0.49, height * 0.505),
                 new Barrier("floating3", width * 0.40, height * 0.74, width * 0.49, height * 0.805)
             );
             extras.push(
-                new Extra("lvl3question", width * 0.40, height * 0.81, 0, 0, "p", question),
-                new Extra("lvl3answerRefrigerate", width * 0.05, height * 0.10, 0, 0, "p", answerRefrigerate),
+                new Extra("lvl3question", width * 0.45, height * 0.2, 0, 0, "p", question),
+                // new Extra("lvl3answerRefrigerate", width * 0.05, height * 0.10, 0, 0, "p", answerRefrigerate),
                 new Extra("lvl3answerToast", width * 0.05, height * 0.35, 0, 0, "p", answerToast),
                 new Extra("lvl3answerSoak", width * 0.05, height * 0.60, 0, 0, "p", answerSoak),
                 new Extra("lvl3answerBreak", width * 0.05, height * 0.81, 0, 0, "p", answerBreak)
             );
             wrongs.push(
-                new Wrong("lvl3wrongRefrigerate", width * 0.05, height * 0.05, width * 0.20, height * 0.20, "lvl3answerRefrigerate"),
+                // new Wrong("lvl3wrongRefrigerate", width * 0.05, height * 0.05, width * 0.20, height * 0.20, "lvl3answerRefrigerate"),
                 new Wrong("lvl3wrongSoak", width * 0.05, height * 0.55, width * 0.20, height * 0.70, "lvl3answerSoak"),
-                new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.20, height * 0.90, "lvl3answerBreak")
+                new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.25, height * 0.90, "lvl3answerBreak")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If your chips have gone stale, don't throw them out - just <span class=\"answer\">toast them!</span></p>";
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
-            playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
+            playItem = new PlayItem(width * 0.70 - playItemSize / 2, height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 8) {
             // Level 4 Game Stage (maze)
             barriers.push(
@@ -523,7 +523,7 @@ $(function () {
             /**
              * Displays the goal, then adds the goal to the level object.
              */
-            // goal.drawPhysicalObject();
+            goal.drawPhysicalObject();
             level.addGoal(goal);
 
             /**

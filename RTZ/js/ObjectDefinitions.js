@@ -17,7 +17,7 @@ const SOLID = 1;
 const GOAL = 2;
 const WRONG = 3;
 
-let BOUNCE_MULTIPLIER = 0.6;
+let BOUNCE_MULTIPLIER = 0.4;
 
 // Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
@@ -923,27 +923,31 @@ class PhysicalObject {
          element.css("top", this._y1);
          */
 
-        // barrier visual based on single section of image
-        let barrierImage = document.createElement("div");
-        barrierImage.id = this.name;
-        barrierImage.style.width = "100%";
-        barrierImage.style.height = "100%";
-        barrierImage.style.position = "absolute";
-        barrierImage.style.left = this.x1 + "px";
-        barrierImage.style.top = this.y1 + "px";
+        // object visual based on single section of image
+        let objectImage = document.createElement("div");
+        objectImage.id = this.name;
+        objectImage.style.width = objectWidth + "px";
+        objectImage.style.height = objectHeight + "px";
+        objectImage.style.position = "absolute";
+        objectImage.style.left = this.x1 + "px";
+        objectImage.style.top = this.y1 + "px";
 
 
         /* For Firefox */
-        $(barrierImage).css("width", objectWidth);
-        $(barrierImage).css("height", objectHeight);
-        $(barrierImage).css("position", "absolute");
-        $(barrierImage).css("left", this.x1);
-        $(barrierImage).css("top", this.y1);
+        $(objectImage).css("width", objectWidth);
+        $(objectImage).css("height", objectHeight);
+        $(objectImage).css("position", "absolute");
+        $(objectImage).css("left", this.x1);
+        $(objectImage).css("top", this.y1);
 
         if (this.pixelType === SOLID) {
-            barrierImage.style.background = "url('img/barrier1.jpg') " + this.x1 + "px " + this.y1 + "px";
+            objectImage.style.background = "url('img/barrier1.jpg') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === GOAL) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === AIR) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
         }
-        document.getElementById("game_window").appendChild(barrierImage);
+        document.getElementById("game_window").appendChild(objectImage);
     }
 }
 
