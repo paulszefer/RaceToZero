@@ -174,16 +174,26 @@ $(function () {
          * Load data for the current level.
          */
         if (levelID === -2) {
-            // TODO - unused because play button creates extra click, and other reasons
             // initial screen with play button
             let playButton = document.createElement("div");
             playButton.id = "play_button";
+            let playButtonText = document.createElement("p");
+            playButtonText.id = "play_button_text";
+            playButtonText.innerHTML = "PLAY";
+            playButton.appendChild(playButtonText);
             gameWindow.appendChild(playButton);
 
+            let aboutRTZOverlay = document.createElement("div");
+            aboutRTZOverlay.id = "about_rtz_overlay";
+            let aboutRTZText = document.createElement("p");
+            aboutRTZText.id = "about_rtz_text";
+            aboutRTZText.innerHTML = "Welcome to Race To Zero! Race through each level to get the fastest time, all while learning about the issue of food waste!";
+            aboutRTZOverlay.appendChild(aboutRTZText);
+            gameWindow.appendChild(aboutRTZOverlay);
+
             $(playButton).click(function () {
-                let gameXDisplacement = $(window).width() * 0.5;
-                let gameYDisplacement = $(window).height() * 0.5;
-                window.scrollTo(gameXDisplacement, gameYDisplacement);
+                let gameContainerOffset = $(gameContainer).offset();
+                window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
                 game.level = -1;
                 reInit();
             })
