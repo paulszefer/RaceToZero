@@ -137,6 +137,8 @@ button{
     position:absolute;
     left: 2vh;
     top: 2vh;
+    width: 4vh;
+    height: 4vh;
 }
 /* xbutton for affiliated apps */
 #bigone{
