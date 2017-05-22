@@ -280,8 +280,8 @@ $(function () {
             gameWindow.appendChild(levelSelect);
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
-            let hint1 = "Tap on one side of the strawberry to make it go the other way!";
-            let hint2 = "The further you tap from the strawberry, the further it will go!";
+            let hint1 = "Tap anywhere to move the strawberry in the opposite direction!";
+            let hint2 = "The further away that you tap, the further it will go!";
             let hint3 = "Get the strawberry through this hole!";
             
             barriers.push(
@@ -305,8 +305,8 @@ $(function () {
             let question = "How much of the food produced around the world is wasted?";
             let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one.";
             let hint2 = "Tap during mid-jump to go higher!";
-            let answer1 = "One half";
-            let answer2 = "One third";
+            let answer1 = "One third";
+            let answer2 = "One half";
             barriers.push(
                 new Barrier("platform1", 0, height * 0.44, width * 0.4, height * 0.505),
                 new Barrier("ground1", 0, height * 0.80, width * 0.25, height),
@@ -325,10 +325,10 @@ $(function () {
                 new Extra("arrow2", width * 0.64, height * 0.80, width * 0.69, height * 0.85, "img", "img/arrow.png")
             );
             wrongs.push(
-                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1")
+                new Wrong("wrong1", width * 0.6, height * 0.85, width * 0.75, height * 0.9, true)
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
-            goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9, true);
+            goal = new Goal("goal", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
@@ -757,23 +757,26 @@ $(function () {
                 navImage.src = "img/menuicon.png";
 
                 retryImage.style.display = "none";
-                timer.style.display = "none";
-                scoreOverlay.style.display = "block";
 
-                retryButton.onclick = function () {
-                    game.level -= 1;
-                    reInit();
-                };
+                setTimeout(function() {
+                    timer.style.display = "none";
+                    scoreOverlay.style.display = "block";
 
-                selectLevelButton.onclick = function () {
-                    game.level = -1;
-                    reInit();
-                };
+                    retryButton.onclick = function () {
+                        game.level -= 1;
+                        reInit();
+                    };
 
-                nextLevelButton.onclick = function () {
-                    game.level += 1;
-                    reInit();
-                };
+                    selectLevelButton.onclick = function () {
+                        game.level = -1;
+                        reInit();
+                    };
+
+                    nextLevelButton.onclick = function () {
+                        game.level += 1;
+                        reInit();
+                    };
+                }, 2000);
             }
         }
         drawFoodItem();
