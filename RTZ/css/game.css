@@ -96,11 +96,29 @@
     width: 20%;
     height: 10%;
     position: absolute;
-    bottom: 10%;
+    bottom: 15%;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
     outline: 10px rgb(120, 120, 120) outset;
     /*border-radius: 12px;*/
+}
+
+#sound_button {
+    width: 10%;
+    height: 6%;
+    position: absolute;
+    left: 45%;
+    bottom: 5%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    outline: 5px rgb(120, 120, 120) outset;
+}
+
+#sound_button img {
+    height: 6vh;
+    width: 6vh;
+    position: relative;
+    display: block;
+    margin: auto;
 }
 
 .score_overlay_button:hover {
@@ -125,7 +143,7 @@
     left: 40%;
 }
 
-.score_overlay_button:last-of-type {
+.score_overlay_button:nth-of-type(3) {
     right: 10%;
 }
 

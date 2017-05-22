@@ -1,14 +1,24 @@
+.contentactual h1 {
+    text-align: center;
+}
 /*This is css for the table*/
 #besttimes{
 	min-width: 80%;
 	margin:auto;
 	border-collapse: collapse;
 	margin-bottom: 1em;
-	font-size: 200%;
+	font-size: 180%;
+}
+select {
+    font-size: 1.5em;
+}
+#besttimes th {
+    padding: 10px;
 }
 #besttimes td{
 	text-align:center;
 	border: 1px solid;
+    padding: 10px;
 }
 tr {
 	background-color: #f2f2f2;
