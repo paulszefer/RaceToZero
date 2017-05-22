@@ -114,13 +114,16 @@
 .expandedcontentbox ol{
     list-style: decimal inside;
     padding: 2vh;
+    font-size: 1.75em;
 }
 .expandedcontentbox ul{
     list-style: none inside;
     padding: 4vh;
+    font-size: 0.75em;
 }
 .expandedcontentbox ul li{
     padding-top: 15px;
+    font-size: 0.75em;
 }
 /* quiz buttons */
 button{
@@ -135,10 +138,8 @@ button{
 /* Closing button */
 .xbutton{
     position:absolute;
-    left: 2vh;
-    top: 2vh;
-    width: 4vh;
-    height: 4vh;
+    left: 0;
+    top: 0;
 }
 /* xbutton for affiliated apps */
 #bigone{

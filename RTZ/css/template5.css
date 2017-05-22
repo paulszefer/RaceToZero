@@ -97,7 +97,7 @@
 
 #xButton {
     position: absolute;
-    content: url('../img/xButtonInv.png');
+    content: url('../img/xButton.png');
     height: 6vh;
     width: 6vh;
     left: 3vh;
@@ -234,19 +234,17 @@ html, body {
     #navCont #navburger {
         display: block;
         position: absolute;
-        top: 2vh;
-        left: 2vh;
-        /* animation brings attention to repositioning
+        top: 2.5vh;
+        left: 2.5vh;
         transition: top 0.2s ease-in-out;
-        -webkit-transition: top 0.2s ease-in-out;
+        -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
         -moz-transition: top 0.2s ease-in-out;
-        */
         z-index: 100;
     }
 
     /*navburger's height*/
     #navCont #navburger img {
-        height: 7vh;
+        height: 5vh;
     }
 
     /*text for displaying if logged in or not*/
@@ -259,11 +257,9 @@ html, body {
 
     /*navlogo when screen is stupidly small*/
     #navCont > div.navlogo > a > img {
-        /* causes mispositioning of logo
-        position: absolute;
-         */
-        top: 7vh;
-        right: 5vh;
+        display: absolute;
+        top: 2.5vh;
+        right: 2.5vh;
         height: 10vh;
     }
 }

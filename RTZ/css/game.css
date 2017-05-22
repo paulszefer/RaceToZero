@@ -21,37 +21,14 @@
     width: 60%;
     height: 5vh;
     padding: 2vh 0;
-    margin: 16vh auto;
+    margin: 6vh auto;
     text-align: center;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
     color: black;
-    font-size: 3em;
-    outline: 10px rgb(120, 120, 120) outset;
-}
-
-#play_button:hover {
-    /*background-color: white;*/
-    background: linear-gradient(white, rgb(160, 160, 160));
-}
-
-#play_button p {
-    text-align: center;
-    font-weight: bold;
-}
-
-#about_rtz_overlay {
-    width: 60%;
-    margin: auto;
-    background-color: black;
-    color: white;
     font-size: 2em;
-    padding: 2vh;
-    outline: 10px outset rgb(120, 120, 120);
-}
-
-#about_rtz_overlay p {
-    text-align: center;
+    border: 10px rgb(120, 120, 120) outset;
+    border-radius: 12px;
 }
 
 #timer {
@@ -61,7 +38,7 @@
     text-align: center;
     top: 1%;
     /*left: 50%;*/
-    color: white;
+    color: black;
     font-size: 1.5em;
     z-index: 10;
 }
@@ -96,29 +73,11 @@
     width: 20%;
     height: 10%;
     position: absolute;
-    bottom: 15%;
+    bottom: 10%;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
-    outline: 10px rgb(120, 120, 120) outset;
-    /*border-radius: 12px;*/
-}
-
-#sound_button {
-    width: 10%;
-    height: 6%;
-    position: absolute;
-    left: 45%;
-    bottom: 5%;
-    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
-    outline: 5px rgb(120, 120, 120) outset;
-}
-
-#sound_button img {
-    height: 6vh;
-    width: 6vh;
-    position: relative;
-    display: block;
-    margin: auto;
+    border: 10px rgb(120, 120, 120) outset;
+    border-radius: 12px;
 }
 
 .score_overlay_button:hover {
@@ -140,10 +99,10 @@
 }
 
 .score_overlay_button:nth-of-type(2) {
-    left: 40%;
+    left: 39%;
 }
 
-.score_overlay_button:nth-of-type(3) {
+.score_overlay_button:last-of-type {
     right: 10%;
 }
 
@@ -192,10 +151,6 @@
 
 .extra {
     position: absolute;
-}
-
-.contentactual p {
-    width: initial;
 }
 
 .unselectable {

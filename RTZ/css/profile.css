@@ -33,30 +33,17 @@
 .button {
     
 }
-body p#changepic {
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-li {
-    font-size: 150%;
-}
-li table {
-    font-size: 100%;
-}
 /*The best times on profile*/
 #bestTimesTable{
 	display:block;
 	margin:auto;
-	width:40vw;
+	width:50vw;
 	text-align: center;
 }
 #bestTimesTable td, #bestTimesTable th{
-	min-width:20vw;
-	border: 1px solid;
+	min-width:25vw;
 }
-#bestTimesTable >tbody> tr {
+#bestTimesTable >tbody> tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 /*the title row*/

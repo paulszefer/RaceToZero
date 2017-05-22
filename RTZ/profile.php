@@ -76,7 +76,6 @@
 					);
 				}
 			?>
-				<p id='changepic'><a href='changepic.php'>Change Your Picture</a></p>
 			</div>
 		</div>	
 		<div class='row'>	
@@ -95,7 +94,7 @@
 	            			for ($i = 1; $i <= 5; $i++) { // edit if extra level(s) added
 	            				echo "<tr>";
 	            					echo "<td>" . (($i == 1) ? "Tutorial" : $i) . "</td>";
-	            					echo "<td>" . round(getLevelScore($i) / 1000, 1) . "s</td>";
+	            					echo "<td>" . getLevelScore($i) . "</td>";
 	            				echo "</tr>";
 	            			}
 	            		echo "</table>";
