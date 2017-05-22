@@ -377,7 +377,7 @@ $(function () {
                 new Wrong("lvl1wrong4", width * 0.80, height * 0.85, width * 0.95, height * 0.9, "lvl1answer4")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
-            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90, true);
+            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90, "lvl1answer2");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.05 + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
@@ -425,7 +425,7 @@ $(function () {
                 new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width * 0.95, height * 0.50, "lvl2answerFruits")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
-            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90, true);
+            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90, "lvl2answerAll");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
@@ -490,7 +490,7 @@ $(function () {
                 new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.20, height * 0.90, "lvl3answerBreak")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If your chips have gone stale, don't throw them out - just <span class=\"answer\">toast them!</span></p>";
-            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, true);
+            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, "lvl3answerToast");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 8) {
@@ -557,7 +557,7 @@ $(function () {
                 new Wrong("lvl4wrongBillion", width * 0.80, height * 0.25, width * 0.95, height * 0.35, "lvl4answerBillion")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
-            goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
+            goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95, "lvl4answerTrillion");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.075, height * 0.10, 0, 0, playItemSize, foodItem);
         }
