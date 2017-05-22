@@ -16,53 +16,54 @@ const AIR = 0;
 const SOLID = 1;
 const GOAL = 2;
 const WRONG = 3;
+const RIGHT_ANSWER = 4;
 
-let BOUNCE_MULTIPLIER = 0.6;
+let BOUNCE_MULTIPLIER = 0.4;
 
 // Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
-$(document).keypress(function(event) {
-	if (keyNumber === 0) {
-		if (event.which === 98) { // "b"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 1) {
-		if (event.which === 111) { // "o"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 2) {
-		if (event.which === 117) { // "u"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 3) {
-		if (event.which === 110) { // "n"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 4) {
-		if (event.which === 99) { // "c"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 5) {
-		if (event.which === 101) { // "e"
-			if (BOUNCE_MULTIPLIER === 0.6) {
-				BOUNCE_MULTIPLIER = 2;
-			} else {
-				BOUNCE_MULTIPLIER = 0.6;
-			}
-		} else {
-			keyNumber = 0;
-		}
-	}
+$(document).keypress(function (event) {
+    if (keyNumber === 0) {
+        if (event.which === 98) { // "b"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 1) {
+        if (event.which === 111) { // "o"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 2) {
+        if (event.which === 117) { // "u"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 3) {
+        if (event.which === 110) { // "n"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 4) {
+        if (event.which === 99) { // "c"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 5) {
+        if (event.which === 101) { // "e"
+            if (BOUNCE_MULTIPLIER === 0.6) {
+                BOUNCE_MULTIPLIER = 2;
+            } else {
+                BOUNCE_MULTIPLIER = 0.6;
+            }
+        } else {
+            keyNumber = 0;
+        }
+    }
 });
 
 
@@ -116,11 +117,10 @@ class Game {
     }
 
     /**
-     * Returns the user's current level. Currently the user always starts from level -1 (level select).
-     * TODO - this function should be renamed
+     * Returns the level to load: -2 (play screen) if not logged in; -1 (level select screen) if logged in.
      */
     retrieveLevel() {
-        return -1;
+        return loggedIn;
     }
 
     /**
@@ -300,7 +300,7 @@ class Level {
      */
     move() {
 
-		
+
         // don't move if out of bounds
         if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
             console.log("Error: The item is out of bounds.");
@@ -576,33 +576,33 @@ class Level {
                 return 4;
             }
             /*let move = 0;
-            while (move < this._playItem.size) {
-                if (this._board[origX1 - move][origY1].type === SOLID) {
-                    return 4;
-                } else if (this._board[origX1][origY1 - move].type === SOLID) {
-                    return 1;
-                } else {
-                    move++;
-                }
-            }*/
+             while (move < this._playItem.size) {
+             if (this._board[origX1 - move][origY1].type === SOLID) {
+             return 4;
+             } else if (this._board[origX1][origY1 - move].type === SOLID) {
+             return 1;
+             } else {
+             move++;
+             }
+             }*/
             let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
             for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
-            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX1][currentY1].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX1 + move][currentY1].type !== SOLID) {
-            				return 4;
-            			}
-            			if (this.board[currentX1][currentY1 + move].type !== SOLID) {
-            				return 1;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+                let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+                let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+                if (this.board[currentX1][currentY1].type === SOLID) {
+                    let move = 0;
+                    while (move < this.playItem.size) {
+                        if (this.board[currentX1 + move][currentY1].type !== SOLID) {
+                            return 4;
+                        }
+                        if (this.board[currentX1][currentY1 + move].type !== SOLID) {
+                            return 1;
+                        }
+                        else {
+                            move++;
+                        }
+                    }
+                }
             }
             return 0;
         }
@@ -622,34 +622,34 @@ class Level {
             return 2;
         }
         /*let move = 0;
-        while (move < this._playItem.size) {
-            if (this._board[origX2 + move][origY1].type === SOLID) {
-                return 2;
-            } else if (this._board[origX2][origY1 - move].type === SOLID) {
-                return 1;
-            } else {
-                move++;
-            }
-        }*/
+         while (move < this._playItem.size) {
+         if (this._board[origX2 + move][origY1].type === SOLID) {
+         return 2;
+         } else if (this._board[origX2][origY1 - move].type === SOLID) {
+         return 1;
+         } else {
+         move++;
+         }
+         }*/
         let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
         for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
-            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX2][currentY1].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX2 - move][currentY1].type !== SOLID) {
-            				return 2;
-            			}
-            			if (this.board[currentX2][currentY1 + move].type !== SOLID) {
-            				return 1;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+            let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+            let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+            if (this.board[currentX2][currentY1].type === SOLID) {
+                let move = 0;
+                while (move < this.playItem.size) {
+                    if (this.board[currentX2 - move][currentY1].type !== SOLID) {
+                        return 2;
+                    }
+                    if (this.board[currentX2][currentY1 + move].type !== SOLID) {
+                        return 1;
+                    }
+                    else {
+                        move++;
+                    }
+                }
             }
+        }
         return 0;
     }
 
@@ -679,33 +679,33 @@ class Level {
                 return 2;
             }
             /*let move = 0;
-            while (move < this._playItem.size) {
-                if (this._board[origX2 + move][origY2].type === SOLID) {
-                    return 2;
-                } else if (this._board[origX2][origY2 + move].type === SOLID) {
-                    return 3;
-                } else {
-                    move++;
-                }
-            }*/
+             while (move < this._playItem.size) {
+             if (this._board[origX2 + move][origY2].type === SOLID) {
+             return 2;
+             } else if (this._board[origX2][origY2 + move].type === SOLID) {
+             return 3;
+             } else {
+             move++;
+             }
+             }*/
             let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
             for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
-            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX2][currentY2].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX2 - move][currentY2].type !== SOLID) {
-            				return 2;
-            			}
-            			if (this.board[currentX2][currentY2 - move].type !== SOLID) {
-            				return 3;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+                let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+                let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+                if (this.board[currentX2][currentY2].type === SOLID) {
+                    let move = 0;
+                    while (move < this.playItem.size) {
+                        if (this.board[currentX2 - move][currentY2].type !== SOLID) {
+                            return 2;
+                        }
+                        if (this.board[currentX2][currentY2 - move].type !== SOLID) {
+                            return 3;
+                        }
+                        else {
+                            move++;
+                        }
+                    }
+                }
             }
             return 0;
         }
@@ -739,36 +739,36 @@ class Level {
                 return 4;
             }
             /*let move = 0;
-            while (move < this._playItem.size) {
-                if (this._playItem.isGrounded) {
-                    return 3;
-                }
-                if (this._board[origX1 - move][origY2].type === SOLID) {
-                    return 4;
-                } else if (this._board[origX1][origY2 + move].type === SOLID) {
-                    return 3;
-                } else {
-                    move++;
-                }
-            }*/
+             while (move < this._playItem.size) {
+             if (this._playItem.isGrounded) {
+             return 3;
+             }
+             if (this._board[origX1 - move][origY2].type === SOLID) {
+             return 4;
+             } else if (this._board[origX1][origY2 + move].type === SOLID) {
+             return 3;
+             } else {
+             move++;
+             }
+             }*/
             let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
             for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
-            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX1][currentY2].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX1 + move][currentY2].type !== SOLID) {
-            				return 4;
-            			}
-            			if (this.board[currentX1][currentY2 - move].type !== SOLID) {
-            				return 3;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+                let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+                let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+                if (this.board[currentX1][currentY2].type === SOLID) {
+                    let move = 0;
+                    while (move < this.playItem.size) {
+                        if (this.board[currentX1 + move][currentY2].type !== SOLID) {
+                            return 4;
+                        }
+                        if (this.board[currentX1][currentY2 - move].type !== SOLID) {
+                            return 3;
+                        }
+                        else {
+                            move++;
+                        }
+                    }
+                }
             }
         }
         return 0;
@@ -891,33 +891,69 @@ class PhysicalObject {
         let objectHeight = this._y2 - this._y1;
         let objectColour = "";
 
-        if (this._pixelType === SOLID) {
-            objectColour = BARRIER_COLOUR;
-        } else if (this._pixelType === AIR) {
-            objectColour = BACKGROUND_COLOUR;
-        } else if (this._pixelType === GOAL) {
-            objectColour = BACKGROUND_COLOUR;
-        } else if (this._pixelType === WRONG) {
-            objectColour = BARRIER_COLOUR;
+        // TODO - Old barriers made with SVG shapes
+        /*
+
+         if (this._pixelType === SOLID) {
+         objectColour = BARRIER_COLOUR;
+         } else if (this._pixelType === AIR) {
+         objectColour = BACKGROUND_COLOUR;
+         } else if (this._pixelType === GOAL) {
+         objectColour = BACKGROUND_COLOUR;
+         } else if (this._pixelType === WRONG) {
+         objectColour = BARRIER_COLOUR;
+         }
+
+         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+         svgElement.id = this.name;
+         svgElement.style.width = objectWidth;
+         svgElement.style.height = objectHeight;
+         $(svgElement).css("width", objectWidth);
+         $(svgElement).css("height", objectHeight);
+         svgElement.innerHTML = "<rect width=\"" + objectWidth
+         + "\" height=\"" + objectHeight
+         + "\" style=\"fill:" + objectColour + ";\">";
+         document.getElementById("game_window").appendChild(svgElement);
+
+         // TODO - move this up to match other css styling
+         // TODO - OR move to external stylesheet - better solution
+         let element = $("#" + this._name);
+         element.css("position", "absolute");
+         element.css("left", this._x1);
+         element.css("top", this._y1);
+         */
+
+        // object visual based on single section of image
+        let objectImage = document.createElement("div");
+        objectImage.id = this.name;
+        objectImage.style.width = objectWidth + "px";
+        objectImage.style.height = objectHeight + "px";
+        objectImage.style.position = "absolute";
+        objectImage.style.left = this.x1 + "px";
+        objectImage.style.top = this.y1 + "px";
+
+
+        /* For Firefox */
+        $(objectImage).css("width", objectWidth);
+        $(objectImage).css("height", objectHeight);
+        $(objectImage).css("position", "absolute");
+        $(objectImage).css("left", this.x1);
+        $(objectImage).css("top", this.y1);
+
+        if (this.pixelType === SOLID) {
+            objectImage.style.background = "url('img/barrier1.jpg') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === GOAL) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === AIR) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === RIGHT_ANSWER) {
+        	objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        	//objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
+        } else if (this.pixelType === WRONG) {
+        	objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        	//objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
         }
-
-        let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svgElement.id = this.name;
-        svgElement.style.width = objectWidth;
-        svgElement.style.height = objectHeight;
-        $(svgElement).css("width", objectWidth);
-        $(svgElement).css("height", objectHeight);
-        svgElement.innerHTML = "<rect width=\"" + objectWidth
-            + "\" height=\"" + objectHeight
-            + "\" style=\"fill:" + objectColour + ";\">";
-        document.getElementById("game_window").appendChild(svgElement);
-
-        // TODO - move this up to match other css styling
-        // TODO - OR move to external stylesheet - better solution
-        let element = $("#" + this._name);
-        element.css("position", "absolute");
-        element.css("left", this._x1);
-        element.css("top", this._y1);
+        document.getElementById("game_window").appendChild(objectImage);
     }
 }
 
@@ -943,8 +979,12 @@ class Air extends PhysicalObject {
  * Defines a goal.
  */
 class Goal extends PhysicalObject {
-    constructor(name, x1, y1, x2, y2) {
-        super(name, x1, y1, x2, y2, GOAL);
+    constructor(name, x1, y1, x2, y2, rightAnswer) {
+    	if (rightAnswer) {
+    		super(name, x1, y1, x2, y2, RIGHT_ANSWER);
+    	} else {
+        	super(name, x1, y1, x2, y2, GOAL);
+        }
     }
 }
 
@@ -953,7 +993,7 @@ class Goal extends PhysicalObject {
  */
 class Wrong extends PhysicalObject {
     constructor(name, x1, y1, x2, y2, answerID) {
-        super(name, x1, y1, x2, y2, GOAL);
+        super(name, x1, y1, x2, y2, WRONG);
         this._answerID = answerID;
     }
 
@@ -998,7 +1038,7 @@ class Extra {
 
         if (this.elementType === "p") {
             //extra.style.fontSize = "2em";
-            extra.style.fontSize = "3vh";
+            extra.style.fontSize = "2.5vh";
             extra.innerHTML = this.elementData;
         } else if (this.elementType === "img") {
             extra.alt = this.name;

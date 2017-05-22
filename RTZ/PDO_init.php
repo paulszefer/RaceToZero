@@ -13,15 +13,6 @@
         $db_pass = "password.1";
         $db_name = "b12_20107247_ZeroSquad2";
     }
-    //for official host
-    // $db_host = "sql201.byethost12.com";
-    // $db_user = "b12_20107247";
-    // $db_pass = "password.1";
-    // $db_name = "b12_20107247_ZeroSquad2";
-    // $db_host = 'bcitdevcom.ipagemysql.com';
-    // $db_user = 'project2017b';
-    // $db_pass = 'project.g12';
-    // $db_name = 'project2017b';
 	try {
         //make the connection
         $db_conn = new PDO("mysql:host={$db_host};", $db_user, $db_pass);
@@ -30,7 +21,7 @@
         // turn emulation off in MySQL driver - only really used in older of MYSQL
         $db_conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $sql_dbdelete = "DROP DATABASE " . $db_name . ";";
-        // Creates the database and tells mySQl to use it.
+        // Creates the database and tells MySQL to use it.
         $sql_dbcreation = "CREATE DATABASE IF NOT EXISTS " . $db_name . ";";
         $sql_dbuse = "USE " . $db_name;
 

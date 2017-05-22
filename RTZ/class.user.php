@@ -54,10 +54,11 @@ class USER {
 					"INSERT INTO users(user_name,user_password,user_photo) 
 					VALUES(:uname, :upass, :photourl)");
 					$stmt->execute(array(':uname'=>$uname, ':upass'=>$upass,':photourl'=>$photourl));
+					return true;
 					//and log them in automatically
 					$this->doLogin($uname, $upass);
 					//and redirect them to login script
-					$this->redirect('login.php');
+					$this->redirect('index.php');
 				}//End of else
 			} catch(PDOException $e) {
 				echo $e->getMessage();
@@ -136,7 +137,7 @@ class USER {
 		{
 			//Select the userimage filename
 			$statement = $this->conn->prepare("SELECT user_photo
-				FROM users 
+				FROM users
 				WHERE user_name=:uname");
 			$statement->execute(array(':uname' => $_SESSION['user_name']));
 			//store found rows in $row
@@ -148,6 +149,22 @@ class USER {
 			echo $e->getMessage();
 		}
 	}
-	
+	//updates user image, WIP
+	public function updateUserProfileImage($imgId){
+		try 
+		{
+			//check if user is logged in
+			if ($this->loggedIn){
+			$statement = $this->conn->prepare("UPDATE users
+				SET user_photo=:uimgId
+				WHERE user_name=:uname");
+			$statement->execute(array(':uname'=>$_SESSION['user_name'], ':uimgId'=>$imgId));
+			return true;
+			}
+		}
+		catch(PDOException $e) {
+			echo $e->getMessage();
+		}
+	}
 } //end of user class
 ?>

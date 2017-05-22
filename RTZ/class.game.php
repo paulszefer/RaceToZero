@@ -1,7 +1,6 @@
 <?php
 	// Represents a game with a username, level, and time. This class is used to upload
 	// scores to the database.
-	require_once('PDO_conn.php');
 	
 	class GAME {
 		
@@ -18,12 +17,8 @@
 		
 		// Queries the database and records the state of the game.
 		public function save() {
-			$username = "root";
-    		$password = "";
-   			$host     = "localhost";
-    		$database = "comp2910test1";
-
-    		$link = mysqli_connect($host, $username, $password, $database);
+            require_once('PDO_conn.php');
+            $link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
     			
     		$userIDQuery = "SELECT user_id FROM users WHERE user_name=\"" . $this->uname . "\";";
     		$result = mysqli_query($link, $userIDQuery);
@@ -32,7 +27,6 @@
     			
     		$query = "INSERT INTO games(level_id,game_time,user_id) 
 					  VALUES(" . $this->level . ", " . $this->time . ", " . $userid . ");";
-			var_dump($query);
 			mysqli_query($link, $query);
 		}
 		

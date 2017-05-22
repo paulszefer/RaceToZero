@@ -3,7 +3,23 @@
 	z-index: 11;
 }
 
+#hint_tap_here {
+	width: 70%;
+}
+
+#hint_further {
+	width: 65%;
+}
+
 #tutorialquestion {
+	width: 50%;
+}
+
+#hint_answer {
+	width: 50%;
+}
+
+#hint_jump {
 	width: 50%;
 }
 
@@ -56,23 +72,23 @@
 }
 
 #lvl3question {
-	width: 50%;
+	width: 45%;
 }
 
 #lvl3answerRefrigerate {
-	width: 25%;
+	width: 20%;
 }
 
 #lvl3answerToast {
-	width: 25%;
+	width: 20%;
 }
 
 #lvl3answerSoak {
-	width: 25%;
+	width: 20%;
 }
 
 #lvl3answerBreak {
-	width: 25%;
+	width: 20%;
 }
 
 #lvl4question {
