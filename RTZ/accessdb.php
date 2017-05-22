@@ -44,10 +44,12 @@
 	// variables. Then invokes the save() function in class.game.php to send the
 	// game data to the database. Does not have a return value.
 	function saveGame() {
+	    session_start();
+	
 		$uname = $_SESSION['user_name'];
 		$level = $_POST['level'];
 		$time = $_POST['time'];
-	
+	    
 		include_once('class.game.php');
 	
 		$game = new GAME($uname, $level, $time);
