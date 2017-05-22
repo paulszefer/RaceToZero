@@ -70,17 +70,17 @@
 						);
 					}
 				?>
-                <a href='index.php'><li class='mobilelist'><div><img src="img/pizzalogoonly.png" alt="Home">Home</div></li></a>
-				<a href='resource.php'><li class='mobilelist'><div><img src="img/ResourcesIcon.png" alt="Resources">Resources</div></li></a>
-				<a href='leaderboard.php'><li class='mobilelist'><div><img src="img/LeaderboardIcon.png" alt="Leaderboard">Leaderboard</div></li></a>
+                <a href='index.php'><li class='mobilelist'><div>Home</div></li></a>
+				<a href='resource.php'><li class='mobilelist'><div>Resources</div></li></a>
+				<a href='leaderboard.php'><li class='mobilelist'><div>Leaderboard</div></li></a>
 				<?php
 					if(isset($_SESSION['user_session']))
 					{
 						echo 
-						"<a href='logout.php'><li class='mobilelist'><div><img src='img/ProfileIcon.png' alt='Logout'>Logout</div></li></a>";
+						"<a href='logout.php'><li class='mobilelist'><div>Logout</div></li></a>";
 					} else {
 						echo 
-						"<a href='login.php'><li class='mobilelist'><div><img src='img/ProfileIcon.png' alt='Logout'>Login/Register</div></li></a>";
+						"<a href='login.php'><li class='mobilelist'><div>Login/Register</div></li></a>";
 					}
 				?>
                 </ul>

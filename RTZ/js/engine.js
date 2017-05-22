@@ -271,14 +271,20 @@ $(function () {
             gameWindow.appendChild(levelSelect);
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
+            let hint1 = "Tap on one side of the strawberry to make it go the other way!";
+            let hint2 = "The further you tap from the strawberry, the further it will go!";
+            let hint3 = "Get the strawberry through this hole!";
+            
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)//,
                 //new Barrier("forsandbox", 0, height * 0.9, width, height)
             );
             extras.push(
-                new Extra("hint_tap_here", width * 0.15, height * 0.3, 0, 0, "p", "Tap here"),
-                new Extra("tap_image", width * 0.15, height * 0.35, width * 0.2, height * 0.4, "img", "img/taphere.png"),
-                new Extra("arrow", width * 0.15, height * 0.8, width * 0.2, height * 0.85, "img", "img/arrow.png")
+                new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
+                new Extra("tap_image", width * 0.15, height * 0.40, width * 0.2, height * 0.45, "img", "img/taphere.png"),
+                new Extra("hint_further", width * 0.30, height * 0.55, 0, 0, "p", hint2),
+                new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
+                new Extra("arrow", width * 0.10, height * 0.85, width * 0.2, height * 0.90, "img", "img/arrow.png")
             );
             goal = new Goal("goal", width * 0.05, height * 0.95, width * 0.20, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
@@ -288,6 +294,8 @@ $(function () {
             // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
             let question = "How much of the food produced around the world is wasted?";
+            let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one."
+            let hint2 = "Tap during mid-jump to go higher!";
             let answer1 = "One half";
             let answer2 = "One third";
             barriers.push(
@@ -299,9 +307,13 @@ $(function () {
                 new Barrier("floor2", width * 0.6, height * 0.9, width * 0.75, height - barrierHeight)
             );
             extras.push(
-                new Extra("tutorialquestion", width * 0.25, height * 0.30, 0, 0, "p", question),
+                new Extra("tutorialquestion", width * 0.25, height * 0.15, 0, 0, "p", question),
+                new Extra("hint_answer", width * 0.25, height * 0.30, 0, 0, "p", hint1),
+                new Extra("hint_jump", width * 0.25, height * 0.60, 0, 0, "p", hint2),
                 new Extra("tutorialanswer1", width * 0.25, height * 0.75, 0, 0, "p", answer1),
-                new Extra("tutorialanswer2", width * 0.6, height * 0.75, 0, 0, "p", answer2)
+                new Extra("tutorialanswer2", width * 0.6, height * 0.75, 0, 0, "p", answer2),
+                new Extra("arrow1", width * 0.29, height * 0.80, width * 0.34, height * 0.85, "img", "img/arrow.png"),
+                new Extra("arrow2", width * 0.64, height * 0.80, width * 0.69, height * 0.85, "img", "img/arrow.png")
             );
             wrongs.push(
                 new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1")
