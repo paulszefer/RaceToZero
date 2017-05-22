@@ -44,13 +44,14 @@ function answerCheck(buttonName, value) {
     if (value == "incorrect") {
         // if incorrect store .correcttext in resets (display none)
         // and .incorrecttext in results (display inline-block)
-        var results = document.getElementsByClassName("incorrecttext");
+        var results = document.getElementsByClassName("incorrecttext").innerHTML="<img src='img/incorrectIcon.png' />";
         var resets = document.getElementsByClassName("correcttext");
+
     } else {
         // if correct store .incorrecttext in resets (display none)
         // and .correcttext in results (display inline-block)
         var results = document.getElementsByClassName("correcttext");
-        var resets = document.getElementsByClassName("incorrecttext");
+        var resets = document.getElementsByClassName("incorrecttext").innerHTML="<img src='img/incorrectIcon.png' />";
     }
 
     // parses topic number into var
