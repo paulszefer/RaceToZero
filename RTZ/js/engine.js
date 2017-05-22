@@ -36,12 +36,25 @@ $(function () {
      */
     let gameContainer;
     let gameWindow;
+    let musicPlayer;
+    let navBurger = document.getElementById("navburger");
+    let navImage = navBurger.firstElementChild;
     let retryButton;
     let retryImage;
     let timer;
     let scoreOverlay;
     let game;
     const NUMBER_OF_LEVELS = 5;
+    let musicStarted = false;
+    let soundEnabled = true;
+    
+    const musicURLs = ["music/cute.mp3",
+                       "music/happiness.mp3",
+                       "music/ukulele.mp3",
+                       "music/littleidea.mp3",
+                       "music/buddy.mp3",
+                       "music/acousticbreeze.mp3",
+                       "music/anewbeginning.mp3"];
 
     setup();
 
@@ -50,6 +63,14 @@ $(function () {
      * and the game object to store game data.
      */
     function setup() {
+
+		/**
+		 * Creates the element that plays music.
+		 */
+		musicPlayer = document.createElement("audio");
+		musicPlayer.volume = 0.2;
+		musicPlayer.onended = newTrack;
+		musicPlayer.pause();
 
         /**
          * Creates the element that contains the game window.
@@ -77,7 +98,7 @@ $(function () {
         $(retryButton).click(function () {
             clearInterval(intervalId);
             if (game.level % 2 === 1) {
-            	game.level--;
+                game.level--;
             }
             reInit();
         });
@@ -166,22 +187,32 @@ $(function () {
         wrongs = [];
 
         // for testing purposes to skip straight to certain level
-        // levelID = 5;
+        // levelID = 7;
 
         /**
          * Load data for the current level.
          */
         if (levelID === -2) {
-            // TODO - unused because play button creates extra click, and other reasons
             // initial screen with play button
             let playButton = document.createElement("div");
             playButton.id = "play_button";
+            let playButtonText = document.createElement("p");
+            playButtonText.id = "play_button_text";
+            playButtonText.innerHTML = "PLAY";
+            playButton.appendChild(playButtonText);
             gameWindow.appendChild(playButton);
 
+            let aboutRTZOverlay = document.createElement("div");
+            aboutRTZOverlay.id = "about_rtz_overlay";
+            let aboutRTZText = document.createElement("p");
+            aboutRTZText.id = "about_rtz_text";
+            aboutRTZText.innerHTML = "Welcome to Race To Zero! Race through each level to get the fastest time, all while learning about the issue of food waste!";
+            aboutRTZOverlay.appendChild(aboutRTZText);
+            gameWindow.appendChild(aboutRTZOverlay);
+
             $(playButton).click(function () {
-                let gameXDisplacement = $(window).width() * 0.5;
-                let gameYDisplacement = $(window).height() * 0.5;
-                window.scrollTo(gameXDisplacement, gameYDisplacement);
+                let gameContainerOffset = $(gameContainer).offset();
+                window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
                 game.level = -1;
                 reInit();
             })
@@ -201,6 +232,10 @@ $(function () {
                     level.innerHTML = "Level " + i;
                 }
                 level.onclick = function () {
+                	if (!musicStarted && soundEnabled) {
+                		musicStarted = true;
+                		newTrack();
+                	}
                     game.level = i * 2;
                     let gameContainerOffset = $(gameContainer).offset();
                     window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
@@ -208,26 +243,68 @@ $(function () {
                 };
                 levelSelect.appendChild(level);
             }
+            
+            let soundButton = document.createElement("div");
+            soundButton.id = "sound_button";
+            let soundOnImage = document.createElement("img");
+            soundOnImage.src = "img/soundon.png";
+            soundOnImage.alt = "Toggle Sound";
+            let soundOffImage = document.createElement("img");
+            soundOffImage.src = "img/soundoff.png";
+            soundOffImage.alt = "Toggle Sound";
+        	if (soundEnabled) {
+        	    soundButton.appendChild(soundOnImage);
+        	} else {
+        	    soundButton.appendChild(soundOffImage);
+        	}
+                
+            soundButton.onclick = function() {
+                if (soundEnabled) {
+                    soundEnabled = false;
+                    soundButton.removeChild(soundOnImage);
+                    soundButton.appendChild(soundOffImage);
+                    musicPlayer.pause();
+                    document.getElementById("successsound").muted = true;
+                } else {
+                    soundEnabled = true;
+                    musicStarted = true;
+                    soundButton.removeChild(soundOffImage);
+                    soundButton.appendChild(soundOnImage);
+                    newTrack();
+                    document.getElementById("successsound").muted = false;
+                }
+            }
+            
+            levelSelect.appendChild(soundButton);
+            
             gameWindow.appendChild(levelSelect);
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
+            let hint1 = "Tap on one side of the strawberry to make it go the other way!";
+            let hint2 = "The further you tap from the strawberry, the further it will go!";
+            let hint3 = "Get the strawberry through this hole!";
+            
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)//,
                 //new Barrier("forsandbox", 0, height * 0.9, width, height)
             );
             extras.push(
-                new Extra("hint_tap_here", width * 0.15, height * 0.3, 0, 0, "p", "Tap here"),
-                new Extra("tap_image", width * 0.15, height * 0.35, width * 0.2, height * 0.4, "img", "img/taphere.png"),
-                new Extra("arrow", width * 0.15, height * 0.8, width * 0.2, height * 0.85, "img", "img/arrow.png")
+                new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
+                new Extra("tap_image", width * 0.15, height * 0.40, width * 0.2, height * 0.45, "img", "img/taphere.png"),
+                new Extra("hint_further", width * 0.30, height * 0.55, 0, 0, "p", hint2),
+                new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
+                new Extra("arrow", width * 0.10, height * 0.85, width * 0.2, height * 0.90, "img", "img/arrow.png")
             );
-            goal = new Goal("goal", width * 0.05, height * 0.95, width * 0.20, height);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.05, height * 0.95, width * 0.20, height, false);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
             playItem = new PlayItem(width * 0.35, height * 0.2, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
         } else if (levelID === 1) {
             // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
             let question = "How much of the food produced around the world is wasted?";
+            let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one."
+            let hint2 = "Tap during mid-jump to go higher!";
             let answer1 = "One half";
             let answer2 = "One third";
             barriers.push(
@@ -239,16 +316,20 @@ $(function () {
                 new Barrier("floor2", width * 0.6, height * 0.9, width * 0.75, height - barrierHeight)
             );
             extras.push(
-                new Extra("tutorialquestion", width * 0.25, height * 0.30, 0, 0, "p", question),
+                new Extra("tutorialquestion", width * 0.25, height * 0.15, 0, 0, "p", question),
+                new Extra("hint_answer", width * 0.25, height * 0.30, 0, 0, "p", hint1),
+                new Extra("hint_jump", width * 0.25, height * 0.60, 0, 0, "p", hint2),
                 new Extra("tutorialanswer1", width * 0.25, height * 0.75, 0, 0, "p", answer1),
-                new Extra("tutorialanswer2", width * 0.6, height * 0.75, 0, 0, "p", answer2)
+                new Extra("tutorialanswer2", width * 0.6, height * 0.75, 0, 0, "p", answer2),
+                new Extra("arrow1", width * 0.29, height * 0.80, width * 0.34, height * 0.85, "img", "img/arrow.png"),
+                new Extra("arrow2", width * 0.64, height * 0.80, width * 0.69, height * 0.85, "img", "img/arrow.png")
             );
             wrongs.push(
                 new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1")
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
-            goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9, true);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
         } else if (levelID === 2) {
@@ -260,17 +341,17 @@ $(function () {
                 new Barrier("wall2", width * 0.5375, height * 0.6, width, height)
             );
             goal = new Goal("goal", width * 0.4625, height - barrierHeight, width * 0.5375, height);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", false);
             playItem = new PlayItem(width * 0.475, height * 0.1, 0, 0, playItemSize, foodItem);
-       		//playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
             // Level 1 Question Stage
-            
+
             let barrier1Left = Math.max(width * 0.20, barrierWidth + playItemSize + 10);
             let barrier1Right = barrier1Left + Math.max(width * 0.10, playItemSize);
             let barrier3Right = Math.min(width * 0.80, width - barrierWidth - playItemSize - 10);
             let barrier3Left = barrier3Right - Math.max(width * 0.10, playItemSize);
-            
+
             let question = "How much money does a typical household in Vancouver lose per year due to food waste?";
             let answer1 = "$200";
             let answer2 = "$700";
@@ -296,8 +377,8 @@ $(function () {
                 new Wrong("lvl1wrong4", width * 0.80, height * 0.85, width * 0.95, height * 0.9, "lvl1answer4")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
-            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90, true);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.05 + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
             // Level 2 Game Stage (staircase)
@@ -308,8 +389,8 @@ $(function () {
                 new Barrier("step3", width * 0.50, height * 0.35, width * 0.80, height * 0.60),
                 new Barrier("step4", width * 0.65, height * 0.20, width * 0.80, height * 0.45)
             );
-            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height, false);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.30, 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
             // Level 2 Question Stage
@@ -322,7 +403,7 @@ $(function () {
                 new Barrier("platform1", width * 0.75, height * 0.20, width * 0.95, height * 0.30),
                 new Barrier("platform2", width * 0.30, height * 0.29, width * 0.45, height * 0.355),
                 new Barrier("platform3", width * 0.55, height * 0.49, width * 0.70, height * 0.555),
-                new Barrier("platform4", width * 0.30, height * 0.79, width * 0.45, height * 0.855),
+                new Barrier("platform4", width * 0.30, height * 0.79, width * 0.45, height),
                 new Barrier("barrier1", width * 0.20, height * 0.25, width * 0.30, height * 0.55),
                 new Barrier("barrier2", width * 0.05, height * 0.45, width * 0.20, height * 0.55),
                 new Barrier("barrier3", width * 0.70, height * 0.40, width * 0.80, height * 0.60),
@@ -344,10 +425,10 @@ $(function () {
                 new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width * 0.95, height * 0.50, "lvl2answerFruits")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
-            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90, true);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
-        	//playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
+            //playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
         } else if (levelID === 6) {
             // Level 3 Game Stage (obstacles)
             let blocks1 = width * 0.50;
@@ -360,10 +441,11 @@ $(function () {
                 new Barrier("platform1", width * 0.05, height * 0.30, width * 0.80, height * 0.45),
                 new Barrier("platform2", width * 0.25, height * 0.65, width * 0.95, height * 0.80),
                 new Barrier("floor", width * 0.05, height * 0.90, width * 0.80, height * 0.95),
-                new Barrier("barrier1", width * 0.20, height * 0.05, width * 0.30, height * 0.20),
+                new Barrier("barrier1", width * 0.24, height * 0.05, width * 0.32, height * 0.20),
                 new Barrier("barrier2", width * 0.40, height * 0.15, width * 0.50, height * 0.30),
                 new Barrier("barrier3", width * 0.60, height * 0.05, width * 0.70, height * 0.18),
-                new Barrier("barrier4", width * 0.82, height * 0.05, width * 0.88, height * 0.12),
+                new Barrier("barrier4", width * 0.80, height * 0.15, width * 0.85, height * 0.20),
+                new Barrier("corner", width * 0.92, height * 0.04, width * 0.96, height * 0.10),
                 new Barrier("lip", width * 0.80, height * 0.25, width * 0.85, height * 0.40),
                 new Barrier("barrier6", width * 0.30, height * 0.45, width * 0.40, height * 0.55),
                 new Barrier("barrier7", width * 0.05, height * 0.53, width * 0.15, height * 0.60),
@@ -372,8 +454,8 @@ $(function () {
                 new Barrier("barrier10", blocks1, height * 0.60, blocks2, height * 0.65),
                 new Barrier("barrier11", blocks5, height * 0.60, blocks6, height * 0.65)
             );
-            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.80, height * 0.95, width * 0.95, height, false);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.10, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(227, 202, 13, 4, playItemSize, foodItem); //sends the food object into a glitch
         } else if (levelID === 7) {
@@ -382,25 +464,25 @@ $(function () {
             let answerRefrigerate = "Refrigerate them";
             let answerToast = "Toast them";
             let answerSoak = "Soak them in water";
-            let answerBreak = "Break them into smaller pieces";
+            let answerBreak = "Break them into pieces";
             barriers.push(
-                new Barrier("mainwall", width * 0.70, height * 0.05, width * 0.80, height * 0.80),
-                new Barrier("floor", 0, height * 0.90, width * 0.95, height * 0.95),
+                new Barrier("mainwall", width * 0.70, height * 0.04, width * 0.80, height * 0.80),
+                new Barrier("floor", 0, height * 0.90, width * 0.95, height * 0.96),
                 new Barrier("platform1", width * 0.05, height * 0.20, width * 0.30, height * 0.30),
                 new Barrier("platform2", width * 0.05, height * 0.45, width * 0.30, height * 0.55),
                 new Barrier("platform3", width * 0.05, height * 0.70, width * 0.30, height * 0.80),
-                new Barrier("ledge4", width * 0.60, height * 0.34, width * 0.70, height * 0.405),
-                new Barrier("ledge5", width * 0.60, height * 0.59, width * 0.70, height * 0.655),
+                new Barrier("ledge4", width * 0.60, height * 0.34, width * 0.71, height * 0.405),
+                new Barrier("ledge5", width * 0.60, height * 0.59, width * 0.71, height * 0.655),
                 new Barrier("floating1", width * 0.40, height * 0.19, width * 0.49, height * 0.255),
                 new Barrier("floating2", width * 0.40, height * 0.44, width * 0.49, height * 0.505),
                 new Barrier("floating3", width * 0.40, height * 0.74, width * 0.49, height * 0.805)
             );
             extras.push(
-                new Extra("lvl3question", width * 0.40, height * 0.81, 0, 0, "p", question),
-                new Extra("lvl3answerRefrigerate", width * 0.05, height * 0.10, 0, 0, "p", answerRefrigerate),
-                new Extra("lvl3answerToast", width * 0.05, height * 0.35, 0, 0, "p", answerToast),
-                new Extra("lvl3answerSoak", width * 0.05, height * 0.60, 0, 0, "p", answerSoak),
-                new Extra("lvl3answerBreak", width * 0.05, height * 0.81, 0, 0, "p", answerBreak)
+                new Extra("lvl3question", width * 0.50, height * 0.81, 0, 0, "p", question),
+                new Extra("lvl3answerRefrigerate", width * 0.20, height * 0.10, 0, 0, "p", answerRefrigerate),
+                new Extra("lvl3answerToast", width * 0.20, height * 0.35, 0, 0, "p", answerToast),
+                new Extra("lvl3answerSoak", width * 0.20, height * 0.60, 0, 0, "p", answerSoak),
+                new Extra("lvl3answerBreak", width * 0.20, height * 0.82, 0, 0, "p", answerBreak)
             );
             wrongs.push(
                 new Wrong("lvl3wrongRefrigerate", width * 0.05, height * 0.05, width * 0.20, height * 0.20, "lvl3answerRefrigerate"),
@@ -408,8 +490,8 @@ $(function () {
                 new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.20, height * 0.90, "lvl3answerBreak")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If your chips have gone stale, don't throw them out - just <span class=\"answer\">toast them!</span></p>";
-            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, true);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 8) {
             // Level 4 Game Stage (maze)
@@ -436,8 +518,8 @@ $(function () {
                 new Barrier("barrier8", width * 0.40, height * 0.75, width * 0.45, height * 0.80),
                 new Barrier("barrier9", width * 0.28, height * 0.85, width * 0.33, height * 0.90)
             );
-            goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height, false);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.48, 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
             // Level 4 Question Stage
@@ -474,9 +556,9 @@ $(function () {
                 new Wrong("lvl4wrongMillion", width * 0.35, height * 0.85, width * 0.55, height * 0.90, "lvl4answerMillion"),
                 new Wrong("lvl4wrongBillion", width * 0.80, height * 0.25, width * 0.95, height * 0.35, "lvl4answerBillion")
             );
-            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste. Wow!</p>";
+            scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
-            foodItem = new FoodItem("Box", "box", "img/orange.png", true);
+            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.075, height * 0.10, 0, 0, playItemSize, foodItem);
         }
 
@@ -485,7 +567,7 @@ $(function () {
             /**
              * Defines the play area and fills the background with the appropriate colour.
              */
-            new Air("playArea", 0, 0, width, height).drawPhysicalObject();
+            new Air("play_area", 0, 0, width, height).drawPhysicalObject();
 
             /**
              * Displays the barriers, then adds the barriers to the level object.
@@ -545,6 +627,8 @@ $(function () {
 
             foodImage = $("#food_image");
 
+            navBurger.style.top = "7vh";
+            navBurger.style.left = "5vh";
             retryImage.style.display = "block";
             timer.style.display = "block";
 
@@ -552,6 +636,9 @@ $(function () {
              * Initializes the timer that handles game ticks.
              */
             intervalId = setInterval(move, 5);
+        } else {
+            navBurger.style.top = "2vh";
+            navBurger.style.left = "2vh";
         }
     }
 
@@ -589,6 +676,7 @@ $(function () {
                 }
                 init();
             } else {
+        		document.getElementById("successsound").play();
                 $(".extra").css("display", "none");
 
                 let time = document.createElement("p");
@@ -631,10 +719,46 @@ $(function () {
                 if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
                     scoreOverlay.appendChild(nextLevelButton);
                 }
+                
+                let soundButton = document.createElement("div");
+                soundButton.id = "sound_button";
+                let soundOnImage = document.createElement("img");
+                soundOnImage.src = "img/soundon.png";
+                soundOnImage.alt = "Toggle Sound";
+                let soundOffImage = document.createElement("img");
+                soundOffImage.src = "img/soundoff.png";
+                soundOffImage.alt = "Toggle Sound";
+        	    if (soundEnabled) {
+        	        soundButton.appendChild(soundOnImage);
+        	    } else {
+        	        soundButton.appendChild(soundOffImage);
+        	    }
+                
+                soundButton.onclick = function() {
+                    if (soundEnabled) {
+                	    soundEnabled = false;
+                	    soundButton.removeChild(soundOnImage);
+                	    soundButton.appendChild(soundOffImage);
+                	    musicPlayer.pause();
+                	    document.getElementById("successsound").muted = true;
+                    } else {
+                	    soundEnabled = true;
+                	    soundButton.removeChild(soundOffImage);
+                	    soundButton.appendChild(soundOnImage);
+                	    newTrack();
+                	    document.getElementById("successsound").muted = false;
+                    }
+                }
+                
+                scoreOverlay.appendChild(soundButton);
 
-                scoreOverlay.style.display = "block";
+                navBurger.style.top = "2vh";
+                navBurger.style.left = "2vh";
+                navImage.src = "img/menuicon.png";
+
                 retryImage.style.display = "none";
                 timer.style.display = "none";
+                scoreOverlay.style.display = "block";
 
                 retryButton.onclick = function () {
                     game.level -= 1;
@@ -658,14 +782,16 @@ $(function () {
         // update score display (timer)
         timer.innerHTML = parseTime(score);
     }
-	
-	/**
-	 * Reinitializes a level.
-	 */
+
+    /**
+     * Reinitializes a level.
+     */
     function reInit() {
         scoreOverlay.style.display = "none";
+
         score = 0;
         if (game.level >= 0) {
+            navImage.src = "img/menuiconblack.png";
             retryImage.style.display = "block";
             timer.style.display = "block";
         }
@@ -708,10 +834,23 @@ $(function () {
             playItem.clicked(mousePosX, mousePosY);
 
             // implements a delay between inputs - currently unused
-        	// clicked = true;
+            // clicked = true;
             // setTimeout(setClicked, 200, false);
         }
     });
+    
+    /**
+     * Starts playing a new music track, selected at random.
+     */
+    function newTrack() {
+    	if (musicStarted) {
+    		let trackNumber = Math.floor((Math.random() * musicURLs.length));
+        	musicPlayer.setAttribute("src", musicURLs[trackNumber]);
+        	if (soundEnabled) {
+        		musicPlayer.play();
+        	}
+        }
+    }
 });
 
 /**

@@ -76,6 +76,7 @@
 					);
 				}
 			?>
+				<p id='changepic'><a href='changepic.php'>Change Your Picture</a></p>
 			</div>
 		</div>	
 		<div class='row'>	
@@ -85,7 +86,6 @@
 	            <li>&nbsp;</li>
 	            <li>Your Best Times:<br><br>
 	            	<?php 
-	            		//echo displayTutorialScore(); 
 	            		echo "<table id='bestTimesTable'>";
 	            			echo "<tr>";
 	            				echo "<th>Level</th>";
@@ -94,27 +94,16 @@
 	            			for ($i = 1; $i <= 5; $i++) { // edit if extra level(s) added
 	            				echo "<tr>";
 	            					echo "<td>" . (($i == 1) ? "Tutorial" : $i) . "</td>";
-	            					echo "<td>" . getLevelScore($i) . "</td>";
+	            					$levelScore = getLevelScore($i);
+	            					echo "<td>" . (($levelScore == 0) ? "N/A" : (round($levelScore / 1000.0, 1) . s)) . "</td>";
 	            				echo "</tr>";
 	            			}
 	            		echo "</table>";
 	            	?>
-	            	</li>
-	            <li>&nbsp;</li>
+				</li>
 	        </ul>
 	        </div>
 		</div>
-	<!--The following is a work in progress. The user will be able to change their
-	profile picture to another (random) picture.-->
-	<!--<div class'inline'>
-    	<img src="img/setprofilepic.png" name="canvas" width="225" height="150" />
-	</div>
-    <br><br>
-	<div class='button'>
-		<input onclick="displayImage();" type="button" value="Change Image">
-	</div>
-	<br><br>
-    <br>-->
 	</div>
 </div>
 <?php include("templateFooter.php");?>
