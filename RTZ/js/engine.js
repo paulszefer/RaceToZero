@@ -244,23 +244,31 @@ $(function () {
             }
             
             let soundButton = document.createElement("div");
-            soundButton.id = "music_button";
-        	/*TODO: style this. should be smaller than the other buttons.*/
+            soundButton.id = "sound_button";
+            let soundOnImage = document.createElement("img");
+            soundOnImage.src = "img/soundon.png";
+            soundOnImage.alt = "Toggle Sound";
+            let soundOffImage = document.createElement("img");
+            soundOffImage.src = "img/soundoff.png";
+            soundOffImage.alt = "Toggle Sound";
         	if (soundEnabled) {
-        	    soundButton.innerHTML = "Turn sound off";
+        	    soundButton.appendChild(soundOnImage);
         	} else {
-        	    soundButton.innerHTML = "Turn sound on";
+        	    soundButton.appendChild(soundOffImage);
         	}
                 
             soundButton.onclick = function() {
                 if (soundEnabled) {
                     soundEnabled = false;
-                    soundButton.innerHTML = "Turn sound on";
+                    soundButton.removeChild(soundOnImage);
+                    soundButton.appendChild(soundOffImage);
                     musicPlayer.pause();
                     document.getElementById("successsound").muted = true;
                 } else {
                     soundEnabled = true;
-                    soundButton.innerHTML = "Turn sound off";
+                    musicStarted = true;
+                    soundButton.removeChild(soundOffImage);
+                    soundButton.appendChild(soundOnImage);
                     newTrack();
                     document.getElementById("successsound").muted = false;
                 }
@@ -711,24 +719,31 @@ $(function () {
                     scoreOverlay.appendChild(nextLevelButton);
                 }
                 
-                let soundButton = document.createElement("p");
+                let soundButton = document.createElement("div");
                 soundButton.id = "sound_button";
-                /*TODO: style this. should be smaller than the other buttons.*/
-                if (soundEnabled) {
-                    soundButton.innerHTML = "Turn sound off";
-                } else {
-                    soundButton.innerHTML = "Turn sound on";
-                }
+                let soundOnImage = document.createElement("img");
+                soundOnImage.src = "img/soundon.png";
+                soundOnImage.alt = "Toggle Sound";
+                let soundOffImage = document.createElement("img");
+                soundOffImage.src = "img/soundoff.png";
+                soundOffImage.alt = "Toggle Sound";
+        	    if (soundEnabled) {
+        	        soundButton.appendChild(soundOnImage);
+        	    } else {
+        	        soundButton.appendChild(soundOffImage);
+        	    }
                 
                 soundButton.onclick = function() {
                     if (soundEnabled) {
                 	    soundEnabled = false;
-                	    soundButton.innerHTML = "Turn sound on";
+                	    soundButton.removeChild(soundOnImage);
+                	    soundButton.appendChild(soundOffImage);
                 	    musicPlayer.pause();
                 	    document.getElementById("successsound").muted = true;
                     } else {
-                	    soundButton = true;
-                	    soundButton.innerHTML = "Turn sound off";
+                	    soundEnabled = true;
+                	    soundButton.removeChild(soundOffImage);
+                	    soundButton.appendChild(soundOnImage);
                 	    newTrack();
                 	    document.getElementById("successsound").muted = false;
                     }
