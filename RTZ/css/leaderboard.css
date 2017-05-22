@@ -30,7 +30,7 @@ tr:nth-child(4) {
     background-color: #cd7f32;
 }
 /*the title row*/
-#besttimes > tbody > tr:nth-child(1){
+#besttimes > tbody > tr:nth-child(odd){
 	font-weight:bold;
 	font-size: 1.25em;
 	background-color: rgb(128, 0, 0);
@@ -39,7 +39,7 @@ tr:nth-child(4) {
 #levelselect{
     display:block;
     margin: 1vh auto;
-    width: 15%;
+    min-width: 100px;
     height: 5vh;
     text-align: center;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
