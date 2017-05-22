@@ -116,12 +116,19 @@ $(function () {
          */
         muteButton = document.createElement("div");
         muteButton.id = "mute_button";
+        muteImage = document.createElement("img");
+        muteImage.id = "mute_image";
+        muteImage.src = "img/soundon.png";
+        muteButton.appendChild(muteImage);
+        gameContainer.appendChild(muteButton);
         $(muteButton).click(function () {
                 if (soundEnabled) {
+                    muteImage.src = "img/soundoff.png";
                     soundEnabled = false;
                     musicPlayer.pause();
                     document.getElementById("successsound").muted = true;
                 } else {
+                    muteImage.src = "img/soundon.png";
                     soundEnabled = true;
                     musicStarted = true;
                     newTrack();
@@ -129,11 +136,6 @@ $(function () {
                 }
             }
         );
-        muteImage = document.createElement("img");
-        muteImage.id = "mute_image";
-        muteImage.src = "img/soundon.png";
-        muteButton.appendChild(muteImage);
-        gameContainer.appendChild(muteButton);
 
         /**
          * Creates the element that displays the timer(the user's score).

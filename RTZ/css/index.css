@@ -23,13 +23,11 @@
 }
 
 /*mutebutton appears*/
-#mute_button {
+#mute_image {
     display: none;
     position: absolute;
     top: 15.5%;
-    right: 7%;
-    width: 6vh;
-    height: 6vh;
+    right: 5%;
     transition: top 0.2s ease-in-out;
     -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
     -moz-transition: top 0.2s ease-in-out;
@@ -89,10 +87,10 @@
     }
 
     /*mutebutton appears*/
-    #mute_button {
+    #mute_image {
         position: fixed;
         top: 15.5vh;
-        right: 7vh;
+        right: 4vh;
         z-index: 499;
     }
 }
