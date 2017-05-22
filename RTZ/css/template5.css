@@ -236,9 +236,9 @@ html, body {
         position: absolute;
         top: 2.5vh;
         left: 2.5vh;
-        transition: top 0.2s ease-in-out;
-        -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
-        -moz-transition: top 0.2s ease-in-out;
+        /*transition: top 0.2s ease-in-out;
+        -webkit-transition: top 0.2s ease-in-out;
+        -moz-transition: top 0.2s ease-in-out;*/
         z-index: 100;
     }
 
