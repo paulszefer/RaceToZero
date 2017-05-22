@@ -290,10 +290,10 @@ $(function () {
             );
             extras.push(
                 new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
-                new Extra("tap_image", width * 0.15, height * 0.40, width * 0.2, height * 0.45, "img", "img/taphere.png"),
+                new Extra("tap_image", width * 0.15, height * 0.35, width * 0.15 + height * 0.05, height * 0.4, "img", "img/taphere.png"),
                 new Extra("hint_further", width * 0.30, height * 0.55, 0, 0, "p", hint2),
                 new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
-                new Extra("arrow", width * 0.10, height * 0.85, width * 0.2, height * 0.90, "img", "img/arrow.png")
+                new Extra("arrow", width * 0.10, height * 0.85, width * 0.1 + height * 0.05, height * 0.90, "img", "img/arrow.png")
             );
             goal = new Goal("goal", width * 0.05, height * 0.95, width * 0.20, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
@@ -303,7 +303,7 @@ $(function () {
             // Tutorial Level Question Stage
             // TODO - remove row of white pixels at the bottom
             let question = "How much of the food produced around the world is wasted?";
-            let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one."
+            let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one.";
             let hint2 = "Tap during mid-jump to go higher!";
             let answer1 = "One half";
             let answer2 = "One third";
@@ -748,7 +748,7 @@ $(function () {
                 	    newTrack();
                 	    document.getElementById("successsound").muted = false;
                     }
-                }
+                };
                 
                 scoreOverlay.appendChild(soundButton);
 
