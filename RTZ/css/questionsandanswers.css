@@ -3,7 +3,23 @@
 	z-index: 11;
 }
 
+#hint_tap_here {
+	width: 70%;
+}
+
+#hint_further {
+	width: 65%;
+}
+
 #tutorialquestion {
+	width: 50%;
+}
+
+#hint_answer {
+	width: 50%;
+}
+
+#hint_jump {
 	width: 50%;
 }
 

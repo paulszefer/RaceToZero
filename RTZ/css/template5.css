@@ -94,13 +94,6 @@
     font-size: 5vw;
     font-family: MavenPL300;
 }
-#mobilenav img {
-    width: 40px;
-    display: inline-block;
-    position: relative;
-    top: 10px;
-    margin-right: 2vh;
-}
 
 #xButton {
     position: absolute;
