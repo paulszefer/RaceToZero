@@ -74,6 +74,11 @@
     padding-left: 50px;
     color: black;
 }
+.bigexpandedcontentbox p {
+    margin: 0;
+    padding-right: 50px;
+    width: auto;
+}
 .contentbox h1{
     padding:0;
 }
