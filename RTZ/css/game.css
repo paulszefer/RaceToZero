@@ -207,3 +207,21 @@
     -o-user-select: none;
     user-select: none;
 }
+
+/* Animations */
+#tap_image {
+    animation: pulse 2s alternate infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.8;
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
