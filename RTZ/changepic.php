@@ -1,6 +1,8 @@
+<?php include("templateHeader.php");?>
+<link rel="stylesheet" href="css/changepic.css">
+<script src="js/changepic.js"></script>
+<?php include("templateNav.php");?>
 <?php
-
-	session_start();
 	
 	if(!isset($_SESSION['user_session'])) {
 		header('Location: login.php');
@@ -26,11 +28,6 @@
 	}
 
 ?>
-
-<?php include("templateHeader.php");?>
-<link rel="stylesheet" href="css/changepic.css">
-<script src="js/changepic.js"></script>
-<?php include("templateNav.php");?>
 
 <title>Race to Zero - Change Your Picture</title>
 <div id='content'>
