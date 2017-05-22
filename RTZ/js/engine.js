@@ -47,14 +47,14 @@ $(function () {
     const NUMBER_OF_LEVELS = 5;
     let musicStarted = false;
     let soundEnabled = true;
-    
+
     const musicURLs = ["music/cute.mp3",
-                       "music/happiness.mp3",
-                       "music/ukulele.mp3",
-                       "music/littleidea.mp3",
-                       "music/buddy.mp3",
-                       "music/acousticbreeze.mp3",
-                       "music/anewbeginning.mp3"];
+        "music/happiness.mp3",
+        "music/ukulele.mp3",
+        "music/littleidea.mp3",
+        "music/buddy.mp3",
+        "music/acousticbreeze.mp3",
+        "music/anewbeginning.mp3"];
 
     setup();
 
@@ -64,13 +64,13 @@ $(function () {
      */
     function setup() {
 
-		/**
-		 * Creates the element that plays music.
-		 */
-		musicPlayer = document.createElement("audio");
-		musicPlayer.volume = 0.2;
-		musicPlayer.onended = newTrack;
-		musicPlayer.pause();
+        /**
+         * Creates the element that plays music.
+         */
+        musicPlayer = document.createElement("audio");
+        musicPlayer.volume = 0.2;
+        musicPlayer.onended = newTrack;
+        musicPlayer.pause();
 
         /**
          * Creates the element that contains the game window.
@@ -232,10 +232,10 @@ $(function () {
                     level.innerHTML = "Level " + i;
                 }
                 level.onclick = function () {
-                	if (!musicStarted && soundEnabled) {
-                		musicStarted = true;
-                		newTrack();
-                	}
+                    if (!musicStarted && soundEnabled) {
+                        musicStarted = true;
+                        newTrack();
+                    }
                     game.level = i * 2;
                     let gameContainerOffset = $(gameContainer).offset();
                     window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
@@ -243,7 +243,7 @@ $(function () {
                 };
                 levelSelect.appendChild(level);
             }
-            
+
             let soundButton = document.createElement("div");
             soundButton.id = "sound_button";
             let soundOnImage = document.createElement("img");
@@ -252,13 +252,13 @@ $(function () {
             let soundOffImage = document.createElement("img");
             soundOffImage.src = "img/soundoff.png";
             soundOffImage.alt = "Toggle Sound";
-        	if (soundEnabled) {
-        	    soundButton.appendChild(soundOnImage);
-        	} else {
-        	    soundButton.appendChild(soundOffImage);
-        	}
-                
-            soundButton.onclick = function() {
+            if (soundEnabled) {
+                soundButton.appendChild(soundOnImage);
+            } else {
+                soundButton.appendChild(soundOffImage);
+            }
+
+            soundButton.onclick = function () {
                 if (soundEnabled) {
                     soundEnabled = false;
                     soundButton.removeChild(soundOnImage);
@@ -274,16 +274,16 @@ $(function () {
                     document.getElementById("successsound").muted = false;
                 }
             }
-            
+
             levelSelect.appendChild(soundButton);
-            
+
             gameWindow.appendChild(levelSelect);
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
             let hint1 = "Tap anywhere to move the strawberry in the opposite direction!";
             let hint2 = "The further away that you tap, the further it will go!";
             let hint3 = "Get the strawberry through this hole!";
-            
+
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)//,
                 //new Barrier("forsandbox", 0, height * 0.9, width, height)
@@ -325,7 +325,7 @@ $(function () {
                 new Extra("arrow2", width * 0.64, height * 0.80, width * 0.69, height * 0.85, "img", "img/arrow.png")
             );
             wrongs.push(
-                new Wrong("wrong1", width * 0.6, height * 0.85, width * 0.75, height * 0.9, true)
+                new Wrong("wrong1", width * 0.6, height * 0.85, width * 0.75, height * 0.9, "tutorialanswer2")
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
             goal = new Goal("goal", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1");
@@ -676,90 +676,92 @@ $(function () {
                 }
                 init();
             } else {
-        		document.getElementById("successsound").play();
-                $(".extra").css("display", "none");
+                document.getElementById("successsound").play();
 
-                let time = document.createElement("p");
-                time.innerHTML = parseTimeForOverlay(score);
+                setTimeout(function () {
+                    $(".extra").css("display", "none");
 
-                let actualLevel = game.level / 2;
-                let scoreInSeconds = Math.floor(score / 1000);
-                scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
-                $.post("accessdb.php", {
-                    function: "saveGame",
-                    level: actualLevel,
-                    time: score
-                }, function (data) {
-                    //alert(data);
-                });
+                    let time = document.createElement("p");
+                    time.innerHTML = parseTimeForOverlay(score);
 
-                let yourTime = document.createElement("p");
-                let yourTimeText = document.createTextNode("Your Time:");
-                yourTime.appendChild(yourTimeText);
-                scoreOverlay.appendChild(yourTime);
-                scoreOverlay.appendChild(time);
+                    let actualLevel = game.level / 2;
+                    let scoreInSeconds = Math.floor(score / 1000);
+                    scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
+                    $.post("accessdb.php", {
+                        function: "saveGame",
+                        level: actualLevel,
+                        time: score
+                    }, function (data) {
+                        //alert(data);
+                    });
 
-                let retryButton = document.createElement("div");
-                retryButton.id = "retry_button";
-                retryButton.className = "score_overlay_button";
-                retryButton.innerHTML = "<img src='img/retrylevel.png' alt='Retry'>";
-                scoreOverlay.appendChild(retryButton);
+                    let yourTime = document.createElement("p");
+                    let yourTimeText = document.createTextNode("Your Time:");
+                    yourTime.appendChild(yourTimeText);
+                    scoreOverlay.appendChild(yourTime);
+                    scoreOverlay.appendChild(time);
 
-                let selectLevelButton = document.createElement("div");
-                selectLevelButton.id = "select_level_button";
-                selectLevelButton.className = "score_overlay_button";
-                selectLevelButton.innerHTML = "<img src='img/levelselect.png' alt='Levels'>";
-                scoreOverlay.appendChild(selectLevelButton);
+                    let retryButton = document.createElement("div");
+                    retryButton.id = "retry_button";
+                    retryButton.className = "score_overlay_button";
+                    retryButton.innerHTML = "<img src='img/retrylevel.png' alt='Retry'>";
+                    scoreOverlay.appendChild(retryButton);
 
-                let nextLevelButton = document.createElement("div");
-                nextLevelButton.id = "next_level_button";
-                nextLevelButton.className = "score_overlay_button";
-                nextLevelButton.innerHTML = "<img src='img/nextlevel.png' alt='Next'>";
+                    let selectLevelButton = document.createElement("div");
+                    selectLevelButton.id = "select_level_button";
+                    selectLevelButton.className = "score_overlay_button";
+                    selectLevelButton.innerHTML = "<img src='img/levelselect.png' alt='Levels'>";
+                    scoreOverlay.appendChild(selectLevelButton);
 
-                if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
-                    scoreOverlay.appendChild(nextLevelButton);
-                }
-                
-                let soundButton = document.createElement("div");
-                soundButton.id = "sound_button";
-                let soundOnImage = document.createElement("img");
-                soundOnImage.src = "img/soundon.png";
-                soundOnImage.alt = "Toggle Sound";
-                let soundOffImage = document.createElement("img");
-                soundOffImage.src = "img/soundoff.png";
-                soundOffImage.alt = "Toggle Sound";
-        	    if (soundEnabled) {
-        	        soundButton.appendChild(soundOnImage);
-        	    } else {
-        	        soundButton.appendChild(soundOffImage);
-        	    }
-                
-                soundButton.onclick = function() {
-                    if (soundEnabled) {
-                	    soundEnabled = false;
-                	    soundButton.removeChild(soundOnImage);
-                	    soundButton.appendChild(soundOffImage);
-                	    musicPlayer.pause();
-                	    document.getElementById("successsound").muted = true;
-                    } else {
-                	    soundEnabled = true;
-                	    soundButton.removeChild(soundOffImage);
-                	    soundButton.appendChild(soundOnImage);
-                	    newTrack();
-                	    document.getElementById("successsound").muted = false;
+                    let nextLevelButton = document.createElement("div");
+                    nextLevelButton.id = "next_level_button";
+                    nextLevelButton.className = "score_overlay_button";
+                    nextLevelButton.innerHTML = "<img src='img/nextlevel.png' alt='Next'>";
+
+                    if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
+                        scoreOverlay.appendChild(nextLevelButton);
                     }
-                };
-                
-                scoreOverlay.appendChild(soundButton);
 
-                navBurger.style.top = "2vh";
-                navBurger.style.left = "2vh";
-                navImage.src = "img/menuicon.png";
+                    let soundButton = document.createElement("div");
+                    soundButton.id = "sound_button";
+                    let soundOnImage = document.createElement("img");
+                    soundOnImage.src = "img/soundon.png";
+                    soundOnImage.alt = "Toggle Sound";
+                    let soundOffImage = document.createElement("img");
+                    soundOffImage.src = "img/soundoff.png";
+                    soundOffImage.alt = "Toggle Sound";
+                    if (soundEnabled) {
+                        soundButton.appendChild(soundOnImage);
+                    } else {
+                        soundButton.appendChild(soundOffImage);
+                    }
 
-                retryImage.style.display = "none";
+                    soundButton.onclick = function () {
+                        if (soundEnabled) {
+                            soundEnabled = false;
+                            soundButton.removeChild(soundOnImage);
+                            soundButton.appendChild(soundOffImage);
+                            musicPlayer.pause();
+                            document.getElementById("successsound").muted = true;
+                        } else {
+                            soundEnabled = true;
+                            soundButton.removeChild(soundOffImage);
+                            soundButton.appendChild(soundOnImage);
+                            newTrack();
+                            document.getElementById("successsound").muted = false;
+                        }
+                    };
 
-                setTimeout(function() {
+                    scoreOverlay.appendChild(soundButton);
+
+                    navBurger.style.top = "2vh";
+                    navBurger.style.left = "2vh";
+                    navImage.src = "img/menuicon.png";
+
+                    retryImage.style.display = "none";
                     timer.style.display = "none";
+
+                    scoreOverlay.style.animation = "fadein 2s";
                     scoreOverlay.style.display = "block";
 
                     retryButton.onclick = function () {
@@ -841,17 +843,17 @@ $(function () {
             // setTimeout(setClicked, 200, false);
         }
     });
-    
+
     /**
      * Starts playing a new music track, selected at random.
      */
     function newTrack() {
-    	if (musicStarted) {
-    		let trackNumber = Math.floor((Math.random() * musicURLs.length));
-        	musicPlayer.setAttribute("src", musicURLs[trackNumber]);
-        	if (soundEnabled) {
-        		musicPlayer.play();
-        	}
+        if (musicStarted) {
+            let trackNumber = Math.floor((Math.random() * musicURLs.length));
+            musicPlayer.setAttribute("src", musicURLs[trackNumber]);
+            if (soundEnabled) {
+                musicPlayer.play();
+            }
         }
     }
 });
