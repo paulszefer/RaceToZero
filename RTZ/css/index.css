@@ -22,9 +22,27 @@
     z-index: 100;
 }
 
-/*navburger's height*/
+/*mutebutton appears*/
+#mute_button {
+    display: none;
+    position: absolute;
+    top: 15.5%;
+    right: 7%;
+    width: 6vh;
+    height: 6vh;
+    transition: top 0.2s ease-in-out;
+    -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
+    -moz-transition: top 0.2s ease-in-out;
+    z-index: 100;
+}
+/*retrylevel's height*/
 #retrylevel img {
     height: 7vh;
+}
+
+/*mute_button's height*/
+#mute_button img {
+    height: 9vh;
 }
 
 #footer {
@@ -67,6 +85,14 @@
         position: fixed;
         top: 7.5vh;
         right: 5.5vh;
+        z-index: 499;
+    }
+
+    /*mutebutton appears*/
+    #mute_button {
+        position: fixed;
+        top: 15.5vh;
+        right: 7vh;
         z-index: 499;
     }
 }

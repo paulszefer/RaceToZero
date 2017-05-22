@@ -41,6 +41,8 @@ $(function () {
     let navImage = navBurger.firstElementChild;
     let retryButton;
     let retryImage;
+    let muteButton;
+    let muteImage;
     let timer;
     let scoreOverlay;
     let game;
@@ -105,8 +107,33 @@ $(function () {
         retryImage = document.createElement("img");
         retryImage.id = "retrylevel";
         retryImage.src = "img/retrylevel.png";
+        retryImage.alt = "Retry Level"
         retryButton.appendChild(retryImage);
         gameContainer.appendChild(retryButton);
+
+        /**
+         * Creates the audio mute button within the level.
+         */
+        muteButton = document.createElement("div");
+        muteButton.id = "mute_button";
+        $(muteButton).click(function () {
+                if (soundEnabled) {
+                    soundEnabled = false;
+                    musicPlayer.pause();
+                    document.getElementById("successsound").muted = true;
+                } else {
+                    soundEnabled = true;
+                    musicStarted = true;
+                    newTrack();
+                    document.getElementById("successsound").muted = false;
+                }
+            }
+        );
+        muteImage = document.createElement("img");
+        muteImage.id = "mute_image";
+        muteImage.src = "img/soundon.png";
+        muteButton.appendChild(muteImage);
+        gameContainer.appendChild(muteButton);
 
         /**
          * Creates the element that displays the timer(the user's score).
@@ -273,7 +300,7 @@ $(function () {
                     newTrack();
                     document.getElementById("successsound").muted = false;
                 }
-            }
+            };
 
             levelSelect.appendChild(soundButton);
 
@@ -630,6 +657,7 @@ $(function () {
             navBurger.style.top = "7vh";
             navBurger.style.left = "5vh";
             retryImage.style.display = "block";
+            muteImage.style.display = "block";
             timer.style.display = "block";
 
             /**
@@ -678,6 +706,9 @@ $(function () {
             } else {
                 document.getElementById("successsound").play();
                 document.getElementById("goal").style.fontWeight = "bold";
+
+                retryImage.style.display = "none";
+                muteImage.style.display = "none";
 
                 setTimeout(function () {
                     $(".extra").css("display", "none");
@@ -760,7 +791,6 @@ $(function () {
                     navBurger.style.left = "2vh";
                     navImage.src = "img/menuicon.png";
 
-                    retryImage.style.display = "none";
                     timer.style.display = "none";
 
                     scoreOverlay.style.animation = "fadein 2s";
@@ -780,7 +810,7 @@ $(function () {
                         game.level += 1;
                         reInit();
                     };
-                }, 2000);
+                }, 1000);
             }
         }
         drawFoodItem();
@@ -800,6 +830,7 @@ $(function () {
         if (game.level >= 0) {
             navImage.src = "img/menuiconblack.png";
             retryImage.style.display = "block";
+            muteImage.style.display = "block";
             timer.style.display = "block";
         }
         let overlay_elements = scoreOverlay.children;
