@@ -54,11 +54,11 @@ class USER {
 					"INSERT INTO users(user_name,user_password,user_photo) 
 					VALUES(:uname, :upass, :photourl)");
 					$stmt->execute(array(':uname'=>$uname, ':upass'=>$upass,':photourl'=>$photourl));
-					return true;
 					//and log them in automatically
 					$this->doLogin($uname, $upass);
 					//and redirect them to login script
 					$this->redirect('index.php');
+					return true;
 				}//End of else
 			} catch(PDOException $e) {
 				echo $e->getMessage();
@@ -104,6 +104,7 @@ class USER {
 			echo $e->getMessage();
 		}
 	}
+
 	public function displayLoginError(){
 		return $this->loginError;
 	}

@@ -275,6 +275,15 @@ class Level {
      */
     addGoal(goal) {
         this.addPhysicalObject(goal.x1, goal.y1, goal.x2, goal.y2, GOAL);
+        let x1 = goal.x1;
+        let y1 = goal.y1;
+        let x2 = goal.x2;
+        let y2 = goal.y2;
+        for (let i = x1; i <= x2; i++) {
+            for (let j = y1; j <= y2; j++) {
+                this._board[i][j].answerID = goal.answerID;
+            }
+        }
     }
 
     /**
@@ -329,9 +338,9 @@ class Level {
             }
             this.playItem.dy = 0;
             if (this.playItem.dx > 0) {
-                this.playItem.dx *= 0.9;
+                this.playItem.dx *= 0.95;
             } else if (this.playItem.dx < 0) {
-                this.playItem.dx *= 0.9;
+                this.playItem.dx *= 0.95;
             }
         } else {
             // check if next movement causes a collision
@@ -369,6 +378,29 @@ class Level {
             } else if (collision === 5) {
                 // collision with a goal
                 this.playItem.move();
+
+                if (this.levelID % 2 !== 0) {
+                    // find associated right answer
+                    let x1 = Math.round(this.playItem.x);
+                    let y1 = Math.round(this.playItem.y);
+                    let x2 = x1 + this.playItem.size;
+                    let y2 = y1 + this.playItem.size;
+
+                    let topLeftPixel = this.board[x1][y1];
+                    let topRightPixel = this.board[x2][y1];
+                    let bottomLeftPixel = this.board[x1][y2];
+                    let bottomRightPixel = this.board[x2][y2];
+
+                    if (topLeftPixel.type === GOAL) {
+                        document.getElementById(topLeftPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    } else if (topRightPixel.type === GOAL) {
+                        document.getElementById(topRightPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    } else if (bottomLeftPixel.type === GOAL) {
+                        document.getElementById(bottomLeftPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    } else if (bottomRightPixel.type === GOAL) {
+                        document.getElementById(bottomRightPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    }
+                }
                 return 5;
             } else if (collision === 6) {
                 // collision with a wrong answer section
@@ -932,7 +964,6 @@ class PhysicalObject {
         objectImage.style.left = this.x1 + "px";
         objectImage.style.top = this.y1 + "px";
 
-
         /* For Firefox */
         $(objectImage).css("width", objectWidth);
         $(objectImage).css("height", objectHeight);
@@ -947,11 +978,11 @@ class PhysicalObject {
         } else if (this.pixelType === AIR) {
             objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
         } else if (this.pixelType === RIGHT_ANSWER) {
-        	objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
-        	//objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+            //objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
         } else if (this.pixelType === WRONG) {
-        	objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
-        	//objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+            //objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
         }
         document.getElementById("game_window").appendChild(objectImage);
     }
@@ -979,12 +1010,24 @@ class Air extends PhysicalObject {
  * Defines a goal.
  */
 class Goal extends PhysicalObject {
-    constructor(name, x1, y1, x2, y2, rightAnswer) {
-    	if (rightAnswer) {
-    		super(name, x1, y1, x2, y2, RIGHT_ANSWER);
-    	} else {
-        	super(name, x1, y1, x2, y2, GOAL);
-        }
+    constructor(name, x1, y1, x2, y2, answerID) {
+        super(name, x1, y1, x2, y2, GOAL);
+        this._answerID = answerID;
+    }
+
+    /**
+     * Returns the ID of the element holding the text for this right answer.
+     * Used to create visual effects when a right answer is selected.
+     */
+    get answerID() {
+        return this._answerID;
+    }
+
+    /**
+     * Sets the ID.
+     */
+    set answerID(id) {
+        this._answer = id;
     }
 }
 
