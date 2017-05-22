@@ -47,14 +47,14 @@ $(function () {
     const NUMBER_OF_LEVELS = 5;
     let musicStarted = false;
     let soundEnabled = true;
-    
+
     const musicURLs = ["music/cute.mp3",
-                       "music/happiness.mp3",
-                       "music/ukulele.mp3",
-                       "music/littleidea.mp3",
-                       "music/buddy.mp3",
-                       "music/acousticbreeze.mp3",
-                       "music/anewbeginning.mp3"];
+        "music/happiness.mp3",
+        "music/ukulele.mp3",
+        "music/littleidea.mp3",
+        "music/buddy.mp3",
+        "music/acousticbreeze.mp3",
+        "music/anewbeginning.mp3"];
 
     setup();
 
@@ -64,13 +64,13 @@ $(function () {
      */
     function setup() {
 
-		/**
-		 * Creates the element that plays music.
-		 */
-		musicPlayer = document.createElement("audio");
-		musicPlayer.volume = 0.2;
-		musicPlayer.onended = newTrack;
-		musicPlayer.pause();
+        /**
+         * Creates the element that plays music.
+         */
+        musicPlayer = document.createElement("audio");
+        musicPlayer.volume = 0.2;
+        musicPlayer.onended = newTrack;
+        musicPlayer.pause();
 
         /**
          * Creates the element that contains the game window.
@@ -232,10 +232,10 @@ $(function () {
                     level.innerHTML = "Level " + i;
                 }
                 level.onclick = function () {
-                	if (!musicStarted && soundEnabled) {
-                		musicStarted = true;
-                		newTrack();
-                	}
+                    if (!musicStarted && soundEnabled) {
+                        musicStarted = true;
+                        newTrack();
+                    }
                     game.level = i * 2;
                     let gameContainerOffset = $(gameContainer).offset();
                     window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
@@ -243,7 +243,7 @@ $(function () {
                 };
                 levelSelect.appendChild(level);
             }
-            
+
             let soundButton = document.createElement("div");
             soundButton.id = "sound_button";
             let soundOnImage = document.createElement("img");
@@ -252,13 +252,13 @@ $(function () {
             let soundOffImage = document.createElement("img");
             soundOffImage.src = "img/soundoff.png";
             soundOffImage.alt = "Toggle Sound";
-        	if (soundEnabled) {
-        	    soundButton.appendChild(soundOnImage);
-        	} else {
-        	    soundButton.appendChild(soundOffImage);
-        	}
-                
-            soundButton.onclick = function() {
+            if (soundEnabled) {
+                soundButton.appendChild(soundOnImage);
+            } else {
+                soundButton.appendChild(soundOffImage);
+            }
+
+            soundButton.onclick = function () {
                 if (soundEnabled) {
                     soundEnabled = false;
                     soundButton.removeChild(soundOnImage);
@@ -274,23 +274,23 @@ $(function () {
                     document.getElementById("successsound").muted = false;
                 }
             }
-            
+
             levelSelect.appendChild(soundButton);
-            
+
             gameWindow.appendChild(levelSelect);
         } else if (levelID === 0) {
             // Tutorial Level Game Stage
-            let hint1 = "Tap on one side of the strawberry to make it go the other way!";
-            let hint2 = "The further you tap from the strawberry, the further it will go!";
+            let hint1 = "Tap anywhere to move the strawberry in the opposite direction!";
+            let hint2 = "The further away that you tap, the further it will go!";
             let hint3 = "Get the strawberry through this hole!";
-            
+
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)//,
                 //new Barrier("forsandbox", 0, height * 0.9, width, height)
             );
             extras.push(
                 new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
-                new Extra("tap_image", width * 0.15, height * 0.35, width * 0.15 + height * 0.05, height * 0.4, "img", "img/taphere.png"),
+                new Extra("tap_image", width * 0.15, height * 0.6, width * 0.15 + height * 0.05, height * 0.65, "img", "img/taphere.png"),
                 new Extra("hint_further", width * 0.30, height * 0.55, 0, 0, "p", hint2),
                 new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
                 new Extra("arrow", width * 0.10, height * 0.85, width * 0.1 + height * 0.05, height * 0.90, "img", "img/arrow.png")
@@ -305,8 +305,8 @@ $(function () {
             let question = "How much of the food produced around the world is wasted?";
             let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one.";
             let hint2 = "Tap during mid-jump to go higher!";
-            let answer1 = "One half";
-            let answer2 = "One third";
+            let answer1 = "One third";
+            let answer2 = "One half";
             barriers.push(
                 new Barrier("platform1", 0, height * 0.44, width * 0.4, height * 0.505),
                 new Barrier("ground1", 0, height * 0.80, width * 0.25, height),
@@ -325,10 +325,10 @@ $(function () {
                 new Extra("arrow2", width * 0.64, height * 0.80, width * 0.69, height * 0.85, "img", "img/arrow.png")
             );
             wrongs.push(
-                new Wrong("wrong1", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1")
+                new Wrong("wrong1", width * 0.6, height * 0.85, width * 0.75, height * 0.9, "tutorialanswer2")
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
-            goal = new Goal("goal", width * 0.6, height * 0.85, width * 0.75, height * 0.9, true);
+            goal = new Goal("goal", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
@@ -377,7 +377,7 @@ $(function () {
                 new Wrong("lvl1wrong4", width * 0.80, height * 0.85, width * 0.95, height * 0.9, "lvl1answer4")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
-            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90, true);
+            goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90, "lvl1answer2");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.05 + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
@@ -425,7 +425,7 @@ $(function () {
                 new Wrong("lvl2wrongFruits", width * 0.80, height * 0.45, width * 0.95, height * 0.50, "lvl2answerFruits")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
-            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90, true);
+            goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90, "lvl2answerAll");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
@@ -490,7 +490,7 @@ $(function () {
                 new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.20, height * 0.90, "lvl3answerBreak")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If your chips have gone stale, don't throw them out - just <span class=\"answer\">toast them!</span></p>";
-            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, true);
+            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, "lvl3answerToast");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 8) {
@@ -557,7 +557,7 @@ $(function () {
                 new Wrong("lvl4wrongBillion", width * 0.80, height * 0.25, width * 0.95, height * 0.35, "lvl4answerBillion")
             );
             scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
-            goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95);
+            goal = new Goal("goal", width * 0.75, height * 0.90, width * 0.90, height * 0.95, "lvl4answerTrillion");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.075, height * 0.10, 0, 0, playItemSize, foodItem);
         }
@@ -676,104 +676,111 @@ $(function () {
                 }
                 init();
             } else {
-        		document.getElementById("successsound").play();
-                $(".extra").css("display", "none");
+                document.getElementById("successsound").play();
+                document.getElementById("goal").style.fontWeight = "bold";
 
-                let time = document.createElement("p");
-                time.innerHTML = parseTimeForOverlay(score);
+                setTimeout(function () {
+                    $(".extra").css("display", "none");
 
-                let actualLevel = game.level / 2;
-                let scoreInSeconds = Math.floor(score / 1000);
-                scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
-                $.post("accessdb.php", {
-                    function: "saveGame",
-                    level: actualLevel,
-                    time: score
-                }, function (data) {
-                    //alert(data);
-                });
+                    let time = document.createElement("p");
+                    time.innerHTML = parseTimeForOverlay(score);
 
-                let yourTime = document.createElement("p");
-                let yourTimeText = document.createTextNode("Your Time:");
-                yourTime.appendChild(yourTimeText);
-                scoreOverlay.appendChild(yourTime);
-                scoreOverlay.appendChild(time);
+                    let actualLevel = game.level / 2;
+                    let scoreInSeconds = Math.floor(score / 1000);
+                    scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
+                    $.post("accessdb.php", {
+                        function: "saveGame",
+                        level: actualLevel,
+                        time: score
+                    }, function (data) {
+                        //alert(data);
+                    });
 
-                let retryButton = document.createElement("div");
-                retryButton.id = "retry_button";
-                retryButton.className = "score_overlay_button";
-                retryButton.innerHTML = "<img src='img/retrylevel.png' alt='Retry'>";
-                scoreOverlay.appendChild(retryButton);
+                    let yourTime = document.createElement("p");
+                    let yourTimeText = document.createTextNode("Your Time:");
+                    yourTime.appendChild(yourTimeText);
+                    scoreOverlay.appendChild(yourTime);
+                    scoreOverlay.appendChild(time);
 
-                let selectLevelButton = document.createElement("div");
-                selectLevelButton.id = "select_level_button";
-                selectLevelButton.className = "score_overlay_button";
-                selectLevelButton.innerHTML = "<img src='img/levelselect.png' alt='Levels'>";
-                scoreOverlay.appendChild(selectLevelButton);
+                    let retryButton = document.createElement("div");
+                    retryButton.id = "retry_button";
+                    retryButton.className = "score_overlay_button";
+                    retryButton.innerHTML = "<img src='img/retrylevel.png' alt='Retry'>";
+                    scoreOverlay.appendChild(retryButton);
 
-                let nextLevelButton = document.createElement("div");
-                nextLevelButton.id = "next_level_button";
-                nextLevelButton.className = "score_overlay_button";
-                nextLevelButton.innerHTML = "<img src='img/nextlevel.png' alt='Next'>";
+                    let selectLevelButton = document.createElement("div");
+                    selectLevelButton.id = "select_level_button";
+                    selectLevelButton.className = "score_overlay_button";
+                    selectLevelButton.innerHTML = "<img src='img/levelselect.png' alt='Levels'>";
+                    scoreOverlay.appendChild(selectLevelButton);
 
-                if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
-                    scoreOverlay.appendChild(nextLevelButton);
-                }
-                
-                let soundButton = document.createElement("div");
-                soundButton.id = "sound_button";
-                let soundOnImage = document.createElement("img");
-                soundOnImage.src = "img/soundon.png";
-                soundOnImage.alt = "Toggle Sound";
-                let soundOffImage = document.createElement("img");
-                soundOffImage.src = "img/soundoff.png";
-                soundOffImage.alt = "Toggle Sound";
-        	    if (soundEnabled) {
-        	        soundButton.appendChild(soundOnImage);
-        	    } else {
-        	        soundButton.appendChild(soundOffImage);
-        	    }
-                
-                soundButton.onclick = function() {
-                    if (soundEnabled) {
-                	    soundEnabled = false;
-                	    soundButton.removeChild(soundOnImage);
-                	    soundButton.appendChild(soundOffImage);
-                	    musicPlayer.pause();
-                	    document.getElementById("successsound").muted = true;
-                    } else {
-                	    soundEnabled = true;
-                	    soundButton.removeChild(soundOffImage);
-                	    soundButton.appendChild(soundOnImage);
-                	    newTrack();
-                	    document.getElementById("successsound").muted = false;
+                    let nextLevelButton = document.createElement("div");
+                    nextLevelButton.id = "next_level_button";
+                    nextLevelButton.className = "score_overlay_button";
+                    nextLevelButton.innerHTML = "<img src='img/nextlevel.png' alt='Next'>";
+
+                    if (game.level / 2 < (NUMBER_OF_LEVELS - 1)) {
+                        scoreOverlay.appendChild(nextLevelButton);
                     }
-                };
-                
-                scoreOverlay.appendChild(soundButton);
 
-                navBurger.style.top = "2vh";
-                navBurger.style.left = "2vh";
-                navImage.src = "img/menuicon.png";
+                    let soundButton = document.createElement("div");
+                    soundButton.id = "sound_button";
+                    let soundOnImage = document.createElement("img");
+                    soundOnImage.src = "img/soundon.png";
+                    soundOnImage.alt = "Toggle Sound";
+                    let soundOffImage = document.createElement("img");
+                    soundOffImage.src = "img/soundoff.png";
+                    soundOffImage.alt = "Toggle Sound";
+                    if (soundEnabled) {
+                        soundButton.appendChild(soundOnImage);
+                    } else {
+                        soundButton.appendChild(soundOffImage);
+                    }
 
-                retryImage.style.display = "none";
-                timer.style.display = "none";
-                scoreOverlay.style.display = "block";
+                    soundButton.onclick = function () {
+                        if (soundEnabled) {
+                            soundEnabled = false;
+                            soundButton.removeChild(soundOnImage);
+                            soundButton.appendChild(soundOffImage);
+                            musicPlayer.pause();
+                            document.getElementById("successsound").muted = true;
+                        } else {
+                            musicStarted = true;
+                            soundEnabled = true;
+                            soundButton.removeChild(soundOffImage);
+                            soundButton.appendChild(soundOnImage);
+                            newTrack();
+                            document.getElementById("successsound").muted = false;
+                        }
+                    };
 
-                retryButton.onclick = function () {
-                    game.level -= 1;
-                    reInit();
-                };
+                    scoreOverlay.appendChild(soundButton);
 
-                selectLevelButton.onclick = function () {
-                    game.level = -1;
-                    reInit();
-                };
+                    navBurger.style.top = "2vh";
+                    navBurger.style.left = "2vh";
+                    navImage.src = "img/menuicon.png";
 
-                nextLevelButton.onclick = function () {
-                    game.level += 1;
-                    reInit();
-                };
+                    retryImage.style.display = "none";
+                    timer.style.display = "none";
+
+                    scoreOverlay.style.animation = "fadein 2s";
+                    scoreOverlay.style.display = "block";
+
+                    retryButton.onclick = function () {
+                        game.level -= 1;
+                        reInit();
+                    };
+
+                    selectLevelButton.onclick = function () {
+                        game.level = -1;
+                        reInit();
+                    };
+
+                    nextLevelButton.onclick = function () {
+                        game.level += 1;
+                        reInit();
+                    };
+                }, 2000);
             }
         }
         drawFoodItem();
@@ -838,17 +845,17 @@ $(function () {
             // setTimeout(setClicked, 200, false);
         }
     });
-    
+
     /**
      * Starts playing a new music track, selected at random.
      */
     function newTrack() {
-    	if (musicStarted) {
-    		let trackNumber = Math.floor((Math.random() * musicURLs.length));
-        	musicPlayer.setAttribute("src", musicURLs[trackNumber]);
-        	if (soundEnabled) {
-        		musicPlayer.play();
-        	}
+        if (musicStarted) {
+            let trackNumber = Math.floor((Math.random() * musicURLs.length));
+            musicPlayer.setAttribute("src", musicURLs[trackNumber]);
+            if (soundEnabled) {
+                musicPlayer.play();
+            }
         }
     }
 });

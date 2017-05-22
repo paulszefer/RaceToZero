@@ -95,7 +95,7 @@
 	            				echo "<tr>";
 	            					echo "<td>" . (($i == 1) ? "Tutorial" : $i) . "</td>";
 	            					$levelScore = getLevelScore($i);
-	            					echo "<td>" . (($levelScore == 0) ? "N/A" : (round($levelScore / 1000.0, 1) . s)) . "</td>";
+	            					echo "<td>" . (($levelScore == 0) ? "N/A" : (round($levelScore / 1000.0, 1) . "S")) . "</td>";
 	            				echo "</tr>";
 	            			}
 	            		echo "</table>";
