@@ -15,7 +15,12 @@ $(document).ready(function() {
 		for (let i = 0; i < numberOfLevels; i++) {
 			let option = document.createElement("option");
 			option.setAttribute("value", "level" + i);
-			let text = document.createTextNode("Level " + i);
+			let text;
+			if (i === 0) {
+			    text = document.createTextNode("Tutorial");
+			} else {
+			    text = document.createTextNode("Level " + i);
+			}
 			option.appendChild(text);
 			select.appendChild(option); // adds an option element to the select element
 		}

@@ -20,35 +20,32 @@
 .contentactual h1 {
     text-align: center;
 }
+.contentactual td {
+    width: 20%;
+    max-width: 200px;
+}
 .contentactual img {
     height: 200px;
     width: 200px;
-    margin:auto;
+    margin: auto;
     display: block;
     vertical-align: middle;
+}
+.contentactual td img {
+    height: 100%;
+    width: 100%;
 }
 .contentactual ul {
 	padding:0;
 }
-.button {
-    
+h2 {
+    font-size: 150%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-/*The best times on profile*/
-#bestTimesTable{
-	display:block;
-	margin:auto;
-	width:50vw;
-	text-align: center;
-}
-#bestTimesTable td, #bestTimesTable th{
-	min-width:25vw;
-}
-#bestTimesTable >tbody> tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-/*the title row*/
-#bestTimesTable > tbody > tr:nth-child(1){
-	font-weight:bold;
-	font-size: 1.25em;
-	background-color: rgb(137, 232, 148);
+body p#explanation {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
 }
