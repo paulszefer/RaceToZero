@@ -745,6 +745,7 @@ $(function () {
                             musicPlayer.pause();
                             document.getElementById("successsound").muted = true;
                         } else {
+                            musicStarted = true;
                             soundEnabled = true;
                             soundButton.removeChild(soundOffImage);
                             soundButton.appendChild(soundOnImage);
