@@ -112,6 +112,13 @@
     padding: 0 10vw 0 10vw;
 }
 
+.mobileicon {
+    height: 7vh;
+    margin-right: 2vh;
+    position: relative;
+    top: 5px;
+}
+
 #mobilenav ul li div {
     vertical-align: middle;
     display: table-cell;

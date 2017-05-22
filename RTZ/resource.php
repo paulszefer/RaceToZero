@@ -188,7 +188,7 @@
 			<div class='expandedcontentbox bigexpandedcontentbox'>	<!-- Affiliated Apps -->
 				<img class="xbutton" id="bigone" src="img/tempX.png">
 				<h1>AFFILIATED APPS</h1>
-				<p>
+				<p id=centeraffappstext>
 				Here are some other apps that we have connection with!
 				</p>
 				<br>

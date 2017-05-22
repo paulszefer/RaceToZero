@@ -73,6 +73,11 @@
     padding-left: 50px;
     color: black;
 }
+.bigexpandedcontentbox p{
+    margin: 0;
+    width: auto;
+    padding-right: 50px;
+}
 .contentbox h1{
     padding:0;
 }
@@ -140,10 +145,12 @@ button{
     position:absolute;
     left: 0;
     top: 0;
+    padding-top: 1vh;
+    padding-left: 1vh;
 }
 /* xbutton for affiliated apps */
 #bigone{
-    padding-left: 0;
+    padding-left: 1vh;
 }
 /* spans text appended to the end of each question and displays based on answer */
 .correcttext, .incorrecttext{
@@ -156,4 +163,6 @@ button{
 .incorrecttext{
     color: red;
 }
-
+#centeraffappstext {
+    text-align: center;
+}
