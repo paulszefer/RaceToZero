@@ -45,6 +45,7 @@ $(document).ready(function() {
 						let gameTime = data[i]['game_time'];
 						if (gameTime > 0) {
 							let row = document.createElement("tr"); // creates a row.
+							row.className = 'scoreRow';
 							let cell1 = document.createElement("td");
 							let placement = document.createTextNode(placementNumber);
 							cell1.appendChild(placement);
@@ -81,7 +82,7 @@ $(document).ready(function() {
 				let substr = value.substring(5);
 				levelSelected = parseInt(substr);
 				
-				$("table td").remove();
+				$(".scoreRow").remove();
 				displayTable(levelSelected);
 			});
 		});
