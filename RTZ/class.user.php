@@ -58,7 +58,7 @@ class USER {
 					//and log them in automatically
 					$this->doLogin($uname, $upass);
 					//and redirect them to login script
-					$this->redirect('login.php');
+					$this->redirect('index.php');
 				}//End of else
 			} catch(PDOException $e) {
 				echo $e->getMessage();
