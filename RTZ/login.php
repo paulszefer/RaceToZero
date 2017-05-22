@@ -1,13 +1,39 @@
-<?php include("templateHeader.php");?>
 <?php
-require_once('PDO_conn.php');
+	session_start();
+	
+    if (isset($_SESSION['user_session'])) {
+        header("Location: index.php");
+    }
+    
+    require_once('PDO_conn.php');
+    
+    //if login is pressed
+    if (isset($_POST['login'])) {
+        //Setting variables
+        $FormLoginUsername = $_POST['loginUsername'];
+        $FormLoginPassword = $_POST['loginPassword'];
 
-//if user is logged in, redirect em to index.php
-if($user->is_loggedin()){
-	$user->redirect('index.php');
-}
-
+        //if the doLogin function returns true.
+        if ($user->doLogin($FormLoginUsername, $FormLoginPassword)) {
+            header("Location: index.php");
+        } else {
+            echo '<p style="text-align:center">'.$user->displayloginError().'</p>';
+        }
+    }
+    
+    //if register-btn is pressed
+    if (isset($_POST['register-btn'])) {
+        $FormRegUsername = $_POST['regUsername'];
+        $FormRegPassword = $_POST['regPassword'];
+        $PhotoURL = rand(1,10); // takes random integer for disp image
+        if ($user->register($FormRegUsername, $FormRegPassword, $PhotoURL)) {
+            $user->doLogin($FormRegUsername, $FormRegPassword);
+            header("Location: index.php");
+        }
+    }
 ?>
+
+<?php include("templateHeader.php");?>
 <!--insert page specific js css here-->
 <title>Race to Zero - Login</title>
 <link rel="stylesheet" href="css/login.css">
@@ -15,12 +41,12 @@ if($user->is_loggedin()){
 <?php include("templateNav.php");?>
 	
 <div id='content'>
-	<div class='contentactual'>
-		<!--Login section of the php-->
-		<div id='tabwrapper'>
-		<div id='logintab' class='titletab activetab'>Login</div>
-		<div id='regtab' class='titletab inactivetab'>Register</div>
-		</div>
+    <div class='contentactual'>
+        <!--Login section of the php-->
+        <div id='tabwrapper'>
+        <div id='logintab' class='titletab activetab'>Login</div>
+        <div id='regtab' class='titletab inactivetab'>Register</div>
+    </div>
 		<div id='logincontent'>
 			<form id="loginform" method="post" onsubmit="return loginvalidation()" action="login.php">
 				<table>
@@ -43,42 +69,11 @@ if($user->is_loggedin()){
 				<!--<button name="login" value="login" type="submit">Login</button>-->
 				<input type="submit" name="login" value="Login">
 			</form>
-			<?php
-			//if login is pressed
-			if(isset($_POST['login']))
-			{
-				//Setting variables
-				$FormLoginUsername = $_POST['loginUsername'];
-				$FormLoginPassword = $_POST['loginPassword'];
-
-				//if the doLogin function returns true.
-				if($user->doLogin($FormLoginUsername, $FormLoginPassword))
-				{
-					$user->redirect('login.php');
-				} 
-				else
-				{
-					echo '<p style="text-align:center">'.$user->displayloginError().'</p>';
-				}
-			}
-			?>
 		</div><!--end of logincontent-->
 		
 		<!--registration section of the php-->
 		<div id='regcontent'>
-			<form name="registration" method ="post" action="login.php" id="registration" class="registration" onsubmit="return validateForm()">
-			<p>
-				<?php
-					//if register-btn is pressed
-					if(isset($_POST['register-btn']))
-					{
-						$FormRegUsername = $_POST['regUsername'];
-						$FormRegPassword = $_POST['regPassword'];
-						$PhotoURL = rand(0,10); // takes random integer for disp image
-						$user->register($FormRegUsername, $FormRegPassword, $PhotoURL);
-					}
-				?>
-			</p>
+			<form name="registration" method="post" action="login.php" id="registration" class="registration" onsubmit="return validateForm()">
 			<script type = "text/javascript">
 				var insert = "<p id='regRetError' style='text-align:center; color:red;'>"+<?php echo "'".$user->displayRegError()."'"?>+"</p>";
 				$(insert).insertAfter("#registration");
@@ -109,7 +104,7 @@ if($user->is_loggedin()){
 					<td colspan="4">
 						<label for="regPassword">Password:</label>
 						<input type="password" id="regPassword" placeholder="(6+ letters or numbers)" name="regPassword" required>
-					<td/>
+					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr><td>&nbsp;</td></tr>
