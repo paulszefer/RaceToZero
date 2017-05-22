@@ -290,7 +290,7 @@ $(function () {
             );
             extras.push(
                 new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
-                new Extra("tap_image", width * 0.15, height * 0.35, width * 0.15 + height * 0.05, height * 0.4, "img", "img/taphere.png"),
+                new Extra("tap_image", width * 0.15, height * 0.6, width * 0.15 + height * 0.05, height * 0.65, "img", "img/taphere.png"),
                 new Extra("hint_further", width * 0.30, height * 0.55, 0, 0, "p", hint2),
                 new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
                 new Extra("arrow", width * 0.10, height * 0.85, width * 0.1 + height * 0.05, height * 0.90, "img", "img/arrow.png")
@@ -677,6 +677,7 @@ $(function () {
                 init();
             } else {
                 document.getElementById("successsound").play();
+                document.getElementById("goal").style.fontWeight = "bold";
 
                 setTimeout(function () {
                     $(".extra").css("display", "none");
