@@ -76,7 +76,7 @@
 					);
 				}
 			?>
-				<p><a href='changepic.php'>Change Your Picture</a></p>
+				<p id='changepic'><a href='changepic.php'>Change Your Picture</a></p>
 			</div>
 		</div>	
 		<div class='row'>	

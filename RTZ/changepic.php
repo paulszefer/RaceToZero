@@ -29,6 +29,7 @@
 
 <?php include("templateHeader.php");?>
 <link rel="stylesheet" href="css/changepic.css">
+<script src="js/changepic.js"></script>
 <?php include("templateNav.php");?>
 
 <title>Race to Zero - Change Your Picture</title>
@@ -49,8 +50,8 @@
 		</div>	
 		<div class='row'>	
 			<div class='col'>
-				<p>Click on a picture to make it yours!</p>
-				<table>
+				<p id='explanation'>Click on a picture to make it yours!</p>
+				<table id='pictures'>
 					<?php
 						for ($i = 1; $i <= 10; $i++) {
 							if ($i % 5 == 1) {
