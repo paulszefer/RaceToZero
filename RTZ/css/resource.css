@@ -2,159 +2,193 @@
 /*when screen is smaller than 980px*/
 
 /*whole wrapper for resource content*/
-.contentwrapper{
+.contentwrapper {
     display: flex;
-    flex-flow:row wrap;
+    flex-flow: row wrap;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
 }
+
 /*wrapper for each of topic box*/
-.contentboxwrapper{
-    width:50%;
+.contentboxwrapper {
+    width: 50%;
     background-color: white;
-    min-height:25vh;
-    display:inline-block;
-    color:black;
-    margin-bottom:0;
+    min-height: 25vh;
+    display: inline-block;
+    color: black;
+    margin-bottom: 0;
     font-family: MavenPL300;
 }
+
 /*topic box*/
-.contentbox{
-    display:flex;
+.contentbox {
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding:0;
-    height:24.75vh;
-    width:99.5%;
+    padding: 0;
+    height: 24.75vh;
+    width: 99.5%;
     box-sizing: border-box;
     box-shadow: 0.25vw 0.25vw 3px green;
 }
+
 /* affiliated apps topic box */
-.bigcontentbox{
-    height:100%;
-    display:block;
+.bigcontentbox {
+    height: 100%;
+    display: block;
     padding: 1em;
     box-shadow: 0 0 0;
 }
-.bigcontentbox img{
-    width:80%;
+
+.bigcontentbox img {
+    width: 80%;
 }
-.bigcontentboxwrapper{
-    width:100%;
+
+.bigcontentboxwrapper {
+    width: 100%;
     background-color: white;
-    min-height:100%;
-    display:inline-block;
-    color:black;
+    min-height: 100%;
+    display: inline-block;
+    color: black;
     text-align: center;
 }
+
 /*this is the affiliated apps content box*/
-.bigexpandedcontentbox{
+.bigexpandedcontentbox {
     /*because we want it to be displayed on top of topic buttons*/
-    max-width:981px;
-    color:black;
+    max-width: 981px;
+    color: black;
     background-color: white;
-    z-index:10;
-    width:0;
+    z-index: 10;
+    width: 0;
     -webkit-transition: width 0.3s;
     overflow: hidden;
 }
-.bigexpandedcontentbox h1, .bigexpandedcontentbox h2{
-    padding-left:30px;
-    padding-top:30px;
-    padding-bottom:30px;
+
+.bigexpandedcontentbox h1, .bigexpandedcontentbox h2 {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-.bigexpandedcontentbox h2{
+
+.bigexpandedcontentbox h2 {
     font-size: 1.5em;
     font-weight: bold;
 }
-.bigexpandedcontentbox img, .bigexpandedcontentbox p{
+
+.bigexpandedcontentbox img, .bigexpandedcontentbox p {
     padding-left: 50px;
     color: black;
 }
+
 .bigexpandedcontentbox p {
     margin: 0;
     padding-right: 50px;
     width: auto;
 }
-.contentbox h1{
-    padding:0;
+
+.contentbox h1 {
+    padding: 0;
 }
+
 /* main content boxes */
-.expandedcontentbox{
+.expandedcontentbox {
     /*because we want it to be displayed on top of topic buttons*/
-    max-width:981px;
-    color:black;
+    max-width: 981px;
+    color: black;
     background-color: white;
-    z-index:10;
-    min-height:100%;
-    width:0;
+    z-index: 10;
+    min-height: 100%;
+    width: 0;
     -webkit-transition: width 0.2s;
     overflow: hidden;
     font-size: 1em;
     position: absolute;
     z-index: 300;
 }
-.expandedcontentbox h1, .expandedcontentbox h2{
-    padding-left:30px;
-    padding-top:30px;
-    padding-bottom:30px;
+
+.expandedcontentbox h1, .expandedcontentbox h2 {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-.expandedcontentbox h1{
+
+.expandedcontentbox h1 {
     text-align: center;
 }
-.expandedcontentbox h2{
+
+.expandedcontentbox h2 {
     font-size: 1.5em;
     font-weight: bold;
 }
-.expandedcontentbox p{
+
+.expandedcontentbox p {
 }
-.expandedcontentbox ol{
+
+.expandedcontentbox ol {
     list-style: decimal inside;
     padding: 2vh;
 }
-.expandedcontentbox ul{
+
+.expandedcontentbox ul {
     list-style: none inside;
     padding: 4vh;
 }
-.expandedcontentbox ul li{
+
+.expandedcontentbox ul li {
     padding-top: 15px;
 }
+
 /* quiz buttons */
-button{
+button {
     font-size: 1em;
     background: linear-gradient(180deg, #CCCCCC, white, #CCCCCC);
     /*background-color: #6495ED;*/
     border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     padding: 1vh;
 }
+
 /* Closing button */
-.xbutton{
-    position:absolute;
+.xbutton {
+    position: absolute;
     left: 2vh;
     top: 2vh;
     width: 4vh;
     height: 4vh;
 }
+
 /* xbutton for affiliated apps */
-#bigone{
+#bigone {
     padding-left: 0;
 }
+
 /* spans text appended to the end of each question and displays based on answer */
-.correcttext, .incorrecttext{
+.correcttext, .incorrecttext {
     font-family: MavenPL300;
     display: none;
 }
-.correcttext{
+
+.correcttext {
     color: green;
 }
-.incorrecttext{
+
+.incorrecttext {
     color: red;
 }
+
 #centeraffappstext {
     text-align: center;
+}
+
+.answerIcon {
+    display: none;
+    width: 3vh;
+    position: relative;
+    top: 0.9vh;
+    left: 3vh;
 }
