@@ -218,7 +218,7 @@ $(function () {
         wrongs = [];
 
         // for testing purposes to skip straight to certain level
-        //levelID = 8;
+        // levelID = 8;
 
         /**
          * Load data for the current level.
@@ -553,7 +553,8 @@ $(function () {
             goal = new Goal("goal", width * 0.05, height - barrierHeight - 1, width * 0.20, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.48, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(60.78662662639377, 411.5, 1.5995223795140643, 3.8500000000000005, playItemSize, foodItem);
+            //playItem = new PlayItem(67.14865871248756, 411.2, 2.7144728616931486, 3.000000000000001, playItemSize, foodItem);
+            //playItem = new PlayItem(38.20000000000002, 262.3, -4, -4, playItemSize, foodItem);
         } else if (levelID === 9) {
             // Level 4 Question Stage
             let question = "How much money could the world save every year if there was zero food waste?";
@@ -866,7 +867,7 @@ $(function () {
     $(document.getElementById("content")).click(function (e) {
 
         // log for testing purposes
-        console.log("click");
+        // console.log("click");
 
         // prevents initial input
         if (!clicked && score > 100) {
