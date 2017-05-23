@@ -276,6 +276,9 @@ $(function () {
                         reInit();
                     }
                 };
+                if (highestLevel < i) {
+                    level.style.background = "linear-gradient(white, rgb(160, 160, 160))";
+                }
                 levelSelect.appendChild(level);
             }
 
