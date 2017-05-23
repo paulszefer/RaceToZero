@@ -19,6 +19,9 @@ const WRONG = 3;
 const RIGHT_ANSWER = 4;
 
 let BOUNCE_MULTIPLIER = 0.4;
+let clicked;
+let dxChange;
+let dyChange;
 
 // Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
@@ -309,7 +312,12 @@ class Level {
      */
     move() {
 
-
+        if (clicked) {
+            this.playItem.dx += dxChange;
+            this.playItem.dy += dyChange;
+            this.playItem.adjustSpeed();
+            clicked = false;
+        }
         // don't move if out of bounds
         if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
             console.log("Error: The item is out of bounds.");
@@ -318,11 +326,15 @@ class Level {
 
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
+        if (this.playItem.x === 53.84) {
+            console.log("breakpoint here");
+        }
+        
         let collision = this.checkCollisions(tempX, tempY);
 
         // logs for testing purposes
-        //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
-
+        // console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
+        
         if (this.checkCollisions(this.playItem.x, this.playItem.y + 1) === 3 && Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
             this.playItem.isGrounded = true;
             if (collision === 2) {
@@ -487,7 +499,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dy !== 0) {
+        if (Math.abs(this.playItem.dy) > 0.05) {
             let ratio = this._playItem.dx / this._playItem.dy;
             this._playItem.x = this._playItem.x - (move * ratio);
             this._playItem.y = this._playItem.y - move;
@@ -503,7 +515,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dx !== 0) {
+        if (Math.abs(this.playItem.dx) > 0.05) {
             let ratio = this._playItem.dy / this._playItem.dx;
             this._playItem.x = this._playItem.x + move;
             this._playItem.y = this._playItem.y + (move * ratio);
@@ -519,7 +531,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dy !== 0) {
+        if (Math.abs(this.playItem.dy) > 0.05) {
             let ratio = this._playItem.dx / this._playItem.dy;
             this._playItem.x = this._playItem.x + (move * ratio);
             this._playItem.y = this._playItem.y + move;
@@ -535,7 +547,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dx !== 0) {
+        if (Math.abs(this.playItem.dx) > 0.05) {
             let ratio = this._playItem.dy / this._playItem.dx;
             this._playItem.x = this._playItem.x - move;
             this._playItem.y = this._playItem.y - (move * ratio);
@@ -644,9 +656,18 @@ class Level {
      * Handles the case where the top-right corner of the object collides with a barrier.
      */
     topRightCollision(x1, y1) {
+        let size = this._playItem.size;
+        let halfSize = Math.round(this.playItem.size / 2);
+        let x2 = x1 + size;
+        let y2 = y1 + size;
         let origX2 = x1 + this._playItem.size - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
+        if (this._board[x1 + halfSize][y1].type === SOLID) {
+            return 1;
+        } else if (this._board[x2][y2 - halfSize].type === SOLID) {
+            return 2;
+        }
         if (this._playItem.dx < 0) {
             return 1;
         }
@@ -1352,17 +1373,20 @@ class PlayItem {
      * pushing it away from the location of the cursor.
      */
     clicked(mousePosX, mousePosY) {
+    	clicked = true;
         let xDiff = this._x + (this._size / 2) - mousePosX;
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
         // used to slow movement so clicks do not shoot the object off at high speeds
         let divisor = 28;
 
-        this._dx += Math.round(xDiff / divisor);
+        /*this._dx += Math.round(xDiff / divisor);
         this._dy += Math.round(yDiff / divisor);
 
         // ensures a far away click does not allow the playItem to move illegally
-        this.adjustSpeed();
+        this.adjustSpeed();*/
+        dxChange = Math.round(xDiff / divisor);
+        dyChange = Math.round(yDiff / divisor);
     }
 
     /**
