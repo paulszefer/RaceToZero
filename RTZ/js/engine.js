@@ -728,9 +728,9 @@ $(function () {
                             function: "setHighestLevelAchieved",
                             level: levelAchieved
                         });
-                    } else {
-                        setHighestLevelReached(levelAchieved);
-                    }
+                    } 
+                    setHighestLevelReached(levelAchieved);
+                    
                 }
 
                 retryImage.style.display = "none";
