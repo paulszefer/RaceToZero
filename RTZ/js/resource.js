@@ -31,6 +31,7 @@ $(".xbutton").click(function() {
     //resets the inline attr caused by .css()
     $(".contentboxwrapper").attr('style', '');
     $(".contentactual").attr("style", '');
+    $(".answerIcon").css("display", "none");
 });
 
 function hideTopics() {
@@ -82,4 +83,11 @@ function answerCheck(buttonName, value) {
         resets[question - 1 + 19].style.display="none";
         results[question - 1 + 19].style.display="inline-block";
     }
+}
+
+/**
+ * Displays the answer feedback icon (correct/incorrect) when an answer is clicked.
+ */
+function displayIcon(element) {
+    $(element.parentElement.children).css("display", "inline-block");
 }
