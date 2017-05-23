@@ -1,5 +1,5 @@
 <?php
-    
+
 	session_start();
 	
 	if(!isset($_SESSION['user_session'])) {
@@ -13,12 +13,8 @@
 
 	function setPic($picURL) {
 		// Eventually these will be in their own file for convenience.
-		$username = "root";
-    	$password = "";
-   		$host     = "localhost";
-    	$database = "comp2910test1";
-    	
-    	$link = mysqli_connect($host, $username, $password, $database);
+		require_once('PDO_conn.php');
+    	$link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
 		$query = "UPDATE users
 				  SET user_photo = \"" . $picURL . "\"
 				  WHERE user_name=\"" . $_SESSION['user_name'] . "\"";

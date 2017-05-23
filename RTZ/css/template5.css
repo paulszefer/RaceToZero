@@ -264,6 +264,7 @@ html, body {
 
     /*navlogo when screen is stupidly small*/
     #navCont > div.navlogo > a > img {
+        /*display: absolute;*/
         top: 2.5vh;
         right: 2.5vh;
         height: 10vh;

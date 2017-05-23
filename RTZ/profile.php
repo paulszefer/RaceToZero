@@ -1,4 +1,6 @@
 <?php
+	require_once('PDO_conn.php');
+	$link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
 	// Queries the database in order to get the current user's score on the tutorial
 	// level.
 	// Currently unused; will probably be deleted later. (replaced with getLevelScore())
@@ -27,13 +29,8 @@
 	
 	// Queries the database in order to get the current user's score on any level.
 	function getLevelScore($level) {
+        global $link;
 		// Eventually these will be in their own file for convenience.
-		$username = "root";
-    	$password = "";
-   		$host     = "localhost";
-    	$database = "comp2910test1";
-    	
-    	$link = mysqli_connect($host, $username, $password, $database);
     	$query = "SELECT game_time
 				  FROM games
 				  	INNER JOIN users ON games.user_id = users.user_id
