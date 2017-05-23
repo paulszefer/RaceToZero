@@ -19,6 +19,9 @@ const WRONG = 3;
 const RIGHT_ANSWER = 4;
 
 let BOUNCE_MULTIPLIER = 0.4;
+let clicked;
+let dxChange;
+let dyChange;
 
 // Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
@@ -309,7 +312,11 @@ class Level {
      */
     move() {
 
-
+        if (clicked) {
+            this.playItem.dx += dxChange;
+            this.playItem.dy += dyChange;
+            clicked = false;
+        }
         // don't move if out of bounds
         if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
             console.log("Error: The item is out of bounds.");
@@ -1352,17 +1359,20 @@ class PlayItem {
      * pushing it away from the location of the cursor.
      */
     clicked(mousePosX, mousePosY) {
+    	clicked = true;
         let xDiff = this._x + (this._size / 2) - mousePosX;
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
         // used to slow movement so clicks do not shoot the object off at high speeds
         let divisor = 28;
 
-        this._dx += Math.round(xDiff / divisor);
+        /*this._dx += Math.round(xDiff / divisor);
         this._dy += Math.round(yDiff / divisor);
 
         // ensures a far away click does not allow the playItem to move illegally
-        this.adjustSpeed();
+        this.adjustSpeed();*/
+        dxChange = Math.round(xDiff / divisor);
+        dyChange = Math.round(yDiff / divisor);
     }
 
     /**
