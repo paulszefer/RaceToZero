@@ -49,6 +49,8 @@ $(function () {
     const NUMBER_OF_LEVELS = 5;
     let musicStarted = false;
     let soundEnabled = true;
+    let processing;
+    
 
     const musicURLs = ["music/cute.mp3",
         "music/happiness.mp3",
@@ -324,7 +326,7 @@ $(function () {
                 new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
                 new Extra("arrow", width * 0.10, height * 0.85, width * 0.1 + height * 0.05, height * 0.90, "img", "img/arrow.png")
             );
-            goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height, false);
+            goal = new Goal("goal", width * 0.05, height - barrierHeight - 1, width * 0.20, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
             playItem = new PlayItem(width * 0.35, height * 0.2, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
@@ -369,7 +371,7 @@ $(function () {
                 new Barrier("wall1", 0, height * 0.6, width * 0.4625, height),
                 new Barrier("wall2", width * 0.5375, height * 0.6, width, height)
             );
-            goal = new Goal("goal", width * 0.4625, height - barrierHeight, width * 0.5375, height);
+            goal = new Goal("goal", width * 0.4625, height - barrierHeight - 1, width * 0.5375, height);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", false);
             playItem = new PlayItem(width * 0.475, height * 0.1, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
@@ -418,7 +420,7 @@ $(function () {
                 new Barrier("step3", width * 0.50, height * 0.35, width * 0.80, height * 0.60),
                 new Barrier("step4", width * 0.65, height * 0.20, width * 0.80, height * 0.45)
             );
-            goal = new Goal("goal", width * 0.80, height - barrierHeight, width * 0.95, height, false);
+            goal = new Goal("goal", width * 0.80, height - barrierHeight - 1, width * 0.95, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.30, 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
@@ -483,7 +485,7 @@ $(function () {
                 new Barrier("barrier10", blocks1, height * 0.60, blocks2, height * 0.65),
                 new Barrier("barrier11", blocks5, height * 0.60, blocks6, height * 0.65)
             );
-            goal = new Goal("goal", width * 0.80, height - barrierHeight, width * 0.95, height, false);
+            goal = new Goal("goal", width * 0.80, height - barrierHeight - 1, width * 0.95, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
             playItem = new PlayItem(width * 0.10, height * 0.10, 0, 0, playItemSize, foodItem);
             //playItem = new PlayItem(227, 202, 13, 4, playItemSize, foodItem); //sends the food object into a glitch
@@ -522,6 +524,7 @@ $(function () {
             goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, "lvl3answerToast");
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
+            //playItem = new PlayItem(240.63999999999965, 369.95, 1.6400000000000001, 0.7500000000000008, playItemSize, foodItem);
         } else if (levelID === 8) {
             // Level 4 Game Stage (maze)
             barriers.push(
@@ -547,7 +550,7 @@ $(function () {
                 new Barrier("barrier8", width * 0.40, height * 0.75, width * 0.45, height * 0.80),
                 new Barrier("barrier9", width * 0.28, height * 0.85, width * 0.33, height * 0.90)
             );
-            goal = new Goal("goal", width * 0.05, height - barrierHeight, width * 0.20, height, false);
+            goal = new Goal("goal", width * 0.05, height - barrierHeight - 1, width * 0.20, height, false);
             foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
             playItem = new PlayItem(width * 0.475, height * 0.48, 0, 0, playItemSize, foodItem);
         } else if (levelID === 9) {
@@ -695,7 +698,10 @@ $(function () {
     function move() {
         // occurs when there is a collision with the goal i.e. level is complete
         // TODO - move to separate function
+        
+        processing = true;
         let moveReturnValue = level.move();
+        processing = false;
         if (moveReturnValue === 5) {
             clearInterval(intervalId);
             if (game.level % 2 === 0) {
@@ -865,6 +871,9 @@ $(function () {
 
         // prevents initial input
         if (!clicked && score > 100) {
+            while (processing) {
+                
+            }
             let divPosX = $(this).position().left;
             let divPosY = $(this).position().top;
             let mousePosX = e.pageX - divPosX - $(gameContainer).offset().left;
