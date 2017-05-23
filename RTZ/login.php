@@ -1,4 +1,3 @@
-<?php include("templateHeader.php");?>
 <?php
 require_once('PDO_conn.php');
 
@@ -17,7 +16,7 @@ if(isset($_POST['login']))
 	if($user->doLogin($FormLoginUsername, $FormLoginPassword))
 	{
 		//refreshes the page and then checks if user is loggedin
-		$user->redirect('login.php');
+		$user->redirect('index.php');
 	}
 }
 
@@ -29,9 +28,12 @@ if(isset($_POST['register-btn']))
 	$PhotoURL = rand(1,10); // takes random integer for disp image
 	//register now auto logs in, no need to redirect in here
 	$user->register($FormRegUsername, $FormRegPassword, $PhotoURL);
+	$user->doLogin($FormRegUsername, $FormRegPassword);
+	$user->redirect('index.php');
 }
 
 ?>
+<?php include("templateHeader.php");?>
 <!--insert page specific js css here-->
 <title>Race to Zero - Login</title>
 <link rel="stylesheet" href="css/login.css">

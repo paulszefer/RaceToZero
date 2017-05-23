@@ -19,6 +19,7 @@
 </script>
 
 <script src="js/ObjectDefinitions.js"></script>
+<script src="js/cookies.js"></script>
 <script src="js/engine.js"></script>
 <?php include("templateNav.php");?>
 		

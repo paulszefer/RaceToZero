@@ -326,9 +326,6 @@ class Level {
 
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
-        if (this.playItem.x === 53.84) {
-            console.log("breakpoint here");
-        }
         
         let collision = this.checkCollisions(tempX, tempY);
 

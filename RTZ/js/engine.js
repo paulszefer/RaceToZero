@@ -246,8 +246,10 @@ $(function () {
                 window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
                 game.level = -1;
                 reInit();
-            })
+            });
         } else if (levelID === -1) {
+            let highestLevel = getHighestLevelReached();
+            
             // level select screen
             let levelSelect = document.createElement("div");
             levelSelect.id = "level_select";
@@ -263,15 +265,20 @@ $(function () {
                     level.innerHTML = "Level " + i;
                 }
                 level.onclick = function () {
-                    if (!musicStarted && soundEnabled) {
-                        musicStarted = true;
-                        newTrack();
+                    if (highestLevel >= i) {
+                        if (!musicStarted && soundEnabled) {
+                            musicStarted = true;
+                            newTrack();
+                        }
+                        game.level = i * 2;
+                        let gameContainerOffset = $(gameContainer).offset();
+                        window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
+                        reInit();
                     }
-                    game.level = i * 2;
-                    let gameContainerOffset = $(gameContainer).offset();
-                    window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
-                    reInit();
                 };
+                if (highestLevel < i) {
+                    level.style.background = "linear-gradient(white, rgb(160, 160, 160))";
+                }
                 levelSelect.appendChild(level);
             }
 
@@ -714,6 +721,20 @@ $(function () {
             } else {
                 document.getElementById("successsound").play();
                 document.getElementById("goal").style.fontWeight = "bold";
+                
+                let levelAchieved = (game.level + 1) / 2;
+                let highestLevel = getHighestLevelReached();
+                
+                if (levelAchieved > highestLevel) {
+                    if (loggedIn === -1) {
+                        $.post("accessdb.php", {
+                            function: "setHighestLevelAchieved",
+                            level: levelAchieved
+                        });
+                    } 
+                    setHighestLevelReached(levelAchieved);
+                    
+                }
 
                 retryImage.style.display = "none";
                 muteImage.style.display = "none";
