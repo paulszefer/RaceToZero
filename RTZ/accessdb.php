@@ -103,6 +103,16 @@
 		$json = json_encode($times);
 		return $json;
 	}
+	
+	function setHighestLevelAchieved() {
+	    require_once('PDO_conn.php');
+    	$link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
+    	
+    	$query = "UPDATE users
+    	          SET user_level=" . $_POST['level'] . 
+    	        " WHERE user_id=\"" . $_SESSION['user_id'] . "\";";
+    	mysqli_query($link, $query);
+	}
 
 	// Runs whenever this file is invoked by the jQuery $.post function; reads in the
 	// name of the function as a post variable and echoes the output of that function.
@@ -120,6 +130,9 @@
 		case 'getShortestTimes':
 			echo getShortestTimes();
 			break;
+		case 'setHighestLevelAchieved':
+		    echo setHighestLevelAchieved();
+		    break;
 	}
 
 ?>

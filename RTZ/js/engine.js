@@ -246,15 +246,10 @@ $(function () {
                 window.scrollTo(gameContainerOffset.left, gameContainerOffset.top);
                 game.level = -1;
                 reInit();
-            })
+            });
         } else if (levelID === -1) {
-            let highestLevel;
-            if (loggedIn === -1) {
-                // query the database and find their highest level achieved
-                highestLevel = 4; // for now
-            } else {
-                highestLevel = getHighestLevelReached();
-            }
+            let highestLevel = getHighestLevelReached();
+            
             // level select screen
             let levelSelect = document.createElement("div");
             levelSelect.id = "level_select";
@@ -728,7 +723,14 @@ $(function () {
                 let highestLevel = getHighestLevelReached();
                 
                 if (levelAchieved > highestLevel) {
-                    setHighestLevelReached(levelAchieved);
+                    if (loggedIn === -1) {
+                        $.post("accessdb.php", {
+                            function: "setHighestLevelAchieved",
+                            level: levelAchieved
+                        });
+                    } else {
+                        setHighestLevelReached(levelAchieved);
+                    }
                 }
 
                 retryImage.style.display = "none";

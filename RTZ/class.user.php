@@ -86,6 +86,7 @@ class USER {
 					$_SESSION['user_session'] = $userRow['user_name'];
 					$_SESSION['user_name'] = $userRow['user_name'];
 					$_SESSION['user_id'] = $userRow['user_id'];
+					setcookie("level", $userRow['user_level'], time() + 86400);
 					//set this user loggedIn status as true
 					$this->loggedIn = true;
 					return true;
