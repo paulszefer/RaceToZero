@@ -71,7 +71,7 @@ class USER {
 		$this->loginError ='';
 		try {
 			$stmt = $this->conn->prepare(
-				"SELECT user_name, user_password, user_id
+				"SELECT user_name, user_password, user_id, user_level
 				FROM users 
 				WHERE user_name=:uname"
 				);

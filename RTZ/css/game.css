@@ -126,6 +126,10 @@
     margin: auto;
 }
 
+#sound_button:hover {
+    background: linear-gradient(white, rgb(160, 160, 160));
+}
+
 .score_overlay_button:hover {
     /*background-color: white;*/
     background: linear-gradient(white, rgb(160, 160, 160));
