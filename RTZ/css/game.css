@@ -222,11 +222,74 @@
     animation: fadein 2s;
 }
 
-/* Animations */
 #tap_image {
     animation: pulse 2s alternate infinite;
 }
 
+#login_overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    z-index: 15;
+}
+
+#login_overlay p {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    font-size: 6vh;
+}
+
+#score_display {
+    padding-top: 12%;
+    padding-bottom: 2%;
+}
+
+#final_score {
+    padding-top: 2%;
+    padding-bottom: 12%;
+}
+
+#save_score_prompt {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.login_overlay_button {
+    width: 60%;
+    height: 10%;
+    position: relative;
+    top: 20%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    left: 20%;
+    /* background-color: rgb(148, 232, 136); */
+    outline: 10px rgb(120, 120, 120) outset;
+    /* border-radius: 12px; */
+    font-size: 1.7em;
+    text-align: center;
+    color: black;
+}
+
+#login_overlay .login_overlay_button p {
+    padding-top: 2vh;
+    font-size: 4.59vh;
+    width: initial;
+}
+
+#login_register_now {
+    position: relative;
+    top: 10%;
+}
+
+.login_overlay_button:hover {
+    /*background-color: white;*/
+    background: linear-gradient(white, rgb(160, 160, 160));
+}
+
+/* Animations */
 @keyframes pulse {
     0% {
         opacity: 0.8;
@@ -242,9 +305,9 @@
 
 @keyframes fadein {
     0% {
-        opacity: 0;
+        opacity: 0.01;
     }
     100% {
-        opacity: 100;
+        opacity: 1;
     }
 }

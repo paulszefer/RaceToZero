@@ -163,6 +163,7 @@ class Level {
             }
         }
         this._board = emptyBoard;
+        clicked = false;
     }
 
     /**

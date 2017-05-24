@@ -43,6 +43,8 @@ $(function () {
     let muteButton;
     let muteImage;
     let timer;
+    let loginOverlay;
+    let finalScore;
     let scoreOverlay;
     let game;
     const NUMBER_OF_LEVELS = 5;
@@ -108,7 +110,7 @@ $(function () {
         retryImage = document.createElement("img");
         retryImage.id = "retrylevel";
         retryImage.src = "img/retrylevel.png";
-        retryImage.alt = "Retry Level"
+        retryImage.alt = "Retry Level";
         retryButton.appendChild(retryImage);
         gameContainer.appendChild(retryButton);
 
@@ -146,6 +148,56 @@ $(function () {
         timer = document.createElement("p");
         timer.id = "timer";
         gameContainer.appendChild(timer);
+
+        /**
+         * Creates the element that stores the end of level login overlay.
+         */
+        let promptLogin = loggedIn === -2;
+        loginOverlay = document.createElement("div");
+        loginOverlay.id = "login_overlay";
+        // incremented to match level width
+        loginOverlay.style.width = (gameContainer.parentNode.offsetWidth + 1) + "px";
+        loginOverlay.style.height = gameContainer.parentNode.offsetHeight + "px";
+
+        let scoreDisplay = document.createElement("p");
+        scoreDisplay.id = "score_display";
+        scoreDisplay.innerHTML = "Your time:";
+
+        finalScore = document.createElement("p");
+        finalScore.id = "final_score";
+
+        let saveScorePrompt = document.createElement("p");
+        saveScorePrompt.id = "save_score_prompt";
+        saveScorePrompt.innerHTML = "To save your score, login or register.";
+
+        let loginRegisterNow = document.createElement("div");
+        loginRegisterNow.id = "login_register_now";
+        loginRegisterNow.className = "login_overlay_button";
+        loginRegisterNow.innerHTML = "<p>Login / Register</p>";
+        $(loginRegisterNow).click(function () {
+            window.location.href = "login.php";
+        });
+
+        let loginRegisterLater = document.createElement("div");
+        loginRegisterLater.id = "login_register_later";
+        loginRegisterLater.className = "login_overlay_button";
+        loginRegisterLater.innerHTML = "<p>Later</p>";
+        $(loginRegisterLater).click(function () {
+            loginOverlay.style.animation = "fadein 2s reverse";
+            setTimeout(function() {
+                loginOverlay.style.display = "none";
+            }, 1975);
+            scoreOverlay.style.display = "block";
+            scoreOverlay.style.animation = "fadein 2s";
+        });
+
+        loginOverlay.appendChild(scoreDisplay);
+        loginOverlay.appendChild(finalScore);
+        loginOverlay.appendChild(saveScorePrompt);
+        loginOverlay.appendChild(loginRegisterNow);
+        loginOverlay.appendChild(loginRegisterLater);
+
+        gameContainer.appendChild(loginOverlay);
 
         /**
          * Creates the element that stores the end of level score overlay.
@@ -766,6 +818,7 @@ $(function () {
                     });
 
                     let yourTime = document.createElement("p");
+                    yourTime.id = "your_time";
                     let yourTimeText = document.createTextNode("Your Time:");
                     yourTime.appendChild(yourTimeText);
                     scoreOverlay.appendChild(yourTime);
@@ -806,7 +859,7 @@ $(function () {
                         soundButton.appendChild(soundOffImage);
                     }
 
-                    soundButton.onclick = function() {
+                    soundButton.onclick = function () {
                         if (soundEnabled) {
                             soundEnabled = false;
                             soundButton.removeChild(soundOnImage);
@@ -833,8 +886,15 @@ $(function () {
 
                     timer.style.display = "none";
 
-                    scoreOverlay.style.animation = "fadein 2s";
-                    scoreOverlay.style.display = "block";
+                    // show login prompt first if not logged in
+                    if (loggedIn === -2) {
+                        finalScore.innerHTML = time.innerHTML
+                        loginOverlay.style.animation = "fadein 2s";
+                        loginOverlay.style.display = "block";
+                    } else {
+                        scoreOverlay.style.animation = "fadein 2s";
+                        scoreOverlay.style.display = "block";
+                    }
 
                     retryButton.onclick = function () {
                         game.level -= 1;
