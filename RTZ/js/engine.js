@@ -808,16 +808,18 @@ $(function () {
                 setTimeout(function () {
                     $(".extra").css("display", "none");
 
+                    let finalTime = score;
+
                     let time = document.createElement("p");
-                    time.innerHTML = parseTimeForOverlay(score);
+                    time.innerHTML = parseTimeForOverlay(finalTime);
 
                     let actualLevel = game.level / 2;
-                    let scoreInSeconds = Math.floor(score / 1000);
-                    scoreInSeconds = scoreInSeconds + (Math.floor((score - (scoreInSeconds * 1000)) / 100) / 10);
+                    let scoreInSeconds = Math.floor(finalTime / 1000);
+                    scoreInSeconds = scoreInSeconds + (Math.floor((finalTime - (scoreInSeconds * 1000)) / 100) / 10);
                     $.post("accessdb.php", {
                         function: "saveGame",
                         level: actualLevel,
-                        time: score
+                        time: finalTime
                     }, function (data) {
                         //alert(data);
                     });
