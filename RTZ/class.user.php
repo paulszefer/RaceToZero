@@ -87,6 +87,34 @@ class USER {
 					$_SESSION['user_name'] = $userRow['user_name'];
 					$_SESSION['user_id'] = $userRow['user_id'];
 					setcookie("level", $userRow['user_level'], time() + 86400);
+					
+					include_once('class.game.php');
+                    if($_COOKIE['level0']) {
+                        $game = new GAME($userRow['user_name'], 0, $_COOKIE['level0']);
+                        $game->save();
+                        setcookie("level0", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level1']) {
+                        $game = new GAME($userRow['user_name'], 1, $_COOKIE['level1']);
+                        $game->save();
+                        setcookie("level1", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level2']) {
+                        $game = new GAME($userRow['user_name'], 2, $_COOKIE['level2']);
+                        $game->save();
+                        setcookie("level2", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level3']) {
+                        $game = new GAME($userRow['user_name'], 3, $_COOKIE['level3']);
+                        $game->save();
+                        setcookie("level3", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level4']) {
+                        $game = new GAME($userRow['user_name'], 4, $_COOKIE['level4']);
+                        $game->save();
+                        setcookie("level4", 0, time() - 86400);
+                    }
+					
 					//set this user loggedIn status as true
 					$this->loggedIn = true;
 					return true;
