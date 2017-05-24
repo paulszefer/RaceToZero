@@ -794,7 +794,11 @@ $(function () {
                         });
                     }
                     setHighestLevelReached(levelAchieved);
-
+                }
+                
+                if (loggedIn === -2) {
+                    let levelCompleted = (game.level - 1) / 2;
+                    setTime(levelCompleted, score);
                 }
 
                 retryImage.style.display = "none";

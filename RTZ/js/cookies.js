@@ -1,6 +1,6 @@
 function setHighestLevelReached(level) {
     let d = new Date();
-    d.setTime(d.getTime() + 2076300000); // 365 days
+    d.setTime(d.getTime() + 31536000000); // 365 days
     document.cookie = "level=" + level + ";expires=" + d.toUTCString();
 }
 
@@ -27,7 +27,7 @@ function getHighestLevelReached() {
 
 function setSoundSettings(soundOn) {
     let d = new Date();
-    d.setTime(d.getTime() + 2076300000); // 365 days
+    d.setTime(d.getTime() + 31536000000); // 365 days
     document.cookie = "sound=" + soundOn + ";expires=" + d.toUTCString();
 }
 
@@ -50,4 +50,10 @@ function getSoundSettings() {
     } else {
         return (sound === "true");
     }
+}
+
+function setTime(level, timeInMS) {
+    let d = new Date();
+    d.setTime(d.getTime() + 86400000);
+    document.cookie = "level" + level + "=" + timeInMS + ";expires=" + d.toUTCString();
 }
