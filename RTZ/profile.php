@@ -34,7 +34,7 @@
     	$query = "SELECT game_time
 				  FROM games
 				  	INNER JOIN users ON games.user_id = users.user_id
-				  WHERE level_id=" . $level .
+				  WHERE game_level=" . $level .
 				  "	AND user_name=\"" . $_SESSION['user_name'] . 
 			  "\" ORDER BY game_time ASC;";
 		$result = mysqli_query($link, $query);
