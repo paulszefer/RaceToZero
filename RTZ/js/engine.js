@@ -336,6 +336,7 @@ $(function () {
                 };
                 if (highestLevel < i) {
                     level.style.background = "linear-gradient(white, rgb(160, 160, 160))";
+                    level.innerHTML = "<img class='lock_icon' src='img/lock.png' alt='Locked'>";
                 }
                 levelSelect.appendChild(level);
             }

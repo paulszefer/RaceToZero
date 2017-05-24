@@ -194,6 +194,12 @@
     background: linear-gradient(white, rgb(160, 160, 160));
 }
 
+.lock_icon {
+    width: 6vh;
+    position: relative;
+    bottom: 0.5vh;
+}
+
 #food_image {
     position: absolute;
     z-index: 12;
