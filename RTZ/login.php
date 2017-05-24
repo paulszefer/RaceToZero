@@ -16,7 +16,7 @@ if(isset($_POST['login']))
 	if($user->doLogin($FormLoginUsername, $FormLoginPassword))
 	{
 		//refreshes the page and then checks if user is loggedin
-		//$user->redirect('index.php');
+		$user->redirect('index.php');
 	}
 }
 

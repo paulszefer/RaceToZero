@@ -24,7 +24,6 @@
     		$result = mysqli_query($link, $userIDQuery);
     		$row = mysqli_fetch_array($result);
     		$userid = intval($row['user_id']);
-    		
     		//Grabs the current level 3 highest scores
     		$topScoreQuery = "SELECT game_time, user_name
     		FROM games
@@ -53,7 +52,7 @@
 				}
 			}
 			
-    		$query = "INSERT INTO games(level_id,game_time,user_id) 
+    		$query = "INSERT INTO games(game_level,game_time,user_id)
 					  VALUES(" . $this->level . ", " . $this->time . ", " . $userid . ");";
 			mysqli_query($link, $query);
 		}

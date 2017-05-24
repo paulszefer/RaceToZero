@@ -1,3 +1,8 @@
+const FRICTION = 0.95; // old friction: 0.95
+const MAX_SPEED = 4; // old max speed: 4. Can't go higher than 4.
+const GRAVITY = 0.045; // old gravity: 0.05
+let BOUNCE_MULTIPLIER = 0.3; // old bounce multiplier: 0.4
+
 /**
  * Contains definitions for all of the objects used in the game.
  */
@@ -18,7 +23,7 @@ const GOAL = 2;
 const WRONG = 3;
 const RIGHT_ANSWER = 4;
 
-let BOUNCE_MULTIPLIER = 0.4;
+
 let clicked;
 let dxChange;
 let dyChange;
@@ -347,9 +352,9 @@ class Level {
             }
             this.playItem.dy = 0;
             if (this.playItem.dx > 0) {
-                this.playItem.dx *= 0.95;
+                this.playItem.dx *= FRICTION;
             } else if (this.playItem.dx < 0) {
-                this.playItem.dx *= 0.95;
+                this.playItem.dx *= FRICTION;
             }
         } else {
             // check if next movement causes a collision
@@ -1391,7 +1396,7 @@ class PlayItem {
      * before and after every move.
      */
     adjustSpeed() {
-        let maxSpeed = 4;
+        let maxSpeed = MAX_SPEED;
         if (this._dy > maxSpeed) {
             this._dy = maxSpeed;
         } else if (this._dy < -1 * maxSpeed) {
@@ -1438,7 +1443,7 @@ class FoodItem {
         this._name = name;
         this._type = type;
         this.bounceMultiplier = BOUNCE_MULTIPLIER; // varies by type
-        this.gravity = 0.05; // varies by type
+        this.gravity = GRAVITY; // varies by type
         this._imageURL = imageURL;
         this._isEdible = isEdible;
     }
