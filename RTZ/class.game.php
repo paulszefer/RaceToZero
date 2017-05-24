@@ -25,7 +25,7 @@
     		$row = mysqli_fetch_array($result);
     		$userid = intval($row['user_id']);
     			
-    		$query = "INSERT INTO games(level_id,game_time,user_id) 
+    		$query = "INSERT INTO games(game_level,game_time,user_id) 
 					  VALUES(" . $this->level . ", " . $this->time . ", " . $userid . ");";
 			mysqli_query($link, $query);
 		}

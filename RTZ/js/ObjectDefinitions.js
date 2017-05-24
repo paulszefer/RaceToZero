@@ -1,7 +1,7 @@
 const FRICTION = 0.95; // old friction: 0.95
 const MAX_SPEED = 4; // old max speed: 4. Can't go higher than 4.
-const GRAVITY = 0.05; // old gravity: 0.05
-let BOUNCE_MULTIPLIER = 0.4; // old bounce multiplier: 0.4
+const GRAVITY = 0.045; // old gravity: 0.05
+let BOUNCE_MULTIPLIER = 0.3; // old bounce multiplier: 0.4
 
 /**
  * Contains definitions for all of the objects used in the game.
