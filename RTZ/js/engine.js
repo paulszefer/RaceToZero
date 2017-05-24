@@ -30,6 +30,7 @@
  * TODO - before moving, should be Math.floor(), not Math.round()
  */
 $(function () {
+	console.log(document.cookie);
 
     /**
      * Variable declaration for scope.
