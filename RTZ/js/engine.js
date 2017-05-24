@@ -50,7 +50,7 @@ $(function () {
     let musicStarted = false;
     let soundEnabled = getSoundSettings();
     let processing;
-    
+
 
     const musicURLs = ["music/cute.mp3",
         "music/happiness.mp3",
@@ -237,6 +237,11 @@ $(function () {
 
             let aboutRTZOverlay = document.createElement("div");
             aboutRTZOverlay.id = "about_rtz_overlay";
+            let logoMascot = document.createElement("img");
+            logoMascot.id = "logo_mascot";
+            logoMascot.src = "img/pizzalogoonly.png";
+            logoMascot.alt = "Race to Zero logo";
+            aboutRTZOverlay.appendChild(logoMascot);
             let aboutRTZText = document.createElement("p");
             aboutRTZText.id = "about_rtz_text";
             aboutRTZText.innerHTML = "Welcome to Race To Zero! Race through each level to get the fastest time, all while learning about the issue of food waste!";
@@ -251,7 +256,7 @@ $(function () {
             });
         } else if (levelID === -1) {
             let highestLevel = getHighestLevelReached();
-            
+
             // level select screen
             let levelSelect = document.createElement("div");
             levelSelect.id = "level_select";
@@ -346,7 +351,7 @@ $(function () {
             // TODO - remove row of white pixels at the bottom
             let question = "How much of the food produced around the world is wasted?";
             let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one.";
-            let hint2 = "Tap during mid-jump to go higher!";
+            let hint2 = "Tap under the strawberry mid-jump to go higher!";
             let answer1 = "One third";
             let answer2 = "One half";
             barriers.push(
@@ -358,10 +363,10 @@ $(function () {
             );
             extras.push(
                 new Extra("tutorialquestion", width * 0.25, height * 0.15, 0, 0, "p", question),
-                new Extra("hint_answer", width * 0.25, height * 0.30, 0, 0, "p", hint1),
-                new Extra("hint_jump", width * 0.25, height * 0.60, 0, 0, "p", hint2),
-                new Extra("tutorialanswer1", width * 0.25, height * 0.75, 0, 0, "p", answer1),
-                new Extra("tutorialanswer2", width * 0.6, height * 0.75, 0, 0, "p", answer2),
+                new Extra("hint_answer", width * 0.25, height * 0.60, 0, 0, "p", hint1),
+                new Extra("hint_jump", width * 0.25, height * 0.30, 0, 0, "p", hint2),
+                new Extra("tutorialanswer1", width * 0.25, height * 0.70, 0, 0, "p", answer1),
+                new Extra("tutorialanswer2", width * 0.6, height * 0.70, 0, 0, "p", answer2),
                 new Extra("arrow1", width * 0.29, height * 0.80, width * 0.34, height * 0.85, "img", "img/arrow.png"),
                 new Extra("arrow2", width * 0.64, height * 0.80, width * 0.69, height * 0.85, "img", "img/arrow.png")
             );
@@ -726,19 +731,19 @@ $(function () {
                     document.getElementById("successsound").play();
                 }
                 document.getElementById("goal").style.fontWeight = "bold";
-                
+
                 let levelAchieved = (game.level + 1) / 2;
                 let highestLevel = getHighestLevelReached();
-                
+
                 if (levelAchieved > highestLevel) {
                     if (loggedIn === -1) {
                         $.post("accessdb.php", {
                             function: "setHighestLevelAchieved",
                             level: levelAchieved
                         });
-                    } 
+                    }
                     setHighestLevelReached(levelAchieved);
-                    
+
                 }
 
                 retryImage.style.display = "none";
@@ -847,6 +852,11 @@ $(function () {
                         reInit();
                     };
                 }, 1000);
+            }
+        } else if (moveReturnValue === 6) {
+            if (game.level === 1) {
+                document.getElementById("hint_answer").style.display = "block";
+                document.getElementById("tutorialanswer1").style.animation = "pulse 2s alternate infinite";
             }
         }
         drawFoodItem();
