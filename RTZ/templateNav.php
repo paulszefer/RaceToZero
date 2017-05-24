@@ -28,7 +28,7 @@
 			<!-- This div is used for the nav on desktop. -->
 			<div class='navlinks'>
 				<ul>
-					<a href='index.php'><li class='navbuttonleft'>Home</li></a>
+					<a href='index.php'><li class='navbuttonleft'>Play</li></a>
 					<a href='resource.php'><li class='navbuttonleft'>Resources</li></a>
 					<a href='leaderboard.php'><li class='navbuttonleft'>Leaderboard</li></a>
 					<?php
@@ -70,7 +70,7 @@
 						);
 					}
 				?>
-                <a href='index.php'><li class='mobilelist'><div><img class="mobileicon" src="img/pizzalogoonly.png" alt="Home">Home</div></li></a>
+                <a href='index.php'><li class='mobilelist'><div><img class="mobileicon" src="img/pizzalogoonly.png" alt="Home">Play</div></li></a>
 				<a href='resource.php'><li class='mobilelist'><div><img class="mobileicon" src="img/ResourcesIcon.png" alt="Resources">Resources</div></li></a>
 				<a href='leaderboard.php'><li class='mobilelist'><div><img class="mobileicon" src="img/LeaderboardIcon.png" alt="Leaderboard">Leaderboard</div></li></a>
 				<?php
