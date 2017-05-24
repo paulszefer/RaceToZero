@@ -49,11 +49,12 @@ class USER {
 					$this->registerError = 'Username already taken';
 					return false;
 				} else {
+					$levelAchieved = $_COOKIE['level'] ? $_COOKIE['level'] : 0;
 					//If they passed all the tests, register them in
 					$stmt = $this->conn->prepare(
-					"INSERT INTO users(user_name,user_password,user_photo) 
-					VALUES(:uname, :upass, :photourl)");
-					$stmt->execute(array(':uname'=>$uname, ':upass'=>$upass,':photourl'=>$photourl));
+					"INSERT INTO users(user_name,user_password,user_photo,user_level) 
+					VALUES(:uname, :upass, :photourl, :ulevel)");
+					$stmt->execute(array(':uname'=>$uname, ':upass'=>$upass,':photourl'=>$photourl, ':ulevel'=>$levelAchieved));
 					//and log them in automatically
 					$this->doLogin($uname, $upass);
 					//and redirect them to login script
@@ -85,6 +86,7 @@ class USER {
 					$_SESSION['user_session'] = $userRow['user_name'];
 					$_SESSION['user_name'] = $userRow['user_name'];
 					$_SESSION['user_id'] = $userRow['user_id'];
+					setcookie("level", $userRow['user_level'], time() + 86400);
 					//set this user loggedIn status as true
 					$this->loggedIn = true;
 					return true;
