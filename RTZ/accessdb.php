@@ -62,7 +62,7 @@
 		require_once('PDO_conn.php');
     	$link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
 
-    	$query = "SELECT Count(level_id) AS NumberOfLevels FROM levels;";
+    	$query = "SELECT Count(game_level) AS NumberOfLevels FROM levels;";
 			
 		$result = mysqli_query($link, $query);
 	
@@ -89,7 +89,7 @@
                          user_name
 				  FROM games
 				  	INNER JOIN users ON users.user_id = games.user_id
-				  WHERE level_id=" . ($level + 1) . 
+				  WHERE game_level=" . ($level + 1) . 
 				" ORDER BY game_time ASC;";
 				
 		$result = mysqli_query($link, $query);

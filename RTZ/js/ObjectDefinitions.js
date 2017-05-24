@@ -63,10 +63,10 @@ $(document).keypress(function (event) {
         }
     } else if (keyNumber === 5) {
         if (event.which === 101) { // "e"
-            if (BOUNCE_MULTIPLIER === 0.6) {
+            if (BOUNCE_MULTIPLIER === 0.3) {
                 BOUNCE_MULTIPLIER = 2;
             } else {
-                BOUNCE_MULTIPLIER = 0.6;
+                BOUNCE_MULTIPLIER = 0.3;
             }
         } else {
             keyNumber = 0;

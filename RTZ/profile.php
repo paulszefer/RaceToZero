@@ -34,7 +34,7 @@
     	$query = "SELECT game_time
 				  FROM games
 				  	INNER JOIN users ON games.user_id = users.user_id
-				  WHERE level_id=" . $level .
+				  WHERE game_level=" . $level .
 				  "	AND user_name=\"" . $_SESSION['user_name'] . 
 			  "\" ORDER BY game_time ASC;";
 		$result = mysqli_query($link, $query);
@@ -88,9 +88,9 @@
 	            				echo "<th>Level</th>";
 	            				echo "<th>Time</th>";
 	            			echo "</tr>";
-	            			for ($i = 1; $i <= 5; $i++) { // edit if extra level(s) added
+	            			for ($i = 0; $i <= 4; $i++) { // edit if extra level(s) added
 	            				echo "<tr>";
-	            					echo "<td>" . (($i == 1) ? "Tutorial" : $i) . "</td>";
+	            					echo "<td>" . (($i == 0) ? "Tutorial" : $i) . "</td>";
 	            					$levelScore = getLevelScore($i);
 	            					echo "<td>" . (($levelScore == 0) ? "-" : (round($levelScore / 1000.0, 1) . "s")) . "</td>";
 	            				echo "</tr>";
