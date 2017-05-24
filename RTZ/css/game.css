@@ -19,9 +19,8 @@
 
 #play_button {
     width: 60%;
-    height: 5vh;
     padding: 2vh 0;
-    margin: 16vh auto;
+    margin: 16vh auto 8vh;
     text-align: center;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
@@ -48,6 +47,12 @@
     font-size: 2em;
     padding: 2vh;
     outline: 10px outset rgb(120, 120, 120);
+}
+
+#logo_mascot {
+    display: block;
+    width: 10vh;
+    margin: 0 auto 2vh;
 }
 
 #about_rtz_overlay p {
@@ -206,6 +211,11 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+}
+
+#hint_answer {
+    display: none;
+    animation: fadein 2s;
 }
 
 /* Animations */
