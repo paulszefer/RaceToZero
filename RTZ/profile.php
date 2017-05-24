@@ -88,9 +88,9 @@
 	            				echo "<th>Level</th>";
 	            				echo "<th>Time</th>";
 	            			echo "</tr>";
-	            			for ($i = 1; $i <= 5; $i++) { // edit if extra level(s) added
+	            			for ($i = 0; $i <= 4; $i++) { // edit if extra level(s) added
 	            				echo "<tr>";
-	            					echo "<td>" . (($i == 1) ? "Tutorial" : $i) . "</td>";
+	            					echo "<td>" . (($i == 0) ? "Tutorial" : $i) . "</td>";
 	            					$levelScore = getLevelScore($i);
 	            					echo "<td>" . (($levelScore == 0) ? "-" : (round($levelScore / 1000.0, 1) . "s")) . "</td>";
 	            				echo "</tr>";
