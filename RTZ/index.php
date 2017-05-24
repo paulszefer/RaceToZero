@@ -20,6 +20,8 @@
 
 <script src="js/ObjectDefinitions.js"></script>
 <script src="js/engine.js"></script>
+<script src="js/screenfull.js"></script>
+<script src="js/index.js"></script>
 <?php include("templateNav.php");?>
 		
 <div id="content">

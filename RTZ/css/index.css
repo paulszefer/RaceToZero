@@ -33,6 +33,19 @@
     -moz-transition: top 0.2s ease-in-out;
     z-index: 100;
 }
+
+/*fullscreen_image appears*/
+#fullscreen_image {
+    display: none;
+    position: absolute;
+    top: 24.5%;
+    right: 7%;
+    transition: top 0.2s ease-in-out;
+    -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
+    -moz-transition: top 0.2s ease-in-out;
+    z-index: 100;
+}
+
 /*retrylevel's height*/
 #retrylevel img {
     height: 7vh;
@@ -41,6 +54,11 @@
 /*mute_button's height*/
 #mute_button img {
     height: 9vh;
+}
+
+/*fullscreen image toggle's height*/
+#fullscreen_image {
+    height: 5.5vh;
 }
 
 #footer {
@@ -91,6 +109,14 @@
         position: fixed;
         top: 15.5vh;
         right: 4vh;
+        z-index: 499;
+    }
+
+    /*mutebutton appears*/
+    #fullscreen_image {
+        position: fixed;
+        top: 24.5vh;
+        right: 6vh;
         z-index: 499;
     }
 }

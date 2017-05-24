@@ -43,6 +43,8 @@ $(function () {
     let retryImage;
     let muteButton;
     let muteImage;
+    let fullscreen = false;
+    let fullscreenImage;
     let timer;
     let scoreOverlay;
     let game;
@@ -107,7 +109,7 @@ $(function () {
         retryImage = document.createElement("img");
         retryImage.id = "retrylevel";
         retryImage.src = "img/retrylevel.png";
-        retryImage.alt = "Retry Level"
+        retryImage.alt = "Retry Level";
         retryButton.appendChild(retryImage);
         gameContainer.appendChild(retryButton);
 
@@ -136,6 +138,29 @@ $(function () {
                 }
             }
         );
+
+        /**
+         * Creates the fullscreen button.
+         */
+        fullscreenImage = document.createElement("img");
+        fullscreenImage.id = "fullscreen_image";
+        fullscreenImage.src = "img/fullscreenOn.png";
+        fullscreenImage.alt = "Fullscreen Toggle";
+        $(fullscreenImage).click(function () {
+            if (!fullscreen) {
+                screenfull.request();
+                fullscreenImage.src = "img/fullscreenOff.png";
+                document.getElementsByClassName("contentactual")[0].style.height = "115vh";
+                fullscreen = true;
+            } else {
+                console.log("exit");
+                screenfull.exit();
+                fullscreenImage.src = "img/fullscreenOn.png";
+                document.getElementsByClassName("contentactual")[0].style.height = "85vh";
+                fullscreen = false;
+            }
+        });
+        gameContainer.appendChild(fullscreenImage);
 
         /**
          * Creates the element that displays the timer(the user's score).
@@ -660,6 +685,7 @@ $(function () {
             navBurger.style.left = "5vh";
             retryImage.style.display = "block";
             muteImage.style.display = "block";
+            fullscreenImage.style.display = "block";
             timer.style.display = "block";
 
             /**
@@ -711,6 +737,7 @@ $(function () {
 
                 retryImage.style.display = "none";
                 muteImage.style.display = "none";
+                fullscreenImage.style.display = "none";
 
                 setTimeout(function () {
                     $(".extra").css("display", "none");
@@ -833,6 +860,7 @@ $(function () {
             navImage.src = "img/menuiconblack.png";
             retryImage.style.display = "block";
             muteImage.style.display = "block";
+            fullscreenImage.style.display = "block"
             timer.style.display = "block";
         }
         let overlay_elements = scoreOverlay.children;
