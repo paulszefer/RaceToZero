@@ -48,7 +48,7 @@ $(function () {
     let game;
     const NUMBER_OF_LEVELS = 5;
     let musicStarted = false;
-    let soundEnabled = true;
+    let soundEnabled = getSoundSettings();
     let processing;
     
 
@@ -120,7 +120,7 @@ $(function () {
         muteButton.id = "mute_button";
         muteImage = document.createElement("img");
         muteImage.id = "mute_image";
-        muteImage.src = "img/soundon.png";
+        muteImage.src = soundEnabled ? "img/soundon.png" : "img/soundoff.png";
         muteButton.appendChild(muteImage);
         gameContainer.appendChild(muteButton);
         $(muteButton).click(function () {
@@ -129,12 +129,14 @@ $(function () {
                     soundEnabled = false;
                     musicPlayer.pause();
                     document.getElementById("successsound").muted = true;
+                    setSoundSettings(false);
                 } else {
                     muteImage.src = "img/soundon.png";
                     soundEnabled = true;
                     musicStarted = true;
                     newTrack();
                     document.getElementById("successsound").muted = false;
+                    setSoundSettings(true);
                 }
             }
         );
@@ -303,6 +305,7 @@ $(function () {
                     soundButton.appendChild(soundOffImage);
                     musicPlayer.pause();
                     document.getElementById("successsound").muted = true;
+                    setSoundSettings(false);
                 } else {
                     soundEnabled = true;
                     musicStarted = true;
@@ -310,6 +313,7 @@ $(function () {
                     soundButton.appendChild(soundOnImage);
                     newTrack();
                     document.getElementById("successsound").muted = false;
+                    setSoundSettings(true);
                 }
             };
 
@@ -797,13 +801,14 @@ $(function () {
                         soundButton.appendChild(soundOffImage);
                     }
 
-                    soundButton.onclick = function () {
+                    soundButton.onclick = function() {
                         if (soundEnabled) {
                             soundEnabled = false;
                             soundButton.removeChild(soundOnImage);
                             soundButton.appendChild(soundOffImage);
                             musicPlayer.pause();
                             document.getElementById("successsound").muted = true;
+                            setSoundSettings(false);
                         } else {
                             musicStarted = true;
                             soundEnabled = true;
@@ -811,6 +816,7 @@ $(function () {
                             soundButton.appendChild(soundOnImage);
                             newTrack();
                             document.getElementById("successsound").muted = false;
+                            setSoundSettings(true);
                         }
                     };
 
