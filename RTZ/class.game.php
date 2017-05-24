@@ -17,9 +17,9 @@
 		
 		// Queries the database and records the state of the game.
 		public function save() {
-            require_once('PDO_conn.php');
-            $link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
-    			
+            require_once('dblogin.php');
+	        $link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
+	        
     		$userIDQuery = "SELECT user_id FROM users WHERE user_name=\"" . $this->uname . "\";";
     		$result = mysqli_query($link, $userIDQuery);
     		$row = mysqli_fetch_array($result);
@@ -51,7 +51,6 @@
 					$connection->post('statuses/update', array('status'=>$status));
 				}
 			}
-			
     		$query = "INSERT INTO games(game_level,game_time,user_id)
 					  VALUES(" . $this->level . ", " . $this->time . ", " . $userid . ");";
 			mysqli_query($link, $query);
