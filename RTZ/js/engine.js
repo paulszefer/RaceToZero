@@ -47,12 +47,12 @@ $(function () {
     let finalScore;
     let scoreOverlay;
     let game;
-    const NUMBER_OF_LEVELS = 5;
+    
     let musicStarted = false;
     let soundEnabled = getSoundSettings();
     let processing;
 
-
+    const NUMBER_OF_LEVELS = 5;
     const musicURLs = ["music/cute.mp3",
         "music/happiness.mp3",
         "music/ukulele.mp3",
@@ -384,8 +384,7 @@ $(function () {
             let hint3 = "Get the strawberry through this hole!";
 
             barriers.push(
-                new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)//,
-                //new Barrier("forsandbox", 0, height * 0.9, width, height)
+                new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)
             );
             extras.push(
                 new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
@@ -395,12 +394,10 @@ $(function () {
                 new Extra("arrow", width * 0.10, height * 0.85, width * 0.1 + height * 0.05, height * 0.90, "img", "img/arrow.png")
             );
             goal = new Goal("goal", width * 0.05, height - barrierHeight - 1, width * 0.20, height, false);
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
+            foodItem = new FoodItem("strawberry", "strawberry", "img/foodobjects/strawberry.png");
             playItem = new PlayItem(width * 0.35, height * 0.2, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(barrierSize + 5, height - barrierSize - 5, 0, 0, playItemSize, foodItem);
         } else if (levelID === 1) {
             // Tutorial Level Question Stage
-            // TODO - remove row of white pixels at the bottom
             let question = "How much of the food produced around the world is wasted?";
             let hint1 = "Wrong answer? That's okay! Just jump back out and get it into the right one.";
             let hint2 = "Tap under the strawberry mid-jump to go higher!";
@@ -427,24 +424,20 @@ $(function () {
             );
             scoreOverlay.innerHTML = "<p class='statement'><span class='answer'>One third</span> of the food produced around the world is wasted.</p>";
             goal = new Goal("goal", width * 0.25, height * 0.85, width * 0.4, height * 0.9, "tutorialanswer1");
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_strawberry1.png", true);
+            foodItem = new FoodItem("strawberry", "strawberry", "img/foodobjects/strawberry.png");
             playItem = new PlayItem(width * 0.1, height * 0.1, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(188, 621, -7, 8, playItemSize, foodItem);
         } else if (levelID === 2) {
             // Level 1 Game Stage (platform)
-            // TODO - add correct level data
             barriers.push(
                 new Barrier("platform1", width * 0.4, height * 0.29, width * 0.6, height * 0.355),
                 new Barrier("wall1", 0, height * 0.6, width * 0.4625, height),
                 new Barrier("wall2", width * 0.5375, height * 0.6, width, height)
             );
             goal = new Goal("goal", width * 0.4625, height - barrierHeight - 1, width * 0.5375, height);
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", false);
+            foodItem = new FoodItem("apple", "apple", "img/foodobjects/apple.png");
             playItem = new PlayItem(width * 0.475, height * 0.1, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(210, 650, 13, 0, playItemSize, foodItem);
         } else if (levelID === 3) {
             // Level 1 Question Stage
-
             let barrier1Left = Math.max(width * 0.20, barrierWidth + playItemSize + 10);
             let barrier1Right = barrier1Left + Math.max(width * 0.10, playItemSize);
             let barrier3Right = Math.min(width * 0.80, width - barrierWidth - playItemSize - 10);
@@ -476,7 +469,7 @@ $(function () {
             );
             scoreOverlay.innerHTML = "<p class='statement'>The average Vancouver household loses <span class=\"answer\">$700</span> due to food waste every single year!</p>";
             goal = new Goal("goal", width * 0.30, height * 0.85, width * 0.45, height * 0.90, "lvl1answer2");
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_apple1.png", true);
+            foodItem = new FoodItem("apple", "apple", "img/foodobjects/apple.png");
             playItem = new PlayItem(width * 0.475, height * 0.05 + 10, 0, 0, playItemSize, foodItem);
         } else if (levelID === 4) {
             // Level 2 Game Stage (staircase)
@@ -488,7 +481,7 @@ $(function () {
                 new Barrier("step4", width * 0.65, height * 0.20, width * 0.80, height * 0.45)
             );
             goal = new Goal("goal", width * 0.80, height - barrierHeight - 1, width * 0.95, height, false);
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
+            foodItem = new FoodItem("broccoli", "broccoli", "img/foodobjects/broccoli.png");
             playItem = new PlayItem(width * 0.10, height * 0.30, 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
             // Level 2 Question Stage
@@ -524,9 +517,8 @@ $(function () {
             );
             scoreOverlay.innerHTML = "<p class='statement'>If you've found mould on <span class=\"answer\">any</span> kind of food, it's gone bad!</p>";
             goal = new Goal("goal", width * 0.80, height * 0.85, width * 0.95, height * 0.90, "lvl2answerAll");
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_broccoli1.png", true);
+            foodItem = new FoodItem("broccoli", "broccoli", "img/foodobjects/broccoli.png");
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(458, 744, 15, -15, playItemSize, foodItem);
         } else if (levelID === 6) {
             // Level 3 Game Stage (obstacles)
             let blocks1 = width * 0.50;
@@ -542,9 +534,8 @@ $(function () {
                 new Barrier("barrier1", width * 0.24, height * 0.04, width * 0.32, height * 0.20),
                 new Barrier("barrier2", width * 0.40, height * 0.15, width * 0.50, height * 0.31),
                 new Barrier("barrier3", width * 0.60, height * 0.04, width * 0.70, height * 0.18),
-                new Barrier("barrier4", width * 0.80, height * 0.15, width * 0.85, height * 0.20),
                 new Barrier("corner", width * 0.92, height * 0.04, width * 0.96, height * 0.10),
-                new Barrier("lip", width * 0.80, height * 0.25, width * 0.85, height * 0.40),
+                new Barrier("lip", width * 0.80, height * 0.15, width * 0.85, height * 0.40),
                 new Barrier("barrier6", width * 0.30, height * 0.44, width * 0.40, height * 0.55),
                 new Barrier("barrier7", width * 0.04, height * 0.53, width * 0.15, height * 0.60),
                 new Barrier("barrier8", blocks2 - 1, height * 0.55, blocks3, height * 0.66),
@@ -553,9 +544,8 @@ $(function () {
                 new Barrier("barrier11", blocks5, height * 0.60, blocks6, height * 0.66)
             );
             goal = new Goal("goal", width * 0.80, height - barrierHeight - 1, width * 0.95, height, false);
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
+            foodItem = new FoodItem("cookie", "cookie", "img/foodobjects/cookie.png");
             playItem = new PlayItem(width * 0.10, height * 0.10, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(227, 202, 13, 4, playItemSize, foodItem); //sends the food object into a glitch
         } else if (levelID === 7) {
             // Level 3 Question Stage
             let question = "What's a good way to make stale chips taste good again?";
@@ -583,15 +573,14 @@ $(function () {
                 new Extra("lvl3answerBreak", width * 0.20, height * 0.83, 0, 0, "p", answerBreak)
             );
             wrongs.push(
-                new Wrong("lvl3wrongRefrigerate", width * 0.05, height * 0.05, width * 0.20, height * 0.20, "lvl3answerRefrigerate"),
-                new Wrong("lvl3wrongSoak", width * 0.05, height * 0.55, width * 0.20, height * 0.70, "lvl3answerSoak"),
-                new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.20, height * 0.90, "lvl3answerBreak")
+                new Wrong("lvl3wrongRefrigerate", width * 0.05, height * 0.05, width * 0.25, height * 0.20, "lvl3answerRefrigerate"),
+                new Wrong("lvl3wrongSoak", width * 0.05, height * 0.55, width * 0.25, height * 0.70, "lvl3answerSoak"),
+                new Wrong("lvl3wrongBreak", width * 0.05, height * 0.80, width * 0.25, height * 0.90, "lvl3answerBreak")
             );
             scoreOverlay.innerHTML = "<p class='statement'>If your chips have gone stale, don't throw them out - just <span class=\"answer\">toast them!</span></p>";
-            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.20, height * 0.45, "lvl3answerToast");
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_cookie1.png", true);
+            goal = new Goal("goal", width * 0.05, height * 0.30, width * 0.25, height * 0.45, "lvl3answerToast");
+            foodItem = new FoodItem("cookie", "cookie", "img/foodobjects/cookie.png");
             playItem = new PlayItem(width * 0.85, height * 0.10, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(240.63999999999965, 369.95, 1.6400000000000001, 0.7500000000000008, playItemSize, foodItem);
         } else if (levelID === 8) {
             // Level 4 Game Stage (maze)
             barriers.push(
@@ -618,10 +607,8 @@ $(function () {
                 new Barrier("barrier9", width * 0.28, height * 0.85, width * 0.33, height * 0.91)
             );
             goal = new Goal("goal", width * 0.05, height - barrierHeight - 1, width * 0.20, height, false);
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
+            foodItem = new FoodItem("pizza", "pizza", "img/foodobjects/pizza.png");
             playItem = new PlayItem(width * 0.475, height * 0.48, 0, 0, playItemSize, foodItem);
-            //playItem = new PlayItem(67.14865871248756, 411.2, 2.7144728616931486, 3.000000000000001, playItemSize, foodItem);
-            //playItem = new PlayItem(38.20000000000002, 262.3, -4, -4, playItemSize, foodItem);
         } else if (levelID === 9) {
             // Level 4 Question Stage
             let question = "How much money could the world save every year if there was zero food waste?";
@@ -659,7 +646,7 @@ $(function () {
             );
             scoreOverlay.innerHTML = "<p class='statement'>The world could save <span class=\"answer\">a trillion dollars</span> every year by eliminating food waste!</p>";
             goal = new Goal("goal", width * 0.75, height * 0.89, width * 0.90, height * 0.95, "lvl4answerTrillion");
-            foodItem = new FoodItem("Box", "box", "img/foodobjects/rsz_pizza1.png", true);
+            foodItem = new FoodItem("pizza", "pizza", "img/foodobjects/pizza.png");
             playItem = new PlayItem(width * 0.075, height * 0.10, 0, 0, playItemSize, foodItem);
         }
 

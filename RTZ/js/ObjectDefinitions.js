@@ -1,8 +1,3 @@
-const FRICTION = 0.95; // old friction: 0.95
-const MAX_SPEED = 4; // old max speed: 4. Can't go higher than 4.
-const GRAVITY = 0.045; // old gravity: 0.05
-let BOUNCE_MULTIPLIER = 0.3; // old bounce multiplier: 0.4
-
 /**
  * Contains definitions for all of the objects used in the game.
  */
@@ -10,9 +5,11 @@ let BOUNCE_MULTIPLIER = 0.3; // old bounce multiplier: 0.4
 /**
  * Constants.
  */
-const BACKGROUND_COLOUR = "rgb(255, 255, 255)";
-const BARRIER_COLOUR = "rgb(50, 255, 100)";
 const SNAP_TO_GROUND = 0.5;
+const FRICTION = 0.95;
+const MAX_SPEED = 4; // can't go higher than 4 or else certain glitches become possible
+const GRAVITY = 0.045;
+const DEFAULT_BOUNCE_MULTIPLIER = 0.3;
 
 /**
  * Types of pixels.
@@ -23,10 +20,11 @@ const GOAL = 2;
 const WRONG = 3;
 const RIGHT_ANSWER = 4;
 
-
 let clicked;
 let dxChange;
 let dyChange;
+
+let bounceMultiplier = DEFAULT_BOUNCE_MULTIPLIER;
 
 // Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
@@ -63,10 +61,10 @@ $(document).keypress(function (event) {
         }
     } else if (keyNumber === 5) {
         if (event.which === 101) { // "e"
-            if (BOUNCE_MULTIPLIER === 0.3) {
-                BOUNCE_MULTIPLIER = 2;
+            if (bounceMultiplier === DEFAULT_BOUNCE_MULTIPLIER) {
+                bounceMultiplier = 2;
             } else {
-                BOUNCE_MULTIPLIER = 0.3;
+                bounceMultiplier = DEFAULT_BOUNCE_MULTIPLIER;
             }
         } else {
             keyNumber = 0;
@@ -317,7 +315,6 @@ class Level {
      * TODO - check incrementally to fix bugs with moving through thin barriers
      */
     move() {
-
         if (clicked) {
             this.playItem.dx += dxChange;
             this.playItem.dy += dyChange;
@@ -335,7 +332,7 @@ class Level {
         
         let collision = this.checkCollisions(tempX, tempY);
 
-        // logs for testing purposes
+        // log for testing purposes
         // console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
         
         if (this.checkCollisions(this.playItem.x, this.playItem.y + 1) === 3 && Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
@@ -490,8 +487,6 @@ class Level {
         this.playItem.applyGravity();
         this.playItem.adjustSpeed();
     }
-
-    // TODO - group/normalize these snap functions?
 
     /**
      * Snaps the playItem to its top side to simulate the object moving until it collides with its top.
@@ -794,19 +789,6 @@ class Level {
             if (this._playItem.dy < 0) {
                 return 4;
             }
-            /*let move = 0;
-             while (move < this._playItem.size) {
-             if (this._playItem.isGrounded) {
-             return 3;
-             }
-             if (this._board[origX1 - move][origY2].type === SOLID) {
-             return 4;
-             } else if (this._board[origX1][origY2 + move].type === SOLID) {
-             return 3;
-             } else {
-             move++;
-             }
-             }*/
             let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
             for (let i = 1; i <= biggerComponent; i++) {
                 let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
@@ -940,55 +922,18 @@ class PhysicalObject {
     }
 
     /**
-     * Creates an svg element to draw this object on the game window.
+     * Creates an element to draw this object on the game window.
      */
     drawPhysicalObject() {
         let objectWidth = this._x2 - this._x1;
         let objectHeight = this._y2 - this._y1;
         let objectColour = "";
 
-        // TODO - Old barriers made with SVG shapes
-        /*
-
-         if (this._pixelType === SOLID) {
-         objectColour = BARRIER_COLOUR;
-         } else if (this._pixelType === AIR) {
-         objectColour = BACKGROUND_COLOUR;
-         } else if (this._pixelType === GOAL) {
-         objectColour = BACKGROUND_COLOUR;
-         } else if (this._pixelType === WRONG) {
-         objectColour = BARRIER_COLOUR;
-         }
-
-         let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-         svgElement.id = this.name;
-         svgElement.style.width = objectWidth;
-         svgElement.style.height = objectHeight;
-         $(svgElement).css("width", objectWidth);
-         $(svgElement).css("height", objectHeight);
-         svgElement.innerHTML = "<rect width=\"" + objectWidth
-         + "\" height=\"" + objectHeight
-         + "\" style=\"fill:" + objectColour + ";\">";
-         document.getElementById("game_window").appendChild(svgElement);
-
-         // TODO - move this up to match other css styling
-         // TODO - OR move to external stylesheet - better solution
-         let element = $("#" + this._name);
-         element.css("position", "absolute");
-         element.css("left", this._x1);
-         element.css("top", this._y1);
-         */
-
-        // object visual based on single section of image
+        // object visual based on single section of image. jQuery needed for Firefox's
+        // sake.
         let objectImage = document.createElement("div");
         objectImage.id = this.name;
-        objectImage.style.width = objectWidth + "px";
-        objectImage.style.height = objectHeight + "px";
-        objectImage.style.position = "absolute";
-        objectImage.style.left = this.x1 + "px";
-        objectImage.style.top = this.y1 + "px";
 
-        /* For Firefox */
         $(objectImage).css("width", objectWidth);
         $(objectImage).css("height", objectHeight);
         $(objectImage).css("position", "absolute");
@@ -1440,13 +1385,12 @@ class FoodItem {
     /**
      * Sets the name and type of food, the URL of its image, and whether it is edible.
      */
-    constructor(name, type, imageURL, isEdible) {
+    constructor(name, type, imageURL) {
         this._name = name;
         this._type = type;
-        this.bounceMultiplier = BOUNCE_MULTIPLIER; // varies by type
-        this.gravity = GRAVITY; // varies by type
+        this.bounceMultiplier = bounceMultiplier; // could vary by type
+        this.gravity = GRAVITY; // could vary by type
         this._imageURL = imageURL;
-        this._isEdible = isEdible;
     }
 
     set imageURL(imageURL) {
