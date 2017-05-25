@@ -44,9 +44,9 @@ li table {
 }
 /*The best times on profile*/
 #bestTimesTable{
-	display:block;
+	/*display:block;*/
 	margin:auto;
-	width:60vw;
+	width:60%;
 	text-align: center;
 }
 #bestTimesTable td, #bestTimesTable th{
