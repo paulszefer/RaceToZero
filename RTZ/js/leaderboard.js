@@ -34,20 +34,20 @@ $(document).ready(function() {
                     if (gameTime > 0) {
                         let row = document.createElement("tr"); // creates a row.
                         row.className = 'scoreRow';
-                        let cell1 = document.createElement("td");
+                        let placementCell = document.createElement("td");
                         let placement = document.createTextNode(placementNumber);
-                        cell1.appendChild(placement);
-                        let cell2 = document.createElement("td");
-                        let userid = document.createTextNode(name);
-                        cell2.appendChild(userid);
-                        let cell3 = document.createElement("td");
+                        placementCell.appendChild(placement);
+                        let usernameCell = document.createElement("td");
+                        let username = document.createTextNode(name);
+                        usernameCell.appendChild(username);
+                        let timeCell = document.createElement("td");
                         let time = document.createTextNode("" + (Math.round(gameTime / 100) / 10) + "s");
-                        cell3.appendChild(time);
+                        timeCell.appendChild(time);
 
-                        // adds cells to the row: placement, user_id, and time.
-                        row.appendChild(cell1);
-                        row.appendChild(cell2);
-                        row.appendChild(cell3);
+                        // adds cells to the row: placement, username, and time.
+                        row.appendChild(placementCell);
+                        row.appendChild(usernameCell);
+                        row.appendChild(timeCell);
 
                         $("#besttimes").append(row); // adds the row to the table.
                         users.push(name);
@@ -73,6 +73,5 @@ $(document).ready(function() {
             $(".scoreRow").remove();
             displayTable(levelSelected);
         });
-	});
-	
+    });	
 });
