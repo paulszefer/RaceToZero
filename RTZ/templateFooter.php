@@ -29,9 +29,12 @@
 				dino.src = "img/party-dinosaur.gif";
 				dino.setAttribute("class", "easteregg");
 
-				var num = document.getElementsByClassName("easteregg").length
+				var num = document.getElementsByClassName("easteregg").length;
+
 
 				if (num < 20) {
+					document.getElementsByClassName("easteregg")[num - 10].setAttribute("src", "img/party-dinosaur.gif");
+					document.getElementsByClassName("easteregg")[19 - num].setAttribute("src", "img/party-dinosaur.gif");
 					$(dino).insertBefore("#copyright");
 					trigger2();
 				} else {
