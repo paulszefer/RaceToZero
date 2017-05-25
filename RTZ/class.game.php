@@ -86,9 +86,10 @@
 					//if at anytime new score is better, call for twitter post
 					require_once('twitterOAuth.php');
 					//Prepares a message to send to twitter
+					$randInd = array_rand($exclamation);
 					$levelDeclaration = ($theRealCurrentLevelNum === 0) ? "the tutorial level" : ("level " . $theRealCurrentLevel);
-					$status = array_rand($exclamation). $this->uname . ' has a new score on level '
-					. $theRealCurrentLevel . ' with a time of: '.round((($this->time)/1000),1).' seconds! They are now in '.$place[sizeof($top3user)-1].' place!';
+					$status = $exclamation[$randInd].' '. $this->uname . ' has a new score on level '
+					. $theRealCurrentLevel. ' with a time of '.round((($this->time)/1000),1).' seconds! They are now in '.$place[sizeof($top3user)].' place!';
 					//Posts via twitter
 					$connection->post('statuses/update', array('status'=>$status));
 				}
