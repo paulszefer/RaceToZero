@@ -12,5 +12,6 @@ if ($debugMode) {
     $DB_pass = "password.1";
     $DB_name = "b12_20107247_ZeroSquad2";
 }
+$link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
 
 ?>
