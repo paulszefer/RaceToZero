@@ -383,13 +383,15 @@ $(function () {
             let hint1 = "Tap anywhere to move the strawberry in the opposite direction!";
             let hint2 = "The further away that you tap, the further it will go!";
             let hint3 = "Get the strawberry through this hole!";
+            let hint4 = "Tap here!";
 
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)
             );
             extras.push(
-                new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
+                new Extra("hint_tap_anywhere", width * 0.15, height * 0.25, 0, 0, "p", hint1),
                 new Extra("tap_image", width * 0.15, height * 0.6, width * 0.15 + height * 0.05, height * 0.65, "img", "img/taphere.png"),
+                new Extra("tap_here", width * 0.11, height * 0.665, 0, 0, "p", hint4),
                 new Extra("hint_further", width * 0.30, height * 0.55, 0, 0, "p", hint2),
                 new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
                 new Extra("arrow", width * 0.10, height * 0.85, width * 0.1 + height * 0.05, height * 0.90, "img", "img/arrow.png")
