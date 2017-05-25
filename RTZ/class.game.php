@@ -88,8 +88,8 @@
 					//Prepares a message to send to twitter
 					$randInd = array_rand($exclamation);
 					$levelDeclaration = ($theRealCurrentLevelNum === 0) ? "the tutorial level" : ("level " . $theRealCurrentLevel);
-					$status = $exclamation[$randInd].' '. $this->uname . ' has a new score on level '
-					. $theRealCurrentLevel. ' with a time of '.round((($this->time)/1000),1).' seconds! They are now in '.$place[sizeof($top3user)].' place!';
+					$status = $exclamation[$randInd].' '. $this->uname . ' has taken '. $place[sizeof($top3user)].' place on '
+					.$levelDeclaration. ' with a time of '.round((($this->time)/1000),1).' seconds!';
 					//Posts via twitter
 					$connection->post('statuses/update', array('status'=>$status));
 				}
