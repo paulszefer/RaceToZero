@@ -274,6 +274,7 @@ html, body {
 /*footer styling*/
 .footercontent, .eefootercontent{
     background-color: white;
+    height: 10vh;
     width: 100%;
     border-top: solid black 1px;
 }
@@ -283,11 +284,11 @@ html, body {
     color: black;
     text-align: center;
     font-size: 1em;
-    line-height: 10vh;
+    line-height: 5vh;
 }
 /*easter egg styling*/
 .easteregg {
-    width: 25px;
+    width: 15px;
     padding: 0;
     margin: 0;
 }
