@@ -24,7 +24,7 @@
     		$row = mysqli_fetch_array($result);
     		$userid = intval($row['user_id']);
     		//For auto generated messages
-    		$exclamation = ['Congrats!','Wow!','Amazing!','Slammatocious!','Awesome!','Whoo!','WHOA!','Ayylmao.'];
+    		$exclamation = ['Congrats!','Wow!','Amazing!','Slammatocious!','Awesome!','Whoo!','WHOA!'];
     		$place = ["first", 'second', 'third'];
     		//Hacky fix for janky $this->level keks
 			$theRealCurrentLevel;
@@ -86,6 +86,7 @@
 					//if at anytime new score is better, call for twitter post
 					require_once('twitterOAuth.php');
 					//Prepares a message to send to twitter
+					$levelDeclaration = ($theRealCurrentLevelNum === 0) ? "the tutorial level" : ("level " . $theRealCurrentLevel);
 					$status = array_rand($exclamation). $this->uname . ' has a new score on level '
 					. $theRealCurrentLevel . ' with a time of: '.round((($this->time)/1000),1).' seconds! They are now in '.$place[sizeof($top3user)-1].' place!';
 					//Posts via twitter
