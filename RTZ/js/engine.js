@@ -813,7 +813,7 @@ $(function () {
                     let time = document.createElement("p");
                     time.innerHTML = parseTimeForOverlay(finalTime);
 
-                    let actualLevel = game.level / 2;
+                    let actualLevel = (game.level - 1) / 2;
                     let scoreInSeconds = Math.floor(finalTime / 1000);
                     scoreInSeconds = scoreInSeconds + (Math.floor((finalTime - (scoreInSeconds * 1000)) / 100) / 10);
                     $.post("accessdb.php", {

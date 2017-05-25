@@ -17,14 +17,13 @@
 		
 		// Queries the database and records the state of the game.
 		public function save() {
-            require_once('PDO_conn.php');
-            $link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
-    			
+            require_once('dblogin.php');
+
     		$userIDQuery = "SELECT user_id FROM users WHERE user_name=\"" . $this->uname . "\";";
     		$result = mysqli_query($link, $userIDQuery);
     		$row = mysqli_fetch_array($result);
     		$userid = intval($row['user_id']);
-    		
+
     		//Hacky fix for janky $this->level keks
 			$theRealCurrentLevel;
 			$theRealCurrentLevelNum;
@@ -35,13 +34,17 @@
 				$theRealCurrentLevel = intval($this->level);
 				$theRealCurrentLevelNum = intval($this->level);
 			}
-
+            
     		//Grabs the current level 3 highest scores
     		$topScoreQuery = "SELECT game_time, user_name
 			FROM games
             INNER JOIN users on users.user_id = games.user_id
     		WHERE game_level= ".$theRealCurrentLevelNum." ORDER BY game_time ASC;";
     		$topScoreResult = mysqli_query($link, $topScoreQuery);
+    		$topScoreResults = array();
+    		while ($topScoreResultRow = mysqli_fetch_array($topScoreResult)) {
+    		    $topScoreResults[] = $topScoreResultRow;
+    		}
 
    //  		//For dubug shenanigans atm
 			// require_once('twitterOAuth.php');
@@ -50,21 +53,24 @@
 			// . $theRealCurrentLevel . ' with a time of: '.round((($this->time)/1000),2).' seconds!';
 			// //Posts via twitter
 			// $connection->post('statuses/update', array('status'=>$status));
-
+            
     		//Check if score is smaller than the fetched rows
 			header('debug.php', 'LOL NO');
-			if($topScoreResult) {
+			if($topScoreResults) {
 				$shouldPost = false;
 				$i = 0;
 				$top3user = array();
-				while(sizeof($top3user) < 3){
+				while(sizeof($top3user) < 3 && !$shouldPost && !in_array($this->uname, $top3user)){
 					header('debug.php', 'LOL NO');
-					if (!in_array($topScoreResult[$i]['user_name'], $top3user)){
-						if ($topScoreResult[$i]['game_time'] > $this->time){
-							$shouldPost = true;
-
-						}
-						array_push($top3user, $topScoreResult[$i]['user_name']);
+					if ($topScoreResults[$i]) {
+					    if (!in_array($topScoreResults[$i]['user_name'], $top3user)){
+						    if ($topScoreResults[$i]['game_time'] > $this->time){
+							    $shouldPost = true;
+						    }
+						    array_push($top3user, $topScoreResults[$i]['user_name']);
+					    }
+					} else {
+					    $shouldPost = true;
 					}
 					$i++;
 				}
@@ -75,7 +81,6 @@
 				// 		$shouldPost = true;
 				// 	}
 				// }
-
 
 				if ($shouldPost) {
 					//if at anytime new score is better, call for twitter post
