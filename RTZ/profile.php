@@ -7,7 +7,7 @@
 
     // Queries the database in order to get the current user's score on any level.
     function getLevelScore($level) {
-        require_once('dblogin.php');
+        require('dblogin.php');
 
     	$query = "SELECT game_time
                   FROM games

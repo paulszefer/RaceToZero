@@ -28,14 +28,13 @@
 
         $times = array();
 
-        require_once('PDO_conn.php');
-        $link = mysqli_connect($DB_host, $DB_user, $DB_pass, $DB_name);
+        require_once('dblogin.php');
 
         $query = "SELECT game_time,
                          user_name
 				  FROM games
 				  	INNER JOIN users ON users.user_id = games.user_id
-				  WHERE game_level=" . ($level + 1) . 
+				  WHERE game_level=" . $level . 
 				" ORDER BY game_time ASC;";
 
         $result = mysqli_query($link, $query);

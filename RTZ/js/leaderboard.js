@@ -21,6 +21,7 @@ $(document).ready(function() {
     // Takes in a level as a parameter and displays the leaderboard for that level
     // as a table.
     function displayTable($level) {
+        console.log($level);
         // Uses the getShortestTimes() function in accessdb.php to query the database
         // and get the shortest times for that level. Then displays those times in
         // a table.
