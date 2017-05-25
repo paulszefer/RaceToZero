@@ -1,5 +1,6 @@
 <?php
 //Grabs connection script
+session_start();
 require_once('PDO_conn.php');
 
 class USER {
