@@ -2,6 +2,9 @@
 		<div id='footer'>
 			<div class='eefootercontent'>
 				<p id="footerp"><marquee behaviour=alternate direction="down">
+				<a href="about.php">About Us</a><br>
+				<img class="easteregg" src="img/party-dinosaur.gif">
+				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
@@ -9,11 +12,13 @@
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
+				<img class="easteregg" src="img/party-dinosaur.gif">
+				<img class="easteregg" src="img/party-dinosaur.gif">
 				</marquee></p>
 			</div>
 			<div class='footercontent'>
 				<p>
-				<span id="copyright" onClick="trigger()">Copyright 2017</span>
+				<a href="about.php">About Us</a><br><span id="copyright" onClick="trigger()">Copyright 2017</span>
 				</p>
 			</div>
 		</div>
@@ -26,7 +31,7 @@
 
 				var num = document.getElementsByClassName("easteregg").length
 
-				if (num < 12) {
+				if (num < 20) {
 					$(dino).insertBefore("#copyright");
 					trigger2();
 				} else {
