@@ -343,6 +343,7 @@ $(function () {
 
             let soundButton = document.createElement("div");
             soundButton.id = "sound_button";
+            soundButton.style.bottom = '';
             let soundOnImage = document.createElement("img");
             soundOnImage.src = "img/soundon.png";
             soundOnImage.alt = "Toggle Sound";
@@ -841,6 +842,7 @@ $(function () {
 
                     let soundButton = document.createElement("div");
                     soundButton.id = "sound_button";
+                    soundButton.style.bottom = '5%';
                     let soundOnImage = document.createElement("img");
                     soundOnImage.src = "img/soundon.png";
                     soundOnImage.alt = "Toggle Sound";
