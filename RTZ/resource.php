@@ -165,7 +165,7 @@
 						<li><button type="button" onclick="displayIcon(this);">One third</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">One half</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
-					<li>How much money could we save every year if there was zero food waste around the world?
+					<li>How much money could the world save every year if there was zero food waste around the world?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">$1,000</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">$1,000,000</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
