@@ -1,4 +1,7 @@
-<?php include("templateHeader.php");?>
+<?php
+    session_start();r
+    include("templateHeader.php");
+?>
 <link rel="stylesheet" href="css/about.css">
 <?php include("templateNav.php");?>
 
