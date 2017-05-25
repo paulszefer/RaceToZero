@@ -804,13 +804,15 @@ $(function () {
                     let actualLevel = (game.level - 1) / 2;
                     let scoreInSeconds = Math.floor(finalTime / 1000);
                     scoreInSeconds = scoreInSeconds + (Math.floor((finalTime - (scoreInSeconds * 1000)) / 100) / 10);
-                    $.post("accessdb.php", {
-                        function: "saveGame",
-                        level: actualLevel,
-                        time: finalTime
-                    }, function (data) {
-                        //alert(data);
-                    });
+                    if (loggedIn === -1) {
+                        $.post("accessdb.php", {
+                            function: "saveGame",
+                            level: actualLevel,
+                            time: finalTime
+                        }, function (data) {
+                            //alert(data);
+                        });
+                    }
 
                     let yourTime = document.createElement("p");
                     yourTime.id = "your_time";
