@@ -1,5 +1,4 @@
 <?php
-session_start();
 $debugMode = true;
 if ($debugMode) {
     $DB_host = "localhost";
