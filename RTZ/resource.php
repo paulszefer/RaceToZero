@@ -15,10 +15,10 @@
 				<ol>
 					<li>Which of these is the biggest contributor to food waste?
 					<ul>
-						<li><button type="button" onclick="displayIcon(this);">Retail waste</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Not enough storage or packaging</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Consumer waste</button><img class="answerIcon" src="img/correctIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Production waste</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Stores</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Not enough storage space</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Everyday people</button><img class="answerIcon" src="img/correctIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Factories</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
 					<li>How much money does a typical household in Vancouver lose due to food waste each year?
 					<ul>
@@ -29,9 +29,9 @@
 					</ul></li><br>
 					<li>How does food waste hurt the environment?
 					<ul>
-						<li><button type="button" onclick="displayIcon(this);">It creates landfills</button><img class="answerIcon" src="img/correctIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">It makes landfills bigger</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">It feeds bugs</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">It stinks</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">It stinks!</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
 					<li>Which of these can we save by reducing food waste?
 					<ul>
@@ -52,14 +52,14 @@
 						<li><button type="button" onclick="displayIcon(this);">No</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Depends on the food</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 					</ul></li><br>
-					<li>Which of these foods have gone bad if you’ve found mold on them?
+					<li>Which of these foods are still safe to eat if you've found mould on them?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">Meat &amp; Dairy</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Bread</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Fruits &amp; Vegetables</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">All of these</button><img class="answerIcon" src="img/correctIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">None of these</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 					</ul></li><br>
-					<li>How safe is it to eat an apple that’s very soft on the inside?
+					<li>How safe is it to eat an apple that’s mushy on the inside?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">It's safe</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">It depends</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
@@ -70,26 +70,20 @@
 						<li><button type="button" onclick="displayIcon(this);">Yes</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">No</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
-					<li>Are fruits and vegetables with slightly odd coloring safe to eat?
+					<li>Are fruits and vegetables with slightly odd colouring safe to eat?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">Yes</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">No</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Only fruits are</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Only vegetables are</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
-					<li>When you put an egg in water and it’s unsafe to eat, what happens to the egg?
+					<li>When you put a spoiled egg in water, what happens to the egg?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">It sinks</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">It floats</button><img class="answerIcon" src="img/correctIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">It stays in the middle</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">It breaks</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
-					<li>Is a food still safe if it smells weird?
-					<ul>
-						<li><button type="button" onclick="displayIcon(this);">Yes</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">No</button><img class="answerIcon" src="img/correctIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Only if it looks fine</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-					</ul></li><br>
-					<li>If green vegetables have turned yellow are they safe to eat?
+					<li>If green vegetables have turned yellow, are they safe to eat?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">Yes</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">No</button><img class="answerIcon" src="img/correctIcon1.png"></li>
@@ -98,10 +92,10 @@
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">Yes</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">No</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">If you remove the bruised portion</button><img class="answerIcon" src="img/correctIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">If you remove the bruised part</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Only in small amounts</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
-					<li>Is lettuce with brown discoloration safe to eat?
+					<li>Is lettuce with brown discolouration safe to eat?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">Yes</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">No</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
@@ -117,14 +111,14 @@
 						<li><button type="button" onclick="displayIcon(this);">Refrigerating them</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Toasting them</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">Soaking them in water</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Breaking them into smaller pieces</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Crushing them</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
 					<li>How can you heal wilted or wrinkled vegetables?
 					<ul>
-						<li><button type="button" onclick="displayIcon(this);">Chopping it up</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Freezing it</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Putting it in ice water</button><img class="answerIcon" src="img/correctIcon1.png"></li>
-						<li><button type="button" onclick="displayIcon(this);">Cooking it</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Chopping them up</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Freezing them</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Putting them in ice water</button><img class="answerIcon" src="img/correctIcon1.png"></li>
+						<li><button type="button" onclick="displayIcon(this);">Cooking them</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
 					<li>What should you do with apples you don’t want to eat?
 					<ul>
@@ -171,7 +165,7 @@
 						<li><button type="button" onclick="displayIcon(this);">One third</button><img class="answerIcon" src="img/correctIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">One half</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 					</ul></li><br>
-					<li>How much money could we save if there was zero food waste around the world?
+					<li>How much money could we save every year if there was zero food waste around the world?
 					<ul>
 						<li><button type="button" onclick="displayIcon(this);">$1,000</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
 						<li><button type="button" onclick="displayIcon(this);">$1,000,000</button><img class="answerIcon" src="img/incorrectIcon1.png"></li>
@@ -184,7 +178,7 @@
 				<img class="xbutton" id="bigone" src="img/tempX.png">
 				<h1>AFFILIATED APPS</h1>
 				<p id=centeraffappstext>
-				Here are some other apps that we have connection with!
+				Here are some other apps that we have a connection with!
 				</p>
 				<br>
 	            <hr>
@@ -192,14 +186,14 @@
 				<br>
 				<img src='img/foodfactorylogo.png' height='150' width='150' alt='food factory logo'>
 	            <br><br>
-	            <p><a href='https://foodfactoryzero.firebaseapp.com/'>Food Factory Zero</a> is a time-based drag and drop game. All you need to do is pick and match the ingredients with recipes.</p>
+	            <p><a href='https://foodfactoryzero.firebaseapp.com/'>Food Factory Zero</a> is a time-based drag-and-drop game. All you need to do is pick and match the ingredients with recipes.</p>
 				<br>
 	            <hr>
-				<h2>Captin Plan-It</h2>
+				<h2>Captain Plan-It</h2>
 				<br>
 				<img src='img/cp3v2.png' height='150' width='150' alt='captain plan-it logo'>
 				<br><br>
-	            <p><a href='http://students.bcitdev.com/A01009216/Captain-Plan-It/index.php'>Captain Plan-It</a> is an educational quiz game where you can answer questions related to food groups. Answer correctly to earn keys which can unlock accessories for your own personal hero!</p>
+	            <p><a href='http://ec2-34-223-205-71.us-west-2.compute.amazonaws.com/Captain-Plan-It/index.php'>Captain Plan-It</a> is an educational quiz game where you can answer questions related to food groups. Answer correctly to earn keys which can unlock accessories for your own personal hero!</p>
 				<br>
 	            <hr>
 	            <h2>Food Fall</h2>

@@ -46,12 +46,13 @@ li table {
 #bestTimesTable{
 	display:block;
 	margin:auto;
-	width:40vw;
+	width:60vw;
 	text-align: center;
 }
 #bestTimesTable td, #bestTimesTable th{
-	min-width:20vw;
 	border: 1px solid;
+	width: 50%;
+	padding: 2vh;
 }
 #bestTimesTable >tbody> tr {
 	background-color: #f2f2f2;

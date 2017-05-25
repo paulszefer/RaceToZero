@@ -5,7 +5,7 @@
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
-				Copyright whatever
+				Copyright 2017
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
@@ -13,7 +13,7 @@
 			</div>
 			<div class='footercontent'>
 				<p>
-				<span id="copyright" onClick="trigger()">Copyright whatever</span>
+				<span id="copyright" onClick="trigger()">Copyright 2017</span>
 				</p>
 			</div>
 		</div>
