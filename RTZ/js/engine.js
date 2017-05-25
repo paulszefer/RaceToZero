@@ -43,6 +43,7 @@ $(function () {
     let muteButton;
     let muteImage;
     let timer;
+    let hintFurther;
     let loginOverlay;
     let finalScore;
     let scoreOverlay;
@@ -681,6 +682,10 @@ $(function () {
                 extras[i].render();
             }
 
+            if (game.level === 0) {
+                hintFurther = document.getElementById("hint_further");
+            }
+
             /**
              * Adds the wrongs to the level object.
              */
@@ -721,6 +726,12 @@ $(function () {
             retryImage.style.display = "block";
             muteImage.style.display = "block";
             timer.style.display = "block";
+
+            if (game.level === 0) {
+                setTimeout(function() {
+                    hintFurther.style.display = "block";
+                }, 3000);
+            }
 
             /**
              * Initializes the timer that handles game ticks.
@@ -966,6 +977,10 @@ $(function () {
 
         // prevents initial input
         if (!clicked && score > 100) {
+            if (game.level === 0) {
+                document.getElementById("hint_hole").style.display = "block";
+                document.getElementById("arrow").style.display = "block";
+            }
             let divPosX = $(this).position().left;
             let divPosY = $(this).position().top;
             let mousePosX = e.pageX - divPosX - $(gameContainer).offset().left;

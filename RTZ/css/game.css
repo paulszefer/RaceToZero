@@ -221,6 +221,11 @@
     user-select: none;
 }
 
+#hint_further, #hint_hole, #arrow {
+    display: none;
+    animation: fadein 1s;
+}
+
 #hint_answer {
     display: none;
     animation: fadein 2s;
