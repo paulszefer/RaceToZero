@@ -1,4 +1,7 @@
-<?php include("templateHeader.php");?>
+<?php
+    session_start();
+    include("templateHeader.php");
+?>
 <title>Race to Zero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link rel="stylesheet" href="css/index.css">

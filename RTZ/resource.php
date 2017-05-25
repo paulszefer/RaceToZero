@@ -1,4 +1,7 @@
-<?php include("templateHeader.php");?>
+<?php
+    session_start();
+    include("templateHeader.php");
+?>
 
 <!--insert page specific js css here-->
 <title>Race To Zero - Resources</title>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('PDO_conn.php');
 
 //if user is logged in, redirect em to index.php

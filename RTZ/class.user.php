@@ -1,6 +1,6 @@
 <?php
 //Grabs connection script
-session_start();
+//session_start();
 require_once('PDO_conn.php');
 
 class USER {
@@ -145,7 +145,7 @@ class USER {
 	//checks if an user object is logged in
 	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
-		return $this->loggedIn;
+		return isset($_SESSION['user_session']);
 	}
 	
 	//Redirects user to another page
