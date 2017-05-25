@@ -6,9 +6,8 @@
 <link rel="stylesheet" href="css/questionsandanswers.css">
 
 <?php
-/* loads 'play' screen first if the user is not logged in */
-    if(isset($_SESSION['user_session']))
-    {
+    /* loads 'play' screen first if the user is not logged in */
+    if(isset($_SESSION['user_session'])) {
         $loggedIn = -1;
     } else {
         $loggedIn = -2;
@@ -22,7 +21,7 @@
 <script src="js/cookies.js"></script>
 <script src="js/engine.js"></script>
 <?php include("templateNav.php");?>
-		
+
 <div id="content">
 	<div class='contentactual'>
 	</div>

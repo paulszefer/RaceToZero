@@ -180,22 +180,5 @@ class USER {
 			echo $e->getMessage();
 		}
 	}
-	//updates user image, WIP
-	public function updateUserProfileImage($imgId){
-		try 
-		{
-			//check if user is logged in
-			if ($this->loggedIn){
-			$statement = $this->conn->prepare("UPDATE users
-				SET user_photo=:uimgId
-				WHERE user_name=:uname");
-			$statement->execute(array(':uname'=>$_SESSION['user_name'], ':uimgId'=>$imgId));
-			return true;
-			}
-		}
-		catch(PDOException $e) {
-			echo $e->getMessage();
-		}
-	}
 } //end of user class
 ?>

@@ -1,6 +1,4 @@
 <?php
-// This file will be heavily modified/replaced later, because we will be using mysqli
-// instead.
 session_start();
 $debugMode = true;
 if ($debugMode) {
