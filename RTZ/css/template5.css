@@ -274,7 +274,6 @@ html, body {
 /*footer styling*/
 .footercontent, .eefootercontent{
     background-color: white;
-    height: 10vh;
     width: 100%;
     border-top: solid black 1px;
 }
