@@ -343,6 +343,7 @@ $(function () {
 
             let soundButton = document.createElement("div");
             soundButton.id = "sound_button";
+            soundButton.style.bottom = '';
             let soundOnImage = document.createElement("img");
             soundOnImage.src = "img/soundon.png";
             soundOnImage.alt = "Toggle Sound";
@@ -382,13 +383,15 @@ $(function () {
             let hint1 = "Tap anywhere to move the strawberry in the opposite direction!";
             let hint2 = "The further away that you tap, the further it will go!";
             let hint3 = "Get the strawberry through this hole!";
+            let hint4 = "Tap here!";
 
             barriers.push(
                 new Barrier("platform1", 0, height * 0.45, width * 0.45, height * 0.515)
             );
             extras.push(
-                new Extra("hint_tap_here", width * 0.15, height * 0.25, 0, 0, "p", hint1),
+                new Extra("hint_tap_anywhere", width * 0.15, height * 0.25, 0, 0, "p", hint1),
                 new Extra("tap_image", width * 0.15, height * 0.6, width * 0.15 + height * 0.05, height * 0.65, "img", "img/taphere.png"),
+                new Extra("tap_here", width * 0.11, height * 0.665, 0, 0, "p", hint4),
                 new Extra("hint_further", width * 0.30, height * 0.55, 0, 0, "p", hint2),
                 new Extra("hint_hole", width * 0.10, height * 0.80, 0, 0, "p", hint3),
                 new Extra("arrow", width * 0.10, height * 0.85, width * 0.1 + height * 0.05, height * 0.90, "img", "img/arrow.png")
@@ -485,11 +488,11 @@ $(function () {
             playItem = new PlayItem(width * 0.10, height * 0.30, 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
             // Level 2 Question Stage
-            let question = "Which of these foods have gone bad if you've found mould on them?";
+            let question = "Which of these foods are still safe to eat if you've found mould on them?";
             let answerMeat = "Meat & Dairy";
             let answerBread = "Bread";
             let answerFruits = "Fruits & Veggies";
-            let answerAll = "All of these";
+            let answerAll = "None of these";
             barriers.push(
                 new Barrier("platform1", width * 0.75, height * 0.20, width * 0.96, height * 0.30),
                 new Barrier("platform2", width * 0.29, height * 0.29, width * 0.45, height * 0.355),
@@ -552,7 +555,7 @@ $(function () {
             let answerRefrigerate = "Refrigerate them";
             let answerToast = "Toast them";
             let answerSoak = "Soak them in water";
-            let answerBreak = "Break them into pieces";
+            let answerBreak = "Crush them";
             barriers.push(
                 new Barrier("mainwall", width * 0.70, height * 0.04, width * 0.80, height * 0.80),
                 new Barrier("floor", 0, height * 0.90, width * 0.96, height * 0.96),
@@ -803,13 +806,15 @@ $(function () {
                     let actualLevel = (game.level - 1) / 2;
                     let scoreInSeconds = Math.floor(finalTime / 1000);
                     scoreInSeconds = scoreInSeconds + (Math.floor((finalTime - (scoreInSeconds * 1000)) / 100) / 10);
-                    $.post("accessdb.php", {
-                        function: "saveGame",
-                        level: actualLevel,
-                        time: finalTime
-                    }, function (data) {
-                        //alert(data);
-                    });
+                    if (loggedIn === -1) {
+                        $.post("accessdb.php", {
+                            function: "saveGame",
+                            level: actualLevel,
+                            time: finalTime
+                        }, function (data) {
+                            //alert(data);
+                        });
+                    }
 
                     let yourTime = document.createElement("p");
                     yourTime.id = "your_time";
@@ -841,6 +846,7 @@ $(function () {
 
                     let soundButton = document.createElement("div");
                     soundButton.id = "sound_button";
+                    soundButton.style.bottom = '5%';
                     let soundOnImage = document.createElement("img");
                     soundOnImage.src = "img/soundon.png";
                     soundOnImage.alt = "Toggle Sound";

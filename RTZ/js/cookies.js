@@ -23,7 +23,7 @@ function getHighestLevelReached() {
         while (indivCookie.charAt(0) == ' ') {
             indivCookie = indivCookie.substring(1);
         }
-        if (indivCookie.indexOf("level") == 0) {
+        if (indivCookie.indexOf("level=") == 0) {
             level = indivCookie.substring(6, indivCookie.length);
         }
     }
