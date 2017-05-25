@@ -113,7 +113,6 @@
     height: 6%;
     position: absolute;
     left: 45%;
-    bottom: 5%;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     outline: 5px rgb(120, 120, 120) outset;
 }
@@ -179,7 +178,7 @@
     width: 60%;
     height: 5vh;
     padding: 2vh 0;
-    margin: 5vh auto;
+    margin: 4vh auto;
     text-align: center;
     background-color: rgb(148, 232, 136);
     background: linear-gradient(170deg, rgb(108, 192, 96), rgb(148, 232, 136), rgb(108, 192, 96));
@@ -190,7 +189,6 @@
 }
 
 .level_select_button:hover {
-    /*background-color: white;*/
     background: linear-gradient(white, rgb(160, 160, 160));
 }
 
