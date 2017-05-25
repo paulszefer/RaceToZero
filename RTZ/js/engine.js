@@ -552,7 +552,7 @@ $(function () {
             let answerRefrigerate = "Refrigerate them";
             let answerToast = "Toast them";
             let answerSoak = "Soak them in water";
-            let answerBreak = "Break them into pieces";
+            let answerBreak = "Crush them";
             barriers.push(
                 new Barrier("mainwall", width * 0.70, height * 0.04, width * 0.80, height * 0.80),
                 new Barrier("floor", 0, height * 0.90, width * 0.96, height * 0.96),
