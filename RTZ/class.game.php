@@ -23,7 +23,9 @@
     		$result = mysqli_query($link, $userIDQuery);
     		$row = mysqli_fetch_array($result);
     		$userid = intval($row['user_id']);
-
+    		//For auto generated messages
+    		$exclamation = ['Congrats!','Wow!','Amazing!','Slammatocious!','Awesome!','Whoo!','WHOA!'];
+    		$place = ["first", 'second', 'third'];
     		//Hacky fix for janky $this->level keks
 			$theRealCurrentLevel;
 			$theRealCurrentLevelNum;
@@ -55,13 +57,11 @@
 			// $connection->post('statuses/update', array('status'=>$status));
             
     		//Check if score is smaller than the fetched rows
-			header('debug.php', 'LOL NO');
 			if($topScoreResults) {
 				$shouldPost = false;
 				$i = 0;
 				$top3user = array();
 				while(sizeof($top3user) < 3 && !$shouldPost && !in_array($this->uname, $top3user)){
-					header('debug.php', 'LOL NO');
 					if ($topScoreResults[$i]) {
 					    if (!in_array($topScoreResults[$i]['user_name'], $top3user)){
 						    if ($topScoreResults[$i]['game_time'] > $this->time){
@@ -86,8 +86,9 @@
 					//if at anytime new score is better, call for twitter post
 					require_once('twitterOAuth.php');
 					//Prepares a message to send to twitter
-					$status = 'Congrats! '. $this->uname . ' has a new score on level '
-					. $theRealCurrentLevel . ' with a time of: '.round((($this->time)/1000),1).' seconds!';
+					$levelDeclaration = ($theRealCurrentLevelNum === 0) ? "the tutorial level" : ("level " . $theRealCurrentLevel);
+					$status = array_rand($exclamation). $this->uname . ' has a new score on level '
+					. $theRealCurrentLevel . ' with a time of: '.round((($this->time)/1000),1).' seconds! They are now in '.$place[sizeof($top3user)-1].' place!';
 					//Posts via twitter
 					$connection->post('statuses/update', array('status'=>$status));
 				}
