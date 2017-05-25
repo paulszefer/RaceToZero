@@ -32,6 +32,7 @@
 				} else {
 					document.getElementsByClassName("eefootercontent")[0].style.width = "100%";
 					document.getElementsByClassName("eefootercontent")[0].style.height = "10vh";
+					document.getElementsByClassName("eefootercontent")[0].style.borderTop = "1px solid black";
 					document.getElementsByClassName("footercontent")[0].style.display = "none";
 				}
 			}			

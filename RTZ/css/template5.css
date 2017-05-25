@@ -295,6 +295,7 @@ html, body {
 .eefootercontent {
     width: 0;
     height: 0;
+    border: 0;
 }
 .eefootercontent p {
     margin: 0 auto;
