@@ -485,11 +485,11 @@ $(function () {
             playItem = new PlayItem(width * 0.10, height * 0.30, 0, 0, playItemSize, foodItem);
         } else if (levelID === 5) {
             // Level 2 Question Stage
-            let question = "Which of these foods have gone bad if you've found mould on them?";
+            let question = "Which of these foods are still safe to eat if you've found mould on them?";
             let answerMeat = "Meat & Dairy";
             let answerBread = "Bread";
             let answerFruits = "Fruits & Veggies";
-            let answerAll = "All of these";
+            let answerAll = "None of these";
             barriers.push(
                 new Barrier("platform1", width * 0.75, height * 0.20, width * 0.96, height * 0.30),
                 new Barrier("platform2", width * 0.29, height * 0.29, width * 0.45, height * 0.355),
