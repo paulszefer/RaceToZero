@@ -1,5 +1,5 @@
 <?php
-    session_start();r
+    session_start();
     include("templateHeader.php");
 ?>
 <link rel="stylesheet" href="css/about.css">
