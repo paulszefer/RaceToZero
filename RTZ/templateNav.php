@@ -21,7 +21,7 @@
 					</p>
 				</div> -->
 				<div id='navburger'>
-					<img src='img/menuiconblack.png'>
+					<img src='img/menuicon.png'>
 				</div>
 			</div> <!--end of navlogo-->
 			
