@@ -49,6 +49,11 @@
     outline: 10px outset rgb(120, 120, 120);
 }
 
+#navburger {
+    top: 2vh;
+    left: 2vh;
+}
+
 #logo_mascot {
     display: block;
     width: 10vh;
@@ -125,6 +130,24 @@
     margin: auto;
 }
 
+#twitter_button {
+    width: 10%;
+    height: 6%;
+    position: absolute;
+    right: 15%;
+    bottom: 5%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    outline: 5px rgb(120, 120, 120) outset;
+}
+
+#twitter_button img {
+    width: 5vh;
+    position: relative;
+    top: 0.5vh;
+    display: block;
+    margin: auto;
+}
+
 #sound_button:hover {
     background: linear-gradient(white, rgb(160, 160, 160));
 }
@@ -175,10 +198,10 @@
 
 /* Styles a level select button. */
 .level_select_button {
-    width: 60%;
+    width: 50%;
     height: 5vh;
     padding: 2vh 0;
-    margin: 4vh auto;
+    margin: 4.5vh auto;
     text-align: center;
     background-color: rgb(148, 232, 136);
     background: linear-gradient(170deg, rgb(108, 192, 96), rgb(148, 232, 136), rgb(108, 192, 96));

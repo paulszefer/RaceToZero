@@ -214,7 +214,6 @@ $(function () {
          * Creates the game object to store the game's state.
          */
         game = new Game();
-
     }
 
     /** Declare/Initialize game variables. */
@@ -722,9 +721,6 @@ $(function () {
             document.getElementById("game_window").appendChild(imgElement);
 
             foodImage = $("#food_image");
-
-            navBurger.style.top = "7vh";
-            navBurger.style.left = "5vh";
             retryImage.style.display = "block";
             muteImage.style.display = "block";
             timer.style.display = "block";
@@ -739,9 +735,6 @@ $(function () {
              * Initializes the timer that handles game ticks.
              */
             intervalId = setInterval(move, 5);
-        } else {
-            navBurger.style.top = "2vh";
-            navBurger.style.left = "2vh";
         }
     }
 
@@ -891,8 +884,6 @@ $(function () {
 
                     scoreOverlay.appendChild(soundButton);
 
-                    navBurger.style.top = "2vh";
-                    navBurger.style.left = "2vh";
                     navImage.src = "img/menuicon.png";
 
                     timer.style.display = "none";
@@ -944,7 +935,6 @@ $(function () {
 
         score = 0;
         if (game.level >= 0) {
-            navImage.src = "img/menuiconblack.png";
             retryImage.style.display = "block";
             muteImage.style.display = "block";
             timer.style.display = "block";
