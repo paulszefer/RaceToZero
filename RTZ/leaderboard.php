@@ -1,4 +1,7 @@
-<?php include("templateHeader.php");?>
+<?php
+    session_start();
+    include("templateHeader.php");
+?>
 
 <title>Race To Zero - Leaderboard</title>
 <link rel="stylesheet" href="css/leaderboard.css">

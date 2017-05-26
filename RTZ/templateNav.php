@@ -21,14 +21,14 @@
 					</p>
 				</div> -->
 				<div id='navburger'>
-					<img src='img/menuiconblack.png'>
+					<img src='img/menuicon.png'>
 				</div>
 			</div> <!--end of navlogo-->
 			
 			<!-- This div is used for the nav on desktop. -->
 			<div class='navlinks'>
 				<ul>
-					<a href='index.php'><li class='navbuttonleft'>Home</li></a>
+					<a href='index.php'><li class='navbuttonleft'>Play</li></a>
 					<a href='resource.php'><li class='navbuttonleft'>Resources</li></a>
 					<a href='leaderboard.php'><li class='navbuttonleft'>Leaderboard</li></a>
 					<?php
@@ -70,17 +70,17 @@
 						);
 					}
 				?>
-                <a href='index.php'><li class='mobilelist'><div>Home</div></li></a>
-				<a href='resource.php'><li class='mobilelist'><div>Resources</div></li></a>
-				<a href='leaderboard.php'><li class='mobilelist'><div>Leaderboard</div></li></a>
+                <a href='index.php'><li class='mobilelist'><div><img class="mobileicon" src="img/pizzalogoonly.png" alt="Home">Play</div></li></a>
+				<a href='resource.php'><li class='mobilelist'><div><img class="mobileicon" src="img/ResourcesIcon.png" alt="Resources">Resources</div></li></a>
+				<a href='leaderboard.php'><li class='mobilelist'><div><img class="mobileicon" src="img/LeaderboardIcon.png" alt="Leaderboard">Leaderboard</div></li></a>
 				<?php
 					if(isset($_SESSION['user_session']))
 					{
 						echo 
-						"<a href='logout.php'><li class='mobilelist'><div>Logout</div></li></a>";
+						"<a href='logout.php'><li class='mobilelist'><div><img class='mobileicon' src='img/ProfileIcon.png' alt='Logout'>Logout</div></li></a>";
 					} else {
 						echo 
-						"<a href='login.php'><li class='mobilelist'><div>Login/Register</div></li></a>";
+						"<a href='login.php'><li class='mobilelist'><div><img class='mobileicon' src='img/ProfileIcon.png' alt='Login/Register'>Login/Register</div></li></a>";
 					}
 				?>
                 </ul>

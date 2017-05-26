@@ -1,5 +1,6 @@
 <?php
 //Grabs connection script
+//session_start();
 require_once('PDO_conn.php');
 
 class USER {
@@ -49,15 +50,17 @@ class USER {
 					$this->registerError = 'Username already taken';
 					return false;
 				} else {
+					$levelAchieved = $_COOKIE['level'] ? $_COOKIE['level'] : 0;
 					//If they passed all the tests, register them in
 					$stmt = $this->conn->prepare(
-					"INSERT INTO users(user_name,user_password,user_photo) 
-					VALUES(:uname, :upass, :photourl)");
-					$stmt->execute(array(':uname'=>$uname, ':upass'=>$upass,':photourl'=>$photourl));
+					"INSERT INTO users(user_name,user_password,user_photo,user_level) 
+					VALUES(:uname, :upass, :photourl, :ulevel)");
+					$stmt->execute(array(':uname'=>$uname, ':upass'=>$upass,':photourl'=>$photourl, ':ulevel'=>$levelAchieved));
 					//and log them in automatically
 					$this->doLogin($uname, $upass);
 					//and redirect them to login script
-					$this->redirect('login.php');
+					$this->redirect('index.php');
+					return true;
 				}//End of else
 			} catch(PDOException $e) {
 				echo $e->getMessage();
@@ -69,7 +72,7 @@ class USER {
 		$this->loginError ='';
 		try {
 			$stmt = $this->conn->prepare(
-				"SELECT user_name, user_password, user_id
+				"SELECT user_name, user_password, user_id, user_level
 				FROM users 
 				WHERE user_name=:uname"
 				);
@@ -84,6 +87,35 @@ class USER {
 					$_SESSION['user_session'] = $userRow['user_name'];
 					$_SESSION['user_name'] = $userRow['user_name'];
 					$_SESSION['user_id'] = $userRow['user_id'];
+					setcookie("level", $userRow['user_level'], time() + 86400);
+					
+					include_once('class.game.php');
+                    if($_COOKIE['level0']) {
+                        $game = new GAME($userRow['user_name'], 0, $_COOKIE['level0']);
+                        $game->save();
+                        setcookie("level0", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level1']) {
+                        $game = new GAME($userRow['user_name'], 1, $_COOKIE['level1']);
+                        $game->save();
+                        setcookie("level1", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level2']) {
+                        $game = new GAME($userRow['user_name'], 2, $_COOKIE['level2']);
+                        $game->save();
+                        setcookie("level2", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level3']) {
+                        $game = new GAME($userRow['user_name'], 3, $_COOKIE['level3']);
+                        $game->save();
+                        setcookie("level3", 0, time() - 86400);
+                    }
+                    if($_COOKIE['level4']) {
+                        $game = new GAME($userRow['user_name'], 4, $_COOKIE['level4']);
+                        $game->save();
+                        setcookie("level4", 0, time() - 86400);
+                    }
+					
 					//set this user loggedIn status as true
 					$this->loggedIn = true;
 					return true;
@@ -103,6 +135,7 @@ class USER {
 			echo $e->getMessage();
 		}
 	}
+
 	public function displayLoginError(){
 		return $this->loginError;
 	}
@@ -112,7 +145,7 @@ class USER {
 	//checks if an user object is logged in
 	public function is_loggedin() {
 		//isset() just determines if a var isn't null - 'user_session' is key, check if NULL
-		return $this->loggedIn;
+		return isset($_SESSION['user_session']);
 	}
 	
 	//Redirects user to another page
@@ -136,7 +169,7 @@ class USER {
 		{
 			//Select the userimage filename
 			$statement = $this->conn->prepare("SELECT user_photo
-				FROM users 
+				FROM users
 				WHERE user_name=:uname");
 			$statement->execute(array(':uname' => $_SESSION['user_name']));
 			//store found rows in $row
@@ -148,6 +181,5 @@ class USER {
 			echo $e->getMessage();
 		}
 	}
-	
 } //end of user class
 ?>

@@ -1,4 +1,4 @@
-/*override default template2.css*/
+/*override default template5.css*/
 .row{
 	max-height:100vh;
 	overflow:hidden;
@@ -30,20 +30,31 @@
 .contentactual ul {
 	padding:0;
 }
-.button {
-    
+body p#changepic {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+li {
+    font-size: 150%;
+}
+li table {
+    font-size: 100%;
 }
 /*The best times on profile*/
 #bestTimesTable{
-	display:block;
+	/*display:block;*/
 	margin:auto;
-	width:50vw;
+	width:60%;
 	text-align: center;
 }
 #bestTimesTable td, #bestTimesTable th{
-	min-width:25vw;
+	border: 1px solid;
+	width: 50%;
+	padding: 2vh;
 }
-#bestTimesTable >tbody> tr:nth-child(even) {
+#bestTimesTable >tbody> tr {
 	background-color: #f2f2f2;
 }
 /*the title row*/

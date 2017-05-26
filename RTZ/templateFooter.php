@@ -2,10 +2,15 @@
 		<div id='footer'>
 			<div class='eefootercontent'>
 				<p id="footerp"><marquee behaviour=alternate direction="down">
+				<a href="about.php">About Us</a><br>
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
-				Copyright whatever
+				<img class="easteregg" src="img/party-dinosaur.gif">
+				<img class="easteregg" src="img/party-dinosaur.gif">
+				Copyright 2017
+				<img class="easteregg" src="img/party-dinosaur.gif">
+				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
 				<img class="easteregg" src="img/party-dinosaur.gif">
@@ -13,7 +18,7 @@
 			</div>
 			<div class='footercontent'>
 				<p>
-				<span id="copyright" onClick="trigger()">Copyright whatever</span>
+				<a href="about.php">About Us</a><br><span id="copyright" onClick="trigger()">Copyright 2017</span>
 				</p>
 			</div>
 		</div>
@@ -24,14 +29,18 @@
 				dino.src = "img/party-dinosaur.gif";
 				dino.setAttribute("class", "easteregg");
 
-				var num = document.getElementsByClassName("easteregg").length
+				var num = document.getElementsByClassName("easteregg").length;
 
-				if (num < 12) {
+
+				if (num < 20) {
+					document.getElementsByClassName("easteregg")[num - 10].setAttribute("src", "img/party-dinosaur.gif");
+					document.getElementsByClassName("easteregg")[19 - num].setAttribute("src", "img/party-dinosaur.gif");
 					$(dino).insertBefore("#copyright");
 					trigger2();
 				} else {
 					document.getElementsByClassName("eefootercontent")[0].style.width = "100%";
 					document.getElementsByClassName("eefootercontent")[0].style.height = "10vh";
+					document.getElementsByClassName("eefootercontent")[0].style.borderTop = "1px solid black";
 					document.getElementsByClassName("footercontent")[0].style.display = "none";
 				}
 			}			

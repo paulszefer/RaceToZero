@@ -11,6 +11,7 @@
 #navCont {
     min-height: 10vh;
     background-color: rgb(137, 232, 148);
+    border-bottom: 1px black solid;
 }
 
 /*Logo image*/
@@ -109,6 +110,13 @@
 
 #mobilenav ul {
     padding: 0 10vw 0 10vw;
+}
+
+.mobileicon {
+    height: 7vh;
+    margin-right: 2vh;
+    position: relative;
+    top: 5px;
 }
 
 #mobilenav ul li div {
@@ -235,9 +243,9 @@ html, body {
         position: absolute;
         top: 2.5vh;
         left: 2.5vh;
-        transition: top 0.2s ease-in-out;
-        -webkit-transition: top 0.2s ease-in-out; /** Chrome & Safari **/
-        -moz-transition: top 0.2s ease-in-out;
+        /*transition: top 0.2s ease-in-out;
+        -webkit-transition: top 0.2s ease-in-out;
+        -moz-transition: top 0.2s ease-in-out;*/
         z-index: 100;
     }
 
@@ -256,7 +264,7 @@ html, body {
 
     /*navlogo when screen is stupidly small*/
     #navCont > div.navlogo > a > img {
-        display: absolute;
+        /*display: absolute;*/
         top: 2.5vh;
         right: 2.5vh;
         height: 10vh;
@@ -276,17 +284,18 @@ html, body {
     color: black;
     text-align: center;
     font-size: 1em;
-    line-height: 10vh;
+    line-height: 5vh;
 }
 /*easter egg styling*/
 .easteregg {
-    width: 25px;
+    width: 15px;
     padding: 0;
     margin: 0;
 }
 .eefootercontent {
     width: 0;
     height: 0;
+    border: 0;
 }
 .eefootercontent p {
     margin: 0 auto;
@@ -295,7 +304,7 @@ html, body {
     /*line-height: 10vh;*/
 }
 marquee {
-    height: 9.7vh;
+    height: 9.65vh;
     text-align: center;
     padding: 0;
     margin: 0;

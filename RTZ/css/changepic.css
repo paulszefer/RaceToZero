@@ -1,0 +1,51 @@
+/*override default template2.css*/
+.row{
+	max-height:100vh;
+	overflow:hidden;
+}
+.col{
+	vertical-align: top;
+	top:0;
+	text-align: center;
+	margin:auto;
+}
+.half-col{
+	width:49%;
+	min-height:50vh;
+}
+.half-col ul{
+	position:relative;
+	top:50%;
+}
+.contentactual h1 {
+    text-align: center;
+}
+.contentactual td {
+    width: 20%;
+    max-width: 200px;
+}
+.contentactual img {
+    height: 200px;
+    width: 200px;
+    margin: auto;
+    display: block;
+    vertical-align: middle;
+}
+.contentactual td img {
+    height: 100%;
+    width: 100%;
+}
+.contentactual ul {
+	padding:0;
+}
+h2 {
+    font-size: 150%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+body p#explanation {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}

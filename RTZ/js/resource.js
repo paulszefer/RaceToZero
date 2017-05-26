@@ -4,34 +4,44 @@
 // hides all topics, and then shows the correct
 // maximized topic
 $(function() {
+//When a contentbox is clicked, expand the corresponding content
 $(".contentbox").click(function() {
     var index = $(".contentbox").index(this);
     var expanded = $(".expandedcontentbox").get(index);
     hideTopics();
-    expanded.style.display = "block";
-    expanded.style.minHeight = "100vh";
-    expanded.style.height = "100%";
-    expanded.style.width = "99%";
-    expanded.style.overflow = "default";
+    // expanded.style.display = "block";
+    expanded.style.minHeight = "100%";
+    if ($(window).width() < 786) {
+       expanded.style.width = "100%";
+    }
+    else {
+       expanded.style.width = "80%";
+    };
+    //Set this timer to the same time as each transition time in the css
+    //This calculates the height for contentactual to fit with height of expandedcontent
+    setTimeout(function(){ 
+        $(".contentactual").css("height", $(".expandedcontentbox").eq(index).height()+''); 
+    }, 300);
 });
 
 // adds a click handler for each maximized topic
-//
 // hides all topics, then shows all minimized topics
 $(".xbutton").click(function() {
     $(".expandedcontentbox").attr('style', '');
     //resets the inline attr caused by .css()
     $(".contentboxwrapper").attr('style', '');
-    // $(".contentbox").attr('style', ''); //apparently we dont need this kappa
+    $(".contentactual").attr("style", '');
+    $(".answerIcon").css("display", "none");
 });
 
 function hideTopics() {
-    $(".contentboxwrapper").css("display", "none"); // can animate this instead later
+    $(".contentboxwrapper").css("display", "block"); // can animate this instead later
     // $(".contentbox").css("display", "none"); //apparently we dont need this kappa
     //reset all in line style first
     $(".expandedcontentbox").attr("style", '');
     //hide all other expandedcontentbox
     $(".expandedcontentbox").css("overflow", 'hidden');
+    //Resets body attribute
 }
 
 });
@@ -73,4 +83,11 @@ function answerCheck(buttonName, value) {
         resets[question - 1 + 19].style.display="none";
         results[question - 1 + 19].style.display="inline-block";
     }
+}
+
+/**
+ * Displays the answer feedback icon (correct/incorrect) when an answer is clicked.
+ */
+function displayIcon(element) {
+    $(element.parentElement.children).css("display", "inline-block");
 }

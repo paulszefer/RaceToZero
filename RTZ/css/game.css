@@ -19,16 +19,49 @@
 
 #play_button {
     width: 60%;
-    height: 5vh;
     padding: 2vh 0;
-    margin: 6vh auto;
+    margin: 16vh auto 8vh;
     text-align: center;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
     color: black;
+    font-size: 3em;
+    outline: 10px rgb(120, 120, 120) outset;
+}
+
+#play_button:hover {
+    /*background-color: white;*/
+    background: linear-gradient(white, rgb(160, 160, 160));
+}
+
+#play_button p {
+    text-align: center;
+    font-weight: bold;
+}
+
+#about_rtz_overlay {
+    width: 60%;
+    margin: auto;
+    background-color: black;
+    color: white;
     font-size: 2em;
-    border: 10px rgb(120, 120, 120) outset;
-    border-radius: 12px;
+    padding: 2vh;
+    outline: 10px outset rgb(120, 120, 120);
+}
+
+#navburger {
+    top: 2vh;
+    left: 2vh;
+}
+
+#logo_mascot {
+    display: block;
+    width: 10vh;
+    margin: 0 auto 2vh;
+}
+
+#about_rtz_overlay p {
+    text-align: center;
 }
 
 #timer {
@@ -38,7 +71,7 @@
     text-align: center;
     top: 1%;
     /*left: 50%;*/
-    color: black;
+    color: white;
     font-size: 1.5em;
     z-index: 10;
 }
@@ -61,9 +94,9 @@
 }
 
 #score_overlay p.statement{
-    width: 60%;
+    width: 70%;
     margin: auto;
-    padding-top: 10%;
+    padding-top: 12%;
     padding-bottom: 10%;
     /*font-size: 2.5em;*/
     font-size: 6vh;
@@ -73,11 +106,50 @@
     width: 20%;
     height: 10%;
     position: absolute;
-    bottom: 10%;
+    bottom: 15%;
     background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
     /*background-color: rgb(148, 232, 136);*/
-    border: 10px rgb(120, 120, 120) outset;
-    border-radius: 12px;
+    outline: 10px rgb(120, 120, 120) outset;
+    /*border-radius: 12px;*/
+}
+
+#sound_button {
+    width: 10%;
+    height: 6%;
+    position: absolute;
+    left: 45%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    outline: 5px rgb(120, 120, 120) outset;
+}
+
+#sound_button img {
+    height: 6vh;
+    width: 6vh;
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+#twitter_button {
+    width: 10%;
+    height: 6%;
+    position: absolute;
+    right: 15%;
+    bottom: 5%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    outline: 5px rgb(120, 120, 120) outset;
+}
+
+#twitter_button img {
+    width: 5vh;
+    position: relative;
+    top: 0.5vh;
+    display: block;
+    margin: auto;
+}
+
+#sound_button:hover {
+    background: linear-gradient(white, rgb(160, 160, 160));
 }
 
 .score_overlay_button:hover {
@@ -99,10 +171,10 @@
 }
 
 .score_overlay_button:nth-of-type(2) {
-    left: 39%;
+    left: 40%;
 }
 
-.score_overlay_button:last-of-type {
+.score_overlay_button:nth-of-type(3) {
     right: 10%;
 }
 
@@ -126,10 +198,10 @@
 
 /* Styles a level select button. */
 .level_select_button {
-    width: 60%;
+    width: 50%;
     height: 5vh;
     padding: 2vh 0;
-    margin: 6vh auto;
+    margin: 4.5vh auto;
     text-align: center;
     background-color: rgb(148, 232, 136);
     background: linear-gradient(170deg, rgb(108, 192, 96), rgb(148, 232, 136), rgb(108, 192, 96));
@@ -140,8 +212,13 @@
 }
 
 .level_select_button:hover {
-    /*background-color: white;*/
     background: linear-gradient(white, rgb(160, 160, 160));
+}
+
+.lock_icon {
+    width: 6vh;
+    position: relative;
+    bottom: 0.5vh;
 }
 
 #food_image {
@@ -153,6 +230,10 @@
     position: absolute;
 }
 
+.contentactual p {
+    width: initial;
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -161,4 +242,102 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+}
+
+#hint_further, #hint_hole, #arrow {
+    display: none;
+    animation: fadein 1s;
+}
+
+#hint_answer {
+    display: none;
+    animation: fadein 2s;
+}
+
+#tap_image {
+    animation: pulse 2s alternate infinite;
+}
+
+#login_overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    z-index: 15;
+}
+
+#login_overlay p {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    font-size: 6vh;
+}
+
+#score_display {
+    padding-top: 6%;
+}
+
+#final_score {
+    padding-bottom: 6%;
+}
+
+#save_score_prompt {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.login_overlay_button {
+    width: 60%;
+    height: 10%;
+    position: relative;
+    top: 20%;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    left: 20%;
+    /* background-color: rgb(148, 232, 136); */
+    outline: 10px rgb(120, 120, 120) outset;
+    /* border-radius: 12px; */
+    font-size: 1.7em;
+    text-align: center;
+    color: black;
+}
+
+#login_overlay .login_overlay_button p {
+    padding-top: 2vh;
+    font-size: 4.59vh;
+    width: initial;
+}
+
+#login_register_now {
+    position: relative;
+    top: 10%;
+}
+
+.login_overlay_button:hover {
+    /*background-color: white;*/
+    background: linear-gradient(white, rgb(160, 160, 160));
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        opacity: 0.8;
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0.01;
+    }
+    100% {
+        opacity: 1;
+    }
 }

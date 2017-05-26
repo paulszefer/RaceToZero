@@ -5,9 +5,11 @@
 /**
  * Constants.
  */
-const BACKGROUND_COLOUR = "rgb(255, 255, 255)";
-const BARRIER_COLOUR = "rgb(50, 255, 100)";
 const SNAP_TO_GROUND = 0.5;
+const FRICTION = 0.95;
+const MAX_SPEED = 4; // can't go higher than 4 or else certain glitches become possible
+const GRAVITY = 0.045;
+const DEFAULT_BOUNCE_MULTIPLIER = 0.3;
 
 /**
  * Types of pixels.
@@ -16,53 +18,58 @@ const AIR = 0;
 const SOLID = 1;
 const GOAL = 2;
 const WRONG = 3;
+const RIGHT_ANSWER = 4;
 
-let BOUNCE_MULTIPLIER = 0.6;
+let clicked;
+let dxChange;
+let dyChange;
+
+let bounceMultiplier = DEFAULT_BOUNCE_MULTIPLIER;
 
 // Changes the bounce multiplier if the user types "bounce".
 let keyNumber = 0;
-$(document).keypress(function(event) {
-	if (keyNumber === 0) {
-		if (event.which === 98) { // "b"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 1) {
-		if (event.which === 111) { // "o"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 2) {
-		if (event.which === 117) { // "u"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 3) {
-		if (event.which === 110) { // "n"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 4) {
-		if (event.which === 99) { // "c"
-			keyNumber++;
-		} else {
-			keyNumber = 0;
-		}
-	} else if (keyNumber === 5) {
-		if (event.which === 101) { // "e"
-			if (BOUNCE_MULTIPLIER === 0.6) {
-				BOUNCE_MULTIPLIER = 2;
-			} else {
-				BOUNCE_MULTIPLIER = 0.6;
-			}
-		} else {
-			keyNumber = 0;
-		}
-	}
+$(document).keypress(function (event) {
+    if (keyNumber === 0) {
+        if (event.which === 98) { // "b"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 1) {
+        if (event.which === 111) { // "o"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 2) {
+        if (event.which === 117) { // "u"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 3) {
+        if (event.which === 110) { // "n"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 4) {
+        if (event.which === 99) { // "c"
+            keyNumber++;
+        } else {
+            keyNumber = 0;
+        }
+    } else if (keyNumber === 5) {
+        if (event.which === 101) { // "e"
+            if (bounceMultiplier === DEFAULT_BOUNCE_MULTIPLIER) {
+                bounceMultiplier = 2;
+            } else {
+                bounceMultiplier = DEFAULT_BOUNCE_MULTIPLIER;
+            }
+        } else {
+            keyNumber = 0;
+        }
+    }
 });
 
 
@@ -116,11 +123,10 @@ class Game {
     }
 
     /**
-     * Returns the user's current level. Currently the user always starts from level -1 (level select).
-     * TODO - this function should be renamed
+     * Returns the level to load: -2 (play screen) if not logged in; -1 (level select screen) if logged in.
      */
     retrieveLevel() {
-        return -1;
+        return loggedIn;
     }
 
     /**
@@ -155,6 +161,7 @@ class Level {
             }
         }
         this._board = emptyBoard;
+        clicked = false;
     }
 
     /**
@@ -275,6 +282,15 @@ class Level {
      */
     addGoal(goal) {
         this.addPhysicalObject(goal.x1, goal.y1, goal.x2, goal.y2, GOAL);
+        let x1 = goal.x1;
+        let y1 = goal.y1;
+        let x2 = goal.x2;
+        let y2 = goal.y2;
+        for (let i = x1; i <= x2; i++) {
+            for (let j = y1; j <= y2; j++) {
+                this._board[i][j].answerID = goal.answerID;
+            }
+        }
     }
 
     /**
@@ -299,8 +315,12 @@ class Level {
      * TODO - check incrementally to fix bugs with moving through thin barriers
      */
     move() {
-
-		
+        if (clicked) {
+            this.playItem.dx += dxChange;
+            this.playItem.dy += dyChange;
+            this.playItem.adjustSpeed();
+            clicked = false;
+        }
         // don't move if out of bounds
         if (this.playItem.x < 0 || this.playItem.y < 0 || this.playItem.x + this.playItem.size > this.width || this.playItem.y + this.playItem.size > this.height) {
             console.log("Error: The item is out of bounds.");
@@ -309,11 +329,12 @@ class Level {
 
         let tempX = this.playItem.x + this.playItem.dx;
         let tempY = this.playItem.y + this.playItem.dy;
+        
         let collision = this.checkCollisions(tempX, tempY);
 
-        // logs for testing purposes
-        //console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
-
+        // log for testing purposes
+        // console.log("x: " + this.playItem.x + " y: " + this.playItem.y + " dx: " + this.playItem.dx + " dy: " + this.playItem.dy + " coll: " + collision);
+        
         if (this.checkCollisions(this.playItem.x, this.playItem.y + 1) === 3 && Math.abs(this.playItem.dy) < SNAP_TO_GROUND) {
             this.playItem.isGrounded = true;
             if (collision === 2) {
@@ -329,9 +350,9 @@ class Level {
             }
             this.playItem.dy = 0;
             if (this.playItem.dx > 0) {
-                this.playItem.dx *= 0.9;
+                this.playItem.dx *= FRICTION;
             } else if (this.playItem.dx < 0) {
-                this.playItem.dx *= 0.9;
+                this.playItem.dx *= FRICTION;
             }
         } else {
             // check if next movement causes a collision
@@ -369,6 +390,29 @@ class Level {
             } else if (collision === 5) {
                 // collision with a goal
                 this.playItem.move();
+
+                if (this.levelID % 2 !== 0) {
+                    // find associated right answer
+                    let x1 = Math.round(this.playItem.x);
+                    let y1 = Math.round(this.playItem.y);
+                    let x2 = x1 + this.playItem.size;
+                    let y2 = y1 + this.playItem.size;
+
+                    let topLeftPixel = this.board[x1][y1];
+                    let topRightPixel = this.board[x2][y1];
+                    let bottomLeftPixel = this.board[x1][y2];
+                    let bottomRightPixel = this.board[x2][y2];
+
+                    if (topLeftPixel.type === GOAL) {
+                        document.getElementById(topLeftPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    } else if (topRightPixel.type === GOAL) {
+                        document.getElementById(topRightPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    } else if (bottomLeftPixel.type === GOAL) {
+                        document.getElementById(bottomLeftPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    } else if (bottomRightPixel.type === GOAL) {
+                        document.getElementById(bottomRightPixel.answerID).style.color = "rgb(0, 255, 0)";
+                    }
+                }
                 return 5;
             } else if (collision === 6) {
                 // collision with a wrong answer section
@@ -444,8 +488,6 @@ class Level {
         this.playItem.adjustSpeed();
     }
 
-    // TODO - group/normalize these snap functions?
-
     /**
      * Snaps the playItem to its top side to simulate the object moving until it collides with its top.
      */
@@ -455,7 +497,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dy !== 0) {
+        if (Math.abs(this.playItem.dy) > 0.05) {
             let ratio = this._playItem.dx / this._playItem.dy;
             this._playItem.x = this._playItem.x - (move * ratio);
             this._playItem.y = this._playItem.y - move;
@@ -471,7 +513,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dx !== 0) {
+        if (Math.abs(this.playItem.dx) > 0.05) {
             let ratio = this._playItem.dy / this._playItem.dx;
             this._playItem.x = this._playItem.x + move;
             this._playItem.y = this._playItem.y + (move * ratio);
@@ -487,7 +529,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dy !== 0) {
+        if (Math.abs(this.playItem.dy) > 0.05) {
             let ratio = this._playItem.dx / this._playItem.dy;
             this._playItem.x = this._playItem.x + (move * ratio);
             this._playItem.y = this._playItem.y + move;
@@ -503,7 +545,7 @@ class Level {
             move++;
         }
         move--;
-        if (this.playItem.dx !== 0) {
+        if (Math.abs(this.playItem.dx) > 0.05) {
             let ratio = this._playItem.dy / this._playItem.dx;
             this._playItem.x = this._playItem.x - move;
             this._playItem.y = this._playItem.y - (move * ratio);
@@ -576,33 +618,33 @@ class Level {
                 return 4;
             }
             /*let move = 0;
-            while (move < this._playItem.size) {
-                if (this._board[origX1 - move][origY1].type === SOLID) {
-                    return 4;
-                } else if (this._board[origX1][origY1 - move].type === SOLID) {
-                    return 1;
-                } else {
-                    move++;
-                }
-            }*/
+             while (move < this._playItem.size) {
+             if (this._board[origX1 - move][origY1].type === SOLID) {
+             return 4;
+             } else if (this._board[origX1][origY1 - move].type === SOLID) {
+             return 1;
+             } else {
+             move++;
+             }
+             }*/
             let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
             for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
-            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX1][currentY1].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX1 + move][currentY1].type !== SOLID) {
-            				return 4;
-            			}
-            			if (this.board[currentX1][currentY1 + move].type !== SOLID) {
-            				return 1;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+                let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+                let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+                if (this.board[currentX1][currentY1].type === SOLID) {
+                    let move = 0;
+                    while (move < this.playItem.size) {
+                        if (this.board[currentX1 + move][currentY1].type !== SOLID) {
+                            return 4;
+                        }
+                        if (this.board[currentX1][currentY1 + move].type !== SOLID) {
+                            return 1;
+                        }
+                        else {
+                            move++;
+                        }
+                    }
+                }
             }
             return 0;
         }
@@ -612,9 +654,18 @@ class Level {
      * Handles the case where the top-right corner of the object collides with a barrier.
      */
     topRightCollision(x1, y1) {
+        let size = this._playItem.size;
+        let halfSize = Math.round(this.playItem.size / 2);
+        let x2 = x1 + size;
+        let y2 = y1 + size;
         let origX2 = x1 + this._playItem.size - this._playItem.dx;
         let origY1 = y1 - this._playItem.dy;
 
+        if (this._board[x1 + halfSize][y1].type === SOLID) {
+            return 1;
+        } else if (this._board[x2][y2 - halfSize].type === SOLID) {
+            return 2;
+        }
         if (this._playItem.dx < 0) {
             return 1;
         }
@@ -622,34 +673,34 @@ class Level {
             return 2;
         }
         /*let move = 0;
-        while (move < this._playItem.size) {
-            if (this._board[origX2 + move][origY1].type === SOLID) {
-                return 2;
-            } else if (this._board[origX2][origY1 - move].type === SOLID) {
-                return 1;
-            } else {
-                move++;
-            }
-        }*/
+         while (move < this._playItem.size) {
+         if (this._board[origX2 + move][origY1].type === SOLID) {
+         return 2;
+         } else if (this._board[origX2][origY1 - move].type === SOLID) {
+         return 1;
+         } else {
+         move++;
+         }
+         }*/
         let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
         for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
-            	let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX2][currentY1].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX2 - move][currentY1].type !== SOLID) {
-            				return 2;
-            			}
-            			if (this.board[currentX2][currentY1 + move].type !== SOLID) {
-            				return 1;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+            let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+            let currentY1 = Math.round(origY1 + this.playItem.dy * i / biggerComponent);
+            if (this.board[currentX2][currentY1].type === SOLID) {
+                let move = 0;
+                while (move < this.playItem.size) {
+                    if (this.board[currentX2 - move][currentY1].type !== SOLID) {
+                        return 2;
+                    }
+                    if (this.board[currentX2][currentY1 + move].type !== SOLID) {
+                        return 1;
+                    }
+                    else {
+                        move++;
+                    }
+                }
             }
+        }
         return 0;
     }
 
@@ -679,33 +730,33 @@ class Level {
                 return 2;
             }
             /*let move = 0;
-            while (move < this._playItem.size) {
-                if (this._board[origX2 + move][origY2].type === SOLID) {
-                    return 2;
-                } else if (this._board[origX2][origY2 + move].type === SOLID) {
-                    return 3;
-                } else {
-                    move++;
-                }
-            }*/
+             while (move < this._playItem.size) {
+             if (this._board[origX2 + move][origY2].type === SOLID) {
+             return 2;
+             } else if (this._board[origX2][origY2 + move].type === SOLID) {
+             return 3;
+             } else {
+             move++;
+             }
+             }*/
             let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
             for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
-            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX2][currentY2].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX2 - move][currentY2].type !== SOLID) {
-            				return 2;
-            			}
-            			if (this.board[currentX2][currentY2 - move].type !== SOLID) {
-            				return 3;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+                let currentX2 = Math.round(origX2 + this.playItem.dx * i / biggerComponent);
+                let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+                if (this.board[currentX2][currentY2].type === SOLID) {
+                    let move = 0;
+                    while (move < this.playItem.size) {
+                        if (this.board[currentX2 - move][currentY2].type !== SOLID) {
+                            return 2;
+                        }
+                        if (this.board[currentX2][currentY2 - move].type !== SOLID) {
+                            return 3;
+                        }
+                        else {
+                            move++;
+                        }
+                    }
+                }
             }
             return 0;
         }
@@ -738,37 +789,24 @@ class Level {
             if (this._playItem.dy < 0) {
                 return 4;
             }
-            /*let move = 0;
-            while (move < this._playItem.size) {
-                if (this._playItem.isGrounded) {
-                    return 3;
-                }
-                if (this._board[origX1 - move][origY2].type === SOLID) {
-                    return 4;
-                } else if (this._board[origX1][origY2 + move].type === SOLID) {
-                    return 3;
-                } else {
-                    move++;
-                }
-            }*/
             let biggerComponent = Math.max(Math.abs(this.playItem.dx), Math.abs(this.playItem.dy));
             for (let i = 1; i <= biggerComponent; i++) {
-            	let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
-            	let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
-            	if (this.board[currentX1][currentY2].type === SOLID) {
-            		let move = 0;
-            		while (move < this.playItem.size) {
-            			if (this.board[currentX1 + move][currentY2].type !== SOLID) {
-            				return 4;
-            			}
-            			if (this.board[currentX1][currentY2 - move].type !== SOLID) {
-            				return 3;
-            			}
-            			else {
-            				move++;
-            			}
-            		}
-            	}
+                let currentX1 = Math.round(origX1 + this.playItem.dx * i / biggerComponent);
+                let currentY2 = Math.round(origY2 + this.playItem.dy * i / biggerComponent);
+                if (this.board[currentX1][currentY2].type === SOLID) {
+                    let move = 0;
+                    while (move < this.playItem.size) {
+                        if (this.board[currentX1 + move][currentY2].type !== SOLID) {
+                            return 4;
+                        }
+                        if (this.board[currentX1][currentY2 - move].type !== SOLID) {
+                            return 3;
+                        }
+                        else {
+                            move++;
+                        }
+                    }
+                }
             }
         }
         return 0;
@@ -884,38 +922,38 @@ class PhysicalObject {
     }
 
     /**
-     * Creates an svg element to draw this object on the game window.
+     * Creates an element to draw this object on the game window.
      */
     drawPhysicalObject() {
         let objectWidth = this._x2 - this._x1;
         let objectHeight = this._y2 - this._y1;
         let objectColour = "";
 
-        if (this._pixelType === SOLID) {
-            objectColour = BARRIER_COLOUR;
-        } else if (this._pixelType === AIR) {
-            objectColour = BACKGROUND_COLOUR;
-        } else if (this._pixelType === GOAL) {
-            objectColour = BACKGROUND_COLOUR;
-        } else if (this._pixelType === WRONG) {
-            objectColour = BARRIER_COLOUR;
+        // object visual based on single section of image. jQuery needed for Firefox's
+        // sake.
+        let objectImage = document.createElement("div");
+        objectImage.id = this.name;
+
+        $(objectImage).css("width", objectWidth);
+        $(objectImage).css("height", objectHeight);
+        $(objectImage).css("position", "absolute");
+        $(objectImage).css("left", this.x1);
+        $(objectImage).css("top", this.y1);
+
+        if (this.pixelType === SOLID) {
+            objectImage.style.background = "url('img/barrier1.jpg') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === GOAL) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === AIR) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+        } else if (this.pixelType === RIGHT_ANSWER) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+            //objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
+        } else if (this.pixelType === WRONG) {
+            objectImage.style.background = "url('img/gamebg.png') " + -this.x1 + "px " + -this.y1 + "px";
+            //objectImage.style.backgroundColor = "rgba(0,127,255,0.5)";
         }
-
-        let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svgElement.id = this.name;
-        svgElement.style.width = objectWidth;
-        svgElement.style.height = objectHeight;
-        svgElement.innerHTML = "<rect width=\"" + objectWidth
-            + "\" height=\"" + objectHeight
-            + "\" style=\"fill:" + objectColour + ";\">";
-        document.getElementById("game_window").appendChild(svgElement);
-
-        // TODO - move this up to match other css styling
-        // TODO - OR move to external stylesheet - better solution
-        let element = $("#" + this._name);
-        element.css("position", "absolute");
-        element.css("left", this._x1);
-        element.css("top", this._y1);
+        document.getElementById("game_window").appendChild(objectImage);
     }
 }
 
@@ -941,8 +979,24 @@ class Air extends PhysicalObject {
  * Defines a goal.
  */
 class Goal extends PhysicalObject {
-    constructor(name, x1, y1, x2, y2) {
+    constructor(name, x1, y1, x2, y2, answerID) {
         super(name, x1, y1, x2, y2, GOAL);
+        this._answerID = answerID;
+    }
+
+    /**
+     * Returns the ID of the element holding the text for this right answer.
+     * Used to create visual effects when a right answer is selected.
+     */
+    get answerID() {
+        return this._answerID;
+    }
+
+    /**
+     * Sets the ID.
+     */
+    set answerID(id) {
+        this._answer = id;
     }
 }
 
@@ -951,7 +1005,7 @@ class Goal extends PhysicalObject {
  */
 class Wrong extends PhysicalObject {
     constructor(name, x1, y1, x2, y2, answerID) {
-        super(name, x1, y1, x2, y2, GOAL);
+        super(name, x1, y1, x2, y2, WRONG);
         this._answerID = answerID;
     }
 
@@ -996,7 +1050,7 @@ class Extra {
 
         if (this.elementType === "p") {
             //extra.style.fontSize = "2em";
-            extra.style.fontSize = "3vh";
+            extra.style.fontSize = "2.5vh";
             extra.innerHTML = this.elementData;
         } else if (this.elementType === "img") {
             extra.alt = this.name;
@@ -1267,17 +1321,20 @@ class PlayItem {
      * pushing it away from the location of the cursor.
      */
     clicked(mousePosX, mousePosY) {
+    	clicked = true;
         let xDiff = this._x + (this._size / 2) - mousePosX;
         let yDiff = this._y + (this._size / 2) - mousePosY;
 
         // used to slow movement so clicks do not shoot the object off at high speeds
         let divisor = 28;
 
-        this._dx += Math.round(xDiff / divisor);
+        /*this._dx += Math.round(xDiff / divisor);
         this._dy += Math.round(yDiff / divisor);
 
         // ensures a far away click does not allow the playItem to move illegally
-        this.adjustSpeed();
+        this.adjustSpeed();*/
+        dxChange = Math.round(xDiff / divisor);
+        dyChange = Math.round(yDiff / divisor);
     }
 
     /**
@@ -1285,7 +1342,7 @@ class PlayItem {
      * before and after every move.
      */
     adjustSpeed() {
-        let maxSpeed = 4;
+        let maxSpeed = MAX_SPEED;
         if (this._dy > maxSpeed) {
             this._dy = maxSpeed;
         } else if (this._dy < -1 * maxSpeed) {
@@ -1328,13 +1385,12 @@ class FoodItem {
     /**
      * Sets the name and type of food, the URL of its image, and whether it is edible.
      */
-    constructor(name, type, imageURL, isEdible) {
+    constructor(name, type, imageURL) {
         this._name = name;
         this._type = type;
-        this.bounceMultiplier = BOUNCE_MULTIPLIER; // varies by type
-        this.gravity = 0.05; // varies by type
+        this.bounceMultiplier = bounceMultiplier; // could vary by type
+        this.gravity = GRAVITY; // could vary by type
         this._imageURL = imageURL;
-        this._isEdible = isEdible;
     }
 
     set imageURL(imageURL) {

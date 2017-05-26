@@ -1,27 +1,53 @@
+.contentactual h1 {
+    text-align: center;
+}
 /*This is css for the table*/
 #besttimes{
 	min-width: 80%;
 	margin:auto;
 	border-collapse: collapse;
 	margin-bottom: 1em;
+	font-size: 180%;
+}
+#besttimes th {
+    padding: 3vw;
 }
 #besttimes td{
 	text-align:center;
 	border: 1px solid;
+    font-size: 0.75em;
+    padding: 3vw;
 }
-tr:nth-child(even) {
+tr {
 	background-color: #f2f2f2;
+}
+tr:nth-child(2) {
+    background-color: #ffdd00;
+}
+tr:nth-child(3) {
+    background-color: #c0c0c0;
+}
+tr:nth-child(4) {
+    background-color: #cd7f32;
 }
 /*the title row*/
 #besttimes > tbody > tr:nth-child(1){
 	font-weight:bold;
-	font-size: 1.25em;
-	background-color: rgb(137, 232, 148);
+	font-size: 0.75em;
+	background-color: rgb(128, 0, 0);
+	color: rgb(255, 190, 190);
 }
 #levelselect{
-	margin:1em;
-	display:block;
-	margin:auto;
+    display:block;
+    margin: 1vh auto;
+    min-width: 150px;
+    padding: 1vh;
+    text-align: center;
+    background: linear-gradient(rgb(148, 232, 136), rgb(108, 192, 96));
+    color: black;
+    font-size: 1.30em;
+    border: 5px rgb(120, 120, 120) outset;
+    border-radius: 12px;
 }
 /*Removes the side borders*/
 #besttimes tr td:first-child {
